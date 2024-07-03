@@ -1,21 +1,22 @@
-import React from 'react'
-import './Navbar.css';
+import React from 'react';
+import './Navbar.css'; // Ensure you import the correct CSS file
 import { NavLink } from 'react-router-dom';
+import logo from '../components/final.png';
+
 function Navbar() {
   return (
-    <>
-    <nav className="navbar">
-        <NavLink to='/' className="logo">
-            <img src="./Images/1.jpg" alt="" />
-            <h2>TastyTrack</h2>
-        </NavLink>
-        <div className="buttons">
-            <NavLink to='/auth/login' className="navbutton"><p>Login</p></NavLink>
-            <NavLink to='/auth/register' className="navbutton"><p>Register</p></NavLink>
-        </div>
-    </nav>
-    </>
-  )
+    <header className="navbar">
+      <NavLink to="/" className="logo">
+        <img src={logo} alt="Logo" />
+        
+      </NavLink>
+      <div className="nav-links">
+        <NavLink to='/auth/login' className="navbutton">Login</NavLink>
+        <NavLink to='/auth/restaurants' className="navbutton">Cart</NavLink>
+        <NavLink to='/auth/register' className="navbutton">Register</NavLink>
+      </div>
+    </header>
+  );
 }
 
-export default Navbar
+export default Navbar;
