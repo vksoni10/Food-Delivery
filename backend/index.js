@@ -20,7 +20,7 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.static('public'));
 
-mongoose.connect('mongodb://127.0.0.1:27017/foodDelivery', {
+mongoose.connect('mongodb+srv://adityagarg:adityagarg@cluster0.nrepxpj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {

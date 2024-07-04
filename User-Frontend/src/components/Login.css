@@ -80,9 +80,9 @@ html {
   margin-top: 20px;
 }
 
-.btn {
-  background-color: #fff;
-  color: #ff7e5f;
+.bttn{
+  background-color: gold;
+  color: #f6f5f5;
   padding: 15px 30px;
   border: none;
   border-radius: 25px;
@@ -92,9 +92,10 @@ html {
   width: 100%;
 }
 
-.btn:hover {
-  background-color: #fc2525;
-  color: #fff;
+.bttn:hover {
+  background-color: #f5f0e8;
+  color: #0d0909;
+  border-color:black;
 }
 
 .btnarea p {

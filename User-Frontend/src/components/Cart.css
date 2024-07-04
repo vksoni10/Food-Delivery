@@ -1,0 +1,57 @@
+/* Cart.css */
+
+.Cart {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .Cart h1 {
+    margin-top: 0;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .Cart table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .Cart thead th {
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .Cart tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .Cart tbody tr:nth-child(even) {
+    background-color: #f7f7f7;
+  }
+  
+  .Cart p {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .Cart button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .Cart button:hover {
+    background-color: #3e8e41;
+  }

@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Restaurants from './components/Restaurants';
 import Home from './components/Home';
 import Kanha from './components/Kanha';
+import Cart from './components/Cart';
 import RestroDetail from './components/RestroDetail'; // Import RestroDetail
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route exact path='/auth/register' element={<Register />} />
           <Route exact path='/auth/login' element={<Login />} />
           <Route exact path='/auth/kanha' element={<Kanha />} />
+          <Route exact path='/auth/cart' element={<Cart />} />
           <Route exact path='/auth/restaurants' element={<Restaurants />} />
           <Route exact path='/restaurant/:id' element={<RestroDetail />} /> {/* Add this route */}
         </Routes>

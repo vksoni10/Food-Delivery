@@ -1,31 +1,36 @@
 .restro-detail {
   font-family: Arial, sans-serif;
-  margin: 20px;
-  background-color: blueviolet;
-}
+  margin: 0px;
+  /* background-color: rgb(158, 81, 81); */
 
-.breadcrumb {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  backdrop-filter: blur(10px); /* Blurring effect */
+  -webkit-backdrop-filter: blur(10px); /* Blurring effect for Safari */
+  border: 1px solid rgba(255, 255, 255, 0.18); /* Light border */
+  padding: 20px; /* Inner spacing */
 }
 
 .image-section {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: unset;
 }
 
 .main-image {
+  margin: 10px;
   width: 100%;
   max-width: 800px;
+  border: 2px solid black;
   border-radius: 8px;
   margin-bottom: 10px;
 }
 
 .gallery {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;
   width: 100%;
   max-width: 800px;
 }
@@ -35,9 +40,11 @@
 }
 
 .gallery-item img {
-  width: 100px;
-  height: 100px;
+  margin: 10px;
+  width: 400px;
+  height: 250px;
   object-fit: cover;
+  border: 2px solid black;
   border-radius: 8px;
 }
 
@@ -52,16 +59,20 @@
 }
 
 .details-section {
-  margin-top: 20px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  text-align: left;
 }
 
 .details-section h1 {
   margin: 0;
-  font-size: 28px;
+  color: white;
+  font-size: 50px;
 }
 
 .details-section p {
+  color: white;
   margin: 5px 0;
 }
 
@@ -73,6 +84,14 @@
   margin: 10px 0;
 }
 
+.actions a {
+  margin-right: 10px;
+  padding: 10px 20px;
+  background: #eee;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 .actions button {
   margin-right: 10px;
   padding: 10px 20px;
@@ -100,6 +119,7 @@
 
 .rating-value {
   color: green;
+  margin-left: 40px;
 }
 
 .tabs {
@@ -113,13 +133,25 @@
   margin-right: 20px;
   padding-bottom: 10px;
   cursor: pointer;
+  color: white;
 }
 
 .tab.active {
   border-bottom: 2px solid red;
+  color: white;
 }
 
 .about {
   margin-top: 20px;
   text-align: center;
+}
+.hello {
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  backdrop-filter: blur(7px); /* Blurring effect */
+  text-decoration: none;
+  font-weight: 700;
+  color: black;
+  border-h
 }
