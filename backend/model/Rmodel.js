@@ -1,22 +1,21 @@
 const mongoose = require("mongoose");
-import React, { useEffect, useState } from "react";
 
 var rSchema = new mongoose.Schema({
-  rname: {
+  rName: {
     type: String,
     required: true,
   },
-  remail: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  rmobile: {
+  rEmail: {
     type: String,
     required: true,
     unique: true,
   },
-  rpassword: {
+  rMobile: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  rPassword: {
     type: String,
     required: true,
   },
