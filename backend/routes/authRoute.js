@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserModel = require('../model/UserModel');
+// const loginUserCtrl= require('../controller/userCtrl')
 
 const router = express.Router();
 const JWT_SECRET = "jwt-secret-key";  // Ensure you have a strong secret key and store it securely
@@ -24,7 +25,7 @@ router.post('/register', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
+// router.post('/login', loginUserCtrl);
 // Login route
 router.post('/login', async (req, res) => {
   const {email, password } = req.body;

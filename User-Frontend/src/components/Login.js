@@ -19,6 +19,7 @@ export default function Login() {
         } else {
           alert('Invalid credentials');
         }
+        
       })
       .catch(err => {
         console.error(err);

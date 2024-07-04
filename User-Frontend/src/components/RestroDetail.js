@@ -1,9 +1,13 @@
 import React from 'react';
 import './RestroDetail.css';
 import Navbar from './Navbar';
-
+import menu1 from '../components/menu.jpg';
 const RestroDetail = () => {
-  return (
+  
+  return(
+  
+  
+  
     <>
     <Navbar/>
     <div className="restro-detail">
@@ -17,18 +21,18 @@ const RestroDetail = () => {
           </div>
         </div>
       </div>
+
+       
       <div className="details-section">
         <h1>Bonkey's Pizza</h1>
         <p>Pizza</p>
         <p>Civil Lines, Jaipur</p>
         <p className="status">Open now - 1pm - 11pm (Today)</p>
         <div className="actions">
-          <a className='hello' target='_main' href='https://www.google.com/maps/place/Bonkey'>Direction</a>
+          <button className='hello'><a className='hello' target='_main' href='https://www.google.com/maps/place/Bonkey'>Direction</a></button>
           <button className='hello'>Menu</button>
-          <button><span className="material-symbols-outlined share">
-share
-</span>
-</button>
+
+
         </div>
         <div className="ratings">
           <div className="rating-item">
@@ -45,7 +49,7 @@ share
           <span className="tab active">Overview</span>
           <span className="tab">Order Online</span>
           <span className="tab">Reviews</span>
-          <span className="tab">Photos</span>
+          <span className="tab">Call</span>
           <span className="tab">Book a Table</span>
         </div>
         <div className="about">
@@ -53,6 +57,7 @@ share
         </div>
       </div>
     </div></>
+  
   );
 };
 
