@@ -22,8 +22,12 @@ app.use(
 app.use(cookieParser());
 app.use(express.static("public"));
 
+<<<<<<< HEAD
 mongoose
   .connect("mongodb://localhost:27017/Food-delivery", {
+=======
+mongoose.connect('mongodb+srv://adityagarg:adityagarg@cluster0.nrepxpj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+>>>>>>> c0957c89557572f13a9576f9a2ae2d0e81fcb3d0
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

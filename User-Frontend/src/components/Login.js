@@ -12,11 +12,14 @@ export default function Login() {
     e.preventDefault();
     axios.post('http://localhost:3001/auth/login', { email, password })
       .then(res => {
-        if (res.data === 'Success') {
+        const { token, message } = res.data; // Destructure token and message from response data
+        if (message === 'Login successful' && token) {
+          localStorage.setItem('token', token); // Store the token in localStorage or a cookie
           window.location.href = "/";
         } else {
           alert('Invalid credentials');
         }
+        
       })
       .catch(err => {
         console.error(err);
@@ -26,7 +29,7 @@ export default function Login() {
 
   return (
     <>
-    <Navbar/>
+    <Navbar />
     <div className='login'>
       <form onSubmit={handleLogin} className='formarea'>
         <h1>Login</h1>
@@ -39,10 +42,11 @@ export default function Login() {
           <input className='inputs' type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className="btnarea">
-          <button className='btn' type="submit">Login</button>
+          <button className='bttn' type="submit">Login</button>
           <p>First time on our website? <NavLink to='/auth/register'>Register Now</NavLink></p>
         </div>
       </form>
-    </div></>
+    </div>
+    </>
   );
 }

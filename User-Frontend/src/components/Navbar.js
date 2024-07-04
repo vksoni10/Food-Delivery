@@ -12,7 +12,7 @@ function Navbar() {
       </NavLink>
       <div className="nav-links">
         <NavLink to='/auth/login' className="navbutton">Login</NavLink>
-        <NavLink to='/auth/restaurants' className="navbutton">Cart</NavLink>
+        <NavLink to='/auth/cart' className="navbutton">Cart</NavLink>
         <NavLink to='/auth/register' className="navbutton">Register</NavLink>
       </div>
     </header>
