@@ -6,10 +6,10 @@ import axios from "axios";
 import "./Register.css";
 
 export default function Register() {
-  const [rName, setRName] = useState("");
-  const [rEmail, setREmail] = useState("");
-  const [rMobile, setRMobile] = useState("");
-  const [rPassword, setRPassword] = useState("");
+  const [rName, setrName] = useState("");
+  const [rEmail, setrEmail] = useState("");
+  const [rMobile, setrMobile] = useState("");
+  const [rPassword, setrPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -47,7 +47,7 @@ export default function Register() {
               type="text"
               id="name"
               value={rName}
-              onChange={(e) => setRName(e.target.value)}
+              onChange={(e) => setrName(e.target.value)}
               required
             />
           </div>
@@ -60,7 +60,7 @@ export default function Register() {
               type="email"
               id="email"
               value={rEmail}
-              onChange={(e) => setREmail(e.target.value)}
+              onChange={(e) => setrEmail(e.target.value)}
               required
             />
           </div>
@@ -73,7 +73,7 @@ export default function Register() {
               type="number"
               id="mobile"
               value={rMobile}
-              onChange={(e) => setRMobile(e.target.value)}
+              onChange={(e) => setrMobile(e.target.value)}
               required
             />
           </div>
@@ -86,7 +86,7 @@ export default function Register() {
               type="password"
               id="password"
               value={rPassword}
-              onChange={(e) => setRPassword(e.target.value)}
+              onChange={(e) => setrPassword(e.target.value)}
               required
             />
           </div>

@@ -8,7 +8,9 @@ const multer = require("multer");
 const path = require("path");
 const UserModel = require("./model/UserModel");
 const authRoutes = require("./routes/authRoute");
-const RModel = require("./model/RModel");
+const Resmodel = require("./model/Resmodel");
+const restRoute = require("./routes/restRoute");
+
 
 const app = express();
 app.use(express.json());
@@ -21,13 +23,8 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.static("public"));
-
-<<<<<<< HEAD
 mongoose
-  .connect("mongodb://localhost:27017/Food-delivery", {
-=======
-mongoose.connect('mongodb+srv://adityagarg:adityagarg@cluster0.nrepxpj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
->>>>>>> c0957c89557572f13a9576f9a2ae2d0e81fcb3d0
+  .connect("mongodb://localhost:27017/Food-delivery",{
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -38,7 +35,8 @@ mongoose.connect('mongodb+srv://adityagarg:adityagarg@cluster0.nrepxpj.mongodb.n
     console.error("Error connecting to MongoDB:", error.message);
   });
 
-app.use("/auth", authRoutes); // Use the auth routes
+// app.use("/auth", authRoutes); // Use the auth routes
+app.use("/Restaurant", restRoute);
 
 app.listen("3001", () => {
   console.log("Server is running on port 3001");
