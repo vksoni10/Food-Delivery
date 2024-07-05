@@ -26,6 +26,17 @@ const Restaurants = () => {
       discount: "Flat 15% OFF",
       opensAt: "Opens at 11 AM",
       distance: "300"
+    },
+    {
+      id: "3",
+      image: "https://assets.cntraveller.in/photos/612f08a19fd022fa9f74f1e8/16:9/w_1280,c_limit/The%20Verandah.jpeg",
+      name: "Fine Diner",
+      cuisine: "Italian, Continental",
+      price: "6,000",
+      rating: "5.0",
+      discount: "Flat 69% OFF",
+      opensAt: "Open Now",
+      distance: "10"
     }
   ];
 
