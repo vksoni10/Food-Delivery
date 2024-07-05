@@ -21,7 +21,7 @@ function App() {
           <Route exact path='/auth/register' element={<Register />} />
           <Route exact path='/auth/login' element={<Login />} />
           <Route exact path='/auth/kanha' element={<Kanha />} />
-          <Route exact path='/auth/cart' element={<Cart />} />
+          {/* <Route exact path='/auth/cart' element={<Cart />} /> */}
           <Route exact path='/auth/restaurants' element={<Restaurants />} />
           <Route exact path='/restaurant/:id' element={<RestroDetail />} /> {/* Add this route */}
         </Routes>
