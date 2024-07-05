@@ -14,23 +14,21 @@ export default function ShareButton() {
   };
 
   return (
-    <>
-      <div>
-        <span className="material-symbols-outlined" onMouseOver={handleShareClick} style={{ cursor: 'pointer' }}>
-          share
-        </span>
-        {showOptions && (
-          <div className="share-options">
-            <a href={`https://wa.me/?text=${encodeURIComponent(window.location.href)}`} target="_blank" rel="noopener noreferrer">
-              Share on WhatsApp
-            </a>
-            <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}`} target="_blank" rel="noopener noreferrer">
-              Share on X (Twitter)
-            </a>
-            <button onClick={handleCopyToClipboard}>Copy to Clipboard</button>
-          </div>
-        )}
-      </div>
-    </>
+    <div>
+      <span className="material-symbols-outlined" onMouseOver={handleShareClick} style={{ cursor: 'pointer' }}>
+        share
+      </span>
+      {showOptions && (
+        <div className="share-options">
+          <a href={`https://wa.me/?text=${encodeURIComponent(window.location.href)}`} target="_blank" rel="noopener noreferrer">
+            Share on WhatsApp
+          </a>
+          <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}`} target="_blank" rel="noopener noreferrer">
+            Share on X (Twitter)
+          </a>
+          <button onClick={handleCopyToClipboard}>Copy to Clipboard</button>
+        </div>
+      )}
+    </div>
   );
 }

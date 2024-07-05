@@ -2,11 +2,13 @@ import React from 'react';
 import './RestroDetail.css';
 import Navbar from './Navbar';
 import menu1 from '../components/menu.jpg';
+import ShareButton from './ShareButton';
 const RestroDetail = () => {
   
+  
+  
+  
   return(
-  
-  
   
     <>
     <Navbar/>
@@ -29,8 +31,9 @@ const RestroDetail = () => {
         <p>Civil Lines, Jaipur</p>
         <p className="status">Open now - 1pm - 11pm (Today)</p>
         <div className="actions">
-          <button className='hello'><a className='hello' target='_main' href='https://www.google.com/maps/place/Bonkey'>Direction</a></button>
+          <button className='hello'><a className='hello' target='_main' href='https://www.google.com/maps/place/Bonkey'>Directions</a></button>
           <button className='hello'>Menu</button>
+          <button><ShareButton/></button>
 
 
         </div>
