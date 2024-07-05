@@ -23,11 +23,23 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.static("public"));
+<<<<<<< HEAD
 mongoose
   .connect("mongodb://localhost:27017/Food-delivery",{
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
+=======
+
+mongoose
+  .connect(
+    "mongodb+srv://adityagarg:adityagarg@cluster0.nrepxpj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+>>>>>>> aace941ca26638802fe7c3f4e08b544cf00d84f6
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -35,8 +47,13 @@ mongoose
     console.error("Error connecting to MongoDB:", error.message);
   });
 
+<<<<<<< HEAD
 // app.use("/auth", authRoutes); // Use the auth routes
 app.use("/Restaurant", restRoute);
+=======
+app.use("/auth", authRoutes); // Use the auth routes
+app.use("/rest", authRoutes); // Use the auth routes
+>>>>>>> aace941ca26638802fe7c3f4e08b544cf00d84f6
 
 app.listen("3001", () => {
   console.log("Server is running on port 3001");
