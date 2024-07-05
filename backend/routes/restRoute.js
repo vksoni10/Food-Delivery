@@ -1,4 +1,3 @@
-    <<<<<<< HEAD
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -53,11 +52,11 @@ router.post('/login', async (req, res) => {
     const bcrypt = require("bcrypt");
     const jwt = require("jsonwebtoken");
     const RModel = require("../model/RModel");
-  }
+  }})
 //const loginResCtrl= require('../controller/ResCtrl')
 
-const router = express.Router();
-const JWT_SECRET = "jwt-secret-key"; // Ensure you have a strong secret key and store it securely
+// const router = express.Router();
+// const JWT_SECRET = "jwt-secret-key"; // Ensure you have a strong secret key and store it securely
 
 // Register route
 router.post("/Restaurant/register", async (req, res) => {
@@ -116,8 +115,7 @@ router.post("/Restaurant/login", async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ message: "Server error" });
->>>>>>  > aace941ca26638802fe7c3f4e08b544cf00d84f6
-  }
+}
 });
 
 module.exports = router;
