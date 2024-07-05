@@ -33,13 +33,9 @@ const Home = () => {
           <div className="documentList">
             <div>
               <ul>
-                <li>
-                  FSSAI license copy <a href="apply-link">apply now</a>
-                </li>
+                <li>FSSAI license copy</li>
                 <li>PAN card copy</li>
-                <li>
-                  Regular GSTIN <a href="apply-link">apply now</a>
-                </li>
+                <li>Regular GSTIN</li>
               </ul>
             </div>
             <div>
@@ -51,7 +47,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div><div className="spacer"></div>
+      </div>
+      <div className="spacer"></div>
       <div className="whyPotato">
         <div className="potatoDesc">
           <h1>Why Potato?</h1>
@@ -95,7 +92,8 @@ const Home = () => {
             />
           </div>
         </div>
-      </div><div className="spacer"></div>
+      </div>
+      <div className="spacer"></div>
       <div className="home1">
         <h1>How Tomato works for restaurant partners</h1>
         <div className="steps">
@@ -131,7 +129,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-     
     </>
   );
 };

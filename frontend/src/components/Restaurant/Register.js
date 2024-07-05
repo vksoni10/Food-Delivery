@@ -15,7 +15,7 @@ export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/Restaurant/register", {
+      .post("http://localhost:3001/Restaurant/register", {
         rName,
         rEmail,
         rMobile,
