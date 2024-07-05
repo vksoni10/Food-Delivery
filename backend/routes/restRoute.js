@@ -32,7 +32,7 @@ router.post('/login', async (req, res) => {
   const {rEmail, rPassword } = req.body;
 
   try {
-    const Restaurant = await Resmodel.findOne({rEmail});
+    const Restaurant = await Resmodel.findOne({ rEmail });
     if (!Restaurant) {
       return res.status(404).json({ message: 'User does not exist' });
     }
@@ -49,11 +49,11 @@ router.post('/login', async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ message: 'Server error' });
-========
-const express = require("express");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const RModel = require("../model/RModel");
+    const express = require("express");
+    const bcrypt = require("bcrypt");
+    const jwt = require("jsonwebtoken");
+    const RModel = require("../model/RModel");
+  }
 //const loginResCtrl= require('../controller/ResCtrl')
 
 const router = express.Router();
