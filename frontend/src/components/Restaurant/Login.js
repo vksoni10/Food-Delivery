@@ -4,8 +4,8 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 export default function Login() {
-  const [rEmail, setREmail] = useState("");
-  const [rPassword, setRPassword] = useState("");
+  const [rEmail, setrEmail] = useState("");
+  const [rPassword, setrPassword] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ export default function Login() {
             className="inputs"
             type="email"
             id="email"
-            onChange={(e) => setREmail(e.target.value)}
+            onChange={(e) => setrEmail(e.target.value)}
           />
         </div>
         <div className="inputarea">
@@ -47,7 +47,7 @@ export default function Login() {
             className="inputs"
             type="password"
             id="password"
-            onChange={(e) => setRPassword(e.target.value)}
+            onChange={(e) => setrPassword(e.target.value)}
           />
         </div>
         <div className="btnarea">
