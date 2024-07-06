@@ -7,7 +7,7 @@ const Home = () => {
       <div className="home">
         <div className="header">
           <div className="header-text">
-            <h1>Partner with Tomato at 0% commission for the 1st Day!</h1>
+            <h1>Partner with Potato at 0% commission for the 1st Day!</h1>
             <p>
               And get ads worth INR 1500. Valid for new restaurant partners in
               select cities.
