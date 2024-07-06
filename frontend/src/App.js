@@ -21,7 +21,7 @@ function App() {
             path="/Restaurant/register"
             element={<Register />}
           ></Route>
-          {/* <Route exact path="/Restaurant/login" element={<Login />}></Route>
+          <Route exact path="/Restaurant/login" element={<Login />}></Route>
           <Route
             exact
             path="/Restaurant/addRestaurant"
@@ -31,7 +31,7 @@ function App() {
             exact
             path="/Restaurant/viewRestaurant"
             element={<ViewRestaurant />}
-          ></Route> */}
+          ></Route>
         </Routes>
         <Footer />
       </Router>
