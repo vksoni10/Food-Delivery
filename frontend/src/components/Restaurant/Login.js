@@ -10,9 +10,11 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/Restaurant/login", { rEmail, rPassword })
+      .post("http://localhost:3001/Restaurant/login", { rEmail, rPassword })
       .then((res) => {
-        if (res.data === "Success") {
+        const { token, message } = res.data; // Destructure token and message from response data
+        if (token) {
+          localStorage.setItem("token", token); // Store the token in localStorage or a cookie
           window.location.href = "/";
         } else {
           alert("Invalid credentials");
