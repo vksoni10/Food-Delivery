@@ -11,10 +11,10 @@ export default function Navbar() {
           <img src={logo} alt="Logo" />
         </NavLink>
         <div className="nav-links">
-          <NavLink to="./AddRestaurant.js" className="navbutton">
+          <NavLink to="/Restaurant/addRestaurant" className="navbutton">
             Add a new restaurant
           </NavLink>
-          <NavLink to="./ViewRestaurant.js" className="navbutton">
+          <NavLink to="/Restaurant/viewRestaurant" className="navbutton">
             View existing restaurants
           </NavLink>
         </div>
