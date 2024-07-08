@@ -6,13 +6,19 @@ const bcrypt = require('bcrypt');
 const JWT_SECRET = "jwt-secret-key";
 
 const createUser = async (req, res) => {
-    const email = req.body.email;
-    const findUser = await User.findOne({ email: email });
-    if (!findUser) {
-        const newUser = await User.create(req.body);
-        res.json(newUser);
-    } else {
-        throw new Error('User Already Exists');
+    try {
+        const email = req.body.email;
+        const findUser = await User.findOne({ email });
+        if (!findUser) {
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            const newUser = await User.create({ ...req.body, password: hashedPassword });
+            res.status(201).json(newUser);
+        } else {
+            return res.status(400).json({ message: 'User already exists' });
+        }
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ message: 'Server error' });
     }
 };
 
