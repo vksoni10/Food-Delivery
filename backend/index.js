@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 const UserModel = require("./model/UserModel");
 const authRoutes = require("./routes/authRoute");
 const cartRoutes = require("./routes/cartRoute");
-const Resmodel = require("./model/Resmodel");
+const Rest = require("./model/Resmodel");
 const restRoute = require("./routes/restRoute");
 
 const app = express();
@@ -20,17 +20,17 @@ app.use(
 app.use(cookieParser());
 
 mongoose
- .connect(
+  .connect(
     "mongodb+srv://adityagarg:adityagarg@cluster0.nrepxpj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }
   )
- .then(() => {
+  .then(() => {
     console.log("Connected to MongoDB");
   })
- .catch((error) => {
+  .catch((error) => {
     console.error("Error connecting to MongoDB:", error.message);
   });
 
