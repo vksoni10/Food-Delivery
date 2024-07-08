@@ -5,7 +5,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 
 const JWT_SECRET = "jwt-secret-key";
-const createUser = asyncHandler(async (req, res) => {
+const createUser = (async (req, res) => {
   const rEmail = req.body.rEmail;
   const findUser = await User.findOne({ rEmail: rEmail });
   if (!findUser) {
@@ -16,7 +16,7 @@ const createUser = asyncHandler(async (req, res) => {
   }
 });
 
-const loginResCtrl = asyncHandler(async (req, res) => {
+const loginResCtrl = (async (req, res) => {
   const { rEmail, rPassword } = req.body;
 
   try {

@@ -145,6 +145,10 @@
   margin-top: 20px;
   text-align: center;
 }
+.menu {
+  margin-top: 20px;
+  text-align: center;
+}
 .hello {
   background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
   border-radius: 10px; /* Rounded corners */
@@ -154,5 +158,3 @@
   font-weight: 700;
   color: black;
 }
-
-

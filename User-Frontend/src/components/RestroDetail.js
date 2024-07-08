@@ -58,6 +58,9 @@ const RestroDetail = () => {
         <div className="about">
           <h2 className='tab'>About this place</h2>
         </div>
+        <div className="menu">
+          <h2 className='tab'>Menu</h2>
+        </div>
       </div>
     </div></>
   

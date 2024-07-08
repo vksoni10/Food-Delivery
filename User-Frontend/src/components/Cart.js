@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './Cart.css'
+import Navbar from './Navbar';
 
-const Cart = () => {
+const Cart = () => {    
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const [tax, setTax] = useState(0);
@@ -54,8 +56,10 @@ const Cart = () => {
   };
 
   return (
+<>
+    <Navbar/>
     <div className="cart-container">
-      <h2>Cart</h2>
+      <h2>Your Order</h2>
       <ul>
         {cartItems.map((item) => (
           <li key={item.id}>
@@ -71,12 +75,13 @@ const Cart = () => {
         ))}
       </ul>
       <div className="cart-totals">
-        <p>Subtotal: ${subtotal}</p>
-        <p>Tax: ${tax}</p>
-        <p>Total: ${total}</p>
+        <p>Subtotal: ₹{subtotal}</p>
+        <p>Tax: ₹{tax}</p>
+        <p>Total: ₹{total}</p>
       </div>
-      <Link to="/checkout">Proceed to Checkout</Link>
+      <Link to="/checkout" className='checkout-link'>Proceed to Checkout</Link>
     </div>
+    </>
   );
 };
 
