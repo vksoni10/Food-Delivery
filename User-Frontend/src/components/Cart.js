@@ -79,7 +79,7 @@ const Cart = () => {
         <p>Tax: ₹{tax}</p>
         <p>Total: ₹{total}</p>
       </div>
-      <Link to="/checkout" className='checkout-link'>Proceed to Checkout</Link>
+      <Link to="/auth/checkout" className='checkout-link'>Proceed to Checkout</Link>
     </div>
     </>
   );
