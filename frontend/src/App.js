@@ -7,6 +7,7 @@ import Footer from "./components/Restaurant/Footer";
 import Login from "./components/Restaurant/Login";
 import AddRestaurant from "./components/Restaurant/AddRestaurant";
 import ViewRestaurant from "./components/Restaurant/ViewRestaurant";
+import Menu from "./components/Restaurant/Menu";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             path="/Restaurant/viewRestaurant"
             element={<ViewRestaurant />}
           ></Route>
+          <Route exact path="/Restaurant/menu" element={<Menu />}></Route>
         </Routes>
         <Footer />
       </Router>

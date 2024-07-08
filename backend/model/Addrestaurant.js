@@ -11,6 +11,16 @@ const restaurantSchema = new mongoose.Schema({
     required: true,
   },
 
+  Resaddress: {
+    type: String,
+    required: true,
+  },
+
+  Resnumber: {
+    type: Number,
+    required: true,
+  },
+
   menu: [
     {
       Dishname: {

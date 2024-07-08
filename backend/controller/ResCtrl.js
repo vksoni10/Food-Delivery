@@ -1,4 +1,4 @@
-const Restaurant = require("../model/Resmodel");
+const Rest = require("../model/Resmodel");
 const { generateToken } = require("../config/jwtToken");
 const jwt = require("jsonwebtoken");
 const express = require("express");
@@ -9,7 +9,7 @@ const createUser = async (req, res) => {
   const { rName, rEmail, rMobile, rPassword } = req.body;
 
   try {
-    const existingRestaurant = await Restaurant.findOne({
+    const existingRestaurant = await Rest.findOne({
       $or: [{ rEmail }, { rMobile }],
     });
     if (existingRestaurant) {
@@ -18,7 +18,7 @@ const createUser = async (req, res) => {
       });
     }
     const hash = await bcrypt.hash(rPassword, 10);
-    const newRestaurant = await Restaurant.create({
+    const newRestaurant = await Rest.create({
       rName,
       rEmail,
       rMobile,
@@ -35,18 +35,25 @@ const loginResCtrl = async (req, res) => {
   const { rEmail, rPassword } = req.body;
 
   try {
-    const user = await Restaurant.findOne({ rEmail });
-    if (!user) {
+    const Restaurant = await Rest.findOne({ rEmail });
+    if (!Restaurant) {
       return res.status(404).json({ message: "User does not exist" });
     }
 
-    const isPasswordValid = await bcrypt.compare(rPassword, user.rPassword);
+    const isPasswordValid = await bcrypt.compare(
+      rPassword,
+      Restaurant.rPassword
+    );
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Password is incorrect" });
     }
 
     const token = jwt.sign(
-      { rEmail: user.rEmail, rName: user.rName, id: user._id },
+      {
+        rEmail: Restaurant.rEmail,
+        rName: Restaurant.rName,
+        id: Restaurant._id,
+      },
       JWT_SECRET,
       { expiresIn: "1d" }
     );
@@ -58,7 +65,10 @@ const loginResCtrl = async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ message: "Server error" });
+    const express = require("express");
+    const bcrypt = require("bcrypt");
+    const jwt = require("jsonwebtoken");
+    const RModel = require("../model/RModel");
   }
 };
-
 module.exports = { createUser, loginResCtrl };
