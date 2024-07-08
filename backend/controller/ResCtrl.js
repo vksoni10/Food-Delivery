@@ -1,22 +1,37 @@
-const Restaurant = require("../model/RModel");
+const Restaurant = require("../model/Resmodel");
 const { generateToken } = require("../config/jwtToken");
 const jwt = require("jsonwebtoken");
 const express = require("express");
 const bcrypt = require("bcrypt");
 
 const JWT_SECRET = "jwt-secret-key";
-const createUser = (async (req, res) => {
-  const rEmail = req.body.rEmail;
-  const findUser = await User.findOne({ rEmail: rEmail });
-  if (!findUser) {
-    const newUser = await User.create(req.body);
-    res.json(newUser);
-  } else {
-    throw new Error("User Already Exists");
-  }
-});
+const createUser = async (req, res) => {
+  const { rName, rEmail, rMobile, rPassword } = req.body;
 
-const loginResCtrl = (async (req, res) => {
+  try {
+    const existingRestaurant = await Restaurant.findOne({
+      $or: [{ rEmail }, { rMobile }],
+    });
+    if (existingRestaurant) {
+      return res.status(400).json({
+        message: "User with the same email or phone number already exists",
+      });
+    }
+    const hash = await bcrypt.hash(rPassword, 10);
+    const newRestaurant = await Restaurant.create({
+      rName,
+      rEmail,
+      rMobile,
+      rPassword: hash,
+    });
+    res.json(newRestaurant);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const loginResCtrl = async (req, res) => {
   const { rEmail, rPassword } = req.body;
 
   try {
@@ -44,6 +59,6 @@ const loginResCtrl = (async (req, res) => {
     console.error(err.message);
     res.status(500).json({ message: "Server error" });
   }
-});
+};
 
-module.exports = loginResCtrl;
+module.exports = { createUser, loginResCtrl };
