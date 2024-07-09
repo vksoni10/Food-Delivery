@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Switch,
+} from "react-router-dom";
 import Home from "./components/Restaurant/Home";
 import Navbar from "./components/Restaurant/Navbar";
 import Register from "./components/Restaurant/Register";
@@ -37,22 +42,7 @@ function App() {
             path="/Restaurant/viewRestaurant"
             element={<ViewRestaurant />}
           ></Route>
-          <Route exact path="/Restaurant/menu" element={<Menu />}></Route>
-          {/* <Route
-            exact
-            path="/Restaurant/viewOrder"
-            element={<ViewOrder />}
-          ></Route>
-          <Route
-            exact
-            path="/Restaurant/viewOrderDetails"
-            element={<ViewOrderDetails />}
-          ></Route> */}
-          <Route
-            exact
-            path="/Restaurant/restaurantHome"
-            element={<RestaurantHome />}
-          ></Route>
+          <Route exact path="/*" element={<RestaurantHome />}></Route>
         </Routes>
         <Footer />
       </Router>

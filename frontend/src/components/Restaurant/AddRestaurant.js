@@ -294,36 +294,6 @@ export default function AddRestaurant() {
               </label>
               <input type="file" className="form-control" id="gstin" />
             </div>
-            {/* <div className="input-group mb-3">
-              <label className="input-group-text" for="item1">
-                Dish image for top 5 items
-              </label>
-              <input type="file" className="form-control" id="item1" />
-            </div>
-            <div className="input-group mb-3">
-              <label className="input-group-text" for="item2">
-                Dish image for top 5 items
-              </label>
-              <input type="file" className="form-control" id="item2" />
-            </div>
-            <div className="input-group mb-3">
-              <label className="input-group-text" for="item3">
-                Dish image for top 5 items
-              </label>
-              <input type="file" className="form-control" id="item3" />
-            </div>
-            <div className="input-group mb-3">
-              <label className="input-group-text" for="item4">
-                Dish image for top 5 items
-              </label>
-              <input type="file" className="form-control" id="item4" />
-            </div>
-            <div className="input-group mb-3">
-              <label className="input-group-text" for="item5">
-                Dish image for top 5 items
-              </label>
-              <input type="file" className="form-control" id="item5" />
-            </div> */}
             <div className="input-group mb-3">
               <label className="input-group-text" for="image1">
                 Three Restaurant Images
@@ -344,9 +314,8 @@ export default function AddRestaurant() {
             </div>
             <div class="col-12">
               <NavLink
-                to="Restaurant/RestaurantHome"
+                to="/Restaurant/restaurantHome"
                 className="btn btn-primary"
-                type="text"
               >
                 Submit
               </NavLink>
