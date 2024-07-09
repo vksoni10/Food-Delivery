@@ -1,7 +1,7 @@
 const Rest = require("../model/Resmodel");
-const { generateToken } = require("../config/jwtToken");
+// const { generateToken } = require("../config/jwtToken");
 const jwt = require("jsonwebtoken");
-const express = require("express");
+// const express = require("express");
 const bcrypt = require("bcrypt");
 
 const JWT_SECRET = "jwt-secret-key";
@@ -65,10 +65,7 @@ const loginResCtrl = async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ message: "Server error" });
-    const express = require("express");
-    const bcrypt = require("bcrypt");
-    const jwt = require("jsonwebtoken");
-    const RModel = require("../model/RModel");
   }
 };
+
 module.exports = { createUser, loginResCtrl };
