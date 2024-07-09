@@ -8,6 +8,10 @@ import Login from "./components/Restaurant/Login";
 import AddRestaurant from "./components/Restaurant/AddRestaurant";
 import ViewRestaurant from "./components/Restaurant/ViewRestaurant";
 import Menu from "./components/Restaurant/Menu";
+// import ViewMenu from "./components/Restaurant/ViewMenu";
+// import ViewOrder from "./components/Restaurant/ViewOrder";
+// import ViewOrderDetails from "./components/Restaurant/ViewOrderDetails";
+import RestaurantHome from "./components/Restaurant/RestaurantHome";
 
 function App() {
   return (
@@ -34,6 +38,21 @@ function App() {
             element={<ViewRestaurant />}
           ></Route>
           <Route exact path="/Restaurant/menu" element={<Menu />}></Route>
+          {/* <Route
+            exact
+            path="/Restaurant/viewOrder"
+            element={<ViewOrder />}
+          ></Route>
+          <Route
+            exact
+            path="/Restaurant/viewOrderDetails"
+            element={<ViewOrderDetails />}
+          ></Route> */}
+          <Route
+            exact
+            path="/Restaurant/restaurantHome"
+            element={<RestaurantHome />}
+          ></Route>
         </Routes>
         <Footer />
       </Router>
