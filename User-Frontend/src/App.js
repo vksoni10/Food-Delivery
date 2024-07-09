@@ -10,8 +10,9 @@ import Restaurants from './components/Restaurants';
 import Checkout from './components/Checkout';
 import Home from './components/Home';
 import Kanha from './components/Kanha';
+import Tracking from './components/Tracking';
 import Cart from './components/Cart';
-import RestroDetail from './components/RestroDetail'; // Import RestroDetail
+import RestroDetail from './components/RestroDetail'; 
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
           <Route exact path='/auth/restaurants' element={<Restaurants />} />
           <Route exact path='/auth/logout' element={<Logout />} />
           <Route exact path='/auth/checkout' element={<Checkout />} />
-          <Route exact path='/restaurant/:id' element={<RestroDetail />} /> {/* Add this route */}
+          <Route exact path='/auth/track' element={<Tracking />} />
+          <Route exact path='/restaurant/:id' element={<RestroDetail />} />   
         </Routes>
       </main>
     </Router>
