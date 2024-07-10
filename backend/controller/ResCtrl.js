@@ -3,6 +3,8 @@ const Rest = require("../model/Resmodel");
 const jwt = require("jsonwebtoken");
 // const express = require("express");
 const bcrypt = require("bcrypt");
+const restadd = require("../model/Addrestaurant");
+const IMG_BASE_URL = "http://localhost:3001/static/";
 
 const JWT_SECRET = "jwt-secret-key";
 const createUser = async (req, res) => {
@@ -68,4 +70,36 @@ const loginResCtrl = async (req, res) => {
   }
 };
 
-module.exports = { createUser, loginResCtrl };
+const restaurantAdd = async (req, res) => {
+  const {
+    resName,
+    resAddress,
+    resNumber,
+    resOperationalHours,
+    restaurantTypes,
+    resImages,
+  } = req.body;
+
+  try {
+    const existingRest = await restadd.findOne({ resNumber });
+    if (existingRest) {
+      return res
+        .status(400)
+        .json({ message: "Restaurant with the same number already exists" });
+    }
+    const newRest = await restadd.create({
+      resName,
+      resAddress,
+      resNumber,
+      resOperationalHours,
+      restaurantTypes,
+      resImages,
+    });
+    res.json(newRest);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+module.exports = { createUser, loginResCtrl, restaurantAdd };
