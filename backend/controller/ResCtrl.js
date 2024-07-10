@@ -1,12 +1,12 @@
 const Rest = require("../model/Resmodel");
-// const { generateToken } = require("../config/jwtToken");
 const jwt = require("jsonwebtoken");
-// const express = require("express");
 const bcrypt = require("bcrypt");
 const restadd = require("../model/Addrestaurant");
 const IMG_BASE_URL = "http://localhost:3001/static/";
 
+const restro = require("../model/Addrestaurant");
 const JWT_SECRET = "jwt-secret-key";
+
 const createUser = async (req, res) => {
   const { rName, rEmail, rMobile, rPassword } = req.body;
 
@@ -103,3 +103,31 @@ const restaurantAdd = async (req, res) => {
 };
 
 module.exports = { createUser, loginResCtrl, restaurantAdd };
+const getAllRestaurants = async (req, res) => {
+  try {
+    const restaurants = await restro.find();
+    res.status(200).json(restaurants);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const getRestroDetails = async (req, res) => {
+  try {
+    const restaurant = await restro.findById(req.params.id);
+    if (!restaurant) {
+      return res.status(404).json({ message: "Restaurant not found" });
+    }
+    console.log("Working");
+    res.json(restaurant);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+module.exports = {
+  createUser,
+  loginResCtrl,
+  getAllRestaurants,
+  getRestroDetails,
+};

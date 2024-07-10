@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const UserModel = require("./model/UserModel");
 const authRoutes = require("./routes/authRoute");
 const cartRoutes = require("./routes/cartRoute");
 const restRoute = require("./routes/restRoute");
@@ -12,11 +11,12 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    credentials: true, // Important
   })
 );
+
 app.use(cookieParser());
 
 mongoose

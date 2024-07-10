@@ -19,7 +19,11 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  addresses: {
+    type: [String], // Changed to array of strings to support multiple addresses
+    required: false,
+  }
 });
 
-//Export the model
+// Export the model
 module.exports = mongoose.model("User", userSchema);
