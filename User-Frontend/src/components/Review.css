@@ -8,11 +8,13 @@
   backdrop-filter: blur(10px); /* Blur effect for glass morphism */
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Soft shadow */
-}
+ 
 
+}
 form {
   display: flex;
   flex-direction: column;
+ 
 }
 
 input[type="text"],
@@ -25,6 +27,7 @@ select {
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
   backdrop-filter: blur(5px); /* Blur effect for inputs */
+
 }
 
 textarea {
@@ -53,6 +56,7 @@ button:hover {
 
 .review-list {
   margin-top: 20px;
+ 
 }
 
 .review-item {
@@ -62,17 +66,34 @@ button:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
   padding: 20px;
   margin-bottom: 15px;
+ 
 }
 
 .review-item:last-child {
   margin-bottom: 0;
+ 
 }
 
 .review-item p {
   margin: 5px 0;
+  color: black;
 }
 
 .review-item strong {
   font-weight: bold;
   color: #007bff;
+}
+.star-rating {
+  display: flex;
+  flex-direction: row;
+}
+
+.star {
+  font-size: 2em;
+  cursor: pointer;
+  color: #d3d3d3; /* Gray color for empty stars */
+}
+
+.star.filled {
+  color: #ffd700; /* Gold color for filled stars */
 }

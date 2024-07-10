@@ -32,6 +32,7 @@ function App() {
           <Route exact path='/auth/profile' element={<Profile />} />
           <Route exact path='/auth/track' element={<Tracking />} />
           <Route exact path='/restaurant/:id' element={<RestroDetail />} /> 
+          
 
         </Routes>
       </main>

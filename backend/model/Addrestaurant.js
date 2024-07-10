@@ -1,61 +1,62 @@
+// models/Restaurant.js
 const mongoose = require("mongoose");
 
-const restaurantSchema = new mongoose.Schema({
-  resName: {
+const menuItemSchema = new mongoose.Schema({
+  dishName: {
     type: String,
     required: true,
   },
-  resReview: {
-    type: String,
-    required: false,
-  },
-
-  resImage: {
-    type: String,
-    required: false,
-  },
-
-  resAddress: {
-    type: String,
-    required: false,
-  },
-
-  resNumber: {
+  price: {
     type: Number,
-    required: false,
+    required: true,
   },
-
-  resOperationalHours: {
+  dishImage: {
     type: String,
     required: false,
-  },
+  }
+  
+});
+
+const restaurantSchema = new mongoose.Schema({
   resDiscount: {
     type: String,
     required: false,
   },
-
-  menu: [
+  resName: {
+    type: String,
+    required: true,
+  },
+  resReview: [
     {
-      dishName: {
-        type: String,
-        required: false,
-      },
-      price: {
-        type: Number,
-        required: false,
-      },
-      dishImage: {
-        type: String,
-        required: false,
-      },
-    
+      type: String,
+      required: false,
     },
   ],
-
+  resImage: [{
+    type: String,
+    required: false,
+  }],
+  resAddress: {
+    type: String,
+    required: true,
+  },
+  resNumber: {
+    type: Number,
+    required: true,
+  },
+  resOperationalHours: {
+    type: String,
+    required: true,
+  },
+  menu: [menuItemSchema],
   rating: {
     type: Number,
     required: false,
   },
+  restaurantTypes: [{
+    type: String,
+    required: false,
+  }]
 });
 
 module.exports = mongoose.model("Resadd", restaurantSchema);

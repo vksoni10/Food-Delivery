@@ -43,16 +43,16 @@ export default function AddRestaurant() {
                 id="floatingTel"
                 placeholder="Telephone number"
               />
-              <label for="floatingInput">Tel no.</label>
+              <label for="floatingInput">Contact Details</label>
             </div>
             <div className="form-floating mb-3">
               <input
                 type="text"
                 className="form-control"
                 id="floatingBrand"
-                placeholder="Pizza Hut"
+                placeholder="I10am - 12pm"
               />
-              <label for="floatingInput">Brand Name</label>
+              <label for="floatingInput">Operational Hours</label>
             </div>
             <h4>Restaurant Type</h4>
             <div className="resType">
@@ -295,48 +295,29 @@ export default function AddRestaurant() {
               <input type="file" className="form-control" id="gstin" />
             </div>
             <div className="input-group mb-3">
-              <label className="input-group-text" for="menu">
-                Menu
+              <label className="input-group-text" for="image1">
+                Three Restaurant Images
               </label>
-              <input type="file" className="form-control" id="menu" />
+              <input type="file" className="form-control" id="image1" />
             </div>
             <div className="input-group mb-3">
-              <label className="input-group-text" for="item1">
-                Dish image for top 5 items
+              <label className="input-group-text" for="image2">
+                Three Restaurant Images
               </label>
-              <input type="file" className="form-control" id="item1" />
+              <input type="file" className="form-control" id="image2" />
             </div>
             <div className="input-group mb-3">
-              <label className="input-group-text" for="item2">
-                Dish image for top 5 items
+              <label className="input-group-text" for="image3">
+                Three Restaurant Images
               </label>
-              <input type="file" className="form-control" id="item2" />
-            </div>
-            <div className="input-group mb-3">
-              <label className="input-group-text" for="item3">
-                Dish image for top 5 items
-              </label>
-              <input type="file" className="form-control" id="item3" />
-            </div>
-            <div className="input-group mb-3">
-              <label className="input-group-text" for="item4">
-                Dish image for top 5 items
-              </label>
-              <input type="file" className="form-control" id="item4" />
-            </div>
-            <div className="input-group mb-3">
-              <label className="input-group-text" for="item5">
-                Dish image for top 5 items
-              </label>
-              <input type="file" className="form-control" id="item5" />
+              <input type="file" className="form-control" id="image3" />
             </div>
             <div class="col-12">
               <NavLink
-                to="Restaurant/menu"
+                to="/Restaurant/restaurantHome"
                 className="btn btn-primary"
-                type="text"
               >
-                Submit form
+                Submit
               </NavLink>
             </div>
           </form>

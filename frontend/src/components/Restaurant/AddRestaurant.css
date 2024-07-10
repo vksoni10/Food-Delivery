@@ -5,8 +5,7 @@
   margin: 0;
   padding: 0;
   width: 100%;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding: 3rem 0.5rem 3rem 0.5rem;
 }
 
 .intro {
@@ -19,4 +18,21 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+@media screen and (width<500px) {
+  .containerr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #a4d4b4;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    padding: 3rem 0.5rem 3rem 0.5rem;
+  }
+  .intro {
+    margin-top: 20%;
+    width: auto;
+  }
 }
