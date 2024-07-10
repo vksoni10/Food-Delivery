@@ -7,54 +7,54 @@ const restaurantSchema = new mongoose.Schema({
   },
   resReview: {
     type: String,
-    required: true,
+    required: false,
   },
 
   resImage: {
     type: String,
-    required: true,
+    required: false,
   },
 
   resAddress: {
     type: String,
-    required: true,
+    required: false,
   },
 
   resNumber: {
     type: Number,
-    required: true,
+    required: false,
   },
 
   resOperationalHours: {
     type: String,
-    required: true,
+    required: false,
+  },
+  resDiscount: {
+    type: String,
+    required: false,
   },
 
   menu: [
     {
       dishName: {
         type: String,
-        required: true,
+        required: false,
       },
       price: {
         type: Number,
-        required: true,
+        required: false,
       },
-
       dishImage: {
         type: String,
-        required: true,
+        required: false,
       },
-      resDiscount: {
-        type: String,
-        required: true,
-      },
+    
     },
   ],
 
   rating: {
     type: Number,
-    required: true,
+    required: false,
   },
 });
 

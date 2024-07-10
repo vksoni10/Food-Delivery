@@ -1,0 +1,71 @@
+.profile {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.1); /* Translucent background */
+  backdrop-filter: blur(10px); /* Blur effect for glass morphism */
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff; /* Text color changed to white */
+}
+
+.profile h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #eee; /* Title color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.profile-details {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.05
+  ); /* Translucent background for details */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+}
+
+.profile-details table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.profile-details td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Transparent borders */
+  font-size: 1.2rem;
+  color: #ddd; /* Table text color */
+}
+
+.profile-details td:first-child {
+  font-weight: bold;
+  width: 120px;
+  vertical-align: top;
+}
+
+.profile-addresses {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.05
+  ); /* Translucent background for addresses */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+}
+
+.profile-addresses h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ddd; /* Addresses heading color */
+}

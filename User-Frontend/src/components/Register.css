@@ -16,14 +16,12 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
 }
 
 .formarea {
   background: linear-gradient(135deg, #cb1111 0%, #fc2525 100%);
-  padding: 10px 60px;
+  padding: 20px;
   margin-top: 10vh;
-
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -35,7 +33,6 @@ html {
 .formarea h1 {
   margin-bottom: 20px;
   font-size: 2.5rem;
-  color: #fff;
 }
 
 .inputarea {
@@ -47,7 +44,6 @@ html {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #fff;
 }
 
 .inputs {
@@ -80,7 +76,7 @@ html {
   width: 100%;
 }
 
-.btn:hover {
+.bttn:hover {
   background-color: #fc2525;
   color: #fff;
 }
@@ -98,4 +94,25 @@ html {
 
 .btnarea p a:hover {
   color: #fff;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .formarea {
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .formarea {
+    padding: 15px;
+  }
+  .formarea h1 {
+    font-size: 2rem;
+  }
+  .inputs,
+  .bttn {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
 }

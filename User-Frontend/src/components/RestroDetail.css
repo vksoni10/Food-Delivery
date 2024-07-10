@@ -84,7 +84,7 @@
   margin: 10px 0;
 }
 
-.actions a {
+.active a {
   margin-right: 10px;
   padding: 10px 20px;
   background: #eee;
@@ -99,6 +99,17 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+.h {
+  color: white;
+}
+.heh {
+  display: inline-block;
+
+  border-radius: 50%;
+}
+.heh:hover {
+  background-color: gold;
 }
 
 .ratings {
@@ -139,6 +150,7 @@
 .tab.active {
   border-bottom: 2px solid red;
   color: white;
+  opacity: 75%;
 }
 
 .about {
@@ -157,4 +169,71 @@
   text-decoration: none;
   font-weight: 700;
   color: black;
+  display: inline;
+}
+.hello:hover {
+  background-color: gold;
+}
+h2 {
+  color: white;
+}
+.view {
+  cursor: pointer;
+}
+.restro-detail .content {
+  margin-top: 20px;
+  text-align: center;
+  color: white;
+  display: inline-block;
+}
+
+.restro-detail #book form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.restro-detail #book label {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.restro-detail #book input {
+  padding: 10px;
+  font-size: 16px;
+
+  width: 70px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.restro-detail #book button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.restro-detail #book button:hover {
+  background-color: #a8ff08;
+}
+
+.booking-success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: green;
+  margin-top: 20px;
+}
+
+.booking-success span {
+  font-size: 24px;
+  margin-right: 10px;
 }

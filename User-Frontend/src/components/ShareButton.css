@@ -11,7 +11,9 @@
   padding: 10px;
   z-index: 1000;
 }
-
+.shareit {
+  color: black;
+}
 .share-options a,
 .share-options button {
   color: #333;
@@ -28,5 +30,5 @@
 
 .share-options a:hover,
 .share-options button:hover {
-  background-color: #f0f0f0;
+  background-color: white;
 }

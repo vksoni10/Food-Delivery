@@ -1,0 +1,78 @@
+/* ReviewBox.css */
+
+.review-box {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+  backdrop-filter: blur(10px); /* Blur effect for glass morphism */
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+textarea,
+select {
+  margin-bottom: 15px;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ddd; /* Light gray border */
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+  backdrop-filter: blur(5px); /* Blur effect for inputs */
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+select {
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+}
+
+button {
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.review-list {
+  margin-top: 20px;
+}
+
+.review-item {
+  background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+  backdrop-filter: blur(10px); /* Blur effect for glass morphism */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+.review-item:last-child {
+  margin-bottom: 0;
+}
+
+.review-item p {
+  margin: 5px 0;
+}
+
+.review-item strong {
+  font-weight: bold;
+  color: #007bff;
+}

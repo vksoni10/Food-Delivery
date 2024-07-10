@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import Restaurants from './components/Restaurants';
 import Checkout from './components/Checkout';
+import Profile from './components/Profile';
 import Home from './components/Home';
 import Kanha from './components/Kanha';
 import Tracking from './components/Tracking';
@@ -28,8 +29,10 @@ function App() {
           <Route exact path='/auth/restaurants' element={<Restaurants />} />
           <Route exact path='/auth/logout' element={<Logout />} />
           <Route exact path='/auth/checkout' element={<Checkout />} />
+          <Route exact path='/auth/profile' element={<Profile />} />
           <Route exact path='/auth/track' element={<Tracking />} />
-          <Route exact path='/restaurant/:id' element={<RestroDetail />} />   
+          <Route exact path='/restaurant/:id' element={<RestroDetail />} /> 
+
         </Routes>
       </main>
     </Router>

@@ -10,7 +10,7 @@ function Navbar() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    setIsLoggedIn(!!token); 
+    setIsLoggedIn(!!token);
   }, []);
 
   const handleLogout = async () => {
@@ -37,8 +37,15 @@ function Navbar() {
       <div className="nav-links">
         {isLoggedIn ? (
           <>
-            <NavLink to="/auth/cart" className="navbutton">Cart</NavLink>
-            <NavLink to='/auth/logout' className="navbutton">Logout</NavLink>
+            <NavLink to="/auth/cart" className="navbutton"><span class="material-symbols-outlined">
+shopping_cart
+</span></NavLink>
+            <NavLink to="/auth/profile" className="navbutton"><span class="material-symbols-outlined">
+person
+</span></NavLink>
+            <NavLink to='/auth/logout' className="navbutton" onClick={handleLogout}><span class="material-symbols-outlined">
+logout
+</span></NavLink>
           </>
         ) : (
           <>

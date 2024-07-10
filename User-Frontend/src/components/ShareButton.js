@@ -15,7 +15,7 @@ export default function ShareButton() {
 
   return (
     <div>
-      <span className="material-symbols-outlined" onMouseOver={handleShareClick} style={{ cursor: 'pointer' }}>
+      <span className="material-symbols-outlined fs-6 shareit" onClick={handleShareClick} style={{borderRadius : '50%', cursor: 'pointer' }}>
         share
       </span>
       {showOptions && (
