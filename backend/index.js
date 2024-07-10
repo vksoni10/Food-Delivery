@@ -7,6 +7,7 @@ const authRoutes = require("./routes/authRoute");
 const cartRoutes = require("./routes/cartRoute");
 const Rest = require("./model/Resmodel");
 const restRoute = require("./routes/restRoute");
+const registerRoute = require("./routes/addRestRoute");
 
 const app = express();
 app.use(express.json());
@@ -37,6 +38,8 @@ mongoose
 app.use("/Restaurant", restRoute);
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
+app.use('/Restaurant', registerRoute);
+
 
 app.listen("3001", () => {
   console.log("Server is running on port 3001");

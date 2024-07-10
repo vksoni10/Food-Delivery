@@ -1,8 +1,54 @@
-import React from "react";
+import React, {useState} from "react";
 import "./AddRestaurant.css";
 import { NavLink } from "react-router-dom";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function AddRestaurant() {
+
+  const [resName, setResName] = useState('');
+  const [resAddress, setResAddress] = useState('');
+  const [resNumber, setResNumber] = useState('');
+  const [resOperationalHours, setResOperationalHours] = useState('');
+  const [restaurantTypes, setRestaurantTypes] = useState([]);
+  const [resImages, setResImages] = useState([]);
+
+  const navigate = useNavigate();
+
+   const handleImageChange = (e) => {
+     setResImages(Array.from(e.target.files));
+  };
+
+  const handleTypeChange = (e) => {
+    const { value, checked } = e.target;
+    setRestaurantTypes((prevTypes) =>
+      checked ? [...prevTypes, value] : prevTypes.filter((type) => type !== value)
+    );
+ };
+
+  const handleSubmit = (e) => {
+    
+    e.preventDefault();
+    axios.post('http://localhost:3001/Restaurant/addRestaurant', {
+      resName,  
+      resAddress,
+      resNumber,
+      resOperationalHours
+    })
+      .then((result) => {
+        console.log(result);
+        navigate('/Restaurant/restaurantHome');
+      })
+      .catch((err) => {
+        if (err.response && err.response.status === 400) {
+          alert(err.response.data.message);
+        } else {
+          console.error(err);
+        }
+      });
+  };
   return (
     <>
       <div className="containerr mb-3">
@@ -17,13 +63,15 @@ export default function AddRestaurant() {
           </h4>
         </div>
         <div>
-          <form>
-            <div className="form-floating mb-3">
+        <form onSubmit={handleSubmit} >          
+          <div className="form-floating mb-3">
               <input
                 type="text"
                 className="form-control"
                 id="floatingName"
                 placeholder="Pizza Hut - Vaishali Nagar"
+                value={resName}
+                onChange={(e) => setResName(e.target.value)}
               />
               <label for="floatingInput">Store Name</label>
             </div>
@@ -33,6 +81,8 @@ export default function AddRestaurant() {
                 className="form-control"
                 id="floatingAddress"
                 placeholder="Address"
+                value={resAddress}
+                onChange={(e) => setResAddress(e.target.value)}
               />
               <label for="floatingPassword">Store Address</label>
             </div>
@@ -42,6 +92,8 @@ export default function AddRestaurant() {
                 className="form-control"
                 id="floatingTel"
                 placeholder="Telephone number"
+                value={resNumber}
+                onChange={(e) => setResNumber(e.target.value)}
               />
               <label for="floatingInput">Contact Details</label>
             </div>
@@ -50,217 +102,31 @@ export default function AddRestaurant() {
                 type="text"
                 className="form-control"
                 id="floatingBrand"
-                placeholder="I10am - 12pm"
+                placeholder="10am - 12pm"
+                value={resOperationalHours}
+                onChange={(e) => setResOperationalHours(e.target.value)}
               />
               <label for="floatingInput">Operational Hours</label>
             </div>
-            <h4>Restaurant Type</h4>
+             <h4>Restaurant Type</h4>
             <div className="resType">
               <div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="asian"
-                  />
-                  <label className="form-check-label" for="type">
-                    Asian
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="punjabi"
-                  />
-                  <label className="form-check-label" for="type">
-                    Punjabi
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="bbq"
-                  />
-                  <label className="form-check-label" for="type">
-                    BBQ
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="bar"
-                  />
-                  <label className="form-check-label" for="type">
-                    Bar
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="bakery"
-                  />
-                  <label className="form-check-label" for="type">
-                    Bakery and Cake
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="breakfast"
-                  />
-                  <label className="form-check-label" for="type">
-                    Breakfast
-                  </label>
-                </div>
+                {['Asian', 'Punjabi', 'BBQ', 'Bar', 'Bakery and Cake', 'Breakfast', 'Fast Foods', 'Chinese', 'Korean', 'Desserts and IceCream', 'Seafood', 'North Indian', 'Juice and Shakes', 'Mexican', 'Pizza', 'Snacks & Sandwiches', 'Chaat', 'South Indian'].map((type) => (
+                  <div className="form-check" key={type}>
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value={type}
+                      id={type.toLowerCase().replace(/ /g, '')}
+                      onChange={handleTypeChange}
+                    />
+                    <label className="form-check-label" htmlFor={type.toLowerCase().replace(/ /g, '')}>
+                      {type}
+                    </label>
+                  </div>
+                ))}
               </div>
-              <div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="fastFood"
-                  />
-                  <label className="form-check-label" for="type">
-                    Fast Foods
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="chinese"
-                  />
-                  <label className="form-check-label" for="type">
-                    Chinese
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="korean"
-                  />
-                  <label className="form-check-label" for="type">
-                    Korean
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="desserts"
-                  />
-                  <label className="form-check-label" for="type">
-                    Desserts and IceCream
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="seafood"
-                  />
-                  <label className="form-check-label" for="type">
-                    Seafood
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="northIndian"
-                  />
-                  <label className="form-check-label" for="type">
-                    North Indian
-                  </label>
-                </div>
-              </div>
-              <div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="juice"
-                  />
-                  <label className="form-check-label" for="type">
-                    Juice and Shakes
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="mexican"
-                  />
-                  <label className="form-check-label" for="type">
-                    Mexican
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="Pizza"
-                  />
-                  <label className="form-check-label" for="type">
-                    Pizza
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="snacks"
-                  />
-                  <label className="form-check-label" for="type">
-                    Snacks & Sandwiches
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="chaat"
-                  />
-                  <label className="form-check-label" for="type">
-                    Chaat
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="southIndian"
-                  />
-                  <label className="form-check-label mb-3" for="type">
-                    South Indian
-                  </label>
-                </div>
-              </div>
-            </div>
+            </div> 
             <h4 className="mb-3">Upload document</h4>
             <div className="input-group mb-3">
               <label className="input-group-text" for="fssaiLicence">
@@ -293,33 +159,18 @@ export default function AddRestaurant() {
                 Regular GSTIN
               </label>
               <input type="file" className="form-control" id="gstin" />
-            </div>
-            <div className="input-group mb-3">
-              <label className="input-group-text" for="image1">
-                Three Restaurant Images
-              </label>
-              <input type="file" className="form-control" id="image1" />
-            </div>
-            <div className="input-group mb-3">
-              <label className="input-group-text" for="image2">
-                Three Restaurant Images
-              </label>
-              <input type="file" className="form-control" id="image2" />
-            </div>
-            <div className="input-group mb-3">
-              <label className="input-group-text" for="image3">
-                Three Restaurant Images
-              </label>
-              <input type="file" className="form-control" id="image3" />
-            </div>
-            <div class="col-12">
-              <NavLink
-                to="/Restaurant/restaurantHome"
-                className="btn btn-primary"
-              >
-                Submit
-              </NavLink>
-            </div>
+            </div> 
+            
+             <h4 className="mb-3">Three Restaurant Images</h4>
+            {Array.from({ length: 3 }).map((_, index) => (
+              <div className="input-group mb-3" key={index}>
+                <label className="input-group-text" htmlFor={`image${index + 1}`}>
+                  Restaurant Image {index + 1}
+                </label>
+                <input type="file" className="form-control" id={`image${index + 1}`} onChange={handleImageChange} multiple />
+              </div>
+            ))} 
+            <button type="submit">Register Restaurant</button>
           </form>
         </div>
       </div>
