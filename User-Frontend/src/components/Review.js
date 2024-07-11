@@ -59,7 +59,7 @@ export default function Review(props) {
                 {/* <span className='optional-text'>(Optional)</span> */}
                 <textarea
                     className="form-control mb-3"
-                    placeholder="Enter your comment here"
+                    // placeholder="Enter your comment here"
                     rows={4}
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
