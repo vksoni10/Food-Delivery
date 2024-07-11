@@ -15,33 +15,39 @@
 .image-section {
   display: flex;
   flex-direction: row;
-  align-items: unset;
+  align-items: center;
+  margin-left: 1px;
+ width: 100%;
 }
 
 .main-image {
   margin: 10px;
-  width: 100%;
-  max-width: 800px;
+  height: 510px;
+width: 1200px;
+  max-width: 1000px;
   border: 2px solid black;
   border-radius: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 35px;  
 }
 
 .gallery {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  align-items: center;
   width: 100%;
   max-width: 800px;
 }
 
 .gallery-item {
   position: relative;
+  
 }
 
 .gallery-item img {
-  margin: 10px;
-  width: 400px;
+  margin: 5px;
+  margin-left: 0px;
+  width: 650px;
   height: 250px;
   object-fit: cover;
   border: 2px solid black;
@@ -203,7 +209,7 @@ h2 {
   padding: 10px;
   font-size: 16px;
 
-  width: 100px;
+  width: 150px;
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 20px;
@@ -237,3 +243,40 @@ h2 {
   font-size: 24px;
   margin-right: 10px;
 }
+.form-label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: black;
+
+}
+
+.form-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  
+  
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+.text{
+  color:white;
+}
+

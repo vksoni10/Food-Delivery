@@ -212,6 +212,7 @@ const navigate = useNavigate();
 const handleImageChange = (e) => {
   setResImages(prevImages => [...prevImages, ...Array.from(e.target.files)]);
 };
+console.log(resImage)
 
 const handleTypeChange = (e) => {
   const { value, checked } = e.target;
