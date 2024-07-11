@@ -8,23 +8,26 @@ function Profile() {
     const [user, setUser] = useState({});
     const [newAddress, setNewAddress] = useState('');
     const [addresses, setAddresses] = useState([]);
-    const [add,setMyAdd]= useState([]);
+    const [editingIndex, setEditingIndex] = useState(null);
+    const [editingAddress, setEditingAddress] = useState('');
+
+    // Function to fetch user profile and addresses
+    const fetchUserProfile = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const decoded = jwtDecode(token);
+                const { name, email, mobile, addresses } = decoded;
+                setUser({ name, email, mobile });
+                setAddresses(addresses || []);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     useEffect(() => {
-        const fetchUserProfile = async () => {
-            try {
-                const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
-                if (token) {
-                    const decoded = jwtDecode(token);
-                    const { name, email, mobile, address } = decoded;
-                    setUser({ name, email, mobile });
-                    // setAddresses(address || []);
-                }
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        fetchUserProfile(); // Initial fetch when component mounts
+        fetchUserProfile();
     }, []);
 
     const handleAddressChange = (e) => {
@@ -34,35 +37,62 @@ function Profile() {
     const handleAddAddress = async (e) => {
         e.preventDefault();
         try {
-            const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
+            const token = localStorage.getItem('token');
             if (token) {
                 const config = {
                     headers: { Authorization: `Bearer ${token}` }
                 };
                 const response = await axios.post('http://localhost:3001/auth/add-address', { address: newAddress }, config);
-                setAddresses([...addresses, newAddress]);
+                setAddresses(response.data.addresses || []);
                 setNewAddress('');
             }
         } catch (err) {
             console.log(err);
         }
     };
-    useEffect(() => {
-        const fetchUserProfile = async () => {
-            try {
-                const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
-                if (token) {
-                    const decoded = jwtDecode(token);
-                    const {address } = decoded;
-                    
-                    setMyAdd(address || []);
-                }
-            } catch (err) {
-                console.log(err);
+
+    const handleEditClick = (index, address) => {
+        setEditingIndex(index);
+        setEditingAddress(address);
+    };
+
+    const handleEditChange = (e) => {
+        setEditingAddress(e.target.value);
+    };
+
+    const handleEditSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const config = {
+                    headers: { Authorization: `Bearer ${token}` }
+                };
+                const response = await axios.put(`http://localhost:3001/auth/edit-address/${editingIndex}`, { address: editingAddress }, config);
+                setAddresses(response.data.addresses || []);
+                setEditingIndex(null);
+                setEditingAddress('');
             }
-        };
-        fetchUserProfile(); // Initial fetch when component mounts
-    }, []);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const handleDeleteClick = async (index) => {
+        try {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const config = {
+                    headers: { Authorization: `Bearer ${token}` }
+                };
+                const response = await axios.delete(`http://localhost:3001/auth/delete-address/${index}`, config);
+                setAddresses(response.data.addresses || []);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     return (
         <>
             <Navbar />
@@ -89,8 +119,26 @@ function Profile() {
                 <div className="profile-addresses">
                     <h2>Saved Addresses</h2>
                     <ul>
-                        {add.map((address, index) => (
-                            <li key={index}>{address}</li>
+                        {addresses.map((address, index) => (
+                            <li key={index}>
+                                {editingIndex === index ? (
+                                    <form onSubmit={handleEditSubmit}>
+                                        <input
+                                            type="text"
+                                            value={editingAddress}
+                                            onChange={handleEditChange}
+                                            required
+                                        />
+                                        <button type="submit">Save</button>
+                                    </form>
+                                ) : (
+                                    <>
+                                        {address}
+                                        <button onClick={() => handleEditClick(index, address)}>Edit</button>
+                                        <button onClick={() => handleDeleteClick(index)}>Delete</button>
+                                    </>
+                                )}
+                            </li>
                         ))}
                     </ul>
                 </div>
