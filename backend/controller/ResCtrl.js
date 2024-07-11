@@ -77,7 +77,6 @@ const restaurantAdd = async (req, res) => {
     resNumber,
     resOperationalHours,
     restaurantTypes,
-    resImages,
   } = req.body;
 
   try {
@@ -87,13 +86,18 @@ const restaurantAdd = async (req, res) => {
         .status(400)
         .json({ message: "Restaurant with the same number already exists" });
     }
+    let resImages = [];
+    if (req.files) {
+      resImages = req.files.map(file => IMG_BASE_URL + file.filename);
+    }
+
     const newRest = await restadd.create({
       resName,
       resAddress,
       resNumber,
       resOperationalHours,
       restaurantTypes,
-      resImages,
+      resImage: resImages,
     });
     res.json(newRest);
   } catch (err) {
@@ -102,7 +106,6 @@ const restaurantAdd = async (req, res) => {
   }
 };
 
-module.exports = { createUser, loginResCtrl, restaurantAdd };
 const getAllRestaurants = async (req, res) => {
   try {
     const restaurants = await restro.find();
@@ -130,4 +133,5 @@ module.exports = {
   loginResCtrl,
   getAllRestaurants,
   getRestroDetails,
+  restaurantAdd,
 };
