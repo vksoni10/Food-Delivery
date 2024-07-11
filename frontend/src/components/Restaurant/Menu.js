@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Menu.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import {jwtDecode} from "jwt-decode";
 
 export default function Menu() {
   const [menu, setMenu] = useState([]);
@@ -11,37 +12,39 @@ export default function Menu() {
   const [dishType, setDishType] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/menu")
-      .then((response) => setMenu(response.data))
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3001/menu")
+  //     .then((response) => setMenu(response.data))
+  //     .catch((err) => console.log(err));
+  // }, []);
 
-  const handleDelete = (id) => {
-    axios
-      .delete("http://localhost:3001/menu/" + id)
-      .then((res) => {
-        console.log(res);
-        setMenu(menu.filter((item) => item._id !== id)); // Update the state to remove the deleted item
-      })
-      .catch((err) => console.log(err));
+  const fetchRestaurantName = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      console.log(token)
+      const decoded = jwtDecode(token);
+      const { resName } = decoded;
+      return resName;
+    }
+    return null;
   };
 
-  const handleMenuChange = (index, e) => {
-    const newMenu = [...menu];
-    newMenu[index][e.target.name] = e.target.value;
-    setMenu(newMenu);
-  };
-
-  const addMenuItem = () => {
-    setMenu([...menu, { dishName: "", price: "", dishImage: "", dishType: "" }]);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/Restaurant/menu", { dishName, price, dishImage, dishType })
+    const resName = await fetchRestaurantName();
+    if (!resName) {
+      alert("User not authenticated");
+      return;
+    }
+    await axios
+      .post("http://localhost:3001/Restaurant/menu", {
+        dishName,
+        price,
+        dishImage,
+        dishType,
+        resName,
+      })
       .then((result) => {
         console.log(result);
         navigate("/Restaurant/login");
@@ -54,12 +57,11 @@ export default function Menu() {
         }
       });
   };
-  console.log(dishName)
 
   return (
     <>
       <div className="menu">
-        <NavLink to="#" onClick={addMenuItem}>Add</NavLink>
+        {/* <NavLink to="#" onClick={addMenuItem}>Add</NavLink> */}
       </div>
       <div className="add-menu-form">
         <form onSubmit={handleSubmit}>
@@ -124,7 +126,7 @@ export default function Menu() {
                   <NavLink to={`/Restaurant/updateMenu/${item._id}`}>
                     Update
                   </NavLink>
-                  <button onClick={() => handleDelete(item._id)}>Delete</button>
+                  {/* <button onClick={() => handleDelete(item._id)}>Delete</button> */}
                 </td>
               </tr>
             ))}
