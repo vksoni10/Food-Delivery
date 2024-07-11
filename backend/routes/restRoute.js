@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { createUser, loginResCtrl } = require("../controller/ResCtrl");
+// const { createUser, loginResCtrl } = require("../controller/ResCtrl");
 const Rest = require("../model/Resmodel");
 const {
   createUser,
