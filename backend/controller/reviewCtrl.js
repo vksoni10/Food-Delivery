@@ -2,7 +2,7 @@
 const Restaurant = require('../model/Addrestaurant');
 
 const addReview = async (req, res) => {
-  const { rating, comment } = req.body;
+  const { rating, comment, name } = req.body;
 const {id} = req.params;
   try {
     const restaurant = await Restaurant.findById(id);
@@ -14,6 +14,8 @@ const {id} = req.params;
     id,
       rating,
       comment,
+      username: name,
+      createdAt: new Date()
     };
 
     restaurant.resReview.push(newReview);

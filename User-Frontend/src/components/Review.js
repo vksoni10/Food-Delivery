@@ -2,8 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './Review.css'; // Make sure to import the CSS file
 import { useParams } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';
-
+import { fetchUserInfo } from './userApi';
 
 export default function Review() {
     const { id } = useParams();
@@ -11,9 +10,11 @@ export default function Review() {
     const [comment, setComment] = useState('');
     const [message, setMessage] = useState('');
     const [reviews, setReviews] = useState([]);
+    const [user, setUser] = useState({});
 
     useEffect(() => {
         fetchReviews();
+        fetchUserProfile();
     }, [id]);
 
     const fetchReviews = async () => {
@@ -24,25 +25,17 @@ export default function Review() {
             console.error('Error fetching reviews:', err.message);
         }
     };
-    const [user, setUser] = useState({});
 
     const fetchUserProfile = async () => {
         try {
-            const token = localStorage.getItem('token');
-            if (token) {
-                const decoded = jwtDecode(token);
-                const { name, email, mobile, addresses } = decoded;
-                setUser({ name, email, mobile, addresses });
+            const userInfo = await fetchUserInfo();
+            if (userInfo) {
+                setUser(userInfo);
             }
         } catch (err) {
             console.log(err);
         }
     };
-    useEffect(() => {
-        fetchUserProfile();
-    }, []);
-
-
 
     const handleStarClick = (index) => {
         setRating(index);
@@ -56,9 +49,10 @@ export default function Review() {
         setMessage('');
 
         try {
-            const response = await axios.post(`http://localhost:3001/Restaurant/add-review/${id}`, {
+            await axios.post(`http://localhost:3001/Restaurant/add-review/${id}`, {
                 rating,
                 comment,
+                name: user.name // Send the user's name with the review
             });
             setMessage('');
             fetchReviews(); // Refresh the reviews list
@@ -112,9 +106,7 @@ export default function Review() {
                 {reviews.map((review) => (
                     <div key={review._id} className="review-item">
                         <div className="review-header">
-                            {review.name && (
-                                <span className="reviewer-name">{user.name}</span>
-                            )}
+                            <span className="reviewer-name">{review.username}</span>
                             <div className="rating-stars">
                                 {[1, 2, 3, 4, 5].map((index) => (
                                     <span
