@@ -93,12 +93,12 @@ const RestroDetail = () => {
             </div>
           </div>
           <div className="tabs">
-            <span
+            {/* <span
               className={`tab ${activeTab === 'overview' ? 'active' : ''}`}
               onClick={() => handleTabClick('overview')}
             >
               Overview
-            </span>
+            </span> */}
             <span
               className={`tab ${activeTab === 'order' ? 'active' : ''}`}
               onClick={() => handleTabClick('order')}
@@ -121,8 +121,7 @@ const RestroDetail = () => {
           <div className="tab-content">
             {activeTab === 'overview' && (
               <div id="overview">
-                <h2 className="h">About this place</h2>
-                <p>{restaurant.description}</p>
+                <h4 className="h">Order now from {restaurant.resName}.<br></br>The best place in town to have {restaurant.restaurantTypes}. <br></br> Visit us now at {restaurant.resAddress}. <br></br> Checkout the above tabs to explore ordering online, the reviews our customers gave and also to book a table! </h4>
               </div>
             )}
             {activeTab === 'order' && (
