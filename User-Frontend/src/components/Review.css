@@ -98,3 +98,30 @@
 .submit-button:hover {
   background-color: #e0a800; /* Darker gold on hover */
 }
+
+.reviews-list {
+  margin-top: 20px;
+}
+
+.review-item {
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  border: none; /* Remove border */
+  border-radius: 8px; /* Slightly rounded corners */
+  padding: 16px; /* Add padding for better spacing */
+  margin-bottom: 16px; /* Space between review items */
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviewer-name {
+  font-weight: bold;
+}
+
+.review-comment {
+  margin-top: 8px;
+}
