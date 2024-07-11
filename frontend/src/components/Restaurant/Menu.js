@@ -1,57 +1,56 @@
-import React, { useState, useEffect } from 'react';
+// src/pages/RegisterRestaurant.js
+import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const Menu = ({ restaurantId }) => {
-  const [menu, setMenu] = useState([]);
-  const [dishName, setDishName] = useState('');
-  const [price, setPrice] = useState('');
-  const [dishType, setDishType] = useState('');
-  const [dishImage, setDishImage] = useState(null);
+const Menu = () => {
+ 
+  const [menu, setMenu] = useState([{ dishName: '', price: '', dishImage: '' }]);
 
-  useEffect(() => {
-    axios.get(`http://localhost:3001//Restaurant/${restaurantId}`)
-      .then(res => setMenu(res.data.menu))
-      .catch(err => console.error(err));
-  }, [restaurantId]);
+  const navigate = useNavigate();
 
-  const handleAddItem = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('dishName', dishName);
-    formData.append('price', price);
-    formData.append('dishType', dishType);
-    if (dishImage) formData.append('dishImage', dishImage);
-
-    axios.post(`http://localhost:3001//Restaurant/Menu`, formData)
-      .then(res => setMenu(res.data.menu))
-      .catch(err => console.error(err));
+  const handleMenuChange = (index, e) => {
+    const newMenu = [...menu];
+    newMenu[index][e.target.name] = e.target.value;
+    setMenu(newMenu);
   };
 
-  const handleDeleteItem = (menuItemId) => {
-    axios.delete(`/Restaurant/${restaurantId}/menu/${menuItemId}`)
-      .then(res => setMenu(res.data.menu))
-      .catch(err => console.error(err));
+  const addMenuItem = () => {
+    setMenu([...menu, { dishName: '', price: '', dishImage: '' }]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:3001/Restaurant/menu', { 
+      menu
+    })
+    .then((result) => {
+      console.log(result);
+      navigate('/Restaurant/login');
+    })
+    .catch((err) => {
+      if (err.response && err.response.status === 400) {
+        alert(err.response.data.message);
+      } else {
+        console.error(err);
+      }
+    });
   };
 
   return (
-    <div>
-      <h2>Manage Menu</h2>
-      <form onSubmit={handleAddItem}>
-        <input type="text" value={dishName} onChange={(e) => setDishName(e.target.value)} placeholder="Dish Name" required />
-        <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Price" required />
-        <input type="text" value={dishType} onChange={(e) => setDishType(e.target.value)} placeholder="Dish Type" />
-        <input type="file" onChange={(e) => setDishImage(e.target.files[0])} />
-        <button type="submit">Add Item</button>
-      </form>
-      <ul>
-        {menu.map(item => (
-          <li key={item._id}>
-            {item.dishName} - ${item.price}
-            <button onClick={() => handleDeleteItem(item._id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <form onSubmit={handleSubmit}>
+      
+      {menu.map((item, index) => (
+        <div key={index}>
+          <input type="text" name="dishName" value={item.dishName} onChange={(e) => handleMenuChange(index, e)} placeholder="Dish Name" required />
+          <input type="number" name="price" value={item.price} onChange={(e) => handleMenuChange(index, e)} placeholder="Price" required />
+          <input type="text" name="dishImage" value={item.dishImage} onChange={(e) => handleMenuChange(index, e)} placeholder="Dish Image URL" required />
+        </div>
+      ))}
+      <button type="button" onClick={addMenuItem}>Add Menu Item</button>
+
+      <button type="submit">Register Restaurant</button>
+    </form>
   );
 };
 
