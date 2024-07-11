@@ -73,7 +73,11 @@ const RestroDetail = () => {
           <p className="status">{restaurant.resOperationalHours}</p>
           <div className="actions">
             <button className="hello">
-              <a className="hello" target="_main" href={`https://www.google.com/maps/place/${restaurant.resName}`}>
+              <a
+                className="hello"
+                target="_main"
+                href={`https://www.google.com/maps/place/${restaurant.resName}`}
+              >
                 Directions
               </a>
             </button>
@@ -90,42 +94,42 @@ const RestroDetail = () => {
           </div>
           <div className="tabs">
             <span
-              className={`tab ${activeTab === 'overview' ? 'active' : ''}`}
-              onClick={() => handleTabClick('overview')}
+              className={`tab ${activeTab === "overview" ? "active" : ""}`}
+              onClick={() => handleTabClick("overview")}
             >
               Overview
             </span>
             <span
-              className={`tab ${activeTab === 'order' ? 'active' : ''}`}
-              onClick={() => handleTabClick('order')}
+              className={`tab ${activeTab === "order" ? "active" : ""}`}
+              onClick={() => handleTabClick("order")}
             >
               Order Online
             </span>
             <span
-              className={`tab ${activeTab === 'reviews' ? 'active' : ''}`}
-              onClick={() => handleTabClick('reviews')}
+              className={`tab ${activeTab === "reviews" ? "active" : ""}`}
+              onClick={() => handleTabClick("reviews")}
             >
               Reviews
             </span>
             <span
-              className={`tab ${activeTab === 'book' ? 'active' : ''}`}
-              onClick={() => handleTabClick('book')}
+              className={`tab ${activeTab === "book" ? "active" : ""}`}
+              onClick={() => handleTabClick("book")}
             >
               Book a Table
             </span>
           </div>
           <div className="tab-content">
-            {activeTab === 'overview' && (
+            {activeTab === "overview" && (
               <div id="overview">
                 <h2 className="h">About this place</h2>
                 <p>{restaurant.description}</p>
               </div>
             )}
-            {activeTab === 'order' && (
+            {activeTab === "order" && (
               <div id="order">
                 <h2 className="h">Menu</h2>
                 <ul>
-                  {restaurant.menu.map(item => (
+                  {restaurant.menu.map((item) => (
                     <li key={item._id}>
                       {item.dishName} - ${item.price}
                     </li>
@@ -133,13 +137,13 @@ const RestroDetail = () => {
                 </ul>
               </div>
             )}
-            {activeTab === 'reviews' && (
+            {activeTab === "reviews" && (
               <div id="reviews">
                 <h2 className="h">Reviews</h2>
                 <Review reviews={restaurant.resReview} />
               </div>
             )}
-            {activeTab === 'book' && (
+            {activeTab === "book" && (
               <div id="book">
                 <h2 className="h">Book a Table</h2>
                 {bookingSuccess ? (
@@ -148,27 +152,42 @@ const RestroDetail = () => {
                   </div>
                 ) : (
                   <form onSubmit={handleBookingSubmit}>
-                    <label className="h">
-                      Table for:
+                    <label className="form-label">
+                      <h5 className="text">Table for</h5>
                       <input
                         type="number"
                         name="people"
                         value={booking.people}
                         onChange={handleBookingChange}
                         required
+                        className="form-input"
                       />
                     </label>
-                    <label className="h">
-                      Time:
+                    <label className="form-label">
+                      <h5 className="text">Date:</h5>
+                      <input
+                        type="date"
+                        name="date"
+                        value={booking.date}
+                        onChange={handleBookingChange}
+                        required
+                        className="form-input"
+                      />
+                    </label>
+                    <label className="form-label">
+                      <h5 className="text">Time:</h5>
                       <input
                         type="time"
                         name="time"
                         value={booking.time}
                         onChange={handleBookingChange}
                         required
+                        className="form-input"
                       />
                     </label>
-                    <button type="submit">Book Now</button>
+                    <button type="submit" className="form-button">
+                      Book Now
+                    </button>
                   </form>
                 )}
               </div>
