@@ -1,5 +1,5 @@
 // userApi.js
-import jwtDecode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 
 export const fetchUserInfo = async () => {
     const token = localStorage.getItem('token');

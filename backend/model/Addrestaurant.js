@@ -25,6 +25,10 @@ const reviewSchema = new mongoose.Schema({
     ref: 'User',
     required: false,
   },
+  username:{
+    type:String,
+    required:false,
+  },
   rating: {
     type: Number,
     required: false,
