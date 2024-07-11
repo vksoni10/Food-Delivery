@@ -56,6 +56,9 @@ export default function Review() {
             });
             setMessage('Review submitted successfully');
             fetchReviews(); // Refresh the reviews list
+            // Reset the form fields
+            setRating(0);
+            setComment('');
         } catch (err) {
             console.error('Error submitting review:', err.message);
             setMessage('Error submitting review');
@@ -63,8 +66,8 @@ export default function Review() {
     };
 
     return (
-        <div className="review-container">
-            <div className="custom-card">
+        <div className="review-container card-and-reviews">
+            <div className="custom-card ">
                 <div className="custom-card-header">
                     <h2>Rate The Restaurant</h2>
                 </div>
@@ -126,3 +129,4 @@ export default function Review() {
         </div>
     );
 }
+    
