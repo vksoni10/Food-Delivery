@@ -8,6 +8,8 @@ import OrderHistory from "./OrderHistory";
 import Reviews from "./Reviews";
 import Menu from "./Menu";
 import Profile from "./Profile";
+import CreateMenu from "./CreateMenu";
+import UpdateMenu from "./UpdateMenu";
 
 export default function RestaurantHome() {
   const [currentComponent, setCurrentComponent] = useState(
@@ -53,7 +55,7 @@ export default function RestaurantHome() {
                 <span class="material-symbols-outlined">lists</span>
               </sub>
             </sub>
-            &nbsp;&nbsp;Update Menu
+            &nbsp;&nbsp;Menu
           </NavLink>
         </div>
         <div className="sidebar-tab mb-3 btn btn-info">
@@ -122,8 +124,10 @@ export default function RestaurantHome() {
           <Route path="/Restaurant/currentOrders" element={<CurrentOrders />} />
           <Route path="/Restaurant/orderHistory" element={<OrderHistory />} />
           <Route path="/Restaurant/reviews" element={<Reviews />} />
-          <Route path="/Restaurant/menu" element={<Menu />} />
+          <Route path="/*" element={<Menu />} />
           <Route path="/Restaurant/profile" element={<Profile />} />
+          <Route path="/Restaurant/createMenu" element={<CreateMenu />} />
+          <Route path="/Restaurant/updateMenu" element={<UpdateMenu />} />
         </Routes>
       </div>
     </div>
