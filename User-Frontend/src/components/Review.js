@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './Review.css'; // Make sure to import the CSS file
 import { useParams } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode';
+
 
 export default function Review() {
     const { id } = useParams();
@@ -22,6 +24,25 @@ export default function Review() {
             console.error('Error fetching reviews:', err.message);
         }
     };
+    const [user, setUser] = useState({});
+
+    const fetchUserProfile = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const decoded = jwtDecode(token);
+                const { name, email, mobile, addresses } = decoded;
+                setUser({ name, email, mobile, addresses });
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    useEffect(() => {
+        fetchUserProfile();
+    }, []);
+
+
 
     const handleStarClick = (index) => {
         setRating(index);
@@ -91,8 +112,8 @@ export default function Review() {
                 {reviews.map((review) => (
                     <div key={review._id} className="review-item">
                         <div className="review-header">
-                            {review.user_id && (
-                                <span className="reviewer-name">{review.user_id.name}</span>
+                            {review.name && (
+                                <span className="reviewer-name">{user.name}</span>
                             )}
                             <div className="rating-stars">
                                 {[1, 2, 3, 4, 5].map((index) => (
