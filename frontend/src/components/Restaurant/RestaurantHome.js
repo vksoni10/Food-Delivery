@@ -33,7 +33,7 @@ export default function RestaurantHome() {
                 <span className="material-symbols-outlined">dashboard</span>
               </sub>
             </sub>
-            &nbsp; Dashboard
+            &nbsp;&nbsp;Dashboard
           </NavLink>
         </div>
         <div className="sidebar-tab mb-3 btn btn-info">

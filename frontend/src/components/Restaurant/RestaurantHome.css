@@ -4,12 +4,8 @@
   display: flex;
 }
 
-.restaurant-container {
-  display: flex;
-}
-
 .sidebar {
-  width: 25rem; /* Adjust width as needed */
+  width: 25rem;
   background-color: #f5f3f5;
   padding: 1rem;
 }
