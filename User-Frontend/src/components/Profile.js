@@ -8,6 +8,7 @@ function Profile() {
     const [user, setUser] = useState({});
     const [newAddress, setNewAddress] = useState('');
     const [addresses, setAddresses] = useState([]);
+    const [add,setMyAdd]= useState([]);
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -15,9 +16,9 @@ function Profile() {
                 const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
                 if (token) {
                     const decoded = jwtDecode(token);
-                    const { name, email, mobile, addresses } = decoded;
+                    const { name, email, mobile, address } = decoded;
                     setUser({ name, email, mobile });
-                    setAddresses(addresses || []);
+                    // setAddresses(address || []);
                 }
             } catch (err) {
                 console.log(err);
@@ -46,7 +47,22 @@ function Profile() {
             console.log(err);
         }
     };
-
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
+                if (token) {
+                    const decoded = jwtDecode(token);
+                    const {address } = decoded;
+                    
+                    setMyAdd(address || []);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchUserProfile(); // Initial fetch when component mounts
+    }, []);
     return (
         <>
             <Navbar />
@@ -73,7 +89,7 @@ function Profile() {
                 <div className="profile-addresses">
                     <h2>Saved Addresses</h2>
                     <ul>
-                        {addresses.map((address, index) => (
+                        {add.map((address, index) => (
                             <li key={index}>{address}</li>
                         ))}
                     </ul>
