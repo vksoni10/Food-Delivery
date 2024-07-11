@@ -39,7 +39,7 @@ export default function Review() {
                 rating,
                 comment,
             });
-            setMessage('');
+            setMessage('Review submitted successfully');
             fetchReviews(); // Refresh the reviews list
         } catch (err) {
             console.error('Error submitting review:', err.message);
@@ -106,6 +106,7 @@ export default function Review() {
                             </div>
                         </div>
                         <div className="review-comment">{review.comment}</div>
+                        <div className="review-date">{new Date(review.createdAt).toLocaleDateString()}</div>
                     </div>
                 ))}
             </div>
