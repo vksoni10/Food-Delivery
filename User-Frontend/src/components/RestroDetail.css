@@ -10,6 +10,7 @@
   -webkit-backdrop-filter: blur(10px); /* Blurring effect for Safari */
   border: 1px solid rgba(255, 255, 255, 0.18); /* Light border */
   padding: 20px; /* Inner spacing */
+  width: 100%;
 }
 
 .image-section {
@@ -22,12 +23,12 @@
 
 .main-image {
   margin: 10px;
-  height: 510px;
-width: 1200px;
-  max-width: 1000px;
+  height: 550px;
+width: 1100px;
+  max-width: 1700px;
   border: 2px solid black;
   border-radius: 8px;
-  margin-bottom: 35px;  
+  margin-bottom: 30px;  
 }
 
 .gallery {
@@ -47,8 +48,8 @@ width: 1200px;
 .gallery-item img {
   margin: 5px;
   margin-left: 0px;
-  width: 650px;
-  height: 250px;
+  width: 600px;
+  height: 265px;
   object-fit: cover;
   border: 2px solid black;
   border-radius: 8px;
