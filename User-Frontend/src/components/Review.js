@@ -4,7 +4,7 @@ import './Review.css'; // Make sure to import the CSS file
 import { useParams } from 'react-router-dom';
 
 export default function Review() {
-    const {id} = useParams();
+    const { id } = useParams();
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
     const [message, setMessage] = useState('');
@@ -12,14 +12,14 @@ export default function Review() {
 
     useEffect(() => {
         fetchReviews();
-    }, []);
+    }, [id]);
 
     const fetchReviews = async () => {
         try {
             const response = await axios.get(`http://localhost:3001/Restaurant/reviews/${id}`);
             setReviews(response.data);
         } catch (err) {
-            console.error(err.message);
+            console.error('Error fetching reviews:', err.message);
         }
     };
 
@@ -29,22 +29,20 @@ export default function Review() {
 
     const handleSubmit = async () => {
         if (!rating) {
-            setMessage('Please rate the product first');
+            setMessage('Please rate the restaurant first');
             return;
         }
         setMessage('');
 
         try {
-            const response = await axios.put(`http://localhost:3001/Restaurant/add-review/${id}`, {
-                id,
-                // user_id,
+            const response = await axios.post(`http://localhost:3001/Restaurant/add-review/${id}`, {
                 rating,
                 comment,
             });
-            setMessage('Review submitted successfully');
+            setMessage('');
             fetchReviews(); // Refresh the reviews list
         } catch (err) {
-            console.error(err.message);
+            console.error('Error submitting review:', err.message);
             setMessage('Error submitting review');
         }
     };
@@ -93,7 +91,9 @@ export default function Review() {
                 {reviews.map((review) => (
                     <div key={review._id} className="review-item">
                         <div className="review-header">
-                            <span className="reviewer-name">{review.user_id.name}</span>
+                            {review.user_id && (
+                                <span className="reviewer-name">{review.user_id.name}</span>
+                            )}
                             <div className="rating-stars">
                                 {[1, 2, 3, 4, 5].map((index) => (
                                     <span
