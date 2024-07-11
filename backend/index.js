@@ -6,6 +6,8 @@ const authRoutes = require("./routes/authRoute");
 const cartRoutes = require("./routes/cartRoute");
 const restRoute = require("./routes/restRoute");
 const adminRoutes= require("./routes/adminRoute");
+const registerRoute = require("./routes/addRestRoute");
+
 const app = express();
 app.use(express.json());
 app.use(
@@ -37,6 +39,8 @@ app.use("/Restaurant", restRoute);
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
 app.use("/admin", adminRoutes)
+app.use("/Restaurant", registerRoute);
+app.use("/static", express.static(__dirname + "/public/Images"));
 
 app.listen("3001", () => {
   console.log("Server is running on port 3001");

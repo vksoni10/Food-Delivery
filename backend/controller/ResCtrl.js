@@ -1,6 +1,8 @@
 const Rest = require("../model/Resmodel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const restadd = require("../model/Addrestaurant");
+const IMG_BASE_URL = "http://localhost:3001/static/";
 
 const restro = require("../model/Addrestaurant");
 const JWT_SECRET = "jwt-secret-key";
@@ -68,29 +70,68 @@ const loginResCtrl = async (req, res) => {
   }
 };
 
-const getAllRestaurants = async (req, res) => {
+const restaurantAdd = async (req, res) => {
+  const {
+    resName,
+    resAddress,
+    resNumber,
+    resOperationalHours,
+    restaurantTypes,
+  } = req.body;
+
   try {
-      const restaurants = await restro.find();
-      res.status(200).json(restaurants);
+    const existingRest = await restadd.findOne({ resNumber });
+    if (existingRest) {
+      return res
+        .status(400)
+        .json({ message: "Restaurant with the same number already exists" });
+    }
+    let resImages = [];
+    if (req.files) {
+      resImages = req.files.map(file => IMG_BASE_URL + file.filename);
+    }
+
+    const newRest = await restadd.create({
+      resName,
+      resAddress,
+      resNumber,
+      resOperationalHours,
+      restaurantTypes,
+      resImage: resImages,
+    });
+    res.json(newRest);
   } catch (err) {
-      res.status(500).json({ message: 'Server error' });
+    console.error(err.message);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
+const getAllRestaurants = async (req, res) => {
+  try {
+    const restaurants = await restro.find();
+    res.status(200).json(restaurants);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
-
-const getRestroDetails = async(req,res)=>{
+const getRestroDetails = async (req, res) => {
   try {
     const restaurant = await restro.findById(req.params.id);
-  if (!restaurant) {
-      return res.status(404).json({ message: 'Restaurant not found' });
+    if (!restaurant) {
+      return res.status(404).json({ message: "Restaurant not found" });
     }
-    console.log("Working")
+    console.log("Working");
     res.json(restaurant);
-
-} catch (error) {
+  } catch (error) {
     console.log(error);
-  res.status(500).json({ message: 'Server error' });
-}
-}
-module.exports = { createUser, loginResCtrl, getAllRestaurants, getRestroDetails };
+    res.status(500).json({ message: "Server error" });
+  }
+};
+module.exports = {
+  createUser,
+  loginResCtrl,
+  getAllRestaurants,
+  getRestroDetails,
+  restaurantAdd,
+};
