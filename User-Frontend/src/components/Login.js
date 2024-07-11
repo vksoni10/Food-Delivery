@@ -43,7 +43,7 @@ export default function Login() {
         </div>
         <div className="btnarea">
           <button className='bttn' type="submit">Login</button>
-          <p>First time on our website? <NavLink to='/auth/register'>Register Now</NavLink></p>
+          <p>New here? <NavLink to='/auth/register'>Register Now</NavLink></p>
         </div>
       </form>
     </div>
