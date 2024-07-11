@@ -1,0 +1,154 @@
+/* src/components/RestaurantList.css */
+.restaurant-list {
+    padding: 20px;
+    margin-top: 40px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .add-restaurant-button {
+    background-color: #2C3E50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .add-restaurant-button:hover {
+    background-color: #34495E;
+  }
+  
+  .search-bar {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+  }
+  
+  .add-restaurant-form {
+    display: none;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .add-restaurant-form input,
+  .add-restaurant-form select {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .add-restaurant-form button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #2C3E50;
+    color: white;
+  }
+  
+  .add-restaurant-form button:hover {
+    background-color: #34495E;
+  }
+  
+  .filter-container {
+    margin-bottom: 20px;
+  }
+  
+  .restaurant-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .restaurant-table th,
+  .restaurant-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .restaurant-table th {
+    background-color: #2C3E50;
+    color: white;
+  }
+  
+  .restaurant-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .restaurant-table img.restaurant-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+  
+  .restaurant-table button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #e74c3c;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .restaurant-table button:hover {
+    background-color: #c0392b;
+  }
+  
+  .menu-container {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .menu-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .menu-container th,
+  .menu-container td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(134, 56, 56, 0.306);
+  }
+  
+  .menu-container th {
+    background-color: #2C3E50;
+    color: white;
+  }
+  
+  .menu-container tr:nth-child(even) {
+    background-color: #77d583;
+  }
+  
+  .menu-container button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #eddb7e;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .menu-container button:hover {
+    background-color: #c0392b;
+  }
+  
+  .menu-container input {
+    padding: 10px;
+    border: 1px solid #32abd7;
+    border-radius: 5px;
+    width: 100%;
+  }
+  

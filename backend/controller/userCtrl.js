@@ -97,7 +97,63 @@ const addAddress = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+const updateAddress =  async(req,res)=>{
+    const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).json({ message: 'Access denied. No token provided.' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const userId = decoded.id;
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        user.addresses[req.params.index] = req.body.address;
+        await user.save();
+        res.status(200).send(user.address);
+    } catch (err) {
+        res.status(500).send('Server error');
+        console.log(err)
+    }
+
+
+}
+const deleteAddress = async (req, res) => {
+    const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).json({ message: 'Access denied. No token provided.' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const userId = decoded.id;
+
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        if (user.addresses[req.params.index] === undefined) {
+            return res.status(400).json({ message: 'Invalid address index' });
+        }
+
+        user.addresses.splice(req.params.index, 1);
+        await user.save();
+
+        res.json({ message: 'Address deleted successfully', addresses: user.addresses });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
 
 
 
-module.exports = { createUser, loginUserCtrl, logoutUserCtrl, addAddress, getUserProfile };
+
+module.exports = { createUser, loginUserCtrl, logoutUserCtrl, addAddress, getUserProfile, updateAddress, deleteAddress };
