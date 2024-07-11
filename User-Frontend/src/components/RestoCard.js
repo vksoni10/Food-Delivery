@@ -9,7 +9,6 @@ const RestoCard = ({ id, image, name, cuisine, price, rating, discount, opensAt,
   const handleClick = () => {
     navigate(`/restaurant/${id}`);
   };
-
   return (
     <div className="resto-card" onClick={handleClick}>
       <div

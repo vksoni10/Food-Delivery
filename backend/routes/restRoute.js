@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Rest = require("../model/Resmodel");
+const { addReview, getReviewsByRestaurant } = require('../controller/reviewCtrl');
 const {
   createUser,
   loginResCtrl,
@@ -15,5 +16,7 @@ router.post("/login", loginResCtrl);
 router.get("/restaurants", getAllRestaurants);
 router.get("/:id/menuItems", getMenu);
 router.get("/:id", getRestroDetails);
+router.post('/add-review/:id', addReview);
+router.get('/reviews/:id', getReviewsByRestaurant);
 
 module.exports = router;

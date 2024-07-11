@@ -1,0 +1,123 @@
+/* src/components/Dashboard.css */
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background: #f4f4f4;
+  margin-top: 40px;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  
+}
+
+.box {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 550px;
+}
+
+.stats {
+  display: flex;
+  gap: 10px;
+}
+
+.stat-box {
+  flex: 1;
+  padding: 20px;
+  border-radius: 8px;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.stat-box p {
+  margin: 0 0 10px;
+  font-weight: bold;
+}
+
+.stat-box span {
+  font-size: 1.5em;
+}
+
+.stat-box.blue {
+  background: #3498db;
+}
+
+.stat-box.yellow {
+  background: #f1c40f;
+}
+
+.stat-box.green {
+  background: #2ecc71;
+}
+
+.stat-box.red {
+  background: #e74c3c;
+}
+
+.charts-container {
+  display: flex;
+  gap: 20px;
+}
+
+.product-sales,
+.orders-pie {
+  flex: 1;
+  position: relative;
+  height: 400px;
+}
+
+.orders-pie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pie-chart {
+  width: 400px;
+  height: 400px;
+}
+
+.latest-orders {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order {
+  display: flex;
+  gap: 10px;
+  border: 1px solid #eaeaea;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.order img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.order-details {
+  flex: 1;
+}
+
+.order-details p {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+.order-details p strong {
+  display: block;
+  font-size: 1.1em;
+}

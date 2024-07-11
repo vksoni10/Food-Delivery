@@ -1,14 +1,13 @@
-// models/Restaurant.js
 const mongoose = require("mongoose");
 
 const menuItemSchema = new mongoose.Schema({
   dishName: {
     type: String,
-    required: true,
+    required: false,
   },
   price: {
     type: Number,
-    required: true,
+    required: false,
   },
   dishImage: {
     type: String,
@@ -17,6 +16,26 @@ const menuItemSchema = new mongoose.Schema({
   dishType: {
     type: String,
     required: false,
+  },
+});
+
+const reviewSchema = new mongoose.Schema({
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: false,
+  },
+  rating: {
+    type: Number,
+    required: false,
+  },
+  comment: {
+    type: String,
+    required: false,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 
@@ -29,12 +48,7 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  resReview: [
-    {
-      type: String,
-      required: false,
-    },
-  ],
+  resReview: [reviewSchema],
   resImage: [
     {
       type: String,

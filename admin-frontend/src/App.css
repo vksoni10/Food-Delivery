@@ -1,0 +1,22 @@
+/* src/App.css */
+.App {
+  display: flex;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  color: white;
+  padding-top: 60px; /* Adjusted for fixed header */
+}
+
+.main-content {
+  margin-left: 250px; /* Adjust this value to match the width of your sidebar */
+  padding-top: 60px; /* Adjusted for fixed header */
+  padding: 20px;
+  width: 100%;
+}
