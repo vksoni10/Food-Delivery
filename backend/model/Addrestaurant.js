@@ -1,4 +1,3 @@
-// models/Restaurant.js
 const mongoose = require("mongoose");
 
 const menuItemSchema = new mongoose.Schema({
@@ -20,6 +19,26 @@ const menuItemSchema = new mongoose.Schema({
   },
 });
 
+const reviewSchema = new mongoose.Schema({
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  rating: {
+    type: Number,
+    required: true,
+  },
+  comment: {
+    type: String,
+    required: false,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
 const restaurantSchema = new mongoose.Schema({
   resDiscount: {
     type: String,
@@ -29,12 +48,7 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  resReview: [
-    {
-      type: String,
-      required: false,
-    },
-  ],
+  resReview: [reviewSchema],
   resImage: [
     {
       type: String,
