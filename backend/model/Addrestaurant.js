@@ -9,14 +9,20 @@ const menuItemSchema = new mongoose.Schema({
     type: Number,
     required: false,
   },
-  dishImage: {
+  dishImage: [{
     type: String,
     required: false,
-  },
+  }],
   dishType: {
     type: String,
     required: false,
   },
+  Available: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
+  
 });
 
 const reviewSchema = new mongoose.Schema({

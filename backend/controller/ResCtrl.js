@@ -145,6 +145,11 @@ const getRestroDetails = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+const addMenu= async(req,res)=>{
+  
+}
+
 module.exports = {
   createUser,
   loginResCtrl,

@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./Menu.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Menu() {
   const [menu, setMenu] = useState([]);
+  const [dishName, setDishName] = useState("");
+  const [price, setPrice] = useState("");
+  const [dishImage, setDishImage] = useState("");
+  const [dishType, setDishType] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -12,21 +17,90 @@ export default function Menu() {
       .then((response) => setMenu(response.data))
       .catch((err) => console.log(err));
   }, []);
+
   const handleDelete = (id) => {
     axios
       .delete("http://localhost:3001/menu/" + id)
       .then((res) => {
         console.log(res);
-        window.location.reload();
+        setMenu(menu.filter((item) => item._id !== id)); // Update the state to remove the deleted item
       })
       .catch((err) => console.log(err));
   };
+
+  const handleMenuChange = (index, e) => {
+    const newMenu = [...menu];
+    newMenu[index][e.target.name] = e.target.value;
+    setMenu(newMenu);
+  };
+
+  const addMenuItem = () => {
+    setMenu([...menu, { dishName: "", price: "", dishImage: "", dishType: "" }]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:3001/Restaurant/menu", { dishName, price, dishImage, dishType })
+      .then((result) => {
+        console.log(result);
+        navigate("/Restaurant/login");
+      })
+      .catch((err) => {
+        if (err.response && err.response.status === 400) {
+          alert(err.response.data.message);
+        } else {
+          console.error(err);
+        }
+      });
+  };
+  console.log(dishName)
+
   return (
     <>
       <div className="menu">
-        <NavLink to="/Restaurant/createMenu">Add</NavLink>
+        <NavLink to="#" onClick={addMenuItem}>Add</NavLink>
       </div>
-      <div>
+      <div className="add-menu-form">
+        <form onSubmit={handleSubmit}>
+          <div className="menu-item-inputs">
+            <input
+              type="text"
+              name="dishName"
+              value={dishName}
+              onChange={(e) => setDishName(e.target.value)}
+              placeholder="Dish Name"
+              required
+            />
+            <input
+              type="number"
+              name="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              placeholder="Price"
+              required
+            />
+            <input
+              type="text"
+              name="dishImage"
+              value={dishImage}
+              onChange={(e) => setDishImage(e.target.value)}
+              placeholder="Dish Image URL"
+              required
+            />
+            <input
+              type="text"
+              name="dishType"
+              value={dishType}
+              onChange={(e) => setDishType(e.target.value)}
+              placeholder="Dish Type"
+              required
+            />
+            <button type="submit">Register Restaurant</button>
+          </div>
+        </form>
+      </div>
+      <div className="menu-table">
         <table>
           <thead>
             <tr>
@@ -38,83 +112,25 @@ export default function Menu() {
             </tr>
           </thead>
           <tbody>
-            {menu.map((item) => {
-              return (
-                <tr key={item._id}>
-                  <td>{item.itemName}</td>
-                  <td>{item.itemPrice}</td>
-                  <td>{item.itemType}</td>
-                  <td>{item.itemImage}</td>
-                  <td>
-                    <NavLink to={`/Restaurant/updateMenu/${item._id}`}>
-                      Update
-                    </NavLink>
-                    <button onClick={(e) => handleDelete(item._id)}>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {menu.map((item, index) => (
+              <tr key={item._id}>
+                <td>{item.dishName}</td>
+                <td>{item.price}</td>
+                <td>{item.dishType}</td>
+                <td>
+                  <img src={item.dishImage} alt={item.dishName} width="100" />
+                </td>
+                <td>
+                  <NavLink to={`/Restaurant/updateMenu/${item._id}`}>
+                    Update
+                  </NavLink>
+                  <button onClick={() => handleDelete(item._id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
     </>
-    // src/pages/RegisterRestaurant.js
-    // import React, { useState } from 'react';
-    //   import axios from 'axios';
-    //   import { useNavigate } from 'react-router-dom';
-
-    //   const Menu = () => {
-
-    //     const [menu, setMenu] = useState([{ dishName: '', price: '', dishImage: '' }]);
-
-    //     const navigate = useNavigate();
-
-    //     const handleMenuChange = (index, e) => {
-    //       const newMenu = [...menu];
-    //       newMenu[index][e.target.name] = e.target.value;
-    //       setMenu(newMenu);
-    //     };
-
-    //     const addMenuItem = () => {
-    //       setMenu([...menu, { dishName: '', price: '', dishImage: '' }]);
-    //     };
-
-    //     const handleSubmit = (e) => {
-    //       e.preventDefault();
-    //       axios.post('http://localhost:3001/Restaurant/menu', {
-    //         menu
-    //       })
-    //         .then((result) => {
-    //           console.log(result);
-    //           navigate('/Restaurant/login');
-    //         })
-    //         .catch((err) => {
-    //           if (err.response && err.response.status === 400) {
-    //             alert(err.response.data.message);
-    //           } else {
-    //             console.error(err);
-    //           }
-    //         });
-    //     };
-
-    //     return (
-    //       <form onSubmit={handleSubmit}>
-
-    //         {menu.map((item, index) => (
-    //           <div key={index}>
-    //             <input type="text" name="dishName" value={item.dishName} onChange={(e) => handleMenuChange(index, e)} placeholder="Dish Name" required />
-    //             <input type="number" name="price" value={item.price} onChange={(e) => handleMenuChange(index, e)} placeholder="Price" required />
-    //             <input type="text" name="dishImage" value={item.dishImage} onChange={(e) => handleMenuChange(index, e)} placeholder="Dish Image URL" required />
-    //           </div>
-    //         ))}
-    //         <button type="button" onClick={addMenuItem}>Add Menu Item</button>
-
-    //         <button type="submit">Register Restaurant</button>
-    //       </form>
-    //     );
-    //   }
-    // }
   );
 }
