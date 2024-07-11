@@ -13,8 +13,11 @@ const menuItemSchema = new mongoose.Schema({
   dishImage: {
     type: String,
     required: false,
-  }
-  
+  },
+  dishType: {
+    type: String,
+    required: false,
+  },
 });
 
 const restaurantSchema = new mongoose.Schema({
@@ -32,10 +35,12 @@ const restaurantSchema = new mongoose.Schema({
       required: false,
     },
   ],
-  resImage: [{
-    type: String,
-    required: false,
-  }],
+  resImage: [
+    {
+      type: String,
+      required: false,
+    },
+  ],
   resAddress: {
     type: String,
     required: true,
@@ -53,10 +58,12 @@ const restaurantSchema = new mongoose.Schema({
     type: Number,
     required: false,
   },
-  restaurantTypes: [{
-    type: String,
-    required: false,
-  }]
+  restaurantTypes: [
+    {
+      type: String,
+      required: false,
+    },
+  ],
 });
 
 module.exports = mongoose.model("Resadd", restaurantSchema);
