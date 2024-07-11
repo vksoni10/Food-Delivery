@@ -16,7 +16,7 @@ router.post("/login", loginResCtrl);
 router.get("/restaurants", getAllRestaurants);
 router.get("/:id/menuItems", getMenu);
 router.get("/:id", getRestroDetails);
-router.put('/add-review/:id', addReview);
+router.post('/add-review/:id', addReview);
 router.get('/reviews/:id', getReviewsByRestaurant);
 
 module.exports = router;

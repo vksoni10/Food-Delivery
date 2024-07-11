@@ -85,11 +85,7 @@ const RestroDetail = () => {
           <div className="ratings">
             <div className="rating-item">
               <span className="rating-value ta">{restaurant.rating}</span>
-              <p>Dining Ratings</p>
-            </div>
-            <div className="rating-item">
-              <span className="rating-value ta">{restaurant.rating}</span>
-              <p>Delivery Ratings</p>
+              <p className='display-6'>Rating</p>
             </div>
           </div>
           <div className="tabs">
