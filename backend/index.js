@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/authRoute");
 const cartRoutes = require("./routes/cartRoute");
 const restRoute = require("./routes/restRoute");
-
+const adminRoutes= require("./routes/adminRoute");
 const app = express();
 app.use(express.json());
 app.use(
@@ -36,6 +36,7 @@ mongoose
 app.use("/Restaurant", restRoute);
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
+app.use("/admin", adminRoutes)
 
 app.listen("3001", () => {
   console.log("Server is running on port 3001");
