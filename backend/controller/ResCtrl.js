@@ -99,7 +99,24 @@ const restaurantAdd = async (req, res) => {
       restaurantTypes,
       resImage: resImages,
     });
-    res.json(newRest);
+    const token = jwt.sign(
+      {
+        resName: newRest.resName,
+        resAddress: newRest.resAddress,
+        resNumber: newRest.resNumber,
+        resOperationalHours: newRest.resOperationalHours,
+        restaurantTypes: newRest.restaurantTypes,
+        resImage: newRest.resImage,
+        id: newRest._id,
+      },
+      JWT_SECRET,
+      { expiresIn: "10d" }
+    );
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+    res.json({newRest,token});
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ message: "Server error" });

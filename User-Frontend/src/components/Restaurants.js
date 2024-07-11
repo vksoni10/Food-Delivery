@@ -19,15 +19,16 @@ const Restaurants = () => {
 
     fetchRestaurants();
   }, []);
+  console.log(restaurantData)
 
   return (
     <>
       <Navbar />
       <div className='restro'>
         <div className="restaurant-list">
-          {restaurantData.map((resto) => (
+          {restaurantData.map((resto, index) => (
             <RestoCard
-              key={resto._id}
+              key={index}
               id={resto._id}
               image={resto.resImage[0]}
               name={resto.resName}
