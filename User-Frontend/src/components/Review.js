@@ -16,7 +16,7 @@ export default function Review() {
 
     const fetchReviews = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/reviews/${id}`);
+            const response = await axios.get(`http://localhost:3001/Restaurant/reviews/${id}`);
             setReviews(response.data);
         } catch (err) {
             console.error(err.message);
@@ -35,7 +35,7 @@ export default function Review() {
         setMessage('');
 
         try {
-            const response = await axios.post('http://localhost:3001/add-review', {
+            const response = await axios.put(`http://localhost:3001/Restaurant/add-review/${id}`, {
                 id,
                 // user_id,
                 rating,

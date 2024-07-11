@@ -2,16 +2,16 @@
 const Restaurant = require('../model/Addrestaurant');
 
 const addReview = async (req, res) => {
-  const { restaurant_id, user_id, rating, comment } = req.body;
+  const { id,rating, comment } = req.body;
 
   try {
-    const restaurant = await Restaurant.findById(restaurant_id);
+    const restaurant = await Restaurant.findById(id);
     if (!restaurant) {
       return res.status(404).json({ message: 'Restaurant not found' });
     }
 
     const newReview = {
-      user_id,  
+      id,  
       rating,
       comment,
     };
@@ -27,10 +27,11 @@ const addReview = async (req, res) => {
 };
 
 const getReviewsByRestaurant = async (req, res) => {
-  const { restaurant_id } = req.params;
+  const { id } = req.params;
 
   try {
-    const restaurant = await Restaurant.findById(restaurant_id).populate('resReview.user_id', 'name');
+    console.log(id)
+    const restaurant = await Restaurant.findById(id);
     if (!restaurant) {
       return res.status(404).json({ message: 'Restaurant not found' });
     }
