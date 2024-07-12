@@ -1,6 +1,8 @@
-// controllers/cartCtrl.js
-const Resadd = require('../model/Addrestaurant');
-const Cart = require('../model/CartModel');
+const restAdd = require("../model/Addrestaurant");
+const jwt = require("jsonwebtoken");
+const Cart = require('../model/Cartmodel')
+const JWT_SECRET = "jwt-secret-key";
+const userAdd = require('../model/UserModel')
 
 const addToCart = async (req, res) => {
   const { items } = req.body;
