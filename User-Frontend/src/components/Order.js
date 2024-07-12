@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Order.css';
+import  {fetchUserInfo} from './userApi'
 
 const Order = ({ restaurant }) => {
   const [cart, setCart] = useState([]);
+  const [user,setUser]=useState({});
   const [itemInCart, setItemInCart] = useState({});
 
   // useEffect(() => {
@@ -12,6 +14,20 @@ const Order = ({ restaurant }) => {
   //     .then((response) => setCart(response.data))
   //     .catch((error) => console.error('Error fetching cart:', error));
   // }, []);
+  useEffect(() => {
+    fetchUserProfile();
+}, []);
+
+const fetchUserProfile = async () => {
+    try {
+        const userInfo = await fetchUserInfo();
+        if (userInfo) {
+            setUser(userInfo);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+};
 
   const handleAddToCart = async (item) => {
     try {
@@ -20,7 +36,11 @@ const Order = ({ restaurant }) => {
       });
 
       if (response.status === 201) {
-        setCart(response.data);
+        if (response.data && Array.isArray(response.data.items)) {
+          setCart(response.data.items);
+        } else {
+          setCart([]);
+        }
         setItemInCart({ ...itemInCart, [item._id]: true });
       } else {
         console.error('Failed to add item to cart');
@@ -30,25 +50,29 @@ const Order = ({ restaurant }) => {
     }
   };
 
-  const handleUpdateQuantity = async (item, quantity) => {
-    try {
-      const updatedCart = cart.map((cartItem) =>
-        cartItem._id === item._id ? { ...cartItem, quantity } : cartItem
-      );
+  // const handleUpdateQuantity = async (item, quantity) => {
+  //   try {
+  //     const updatedCart = cart.map((cartItem) =>
+  //       cartItem._id === item._id ? { ...cartItem, quantity } : cartItem
+  //     );
 
-      setCart(updatedCart);
+  //     setCart(updatedCart);
 
-      await axios.post('/update-cart', {
-        items: updatedCart,
-      });
+  //     const response = await axios.post('http://localhost:3001/cart/update-cart', {
+  //       items: updatedCart,
+  //     });
 
-      if (quantity === 0) {
-        setItemInCart({ ...itemInCart, [item._id]: false });
-      }
-    } catch (error) {
-      console.error('Error updating cart quantity:', error);
-    }
-  };
+  //     if (response.status === 200) {
+  //       if (quantity === 0) {
+  //         setItemInCart({ ...itemInCart, [item._id]: false });
+  //       }
+  //     } else {
+  //       console.error('Failed to update cart');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error updating cart quantity:', error);
+  //   }
+  // };
 
   return (
     <div id="order">
@@ -73,18 +97,18 @@ const Order = ({ restaurant }) => {
                   ) : (
                     <>
                       <button
-                        onClick={() =>
-                          handleUpdateQuantity(
-                            item,
-                            Math.max(
-                              0,
-                              cart.find((cartItem) => cartItem._id === item._id)?.quantity - 1
-                            )
-                          )
-                        }
-                        disabled={
-                          !cart.find((cartItem) => cartItem._id === item._id)?.quantity
-                        }
+                        // onClick={() =>
+                        //   handleUpdateQuantity(
+                        //     item,
+                        //     Math.max(
+                        //       0,
+                        //       cart.find((cartItem) => cartItem._id === item._id)?.quantity - 1
+                        //     )
+                        //   )
+                        // }
+                        // disabled={
+                        //   !cart.find((cartItem) => cartItem._id === item._id)?.quantity
+                        // }
                       >
                         -
                       </button>
@@ -94,13 +118,13 @@ const Order = ({ restaurant }) => {
                         }
                       </span>
                       <button
-                        onClick={() =>
-                          handleUpdateQuantity(
-                            item,
-                            (cart.find((cartItem) => cartItem._id === item._id)?.quantity ||
-                              0) + 1
-                          )
-                        }
+                        // onClick={() =>
+                        //   handleUpdateQuantity(
+                        //     item,
+                        //     (cart.find((cartItem) => cartItem._id === item._id)?.quantity ||
+                        //       0) + 1
+                        //   )
+                        // }
                       >
                         +
                       </button>

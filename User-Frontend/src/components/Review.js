@@ -13,7 +13,7 @@ export default function Review() {
     const [user, setUser] = useState({});
 
     useEffect(() => {
-        fetchReviews();
+        fetchReviews(); 
         fetchUserProfile();
     }, [id]);
 
