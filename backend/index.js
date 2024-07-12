@@ -39,6 +39,7 @@ app.use("/Restaurant", restRoute);
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
 app.use("/admin", adminRoutes)
+app.use("/admin", restRoute);
 app.use("/Restaurant", registerRoute);
 app.use("/static", express.static(__dirname + "/public/Images"));
 

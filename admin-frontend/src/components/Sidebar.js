@@ -1,4 +1,3 @@
-// src/components/Sidebar.js
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Sidebar.css';
@@ -23,7 +22,7 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      <div className="logo"></div>
+      
       <nav>
         <ul>
           <li>
@@ -32,91 +31,22 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dispatcher" activeClassName="active">
-              Dispatcher
+            <NavLink to="/dispatcher/pending-orders" activeClassName="active">
+              Order Deliveries List
             </NavLink>
           </li>
           <li>
             <NavLink to="/restaurantslist" activeClassName="active">
-              Restaurant List
+            Restaurant List
             </NavLink>
           </li>
+    
           <li>
-            <NavLink to="/users" activeClassName="active">
+            <NavLink to="/user" activeClassName="active">
               User
             </NavLink>
           </li>
 
-         
-
-          <li onClick={() => toggleDropdown('orderDeliveriesList')}>
-            Order Deliveries List
-          </li>
-          {dropdowns.orderDeliveriesList && (
-            <ul>
-              <li>
-                <NavLink to="/deliveries/pending" activeClassName="active">
-                  Pending Deliveries
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/deliveries/approved" activeClassName="active">
-                  Approved Deliveries
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/deliveries/process" activeClassName="active">
-                  Process Deliveries
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/deliveries/ongoing" activeClassName="active">
-                  Ongoing Deliveries
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/deliveries/completed" activeClassName="active">
-                  Completed Deliveries
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/deliveries/cancelled" activeClassName="active">
-                  Cancelled Deliveries
-                </NavLink>
-              </li>
-            </ul>
-          )}
-          
-          <li>
-            <NavLink to="/promocode" activeClassName="active">
-              Promocode
-            </NavLink>
-          </li>
-
-          
-
-          <li onClick={() => toggleDropdown('earningsReports')}>
-            Earnings Reports
-          </li>
-          {dropdowns.earningsReports && (
-            <ul>
-              <li>
-                <NavLink to="/reports/admin" activeClassName="active">
-                  Admin Reports
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/reports/restaurants" activeClassName="active">
-                  Restaurants Report
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/reports/drivers" activeClassName="active">
-                  Driver Report
-                </NavLink>
-              </li>
-            </ul>
-          )}
         </ul>
       </nav>
     </div>

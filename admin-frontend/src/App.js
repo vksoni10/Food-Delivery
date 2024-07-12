@@ -24,7 +24,13 @@ function App() {
           <Header />
           <div className="content">
             <Routes>
-              <Route path="/dashboard" element={<Dashboard />} />
+          
+             <Route path="/dashboard" element={<Dashboard />}>
+                <Route path="pending-orders" element={<PendingOrders />} />
+                <Route path="processing-orders" element={<ProcessingOrders />} />
+                <Route path="completed-orders" element={<CompletedOrders />} />
+                <Route path="cancelled-orders" element={<CancelledOrders />} />
+              </Route>
               <Route path="/dispatcher" element={<Dispatcher />}>
                 <Route path="pending-orders" element={<PendingOrders />} />
                 <Route path="approved-orders" element={<ApprovedOrders />} />
@@ -34,7 +40,8 @@ function App() {
                 <Route path="cancelled-orders" element={<CancelledOrders />} />
               </Route>
               <Route path="/restaurantslist" element={<RestaurantList />} />
-              <Route path="/users" element={<UserList />} />
+              <Route path="/user" element={<UserList />} />
+             
               {/* Define routes for other components here */}
             </Routes>
           </div>
