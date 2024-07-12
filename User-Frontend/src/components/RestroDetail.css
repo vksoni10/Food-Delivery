@@ -18,17 +18,17 @@
   flex-direction: row;
   align-items: center;
   margin-left: 1px;
- width: 100%;
+  width: 100%;
 }
 
 .main-image {
   margin: 10px;
   height: 550px;
-width: 1100px;
+  width: 1100px;
   max-width: 1700px;
   border: 2px solid black;
   border-radius: 8px;
-  margin-bottom: 30px;  
+  margin-bottom: 30px;
 }
 
 .gallery {
@@ -42,7 +42,6 @@ width: 1100px;
 
 .gallery-item {
   position: relative;
-  
 }
 
 .gallery-item img {
@@ -220,7 +219,7 @@ h2 {
   padding: 10px 20px;
   font-size: 16px;
   color: white;
-  background-color: gold ;
+  background-color: gold;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -259,7 +258,6 @@ h2 {
   border: 1px solid #ccc;
   border-radius: 4px;
   color: black;
-
 }
 
 .form-button {
@@ -270,14 +268,67 @@ h2 {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  
-  
 }
 
 .form-button:hover {
   background-color: #0056b3;
 }
-.text{
-  color:white;
+.text {
+  color: white;
 }
 
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.menu-table th,
+.menu-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.menu-table th {
+  background-color: #f2f2f2;
+}
+
+.menu-table td {
+  vertical-align: middle;
+}
+
+.cart-actions {
+  display: flex;
+  align-items: center;
+}
+
+.cart-actions button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.cart-actions button:disabled {
+  background-color: gray;
+}
+
+.cart-actions span {
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: gray;
+}

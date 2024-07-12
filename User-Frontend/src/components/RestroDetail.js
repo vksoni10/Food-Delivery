@@ -1,6 +1,5 @@
-// src/RestroDetail.js
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './RestroDetail.css';
 import Navbar from './Navbar';
 import Review from './Review';
@@ -9,11 +8,13 @@ import ShareButton from './ShareButton';
 import axios from 'axios';
 
 const RestroDetail = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState('overview');
   const [booking, setBooking] = useState({ people: '', time: '' });
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [restaurant, setRestaurant] = useState(null);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const fetchRestaurantDetails = async () => {
@@ -42,9 +43,34 @@ const RestroDetail = () => {
     setBookingSuccess(true);
   };
 
+  const handleAddToCart = (item) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((cartItem) => cartItem._id === item._id);
+      if (existingItem) {
+        return prevCart.map((cartItem) =>
+          cartItem._id === item._id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+        );
+      } else {
+        return [...prevCart, { ...item, quantity: 1 }];
+      }
+    });
+  };
+
+  const handleUpdateQuantity = (item, quantity) => {
+    setCart((prevCart) =>
+      prevCart.map((cartItem) =>
+        cartItem._id === item._id ? { ...cartItem, quantity } : cartItem
+      )
+    );
+  };
+
   if (!restaurant) {
     return <div>Loading...</div>;
   }
+
+  const handleMenuClick = () => {
+    navigate(`/restaurant/${id}`);
+  };
 
   return (
     <>
@@ -93,12 +119,6 @@ const RestroDetail = () => {
             </div>
           </div>
           <div className="tabs">
-            {/* <span
-              className={`tab ${activeTab === 'overview' ? 'active' : ''}`}
-              onClick={() => handleTabClick('overview')}
-            >
-              Overview
-            </span> */}
             <span
               className={`tab ${activeTab === "order" ? "active" : ""}`}
               onClick={() => handleTabClick("order")}
@@ -127,13 +147,60 @@ const RestroDetail = () => {
             {activeTab === "order" && (
               <div id="order">
                 <h2 className="h">Menu</h2>
-                <ul>
-                  {restaurant.menu.map((item) => (
-                    <li key={item._id}>
-                      {item.dishName} - ${item.price}
-                    </li>
-                  ))}
-                </ul>
+                <table className="menu-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Price</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {restaurant.menu.map((item) => (
+                      <tr key={item._id}>
+                        <td>{item.dishName}</td>
+                        <td>₹{item.price}</td>
+                        <td>
+                          <div className="cart-actions">
+                            <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
+                            <button
+                              onClick={() =>
+                                handleUpdateQuantity(
+                                  item,
+                                  Math.max(
+                                    0,
+                                    cart.find((cartItem) => cartItem._id === item._id)?.quantity - 1
+                                  )
+                                )
+                              }
+                              disabled={
+                                !cart.find((cartItem) => cartItem._id === item._id)?.quantity
+                              }
+                            >
+                              -
+                            </button>
+                            <span>
+                              {
+                                cart.find((cartItem) => cartItem._id === item._id)?.quantity || 0
+                              }
+                            </span>
+                            <button
+                              onClick={() =>
+                                handleUpdateQuantity(
+                                  item,
+                                  (cart.find((cartItem) => cartItem._id === item._id)?.quantity ||
+                                    0) + 1
+                                )
+                              }
+                            >
+                              +
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             )}
             {activeTab === "reviews" && (
