@@ -1,79 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Order.css';
-import  {fetchUserInfo} from './userApi'
+import { fetchUserInfo } from './userApi';
+import { useParams } from 'react-router-dom';
 
 const Order = ({ restaurant }) => {
+  const {id} = useParams();
   const [cart, setCart] = useState([]);
-  const [user,setUser]=useState({});
+  const [user, setUser] = useState({});
   const [itemInCart, setItemInCart] = useState({});
 
-  // useEffect(() => {
-  //   // Fetch cart items from the backend on component mount
-  //   axios.get('http://localhost:3001/cart/getCart')
-  //     .then((response) => setCart(response.data))
-  //     .catch((error) => console.error('Error fetching cart:', error));
-  // }, []);
   useEffect(() => {
     fetchUserProfile();
-}, []);
+  }, []);
 
-const fetchUserProfile = async () => {
+  const fetchUserProfile = async () => {
     try {
-        const userInfo = await fetchUserInfo();
-        if (userInfo) {
-            setUser(userInfo);
-        }
+      const userInfo = await fetchUserInfo();
+      if (userInfo) {
+        setUser(userInfo);
+      }
     } catch (err) {
-        console.log(err);
+      console.log(err);
     }
-};
+  };
 
   const handleAddToCart = async (item) => {
     try {
-      const response = await axios.post('http://localhost:3001/cart/add-item', {
-        items: [{ ...item, quantity: 1 }],
+      const response = await axios.post('http://localhost:3001/cart/add-to-cart', {
+        resId: id,  // Adjust this as per your backend API requirements
+        dishName: item.dishName,
+        email: user.email,  // Assuming you have user email from fetchUserInfo
       });
-
-      if (response.status === 201) {
-        if (response.data && Array.isArray(response.data.items)) {
-          setCart(response.data.items);
-        } else {
-          setCart([]);
-        }
-        setItemInCart({ ...itemInCart, [item._id]: true });
-      } else {
-        console.error('Failed to add item to cart');
-      }
     } catch (error) {
       console.error('Error adding item to cart:', error);
     }
   };
-
-  // const handleUpdateQuantity = async (item, quantity) => {
-  //   try {
-  //     const updatedCart = cart.map((cartItem) =>
-  //       cartItem._id === item._id ? { ...cartItem, quantity } : cartItem
-  //     );
-
-  //     setCart(updatedCart);
-
-  //     const response = await axios.post('http://localhost:3001/cart/update-cart', {
-  //       items: updatedCart,
-  //     });
-
-  //     if (response.status === 200) {
-  //       if (quantity === 0) {
-  //         setItemInCart({ ...itemInCart, [item._id]: false });
-  //       }
-  //     } else {
-  //       console.error('Failed to update cart');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error updating cart quantity:', error);
-  //   }
-  // };
-
+console.log(itemInCart)
   return (
     <div id="order">
       <h2 className="h">Menu</h2>
@@ -96,38 +59,11 @@ const fetchUserProfile = async () => {
                     <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
                   ) : (
                     <>
-                      <button
-                        // onClick={() =>
-                        //   handleUpdateQuantity(
-                        //     item,
-                        //     Math.max(
-                        //       0,
-                        //       cart.find((cartItem) => cartItem._id === item._id)?.quantity - 1
-                        //     )
-                        //   )
-                        // }
-                        // disabled={
-                        //   !cart.find((cartItem) => cartItem._id === item._id)?.quantity
-                        // }
-                      >
-                        -
-                      </button>
+                      <button>-</button>
                       <span>
-                        {
-                          cart.find((cartItem) => cartItem._id === item._id)?.quantity || 0
-                        }
+                        {cart.find((cartItem) => cartItem.productId === item._id)?.quantity || 0}
                       </span>
-                      <button
-                        // onClick={() =>
-                        //   handleUpdateQuantity(
-                        //     item,
-                        //     (cart.find((cartItem) => cartItem._id === item._id)?.quantity ||
-                        //       0) + 1
-                        //   )
-                        // }
-                      >
-                        +
-                      </button>
+                      <button>+</button>
                     </>
                   )}
                 </div>
