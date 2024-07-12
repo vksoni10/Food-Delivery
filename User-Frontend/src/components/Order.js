@@ -1,18 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Order.css';
 
-const Order = ({ restaurant, cart, handleAddToCart, handleUpdateQuantity }) => {
+const Order = ({ restaurant }) => {
+  const [cart, setCart] = useState([]);
   const [itemInCart, setItemInCart] = useState({});
 
-  const addToCart = (item) => {
-    handleAddToCart(item);
-    setItemInCart({ ...itemInCart, [item._id]: true });
+  useEffect(() => {
+    // Fetch cart items from the backend on component mount
+    axios.get('http://localhost:3001/cart')
+      .then((response) => setCart(response.data))
+      .catch((error) => console.error('Error fetching cart:', error));
+  }, []);
+
+  const handleAddToCart = async (item) => {
+    try {
+      const response = await axios.post('http://localhost:3001/cart', {
+        items: [{ ...item, quantity: 1 }],
+      });
+
+      if (response.status === 201) {
+        setCart(response.data);
+        setItemInCart({ ...itemInCart, [item._id]: true });
+      } else {
+        console.error('Failed to add item to cart');
+      }
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+    }
   };
 
-  const updateQuantity = (item, quantity) => {
-    handleUpdateQuantity(item, quantity);
-    if (quantity === 0) {
-      setItemInCart({ ...itemInCart, [item._id]: false });
+  const handleUpdateQuantity = async (item, quantity) => {
+    try {
+      const updatedCart = cart.map((cartItem) =>
+        cartItem._id === item._id ? { ...cartItem, quantity } : cartItem
+      );
+
+      setCart(updatedCart);
+
+      await axios.post('/update-cart', {
+        items: updatedCart,
+      });
+
+      if (quantity === 0) {
+        setItemInCart({ ...itemInCart, [item._id]: false });
+      }
+    } catch (error) {
+      console.error('Error updating cart quantity:', error);
     }
   };
 
@@ -35,12 +69,12 @@ const Order = ({ restaurant, cart, handleAddToCart, handleUpdateQuantity }) => {
               <td>
                 <div className="cart-actions">
                   {!itemInCart[item._id] ? (
-                    <button onClick={() => addToCart(item)}>Add to Cart</button>
+                    <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
                   ) : (
                     <>
                       <button
                         onClick={() =>
-                          updateQuantity(
+                          handleUpdateQuantity(
                             item,
                             Math.max(
                               0,
@@ -61,7 +95,7 @@ const Order = ({ restaurant, cart, handleAddToCart, handleUpdateQuantity }) => {
                       </span>
                       <button
                         onClick={() =>
-                          updateQuantity(
+                          handleUpdateQuantity(
                             item,
                             (cart.find((cartItem) => cartItem._id === item._id)?.quantity ||
                               0) + 1
