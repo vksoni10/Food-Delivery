@@ -11,7 +11,7 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/cart')
+    axios.get('http://localhost:3001/cart/add-item')
       .then(response => {
         setCartItems(response.data);
         calculateTotals(response.data);
@@ -27,7 +27,7 @@ const Cart = () => {
     cartItems.forEach((item) => {
       subtotal += item.price * item.quantity;
     });
-    tax = subtotal * 0.08; // 8% tax rate
+    tax = subtotal * 0.18; // 18% tax rate
     setSubtotal(subtotal.toFixed(2));
     setTax(tax.toFixed(2));
     setTotal((subtotal + tax).toFixed(2));
