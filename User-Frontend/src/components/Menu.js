@@ -6,7 +6,7 @@ function Menu({ restaurantId }) {
     const [menuItems, setMenuItems] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/restaurant/${restaurantId}/menuItems`)
+        axios.get(`http://localhost:3001/Restaurant/${restaurantId}/menuItems`)
             .then(response => {
                 setMenuItems(response.data);
             })
@@ -21,7 +21,8 @@ function Menu({ restaurantId }) {
             <ul>
                 {menuItems.map(item => (
                     <li key={item._id}>
-                        <img src={item.dishImage} alt={item.dishName} style={{width: "100px"}} />
+                        {/* <img src={item.dishImage} al
+                        t={item.dishName} style={{width: "100px"}} /> */}
                         <h3>{item.dishName}</h3>
                         <p>${item.price}</p>
                     </li>
