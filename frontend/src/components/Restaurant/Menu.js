@@ -12,12 +12,12 @@ export default function Menu() {
   const [dishType, setDishType] = useState("");
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3001/menu")
-  //     .then((response) => setMenu(response.data))
-  //     .catch((err) => console.log(err));
-  // }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/Restaurant/Menu")
+      .then((response) => setMenu(response.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   const fetchRestaurantName = async () => {
     const token = localStorage.getItem("token");
