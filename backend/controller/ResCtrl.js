@@ -99,7 +99,24 @@ const restaurantAdd = async (req, res) => {
       restaurantTypes,
       resImage: resImages,
     });
-    res.json(newRest);
+    const token = jwt.sign(
+      {
+        resName: newRest.resName,
+        resAddress: newRest.resAddress,
+        resNumber: newRest.resNumber,
+        resOperationalHours: newRest.resOperationalHours,
+        restaurantTypes: newRest.restaurantTypes,
+        resImage: newRest.resImage,
+        id: newRest._id,
+      },
+      JWT_SECRET,
+      { expiresIn: "10d" }
+    );
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+    res.json({newRest,token});
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ message: "Server error" });
@@ -128,10 +145,39 @@ const getRestroDetails = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+const addMenu = async (req, res) => {
+  const { dishName, price, dishImage, dishType, resName } = req.body;
+  try {
+    const restaurant = await restadd.findOne({ resName });
+    if (!restaurant) {
+      return res.status(404).json({ message: 'Restaurant not found' });
+    }
+
+    const newMenuItem = {
+      dishName,
+      price,
+      dishImage,
+      dishType
+    };
+
+    restaurant.menu.push(newMenuItem);
+    await restaurant.save();
+
+    res.status(201).json(newMenuItem);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
+
+
 module.exports = {
   createUser,
   loginResCtrl,
   getAllRestaurants,
   getRestroDetails,
   restaurantAdd,
+  addMenu
 };

@@ -10,27 +10,32 @@
   -webkit-backdrop-filter: blur(10px); /* Blurring effect for Safari */
   border: 1px solid rgba(255, 255, 255, 0.18); /* Light border */
   padding: 20px; /* Inner spacing */
+  width: 100%;
 }
 
 .image-section {
   display: flex;
   flex-direction: row;
-  align-items: unset;
+  align-items: center;
+  margin-left: 1px;
+  width: 100%;
 }
 
 .main-image {
   margin: 10px;
-  width: 100%;
-  max-width: 800px;
+  height: 550px;
+  width: 1100px;
+  max-width: 1700px;
   border: 2px solid black;
   border-radius: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .gallery {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  align-items: center;
   width: 100%;
   max-width: 800px;
 }
@@ -40,9 +45,10 @@
 }
 
 .gallery-item img {
-  margin: 10px;
-  width: 400px;
-  height: 250px;
+  margin: 5px;
+  margin-left: 0px;
+  width: 600px;
+  height: 265px;
   object-fit: cover;
   border: 2px solid black;
   border-radius: 8px;
@@ -203,7 +209,7 @@ h2 {
   padding: 10px;
   font-size: 16px;
 
-  width: 100px;
+  width: 150px;
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 20px;
@@ -213,7 +219,7 @@ h2 {
   padding: 10px 20px;
   font-size: 16px;
   color: white;
-  background-color: gold ;
+  background-color: gold;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -236,4 +242,165 @@ h2 {
 .booking-success span {
   font-size: 24px;
   margin-right: 10px;
+}
+.form-label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: black;
+}
+
+.form-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+.text {
+  color: white;
+}
+
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.menu-table th,
+.menu-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.menu-table th {
+  background-color: #f2f2f2;
+}
+
+.menu-table td {
+  vertical-align: middle;
+}
+
+.cart-actions {
+  display: flex;
+  align-items: center;
+}
+
+.cart-actions button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.cart-actions button:disabled {
+  background-color: gray;
+}
+
+.cart-actions span {
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: gray;
+}
+#order {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.h {
+  color: white;
+  text-align: center;
+}
+
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+.menu-table th,
+.menu-table td {
+  padding: 10px;
+  text-align: center;
+}
+
+.menu-table thead th {
+  font-size: 1.2em;
+}
+
+.menu-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menu-table tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.menu-table th {
+  border-bottom: none;
+}
+
+.menu-table td {
+  border: none;
+}
+
+.cart-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-actions button {
+  background: goldenrod;
+  border: none;
+  color: black;
+  padding: 8px 12px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.cart-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cart-actions span {
+  margin: 0 10px;
+  font-size: 1.2em;
+  color: white;
 }

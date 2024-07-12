@@ -14,7 +14,7 @@ import Kanha from './components/Kanha';
 import Tracking from './components/Tracking';
 import Cart from './components/Cart';
 import RestroDetail from './components/RestroDetail'; 
-
+import Menu from './components/Menu';
 function App() {
   return (
     <Router>
@@ -32,6 +32,7 @@ function App() {
           <Route exact path='/auth/profile' element={<Profile />} />
           <Route exact path='/auth/track' element={<Tracking />} />
           <Route exact path='/restaurant/:id' element={<RestroDetail />} /> 
+          <Route exact path='/restaurant/:id/menu' element={<Menu />} /> 
           
 
         </Routes>

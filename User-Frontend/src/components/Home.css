@@ -98,7 +98,7 @@ html {
 }
 
 .content .button {
-  background-color: #007bff;
+  background-color: goldenrod;
   color: #fff;
   padding: 15px 30px;
   /* border: none; */
@@ -109,5 +109,5 @@ html {
 }
 
 .content .button:hover {
-  background-color: #0056b3;
+  background-color: green;
 }

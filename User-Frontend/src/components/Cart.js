@@ -11,7 +11,7 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    axios.get('/api/cart')
+    axios.get('http://localhost:3001/cart')
       .then(response => {
         setCartItems(response.data);
         calculateTotals(response.data);

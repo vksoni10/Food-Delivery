@@ -212,6 +212,7 @@ const navigate = useNavigate();
 const handleImageChange = (e) => {
   setResImages(prevImages => [...prevImages, ...Array.from(e.target.files)]);
 };
+console.log(resImage)
 
 const handleTypeChange = (e) => {
   const { value, checked } = e.target;
@@ -241,9 +242,13 @@ const handleSubmit = (e) => {
         "Content-Type": "multipart/form-data",
       },
     })
-    .then((result) => {
-      console.log(result);
-      navigate("/Restaurant/restaurantHome");
+    .then((res) => {
+      console.log(res);
+      const {  token } = res.data; // Destructure token and message from response data
+      if (token) {
+        localStorage.setItem("token", token); // Store the token in localStorage or a cookie
+        navigate("/Restaurant/restaurantHome");
+      }
     })
     .catch((err) => {
       if (err.response && err.response.status === 400) {
