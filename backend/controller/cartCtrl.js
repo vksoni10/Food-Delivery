@@ -6,7 +6,9 @@ const cartModel = require('../model/Cartmodel'); // Replace with your cart model
 
 const addToCart = async (req, res) => {
   try {
-    const { resName, dishName, email } = req.body;
+    const { resId, dishName, email } = req.body;
+    console.log(req.body)
+    
 
     const user = await userModel.findOne({ email });
     if (!user) {
@@ -14,7 +16,7 @@ const addToCart = async (req, res) => {
     }
 
     // Find the restaurant
-    const restaurant = await productModel.findOne({ resName });
+    const restaurant = await productModel.findById(resId);
     if (!restaurant) {
         return res.status(404).json({ error: 'Restaurant not found' });
     }
@@ -32,7 +34,7 @@ const addToCart = async (req, res) => {
     }
 
     // Check if the item already exists in the cart
-    const existingItem = cart.items.find(item => item._id.equals(menuItem._id));
+    const existingItem = cart.items.find(item => item.name == menuItem.dishName);
 
     if (existingItem) {
         // Update the quantity of the existing item
@@ -58,5 +60,8 @@ const addToCart = async (req, res) => {
   }
 };
 
+const getCartItems = async (req,res)=>{
+  
+};
 
 module.exports = { addToCart };
