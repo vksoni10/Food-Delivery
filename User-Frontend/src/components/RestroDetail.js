@@ -6,6 +6,7 @@ import Review from './Review';
 import Comment from './Comment';
 import ShareButton from './ShareButton';
 import axios from 'axios';
+import Order from './Order';  // Import the Order component
 
 const RestroDetail = () => {
   const navigate = useNavigate();
@@ -145,63 +146,12 @@ const RestroDetail = () => {
               </div>
             )}
             {activeTab === "order" && (
-              <div id="order">
-                <h2 className="h">Menu</h2>
-                <table className="menu-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Price</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {restaurant.menu.map((item) => (
-                      <tr key={item._id}>
-                        <td>{item.dishName}</td>
-                        <td>₹{item.price}</td>
-                        <td>
-                          <div className="cart-actions">
-                            <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
-                            <button
-                              onClick={() =>
-                                handleUpdateQuantity(
-                                  item,
-                                  Math.max(
-                                    0,
-                                    cart.find((cartItem) => cartItem._id === item._id)?.quantity - 1
-                                  )
-                                )
-                              }
-                              disabled={
-                                !cart.find((cartItem) => cartItem._id === item._id)?.quantity
-                              }
-                            >
-                              -
-                            </button>
-                            <span>
-                              {
-                                cart.find((cartItem) => cartItem._id === item._id)?.quantity || 0
-                              }
-                            </span>
-                            <button
-                              onClick={() =>
-                                handleUpdateQuantity(
-                                  item,
-                                  (cart.find((cartItem) => cartItem._id === item._id)?.quantity ||
-                                    0) + 1
-                                )
-                              }
-                            >
-                              +
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <Order 
+                restaurant={restaurant} 
+                cart={cart} 
+                handleAddToCart={handleAddToCart} 
+                handleUpdateQuantity={handleUpdateQuantity} 
+              />
             )}
             {activeTab === "reviews" && (
               <div id="reviews">

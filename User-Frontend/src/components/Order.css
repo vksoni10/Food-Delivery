@@ -1,0 +1,72 @@
+#order {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.h {
+  color: white;
+  text-align: center;
+}
+
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+.menu-table th,
+.menu-table td {
+  padding: 10px;
+  text-align: center;
+}
+
+.menu-table thead th {
+  font-size: 1.2em;
+}
+
+.menu-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menu-table tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.menu-table th {
+  border-bottom: none;
+}
+
+.menu-table td {
+  border: none;
+}
+
+.cart-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-actions button {
+  background: goldenrod;
+  border: none;
+  color: black;
+  padding: 8px 12px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.cart-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cart-actions span {
+  margin: 0 10px;
+  font-size: 1.2em;
+  color: white;
+}
