@@ -15,7 +15,7 @@ const Order = ({ restaurant }) => {
 
   const handleAddToCart = async (item) => {
     try {
-      const response = await axios.post('http://localhost:3001/cart', {
+      const response = await axios.post('http://localhost:3001/cart/add-item', {
         items: [{ ...item, quantity: 1 }],
       });
 
