@@ -1,5 +1,6 @@
 // src/components/Dashboard.js
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { Line, Pie } from 'react-chartjs-2';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -13,12 +14,21 @@ import {
   LinearScale,
 } from 'chart.js';
 import './Dashboard.css';
+import UserList from './UserList';
+import RestaurantList from './RestaurantList';
 
 // Registering required elements and scales
 ChartJS.register(ArcElement, PointElement, LineElement, Tooltip, Legend, CategoryScale, LinearScale);
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [userCount, setUserCount] = useState(0);
+  const [restaurantCount, setRestaurantCount] = useState(0);
+
+  useEffect(() => {
+    // No need for an effect here unless you're fetching counts from APIs
+    // You can manage counts directly in UserList and RestaurantList components
+  }, []);
 
   const handleNavigation = (path) => {
     navigate(path);
@@ -67,19 +77,19 @@ const Dashboard = () => {
             <i className="fas fa-shopping-cart"></i> Order Statistics
           </h3>
           <div className="stats">
-            <button className="stat-box blue" onClick={() => handleNavigation('/order-deliveries-list/pending')}>
+            <button className="stat-box blue" onClick={() => handleNavigation('/dispatcher/pending-orders')}>
               <p>Received</p>
               <span>156</span>
             </button>
-            <button className="stat-box yellow" onClick={() => handleNavigation('/order-deliveries-list/process')}>
+            <button className="stat-box yellow" onClick={() => handleNavigation('/dispatcher/processing-orders')}>
               <p>Processing</p>
               <span>2</span>
             </button>
-            <button className="stat-box green" onClick={() => handleNavigation('/order-deliveries-list/completed')}>
+            <button className="stat-box green" onClick={() => handleNavigation('/dispatcher/completed-orders')}>
               <p>Delivered</p>
               <span>22</span>
             </button>
-            <button className="stat-box red" onClick={() => handleNavigation('/order-deliveries-list/cancelled')}>
+            <button className="stat-box red" onClick={() => handleNavigation('/dispatcher/cancelled-orders')}>
               <p>Cancelled</p>
               <span>18</span>
             </button>
@@ -87,25 +97,21 @@ const Dashboard = () => {
         </div>
 
         <div className="site-stats box">
-          <h3>
+          <h3>  
             <i className="fas fa-chart-line"></i> Site Statistics
           </h3>
           <div className="stats">
-            <button className="stat-box blue" onClick={() => handleNavigation('/restaurant-list/all')}>
+            <button className="stat-box blue" onClick={() => handleNavigation('/restaurantslist')}>
               <p>Restaurant</p>
-              <span>7</span>
+              <span>{restaurantCount}</span>
             </button>
-            <button className="stat-box yellow" onClick={() => handleNavigation('/delivery-people-list/all')}>
-              <p>Delivery People</p>
-              <span>3</span>
-            </button>
-            <button className="stat-box green" onClick={() => handleNavigation('/user')}>
+            <button className="stat-box green" onClick={() => handleNavigation('/user ')}>
               <p>Users</p>
-              <span>37</span>
+              <span>{userCount}</span>
             </button>
-            <button className="stat-box red" onClick={() => handleNavigation('/earning-reports/admin')}>
+            <button className="stat-box red" onClick={() => handleNavigation('/dashboard')}>
               <p>Earnings</p>
-              <span>$1.11K</span>
+              <span>150 Rupya</span>
             </button>
           </div>
         </div>
@@ -151,6 +157,10 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
+
+      {/* Include UserList and RestaurantList components with count props */}
+      <UserList setUserCount={setUserCount} />
+      <RestaurantList setRestaurantCount={setRestaurantCount} />
     </div>
   );
 };
