@@ -145,10 +145,39 @@ const getRestroDetails = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+const addMenu = async (req, res) => {
+  const { dishName, price, dishImage, dishType, resName } = req.body;
+  try {
+    const restaurant = await restadd.findOne({ resName });
+    if (!restaurant) {
+      return res.status(404).json({ message: 'Restaurant not found' });
+    }
+
+    const newMenuItem = {
+      dishName,
+      price,
+      dishImage,
+      dishType
+    };
+
+    restaurant.menu.push(newMenuItem);
+    await restaurant.save();
+
+    res.status(201).json(newMenuItem);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
+
+
 module.exports = {
   createUser,
   loginResCtrl,
   getAllRestaurants,
   getRestroDetails,
   restaurantAdd,
+  addMenu
 };

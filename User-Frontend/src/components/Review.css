@@ -104,18 +104,18 @@
 }
 
 .review-item {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.8
-  ); /* Semi-transparent white background */
-  backdrop-filter: blur(10px); /* Apply blur effect */
-  border: none; /* Remove border */
+  background: rgba(0, 0, 0, 0.6); /* Transparent black background */
   border-radius: 8px; /* Slightly rounded corners */
-  padding: 16px; /* Add padding for better spacing */
+  padding: 16px; /* Padding for better spacing */
   margin-bottom: 16px; /* Space between review items */
+  color: white; /* White text color for contrast */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* White border for contrast */
 }
+
+
+
+
 
 .review-header {
   display: flex;

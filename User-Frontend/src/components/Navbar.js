@@ -37,15 +37,22 @@ function Navbar() {
       <div className="nav-links">
         {isLoggedIn ? (
           <>
-            <NavLink to="/auth/cart" className="navbutton"><span class="material-symbols-outlined">
-shopping_cart
-</span></NavLink>
+             <NavLink to="/auth/cart" className="navbutton">
+      <span className="material-symbols-outlined">
+        shopping_cart
+      </span>
+      <span className="cart-text">Cart</span> {/* Additional span for the cart text */}
+    </NavLink>
             <NavLink to="/auth/profile" className="navbutton"><span class="material-symbols-outlined">
 person
-</span></NavLink>
+</span>
+<span className="cart-text">Profile</span>
+</NavLink>
             <NavLink to='/auth/logout' className="navbutton" onClick={handleLogout}><span class="material-symbols-outlined">
 logout
-</span></NavLink>
+</span>
+<span className="cart-text">Logout</span>
+</NavLink>
           </>
         ) : (
           <>
