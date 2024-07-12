@@ -32,7 +32,7 @@ const addToCart = async (req, res) => {
     }
 
     // Check if the item already exists in the cart
-    const existingItem = cart.items.find(item => item._id.equals(menuItem._id));
+    const existingItem = cart.items.find(item => item.name == menuItem.dishName);
 
     if (existingItem) {
         // Update the quantity of the existing item
