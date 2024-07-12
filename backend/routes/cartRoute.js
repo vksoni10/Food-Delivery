@@ -12,7 +12,7 @@ const {addToCart} = require('../controller/cartCtrl')
 
 // router.patch('/:itemId', updateCartItem);
 
-router.post('/add-item',addToCart);
+router.post('/add-to-cart',addToCart);
 
 
 module.exports= router;

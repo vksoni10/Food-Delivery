@@ -1,91 +1,61 @@
 const restAdd = require("../model/Addrestaurant");
 const jwt = require("jsonwebtoken");
-const Cart = require('../model/Cartmodel')
-const JWT_SECRET = "jwt-secret-key";
-const userAdd = require('../model/UserModel')
+const productModel = require('../model/Addrestaurant'); // Replace with your product model file path
+const userModel = require('../model/UserModel'); // Replace with your user model file path
+const cartModel = require('../model/Cartmodel'); // Replace with your cart model file path
 
 const addToCart = async (req, res) => {
-  const { items } = req.body;
-  const itemToAdd = items[0];
-
   try {
-    // Find the menu item in the Resadd model
-    const restaurant = await Resadd.findOne({ 'menu._id': itemToAdd._id });
-    if (!restaurant) {
-      return res.status(404).json({ message: 'Menu item not found' });
+    const { resName, dishName, email } = req.body;
+
+    const user = await userModel.findOne({ email });
+    if (!user) {
+        return res.status(404).json({ error: 'User not found' });
     }
 
-    const menuItem = restaurant.menu.id(itemToAdd._id);
+    // Find the restaurant
+    const restaurant = await productModel.findOne({ resName });
+    if (!restaurant) {
+        return res.status(404).json({ error: 'Restaurant not found' });
+    }
 
-    // Create the cart item
-    const cartItem = {
-      name: menuItem.dishName,
-      quantity: itemToAdd.quantity,
-      individualPrice: menuItem.price,
-    };
+    // Find the menu item (dish) within the restaurant's menu
+    const menuItem = restaurant.menu.find(item => item.dishName === dishName);
+    if (!menuItem) {
+        return res.status(404).json({ error: 'Menu item not found' });
+    }
 
-    // Find the user's cart or create a new one
-    let cart = await Cart.findOne();
+    // Find or create the cart for the user
+    let cart = await cartModel.findOne({ _id: user._id });
     if (!cart) {
-      cart = new Cart();
+        cart = new cartModel({ _id: user._id, items: [] });
     }
 
     // Check if the item already exists in the cart
-    const existingItem = cart.items.find(item => item.name === cartItem.name);
+    const existingItem = cart.items.find(item => item._id.equals(menuItem._id));
+
     if (existingItem) {
-      existingItem.quantity += cartItem.quantity;
+        // Update the quantity of the existing item
+        existingItem.quantity += 1;
     } else {
-      cart.items.push(cartItem);
+        // Add the menu item to the cart
+        cart.items.push({
+
+            productId: menuItem._id,
+            name: menuItem.dishName,
+            quantity: 1,
+            individualPrice: menuItem.price,
+        });
     }
 
-    await cart.save();
+    // Save the cart
+    const savedCart = await cart.save();
 
-    return res.status(201).json(cart);
-  } catch (error) {
-    console.error('Error adding item to cart:', error);
-    return res.status(500).json({ message: 'Error adding item to cart' });
+    res.json({ success: true, cart: savedCart });
+  } catch (err) {
+    console.error('Error adding to cart:', err);
+    res.status(500).json({ error: 'Failed to add to cart', details: err.message });
   }
 };
 
-const updateCart = async (req, res) => {
-  const { items } = req.body;
-
-  try {
-    // Find the user's cart
-    let cart = await Cart.findOne();
-    if (!cart) {
-      return res.status(404).json({ message: 'Cart not found' });
-    }
-
-    // Update the cart with the new quantities
-    cart.items = items;
-
-    await cart.save();
-
-    return res.status(200).json(cart);
-  } catch (error) {
-    console.error('Error updating cart:', error);
-    return res.status(500).json({ message: 'Error updating cart' });
-  }
-};
-
-const getCart = async (req, res) => {
-  try {
-    // Find the user's cart
-    let cart = await Cart.findOne();
-    if (!cart) {
-      return res.status(404).json({ message: 'Cart not found' });
-    }
-
-    return res.status(200).json(cart);
-  } catch (error) {
-    console.error('Error fetching cart:', error);
-    return res.status(500).json({ message: 'Error fetching cart' });
-  }
-};
-
-module.exports = {
-  addToCart,
-  updateCart,
-  getCart,
-};
+module.exports = { addToCart };
