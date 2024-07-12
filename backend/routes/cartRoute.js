@@ -3,6 +3,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const {addToCart} = require('../controller/cartCtrl')
+
 // const {createCart, deleteCartItem, updateCartItem}=require('../controller/cartCtrl')
 
 // router.get('/',createCart);
@@ -13,6 +14,6 @@ const {addToCart} = require('../controller/cartCtrl')
 // router.patch('/:itemId', updateCartItem);
 
 router.post('/add-item',addToCart);
-router.get()
+
 
 module.exports= router;

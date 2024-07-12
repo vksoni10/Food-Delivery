@@ -31,7 +31,7 @@ const fetchUserProfile = async () => {
 
   const handleAddToCart = async (item) => {
     try {
-      const response = await axios.post('http://localhost:3001/cart/add-item', {
+      const response = await axios.post('http://localhost:3001/cart/add-to-cart', {
         items: [{ ...item, quantity: 1 }],
       });
 
