@@ -9,8 +9,17 @@ const Order = ({ restaurant }) => {
   useEffect(() => {
     // Fetch cart items from the backend on component mount
     axios.get('http://localhost:3001/cart')
-      .then((response) => setCart(response.data))
-      .catch((error) => console.error('Error fetching cart:', error));
+      .then((response) => {
+        if (response.data && Array.isArray(response.data.items)) {
+          setCart(response.data.items);
+        } else {
+          setCart([]);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching cart:', error);
+        setCart([]);
+      });
   }, []);
 
   const handleAddToCart = async (item) => {
@@ -20,7 +29,11 @@ const Order = ({ restaurant }) => {
       });
 
       if (response.status === 201) {
-        setCart(response.data);
+        if (response.data && Array.isArray(response.data.items)) {
+          setCart(response.data.items);
+        } else {
+          setCart([]);
+        }
         setItemInCart({ ...itemInCart, [item._id]: true });
       } else {
         console.error('Failed to add item to cart');
@@ -38,12 +51,16 @@ const Order = ({ restaurant }) => {
 
       setCart(updatedCart);
 
-      await axios.post('/update-cart', {
+      const response = await axios.post('http://localhost:3001/cart/update-cart', {
         items: updatedCart,
       });
 
-      if (quantity === 0) {
-        setItemInCart({ ...itemInCart, [item._id]: false });
+      if (response.status === 200) {
+        if (quantity === 0) {
+          setItemInCart({ ...itemInCart, [item._id]: false });
+        }
+      } else {
+        console.error('Failed to update cart');
       }
     } catch (error) {
       console.error('Error updating cart quantity:', error);
