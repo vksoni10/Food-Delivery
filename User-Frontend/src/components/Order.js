@@ -6,12 +6,12 @@ const Order = ({ restaurant }) => {
   const [cart, setCart] = useState([]);
   const [itemInCart, setItemInCart] = useState({});
 
-  useEffect(() => {
-    // Fetch cart items from the backend on component mount
-    axios.get('http://localhost:3001/cart')
-      .then((response) => setCart(response.data))
-      .catch((error) => console.error('Error fetching cart:', error));
-  }, []);
+  // useEffect(() => {
+  //   // Fetch cart items from the backend on component mount
+  //   axios.get('http://localhost:3001/cart/getCart')
+  //     .then((response) => setCart(response.data))
+  //     .catch((error) => console.error('Error fetching cart:', error));
+  // }, []);
 
   const handleAddToCart = async (item) => {
     try {
