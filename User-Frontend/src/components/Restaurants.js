@@ -19,7 +19,18 @@ const Restaurants = () => {
 
     fetchRestaurants();
   }, []);
-  console.log(restaurantData)
+
+  const calculateAveragePrice = (menu) => {
+    if (menu.length === 0) return 0;
+    const total = menu.reduce((total, item) => total + item.price, 0);
+    return total / menu.length;
+  };
+
+  const calculateAverageRating = (reviews) => {
+    if (reviews.length === 0) return 0;
+    const total = reviews.reduce((total, review) => total + review.rating, 0);
+    return total / reviews.length;
+  };
 
   return (
     <>
@@ -32,12 +43,12 @@ const Restaurants = () => {
               id={resto._id}
               image={resto.resImage[0]}
               name={resto.resName}
-              cuisine={resto.restaurantTypes.join(', ')}
-              price={resto.menu.reduce((total, item) => total + item.price, 0) / resto.menu.length}
-              rating={resto.rating}
+              cuisine={resto.restaurantTypes}
+              price={calculateAveragePrice(resto.menu)}
+              rating={calculateAverageRating(resto.resReview)} // Calculate average rating
               discount={resto.resDiscount}
               opensAt={resto.resOperationalHours}
-              distance={"Not available"} // Assuming you don't have distance data in the model
+              distance={"Not available"}
             />
           ))}
         </div>

@@ -26,6 +26,8 @@
 
 .menu-table thead th {
   font-size: 1.2em;
+  color: black;
+  text-align: center;
 }
 
 .menu-table tr:nth-child(even) {
