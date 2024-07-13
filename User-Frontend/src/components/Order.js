@@ -3,15 +3,16 @@ import axios from 'axios';
 import './Order.css';
 import { fetchUserInfo } from './userApi';
 import { useParams } from 'react-router-dom';
-
+import { jwtDecode } from 'jwt-decode';
 const Order = ({ restaurant }) => {
-  const {id} = useParams();
+  const { id } = useParams();
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState({});
   const [itemInCart, setItemInCart] = useState({});
 
   useEffect(() => {
     fetchUserProfile();
+    fetchCartItems();
   }, []);
 
   const fetchUserProfile = async () => {
@@ -25,18 +26,72 @@ const Order = ({ restaurant }) => {
     }
   };
 
+  const fetchCartItems = async () => {
+    try {
+      const token = localStorage.getItem('token'); 
+      const decodedToken = jwtDecode(token);
+      const userId = decodedToken.id;
+      
+      const response = await axios.get('http://localhost:3001/cart/get-cart-items', {
+        params: {
+          userId: userId,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setCart(response.data.cart.items);
+
+      // Update itemInCart state to track items already in the cart
+      const itemsInCart = response.data.cart.items.reduce((acc, item) => {
+        acc[item.productId] = true; // Use productId as key to track presence in cart
+        return acc;
+      }, {});
+      setItemInCart(itemsInCart);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleAddToCart = async (item) => {
     try {
       const response = await axios.post('http://localhost:3001/cart/add-to-cart', {
-        resId: id,  // Adjust this as per your backend API requirements
+        resId: id,
         dishName: item.dishName,
-        email: user.email,  // Assuming you have user email from fetchUserInfo
+        email: user.email,
       });
+      fetchCartItems(); // Refresh the cart items after adding
     } catch (error) {
       console.error('Error adding item to cart:', error);
     }
   };
-console.log(itemInCart)
+
+  const handleUpdateQuantity = async (itemId, action) => {
+    try {
+      const token = localStorage.getItem('token'); 
+      const decodedToken = jwtDecode(token);
+      const userId = decodedToken.id;
+
+      const response = await axios.patch(`http://localhost:3001/cart/update-item`, {
+        userId: userId,
+        itemId: itemId,
+        action: action
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setCart(response.data.cart.items);
+
+      // Update itemInCart state after updating quantity
+      const itemsInCart = response.data.cart.items.reduce((acc, item) => {
+        acc[item.productId] = true; // Use productId as key to track presence in cart
+        return acc;
+      }, {});
+      setItemInCart(itemsInCart);
+    } catch (error) {
+      console.error('Error updating cart item quantity:', error);
+    }
+  };
+
   return (
     <div id="order">
       <h2 className="h">Menu</h2>
@@ -59,11 +114,11 @@ console.log(itemInCart)
                     <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
                   ) : (
                     <>
-                      <button>-</button>
+                      <button onClick={() => handleUpdateQuantity(item._id, 'decrease')}>-</button>
                       <span>
                         {cart.find((cartItem) => cartItem.productId === item._id)?.quantity || 0}
                       </span>
-                      <button>+</button>
+                      <button onClick={() => handleUpdateQuantity(item._id, 'increase')}>+</button>
                     </>
                   )}
                 </div>
