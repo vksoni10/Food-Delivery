@@ -3,8 +3,35 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Cart.css'
 import Navbar from './Navbar';
+import {jwtDecode} from 'jwt-decode';
+
+
+
+
 
 const Cart = () => {    
+  const token = localStorage.getItem('token'); // Or wherever you store the token
+  const decodedToken = jwtDecode(token);
+  const userId = decodedToken.id;
+  const getCartItems = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/cart/get-cart-items', {
+        params: {
+          userId: userId,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+  
+      console.log('Cart items:', response.data);
+    } catch (error) {
+      console.error('Error fetching cart items:', error);
+    }
+  };
+  
+  
+  getCartItems();
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const [tax, setTax] = useState(0);

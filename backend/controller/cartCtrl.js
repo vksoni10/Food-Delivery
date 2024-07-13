@@ -60,8 +60,22 @@ const addToCart = async (req, res) => {
   }
 };
 
-const getCartItems = async (req,res)=>{
-  
+const getCartItems = async (req, res) => {
+  try {
+    const { userId } = req.query;
+    console.log(userId)
+
+    const cart = await cartModel.findOne({ _id: userId });
+
+    if (!cart) {
+        return res.status(404).json({ error: 'Cart not found' });
+    }
+
+    res.json({ success: true, cart });
+  } catch (err) {
+    console.error('Error retrieving cart items:', err);
+    res.status(500).json({ error: 'Failed to retrieve cart items', details: err.message });
+  }
 };
 
-module.exports = { addToCart };
+module.exports = { addToCart, getCartItems };
