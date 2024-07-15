@@ -3,7 +3,8 @@ import axios from 'axios';
 import './Order.css';
 import { fetchUserInfo } from './userApi';
 import { useParams } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
+
 const Order = ({ restaurant }) => {
   const { id } = useParams();
   const [cart, setCart] = useState([]);
@@ -28,10 +29,10 @@ const Order = ({ restaurant }) => {
 
   const fetchCartItems = async () => {
     try {
-      const token = localStorage.getItem('token'); 
+      const token = localStorage.getItem('token');
       const decodedToken = jwtDecode(token);
       const userId = decodedToken.id;
-      
+
       const response = await axios.get('http://localhost:3001/cart/get-cart-items', {
         params: {
           userId: userId,
@@ -44,7 +45,7 @@ const Order = ({ restaurant }) => {
 
       // Update itemInCart state to track items already in the cart
       const itemsInCart = response.data.cart.items.reduce((acc, item) => {
-        acc[item.productId] = true; // Use productId as key to track presence in cart
+        acc[item.productId] = item.quantity; // Use productId as key to track presence and quantity in cart
         return acc;
       }, {});
       setItemInCart(itemsInCart);
@@ -68,7 +69,7 @@ const Order = ({ restaurant }) => {
 
   const handleUpdateQuantity = async (itemId, action) => {
     try {
-      const token = localStorage.getItem('token'); 
+      const token = localStorage.getItem('token');
       const decodedToken = jwtDecode(token);
       const userId = decodedToken.id;
 
@@ -83,7 +84,7 @@ const Order = ({ restaurant }) => {
 
       // Update itemInCart state after updating quantity
       const itemsInCart = response.data.cart.items.reduce((acc, item) => {
-        acc[item.productId] = true; // Use productId as key to track presence in cart
+        acc[item.productId] = item.quantity; // Use productId as key to track presence and quantity in cart
         return acc;
       }, {});
       setItemInCart(itemsInCart);
@@ -98,6 +99,7 @@ const Order = ({ restaurant }) => {
       <table className="menu-table">
         <thead>
           <tr>
+            <th>Photo</th>
             <th>Name</th>
             <th>Price</th>
             <th>Action</th>
@@ -106,6 +108,7 @@ const Order = ({ restaurant }) => {
         <tbody>
           {restaurant.menu.map((item) => (
             <tr key={item._id}>
+              <td className="dish-image" style={{ backgroundImage: `url(${item.dishImage})` }}></td>
               <td>{item.dishName}</td>
               <td>₹{item.price}</td>
               <td>
@@ -116,7 +119,7 @@ const Order = ({ restaurant }) => {
                     <>
                       <button onClick={() => handleUpdateQuantity(item._id, 'decrease')}>-</button>
                       <span>
-                        {cart.find((cartItem) => cartItem.productId === item._id)?.quantity || 0}
+                        {itemInCart[item._id]}
                       </span>
                       <button onClick={() => handleUpdateQuantity(item._id, 'increase')}>+</button>
                     </>
