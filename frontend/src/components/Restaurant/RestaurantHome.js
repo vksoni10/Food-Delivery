@@ -10,8 +10,15 @@ import Menu from "./Menu";
 import Profile from "./Profile";
 import CreateMenu from "./CreateMenu";
 import UpdateMenu from "./UpdateMenu";
+import MenuTable from "./MenuTable";
+
 
 export default function RestaurantHome() {
+  const [menu, setMenu] = useState([]);
+
+  const onMenuAdd = (newMenuItem) => {
+    setMenu([...menu, newMenuItem]);
+  };
   const [currentComponent, setCurrentComponent] = useState(
     "/Restaurant/restaurantDashboard"
   );
@@ -42,7 +49,7 @@ export default function RestaurantHome() {
           <NavLink to="/Restaurant/profile" className="btn btn-info">
             <sub>
               <sub>
-                <span class="material-symbols-outlined">account_circle</span>
+                <span className="material-symbols-outlined">account_circle</span>
               </sub>
             </sub>
             &nbsp;&nbsp;Profile
@@ -52,7 +59,7 @@ export default function RestaurantHome() {
           <NavLink to="/Restaurant/menu" className="btn btn-info">
             <sub>
               <sub>
-                <span class="material-symbols-outlined">lists</span>
+                <span className="material-symbols-outlined">lists</span>
               </sub>
             </sub>
             &nbsp;&nbsp;Menu
@@ -62,7 +69,7 @@ export default function RestaurantHome() {
           <NavLink to="/Restaurant/incomingOrders" className="btn btn-info">
             <sub>
               <sub>
-                <span class="material-symbols-outlined">ring_volume</span>
+                <span className="material-symbols-outlined">ring_volume</span>
               </sub>
             </sub>
             &nbsp;&nbsp;Incoming Orders
@@ -72,7 +79,7 @@ export default function RestaurantHome() {
           <NavLink to="/Restaurant/currentOrders" className="btn btn-info">
             <sub>
               <sub>
-                <span class="material-symbols-outlined">shopping_cart</span>
+                <span className="material-symbols-outlined">shopping_cart</span>
               </sub>
             </sub>
             &nbsp;&nbsp;Current Orders
@@ -82,7 +89,7 @@ export default function RestaurantHome() {
           <NavLink to="/Restaurant/orderHistory" className="btn btn-info">
             <sub>
               <sub>
-                <span class="material-symbols-outlined">history</span>
+                <span className="material-symbols-outlined">history</span>
               </sub>
             </sub>
             &nbsp;&nbsp;Order History
@@ -92,7 +99,7 @@ export default function RestaurantHome() {
           <NavLink to="/Restaurant/reviews" className="btn btn-info">
             <sub>
               <sub>
-                <span class="material-symbols-outlined">reviews</span>
+                <span className="material-symbols-outlined">reviews</span>
               </sub>
             </sub>
             &nbsp;&nbsp;Ratings &#38; Reviews
@@ -102,7 +109,7 @@ export default function RestaurantHome() {
           <NavLink to="/" className="btn btn-info">
             <sub>
               <sub>
-                <span class="material-symbols-outlined">logout</span>
+                <span className="material-symbols-outlined">logout</span>
               </sub>
             </sub>
             &nbsp;&nbsp;Logout
@@ -124,10 +131,11 @@ export default function RestaurantHome() {
           <Route path="/Restaurant/currentOrders" element={<CurrentOrders />} />
           <Route path="/Restaurant/orderHistory" element={<OrderHistory />} />
           <Route path="/Restaurant/reviews" element={<Reviews />} />
-          <Route path="/*" element={<Menu />} />
+          <Route path="/Restaurant/menu" element={<Menu />} />
           <Route path="/Restaurant/profile" element={<Profile />} />
-          <Route path="/Restaurant/createMenu" element={<CreateMenu />} />
+          <Route path="/Restaurant/createMenu" element={<CreateMenu onMenuAdd={onMenuAdd} />} />
           <Route path="/Restaurant/updateMenu" element={<UpdateMenu />} />
+          <Route path="/Restaurant/MenuTable" element={<MenuTable menu={menu} setMenu={setMenu} />} />
         </Routes>
       </div>
     </div>

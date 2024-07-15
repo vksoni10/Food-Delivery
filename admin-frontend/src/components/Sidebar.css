@@ -1,56 +1,64 @@
 /* src/components/Sidebar.css */
+
 .sidebar {
-    width: 230px;
-    height: 100vh;
-    background-color: #2C3E50;
-    color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1.1rem;
-  }
-  
-  .logo {
-    font-size: 2.5rem;
-    margin: 10px 0;
-  }
-  
-  nav ul {
-    list-style: none;
-    padding: 0;
-    width: 100%;
-  }
-  
-  nav ul ul {
-    padding-left: 20px;
-    display: none;
-  }
-  
-  nav ul li {
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  nav ul li:hover {
-    background-color: #34495E;
-  }
-  
-  nav ul li ul {
-    display: block;
-  }
-  
-  nav ul li ul li {
-    background-color: #34495E;
-  }
-  
-  nav ul li ul li:hover {
-    background-color: #3C5060;
-  }
-  
-  /* .active {
-    background-color: #ffffff !important;
-  } */
-  
+  width: 230px;
+  background-color: #282c34;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  border-radius: 12px;
+  margin-top: 60px;
+}
+
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 100px;
+}
+
+nav ul ul {
+  padding-left: 20px;
+}
+
+nav ul li {
+  margin-bottom: 15px;
+}
+
+nav ul li a {
+  display: block;
+  padding: 12px 15px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: #3a3f47;
+}
+
+nav ul li a:hover {
+  background-color: #4c9aff;
+  color: #fff;
+}
+
+nav ul li a.active {
+  background-color: #4c9aff;
+  color: #fff;
+  font-weight: bold;
+}
+
+nav ul ul {
+  display: none;
+}
+
+nav ul li ul li a {
+  padding: 10px 15px;
+}
+
+nav ul li ul li a:hover {
+  background-color: #4a5058;
+}
+ 

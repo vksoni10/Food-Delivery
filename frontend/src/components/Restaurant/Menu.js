@@ -1,107 +1,31 @@
 import React, { useEffect, useState } from "react";
-import "./Menu.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
-import {jwtDecode} from "jwt-decode";
+//import MenuTable from "./MenuTable";
+import "./Menu.css";
 
-export default function Menu() {
+const Menu = (restaurantId) => {
+  
   const [menu, setMenu] = useState([]);
-  const [dishName, setDishName] = useState("");
-  const [price, setPrice] = useState("");
-  const [dishImage, setDishImage] = useState("");
-  const [dishType, setDishType] = useState("");
-  const navigate = useNavigate();
+  console.log(menu);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/Restaurant/Menu")
-      .then((response) => setMenu(response.data))
-      .catch((err) => console.log(err));
-  }, []);
+        axios.get(`http://localhost:3001/Restaurant/${restaurantId}/menu`)
+            .then(response => {
+                setMenu(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching menu items:', error);
+            });
+    }, [restaurantId]);
+  
 
-  const fetchRestaurantName = async () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      console.log(token)
-      const decoded = jwtDecode(token);
-      const { resName } = decoded;
-      return resName;
-    }
-    return null;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const resName = await fetchRestaurantName();
-    if (!resName) {
-      alert("User not authenticated");
-      return;
-    }
-    await axios
-      .post("http://localhost:3001/Restaurant/menu", {
-        dishName,
-        price,
-        dishImage,
-        dishType,
-        resName,
-      })
-      .then((result) => {
-        console.log(result);
-        navigate("/Restaurant/login");
-      })
-      .catch((err) => {
-        if (err.response && err.response.status === 400) {
-          alert(err.response.data.message);
-        } else {
-          console.error(err);
-        }
-      });
-  };
-
+ 
   return (
-    <>
-      <div className="menu">
-        {/* <NavLink to="#" onClick={addMenuItem}>Add</NavLink> */}
-      </div>
-      <div className="add-menu-form">
-        <form onSubmit={handleSubmit}>
-          <div className="menu-item-inputs">
-            <input
-              type="text"
-              name="dishName"
-              value={dishName}
-              onChange={(e) => setDishName(e.target.value)}
-              placeholder="Dish Name"
-              required
-            />
-            <input
-              type="number"
-              name="price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              placeholder="Price"
-              required
-            />
-            <input
-              type="text"
-              name="dishImage"
-              value={dishImage}
-              onChange={(e) => setDishImage(e.target.value)}
-              placeholder="Dish Image URL"
-              required
-            />
-            <input
-              type="text"
-              name="dishType"
-              value={dishType}
-              onChange={(e) => setDishType(e.target.value)}
-              placeholder="Dish Type"
-              required
-            />
-            <button type="submit">Register Restaurant</button>
-          </div>
-        </form>
-      </div>
+    <div className="menu">
+      <NavLink to="/Restaurant/createMenu" className="add-button">
+        Add +
+      </NavLink>
       <div className="menu-table">
         <table>
           <thead>
@@ -114,7 +38,7 @@ export default function Menu() {
             </tr>
           </thead>
           <tbody>
-            {menu.map((item, index) => (
+            {menu.map((item) => (
               <tr key={item._id}>
                 <td>{item.dishName}</td>
                 <td>{item.price}</td>
@@ -126,13 +50,15 @@ export default function Menu() {
                   <NavLink to={`/Restaurant/updateMenu/${item._id}`}>
                     Update
                   </NavLink>
-                  {/* <button onClick={() => handleDelete(item._id)}>Delete</button> */}
+                  <button >Delete</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default Menu;
