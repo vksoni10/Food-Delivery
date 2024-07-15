@@ -4,7 +4,7 @@ import axios from "axios";
 import "./Menu.css";
 import {jwtDecode} from "jwt-decode";
 
-const Menu = () => {
+const Menu = (restaurantId) => {
   const [menu, setMenu] = useState([]);
   const [resName, setResName] = useState("");
 
@@ -55,11 +55,11 @@ const Menu = () => {
         <table>
           <thead>
             <tr>
-              <th>Item Name</th>
-              <th>Item Price</th>
-              <th>Item Type</th>
-              <th>Item Image</th>
-              <th>Actions</th>
+              <th scope="col">Item Name</th>
+              <th scope="col">Item Price</th>
+              <th scope="col">Item Type</th>
+              <th scope="col">Item Image</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>

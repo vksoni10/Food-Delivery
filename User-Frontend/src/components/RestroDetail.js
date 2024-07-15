@@ -173,53 +173,57 @@ const RestroDetail = () => {
             )}
             {activeTab === "book" && (
               <div id="book">
-                <h2 className="h">Book a Table</h2>
-                {bookingSuccess ? (
-                  <div className="booking-success">
-                    <span>&#10004;</span> Booked successfully!
-                  </div>
-                ) : (
-                  <form onSubmit={handleBookingSubmit}>
-                    <label className="form-label">
-                      <h5 className="text">Table for</h5>
-                      <input
-                        type="number"
-                        name="people"
-                        value={booking.people}
-                        onChange={handleBookingChange}
-                        required
-                        className="form-input"
-                      />
-                    </label>
-                    <label className="form-label">
-                      <h5 className="text">Date:</h5>
-                      <input
-                        type="date"
-                        name="date"
-                        value={booking.date}
-                        onChange={handleBookingChange}
-                        required
-                        className="form-input"
-                      />
-                    </label>
-                    <label className="form-label">
-                      <h5 className="text">Time:</h5>
-                      <input
-                        type="time"
-                        name="time"
-                        value={booking.time}
-                        onChange={handleBookingChange}
-                        required
-                        className="form-input"
-                      />
-                    </label>
-                    <button type="submit" className="form-button">
-                      Book Now
-                    </button>
-                  </form>
+  <h2 className="h">Book a Table</h2>
+  {bookingSuccess ? (
+    <div className="booking-success">
+      <span>&#10004;</span> Booked successfully!
+    </div>
+  ) : (
+    <div className='booking'>
+      <form onSubmit={handleBookingSubmit}>
+        <label className="form-label">
+          <h5 className="text">Table for</h5>
+          <input
+            type="number"
+            name="people"
+            value={booking.people}
+            onChange={handleBookingChange}
+            required
+            className="form-input"
+          />
+        </label>
+        <label className="form-label">
+          <h5 className="text">Date:</h5>
+          <input
+            type="date"
+            name="date"
+            value={booking.date}
+            onChange={handleBookingChange}
+            required
+            className="form-input"
+          />
+        </label>
+        <label className="form-label">
+          <h5 className="text">Time:</h5>
+          <input
+            type="time"
+            name="time"
+            value={booking.time}
+            onChange={handleBookingChange}
+            required
+            className="form-input"
+          />
+        </label>
+        <button type="submit" className="form-button">
+          Book Now
+        </button>
+      </form>
+    </div>
+  )}
+</div>
+
                 )}
-              </div>
-            )}
+            
           </div>
         </div>
       </div>
