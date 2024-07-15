@@ -19,24 +19,27 @@ router.post("/addRestaurant", upload.array("resImage", 3), restaurantAdd);
 
 router.post("/menu", uploader.single("dishImage"), updateMenu);
 //Get menu items
-router.get("/:restaurantId/menu", async (req, res) => {
+router.get('/:resName/menu', async (req, res) => {
+  const { resName } = req.params;
   console.log("hello");
+  
   try {
-    const restaurants = await Restaurant.find();
-    console.log("Restaurants fetched:", restaurants); // Log the fetched restaurants
-    if (!restaurants) {
-      console.log("No restaurants found");
-      return res.status(404).json({ message: "No restaurants found" });
+    const restaurant = await Restaurant.findOne({ resName });
+    console.log("Restaurant fetched:", restaurant); // Log the fetched restaurant
+    
+    if (!restaurant) {
+      console.log("Restaurant not found");
+      return res.status(404).json({ message: "Restaurant not found" });
     }
-    const menuItems = restaurants.reduce(
-      (acc, restaurant) => acc.concat(restaurant.menu),
-      []
-    );
+
+    const menuItems = restaurant.menu;
     console.log("Menu items aggregated:", menuItems); // Log the aggregated menu items
+    
     if (!menuItems.length) {
       console.log("No menu items found");
       return res.status(404).json({ message: "No menu items found" });
     }
+
     res.json(menuItems);
   } catch (err) {
     console.error("Error fetching menu items:", err.message); // Log the error message

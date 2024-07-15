@@ -1,12 +1,52 @@
+/* body {
+  font-family: "Arial", sans-serif;
+  background: url("your-background-image.jpg") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+} */
+
 .order-confirmation-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
 }
 
 .order-confirmation-container h2 {
   text-align: center;
   margin-bottom: 20px;
+  color: #fff;
+}
+
+.order-confirmation-container h3,
+.order-confirmation-container h4,
+.order-confirmation-container p,
+.order-confirmation-container li span {
+  color: #fff;
+}
+
+.order-confirmation-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.order-confirmation-container li {
+  background: rgba(255, 255, 255, 0.2);
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.order-confirmation-container li span {
+  display: block;
 }
