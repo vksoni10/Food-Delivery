@@ -49,7 +49,7 @@ export default function RestaurantHome() {
           <NavLink to="/Restaurant/profile" className="btn btn-info">
             <sub>
               <sub>
-                <span class="material-symbols-outlined">account_circle</span>
+                <span className="material-symbols-outlined">account_circle</span>
               </sub>
             </sub>
             &nbsp;&nbsp;Profile
@@ -59,7 +59,7 @@ export default function RestaurantHome() {
           <NavLink to="/Restaurant/menu" className="btn btn-info">
             <sub>
               <sub>
-                <span class="material-symbols-outlined">lists</span>
+                <span className="material-symbols-outlined">lists</span>
               </sub>
             </sub>
             &nbsp;&nbsp;Menu
@@ -69,7 +69,7 @@ export default function RestaurantHome() {
           <NavLink to="/Restaurant/incomingOrders" className="btn btn-info">
             <sub>
               <sub>
-                <span class="material-symbols-outlined">ring_volume</span>
+                <span className="material-symbols-outlined">ring_volume</span>
               </sub>
             </sub>
             &nbsp;&nbsp;Incoming Orders
@@ -79,7 +79,7 @@ export default function RestaurantHome() {
           <NavLink to="/Restaurant/currentOrders" className="btn btn-info">
             <sub>
               <sub>
-                <span class="material-symbols-outlined">shopping_cart</span>
+                <span className="material-symbols-outlined">shopping_cart</span>
               </sub>
             </sub>
             &nbsp;&nbsp;Current Orders
@@ -89,7 +89,7 @@ export default function RestaurantHome() {
           <NavLink to="/Restaurant/orderHistory" className="btn btn-info">
             <sub>
               <sub>
-                <span class="material-symbols-outlined">history</span>
+                <span className="material-symbols-outlined">history</span>
               </sub>
             </sub>
             &nbsp;&nbsp;Order History
@@ -99,7 +99,7 @@ export default function RestaurantHome() {
           <NavLink to="/Restaurant/reviews" className="btn btn-info">
             <sub>
               <sub>
-                <span class="material-symbols-outlined">reviews</span>
+                <span className="material-symbols-outlined">reviews</span>
               </sub>
             </sub>
             &nbsp;&nbsp;Ratings &#38; Reviews
@@ -109,7 +109,7 @@ export default function RestaurantHome() {
           <NavLink to="/" className="btn btn-info">
             <sub>
               <sub>
-                <span class="material-symbols-outlined">logout</span>
+                <span className="material-symbols-outlined">logout</span>
               </sub>
             </sub>
             &nbsp;&nbsp;Logout
