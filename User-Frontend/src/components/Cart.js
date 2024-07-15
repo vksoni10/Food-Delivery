@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Cart.css';
 import Navbar from './Navbar';
-import {jwtDecode} from 'jwt-decode';
+import Checkout from './Checkout';
+import { jwtDecode } from 'jwt-decode';
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const Cart = () => {
   const [subtotal, setSubtotal] = useState(0);
   const [tax, setTax] = useState(0);
   const [total, setTotal] = useState(0);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const getCartItems = async () => {
     try {
@@ -24,13 +26,12 @@ const Cart = () => {
       });
       console.log('Cart items:', response.data.cart.items);
       setCartItems(response.data.cart.items);
-      
+
       calculateTotals(response.data.cart.items);
     } catch (error) {
       console.error('Error fetching cart items:', error);
     }
   };
-  const Cartlen = localStorage.setItem("cartcount",cartItems.length);
 
   useEffect(() => {
     getCartItems();
@@ -77,6 +78,7 @@ const Cart = () => {
   };
 
   const handleCheckout = async () => {
+    setShowOverlay(true); // Show overlay
     try {
       const response = await axios.post('http://localhost:3001/order/create', {
         userId,
@@ -87,23 +89,33 @@ const Cart = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       const newOrder = response.data.order;
-      // Redirect to order confirmation page with the new order ID
+      // Clear cart items after successful order creation
+      setCartItems([]);
+      setSubtotal(0);
+      setTax(0);
+      setTotal(0);
+      // Delay navigation using Promise.resolve with setTimeout
+      await new Promise(resolve => setTimeout(resolve, 2000));
       navigate(`/order-confirmation/${newOrder._id}`);
     } catch (error) {
       console.error('Error creating order:', error);
+    } finally {
+      setShowOverlay(false); // Hide overlay after navigation
     }
   };
-
+  
+  
   return (
     <>
       <Navbar />
+      {showOverlay && <Checkout />}
       <div className="cart-container">
         <h2>Your Order</h2>
         <ul>
           {cartItems.map((item) => (
             <li key={item._id}>
-              <span>{item.name} x {item.quantity}<br /> Ordering from: {item.restaurantName}</span>
-              <span>${item.individualPrice * item.quantity}</span>
+              <span>{item.name} x {item.quantity}<br /> Ordering from: {item.itemRestro}</span>
+              <span>₹{item.individualPrice * item.quantity}</span>
               <button onClick={() => handleRemoveItem(item._id)}>Remove</button>
               <button onClick={() => handleUpdateQuantity(item._id, 'decrease')}>-</button>
               <button onClick={() => handleUpdateQuantity(item._id, 'increase')}>+</button>

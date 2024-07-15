@@ -3,15 +3,6 @@ import './Checkout.css';
 import { useNavigate } from 'react-router-dom';
 
 function Checkout() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate('/auth/track');
-    }, 1500);
-
-    return () => clearTimeout(timer);
-  }, [navigate]);
 
   return (
     <div className="success-message">
