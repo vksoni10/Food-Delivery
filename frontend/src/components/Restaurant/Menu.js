@@ -8,13 +8,13 @@ export default function Menu() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/menu")
+      .get("http://localhost:3001/restaurant/menu")
       .then((response) => setMenu(response.data))
       .catch((err) => console.log(err));
   }, []);
   const handleDelete = (id) => {
     axios
-      .delete("http://localhost:3001/menu/" + id)
+      .delete("http://localhost:3001/restaurant/menu/" + id)
       .then((res) => {
         console.log(res);
         window.location.reload();
@@ -23,18 +23,18 @@ export default function Menu() {
   };
   return (
     <>
-      <div className="menu">
+      <div className="menu table">
         <NavLink to="/Restaurant/createMenu">Add</NavLink>
       </div>
       <div>
         <table>
           <thead>
             <tr>
-              <th>Item Name</th>
-              <th>Item Price</th>
-              <th>Item Type</th>
-              <th>Item Image</th>
-              <th>Actions</th>
+              <th scope="col">Item Name</th>
+              <th scope="col">Item Price</th>
+              <th scope="col">Item Type</th>
+              <th scope="col">Item Image</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
