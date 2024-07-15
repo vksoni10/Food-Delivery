@@ -3,7 +3,8 @@ import axios from 'axios';
 import './Order.css';
 import { fetchUserInfo } from './userApi';
 import { useParams } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
+
 const Order = ({ restaurant }) => {
   const { id } = useParams();
   const [cart, setCart] = useState([]);
@@ -22,44 +23,52 @@ const Order = ({ restaurant }) => {
         setUser(userInfo);
       }
     } catch (err) {
-      console.log(err);
+      console.log('Error fetching user profile:', err);
     }
   };
 
   const fetchCartItems = async () => {
     try {
-      const token = localStorage.getItem('token'); 
+      const token = localStorage.getItem('token');
       const decodedToken = jwtDecode(token);
       const userId = decodedToken.id;
-      
+
       const response = await axios.get('http://localhost:3001/cart/get-cart-items', {
         params: {
           userId: userId,
         },
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
+      console.log('Cart items fetched:', response.data.cart.items);
       setCart(response.data.cart.items);
 
-      // Update itemInCart state to track items already in the cart
       const itemsInCart = response.data.cart.items.reduce((acc, item) => {
-        acc[item.productId] = true; // Use productId as key to track presence in cart
+        acc[item.productId] = true;
         return acc;
       }, {});
+      console.log('Items in cart:', itemsInCart);
       setItemInCart(itemsInCart);
     } catch (err) {
-      console.log(err);
+      console.log('Error fetching cart items:', err);
     }
   };
 
   const handleAddToCart = async (item) => {
     try {
+      const token = localStorage.getItem('token');
+      const decodedToken = jwtDecode(token);
+      const userId = decodedToken.id;
+
       const response = await axios.post('http://localhost:3001/cart/add-to-cart', {
         resId: id,
         dishName: item.dishName,
         email: user.email,
+      }, {
+        headers: { Authorization: `Bearer ${token}` },
       });
+      console.log('Add to cart response:', response.data);
       fetchCartItems(); // Refresh the cart items after adding
     } catch (error) {
       console.error('Error adding item to cart:', error);
@@ -68,22 +77,22 @@ const Order = ({ restaurant }) => {
 
   const handleUpdateQuantity = async (itemId, action) => {
     try {
-      const token = localStorage.getItem('token'); 
+      const token = localStorage.getItem('token');
       const decodedToken = jwtDecode(token);
       const userId = decodedToken.id;
 
       const response = await axios.patch(`http://localhost:3001/cart/update-item`, {
         userId: userId,
         itemId: itemId,
-        action: action
+        action: action,
       }, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
+      console.log('Update quantity response:', response.data);
       setCart(response.data.cart.items);
 
-      // Update itemInCart state after updating quantity
       const itemsInCart = response.data.cart.items.reduce((acc, item) => {
-        acc[item.productId] = true; // Use productId as key to track presence in cart
+        acc[item.productId] = true;
         return acc;
       }, {});
       setItemInCart(itemsInCart);
@@ -95,38 +104,29 @@ const Order = ({ restaurant }) => {
   return (
     <div id="order">
       <h2 className="h">Menu</h2>
-      <table className="menu-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {restaurant.menu.map((item) => (
-            <tr key={item._id}>
-              <td>{item.dishName}</td>
-              <td>₹{item.price}</td>
-              <td>
-                <div className="cart-actions">
-                  {!itemInCart[item._id] ? (
-                    <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
-                  ) : (
-                    <>
-                      <button onClick={() => handleUpdateQuantity(item._id, 'decrease')}>-</button>
-                      <span>
-                        {cart.find((cartItem) => cartItem.productId === item._id)?.quantity || 0}
-                      </span>
-                      <button onClick={() => handleUpdateQuantity(item._id, 'increase')}>+</button>
-                    </>
-                  )}
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="menu-list">
+        {restaurant.menu.map((item) => (
+          <div className="menu-item" key={item._id}>
+            <div className="item-details">
+              <span className="item-name">{item.dishName}</span>
+              <span className="item-price">₹{item.price}</span>
+            </div>
+            <div className="cart-actions">
+              {!itemInCart[item._id] ? (
+                <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
+              ) : (
+                <>
+                  <button onClick={() => handleUpdateQuantity(item._id, 'decrease')}>-</button>
+                  <span>
+                    {cart.find((cartItem) => cartItem.productId === item._id)?.quantity || 0}
+                  </span>
+                  <button onClick={() => handleUpdateQuantity(item._id, 'increase')}>+</button>
+                </>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
