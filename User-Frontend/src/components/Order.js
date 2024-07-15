@@ -30,7 +30,6 @@ const Order = ({ restaurant }) => {
   const fetchCartItems = async () => {
     try {
       const token = localStorage.getItem('token');
-      const token = localStorage.getItem('token');
       const decodedToken = jwtDecode(token);
       const userId = decodedToken.id;
 
