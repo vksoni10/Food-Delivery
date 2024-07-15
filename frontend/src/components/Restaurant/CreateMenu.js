@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import {jwtDecode} from 'jwt-decode';
+import React, { useState } from "react";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const CreateMenu = ({ onMenuAdd }) => {
   const [dishName, setDishName] = useState("");
@@ -27,17 +27,17 @@ const CreateMenu = ({ onMenuAdd }) => {
     }
 
     const formData = new FormData();
-    formData.append('dishName', dishName);
-    formData.append('price', price);
-    formData.append('dishImage', dishImage);
-    formData.append('dishType', dishType);
-    formData.append('resName', resName);
+    formData.append("dishName", dishName);
+    formData.append("price", price);
+    formData.append("dishImage", dishImage);
+    formData.append("dishType", dishType);
+    formData.append("resName", resName);
 
     await axios
       .post(`http://localhost:3001/Restaurant/menu`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+          "Content-Type": "multipart/form-data",
+        },
       })
       .then((result) => {
         onMenuAdd(result.data);

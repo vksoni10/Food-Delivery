@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/authRoute");
 const cartRoutes = require("./routes/cartRoute");
+const orderRoutes = require("./routes/orderRoutes");
 const restRoute = require("./routes/restRoute");
 const adminRoutes= require("./routes/adminRoute");
 const registerRoute = require("./routes/addRestRoute");
@@ -42,6 +43,7 @@ app.use("/Restaurant", restRoute);
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
 app.use("/admin", adminRoutes)
+app.use("/order", orderRoutes)
 app.use("/admin", restRoute);
 app.use("/Restaurant", registerRoute);
 app.use("/static", express.static(__dirname + "/public/Images"));

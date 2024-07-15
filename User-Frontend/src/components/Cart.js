@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Cart.css';
 import Navbar from './Navbar';
 import {jwtDecode} from 'jwt-decode';
 
 const Cart = () => {
-  const token = localStorage.getItem('token'); 
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
   const decodedToken = jwtDecode(token);
   const userId = decodedToken.id;
+  const userName = decodedToken.name; // Assuming the token contains the user's name
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const [tax, setTax] = useState(0);
@@ -57,7 +59,7 @@ const Cart = () => {
       console.error('Error removing cart item:', error);
     }
   };
-  
+
   const handleUpdateQuantity = async (itemId, action) => {
     try {
       const response = await axios.patch(`http://localhost:3001/cart/update-item`, {
@@ -73,7 +75,25 @@ const Cart = () => {
       console.error('Error updating cart item quantity:', error);
     }
   };
-  
+
+  const handleCheckout = async () => {
+    try {
+      const response = await axios.post('http://localhost:3001/order/create', {
+        userId,
+        userName,
+        items: cartItems,
+        totalPrice: total
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const newOrder = response.data.order;
+      // Redirect to order confirmation page with the new order ID
+      navigate(`/order-confirmation/${newOrder._id}`);
+    } catch (error) {
+      console.error('Error creating order:', error);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -82,8 +102,8 @@ const Cart = () => {
         <ul>
           {cartItems.map((item) => (
             <li key={item._id}>
-              <span>{item.name} x {item.quantity}</span>
-              <span>₹{item.individualPrice * item.quantity}</span>
+              <span>{item.name} x {item.quantity}<br /> Ordering from: {item.restaurantName}</span>
+              <span>${item.individualPrice * item.quantity}</span>
               <button onClick={() => handleRemoveItem(item._id)}>Remove</button>
               <button onClick={() => handleUpdateQuantity(item._id, 'decrease')}>-</button>
               <button onClick={() => handleUpdateQuantity(item._id, 'increase')}>+</button>
@@ -91,11 +111,13 @@ const Cart = () => {
           ))}
         </ul>
         <div className="cart-totals">
-          <p>Subtotal: ₹{subtotal}</p>
-          <p>Tax: ₹{tax}</p>
-          <p>Total: ₹{total}</p>
+          <p>Subtotal: ${subtotal}</p>
+          <p>Tax: ${tax}</p>
+          <p>Total: ${total}</p>
         </div>
-        <Link to="/auth/checkout" className='checkout-link'>Proceed to Checkout</Link>
+        <button onClick={handleCheckout} disabled={cartItems.length === 0} className='checkout-button'>
+          Proceed to Checkout
+        </button>
       </div>
     </>
   );
