@@ -71,9 +71,16 @@ const RestroDetail = () => {
   }
 
   const handleMenuClick = () => {
-   setActiveTab("order");
-    navigate(`/restaurant/${id}`);
+    setActiveTab("order"); // Set active tab to "order"
+  
+    // Use setTimeout to ensure the tab state updates before scrolling
+    setTimeout(() => {
+      document.getElementById('menuss').scrollIntoView({ behavior: 'smooth' });
+    }, 0); // Delay to ensure the state update takes effect
   };
+  
+  
+  
 
   return (
     <>
