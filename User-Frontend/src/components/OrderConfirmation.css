@@ -50,3 +50,16 @@
 .order-confirmation-container li span {
   display: block;
 }
+.order-totals{
+  display: flex;
+  align-items: center;
+  margin: 10px;
+
+}
+.orderid{
+  margin-left: 300px;
+}
+.totalp{
+font-size: 20px;
+}
+
