@@ -56,7 +56,6 @@ const Cart = () => {
     }
   };
   
-
   const handleUpdateQuantity = async (itemId, action) => {
     try {
       const response = await axios.patch(`http://localhost:3001/cart/update-item`, {
@@ -98,7 +97,6 @@ const Cart = () => {
       </div>
     </>
   );
-  
 };
 
 export default Cart;

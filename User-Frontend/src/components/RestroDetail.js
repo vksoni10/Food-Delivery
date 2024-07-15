@@ -34,6 +34,7 @@ const RestroDetail = () => {
     setActiveTab(tab);
     setBookingSuccess(false);
   };
+  
 
   const handleBookingChange = (e) => {
     setBooking({ ...booking, [e.target.name]: e.target.value });
@@ -70,6 +71,7 @@ const RestroDetail = () => {
   }
 
   const handleMenuClick = () => {
+   setActiveTab("order");
     navigate(`/restaurant/${id}`);
   };
 
@@ -108,7 +110,10 @@ const RestroDetail = () => {
                 Directions
               </a>
             </button>
-            <button className="hello">Menu</button>
+            <button className="hello" onClick={handleMenuClick}>
+  Menu
+</button>
+
             <button className="heh">
               <ShareButton className="mt-5" />
             </button>
@@ -120,7 +125,7 @@ const RestroDetail = () => {
             </div>
           </div>
           <div className="tabs">
-            <span
+            <span id='menuss'
               className={`tab ${activeTab === "order" ? "active" : ""}`}
               onClick={() => handleTabClick("order")}
             >
