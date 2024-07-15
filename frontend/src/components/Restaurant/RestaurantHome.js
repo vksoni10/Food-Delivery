@@ -21,11 +21,11 @@ export default function RestaurantHome() {
     setMenu([...menu, newMenuItem]);
   };
 
-  useEffect(() => {
-    navigate(defaultRoute);
-    // Add your fetchUserDetail and fetchOrders functions here if needed
-    window.scrollTo(0, 0);
-  }, [navigate, defaultRoute]);
+  // useEffect(() => {
+  //   navigate(defaultRoute);
+  //   // Add your fetchUserDetail and fetchOrders functions here if needed
+  //   window.scrollTo(0, 0);
+  // }, [navigate, defaultRoute]);
 
   return (
     <div className="restaurant-dashboard">
@@ -34,7 +34,7 @@ export default function RestaurantHome() {
           <NavLink
             to="/Restaurant/restaurantDashboard"
             className="btn btn-info"
-            onClick={() => setDefaultRoute("/Restaurant/restaurantDashboard")}
+            // onClick={() => setDefaultRoute("/Restaurant/restaurantDashboard")}
           >
             <sub>
               <sub>
@@ -48,7 +48,7 @@ export default function RestaurantHome() {
           <NavLink
             to="/Restaurant/profile"
             className="btn btn-info"
-            onClick={() => setDefaultRoute("/Restaurant/profile")}
+            // onClick={() => setDefaultRoute("/Restaurant/profile")}
           >
             <sub>
               <sub>
@@ -64,7 +64,7 @@ export default function RestaurantHome() {
           <NavLink
             to="/Restaurant/menu"
             className="btn btn-info"
-            onClick={() => setDefaultRoute("/Restaurant/menu")}
+            // onClick={() => setDefaultRoute("/*")}
           >
             <sub>
               <sub>
@@ -78,7 +78,7 @@ export default function RestaurantHome() {
           <NavLink
             to="/Restaurant/incomingOrders"
             className="btn btn-info"
-            onClick={() => setDefaultRoute("/Restaurant/incomingOrders")}
+            // onClick={() => setDefaultRoute("/Restaurant/incomingOrders")}
           >
             <sub>
               <sub>
@@ -92,7 +92,7 @@ export default function RestaurantHome() {
           <NavLink
             to="/Restaurant/currentOrders"
             className="btn btn-info"
-            onClick={() => setDefaultRoute("/Restaurant/currentOrders")}
+            // onClick={() => setDefaultRoute("/Restaurant/currentOrders")}
           >
             <sub>
               <sub>
@@ -106,7 +106,7 @@ export default function RestaurantHome() {
           <NavLink
             to="/Restaurant/orderHistory"
             className="btn btn-info"
-            onClick={() => setDefaultRoute("/Restaurant/orderHistory")}
+            // onClick={() => setDefaultRoute("/Restaurant/orderHistory")}
           >
             <sub>
               <sub>
@@ -120,7 +120,7 @@ export default function RestaurantHome() {
           <NavLink
             to="/Restaurant/reviews"
             className="btn btn-info"
-            onClick={() => setDefaultRoute("/Restaurant/reviews")}
+            // onClick={() => setDefaultRoute("/Restaurant/reviews")}
           >
             <sub>
               <sub>
@@ -157,7 +157,7 @@ export default function RestaurantHome() {
           <Route path="/Restaurant/currentOrders" element={<CurrentOrders />} />
           <Route path="/Restaurant/orderHistory" element={<OrderHistory />} />
           <Route path="/Restaurant/reviews" element={<Reviews />} />
-          <Route path="/Restaurant/menu" element={<Menu />} />
+          <Route path="/*" element={<Menu />} />
           <Route path="/Restaurant/profile" element={<Profile />} />
           <Route
             path="/Restaurant/createMenu"
