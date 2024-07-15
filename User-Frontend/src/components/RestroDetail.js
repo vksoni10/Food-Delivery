@@ -34,6 +34,7 @@ const RestroDetail = () => {
     setActiveTab(tab);
     setBookingSuccess(false);
   };
+  
 
   const handleBookingChange = (e) => {
     setBooking({ ...booking, [e.target.name]: e.target.value });
@@ -70,8 +71,16 @@ const RestroDetail = () => {
   }
 
   const handleMenuClick = () => {
-    navigate(`/restaurant/${id}`);
+    setActiveTab("order"); // Set active tab to "order"
+  
+    // Use setTimeout to ensure the tab state updates before scrolling
+    setTimeout(() => {
+      document.getElementById('menuss').scrollIntoView({ behavior: 'smooth' });
+    }, 0); // Delay to ensure the state update takes effect
   };
+  
+  
+  
 
   return (
     <>
@@ -108,7 +117,10 @@ const RestroDetail = () => {
                 Directions
               </a>
             </button>
-            <button className="hello">Menu</button>
+            <button className="hello" onClick={handleMenuClick}>
+  Menu
+</button>
+
             <button className="heh">
               <ShareButton className="mt-5" />
             </button>
@@ -120,7 +132,7 @@ const RestroDetail = () => {
             </div>
           </div>
           <div className="tabs">
-            <span
+            <span id='menuss'
               className={`tab ${activeTab === "order" ? "active" : ""}`}
               onClick={() => handleTabClick("order")}
             >
