@@ -14,6 +14,26 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!validateEmail(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    if (!validateMobile(mobile)) {
+      alert('Please enter a valid 10-digit phone number.');
+      return;
+    }
+
+    if (password.length < 6) {
+      alert('Password must be at least 6 characters long.');
+      return;
+    }
+
+    alert('Registration successful!');
+    
+
+
+
     axios.post('http://localhost:3001/auth/register', { name, email, mobile, password })
       .then(result => {
         console.log(result);
@@ -27,6 +47,22 @@ export default function Register() {
         }
       });
   };
+
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  const validateMobile = (mobile) => {
+    const regex = /^[0-9]{10}$/;
+    return regex.test(mobile);
+  };
+
+
+
+
+
+
 
   return (<>
       <Navbar/>
@@ -50,7 +86,7 @@ export default function Register() {
           <input className='inputs' type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </div>
         <div className="btnarea">
-          <button className='bttn' type="submit">Register</button>
+          <button className='bttn'  type="submit">Register</button>
           <p>Already a user? <NavLink to='/auth/login'>Login Now</NavLink></p>
         </div>
       </form>
