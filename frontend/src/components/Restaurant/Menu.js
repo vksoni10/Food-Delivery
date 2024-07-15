@@ -4,14 +4,21 @@ import axios from "axios";
 //import MenuTable from "./MenuTable";
 import "./Menu.css";
 
-const Menu = () => {
-  
+const Menu = (restaurantId) => {
   const [menu, setMenu] = useState([]);
   console.log(menu);
 
-  
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/Restaurant/${restaurantId}/menu`)
+      .then((response) => {
+        setMenu(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching menu items:", error);
+      });
+  }, [restaurantId]);
 
- 
   return (
     <div className="menu">
       <NavLink to="/Restaurant/createMenu" className="add-button">
@@ -21,11 +28,11 @@ const Menu = () => {
         <table>
           <thead>
             <tr>
-              <th>Item Name</th>
-              <th>Item Price</th>
-              <th>Item Type</th>
-              <th>Item Image</th>
-              <th>Actions</th>
+              <th scope="col">Item Name</th>
+              <th scope="col">Item Price</th>
+              <th scope="col">Item Type</th>
+              <th scope="col">Item Image</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -41,7 +48,7 @@ const Menu = () => {
                   <NavLink to={`/Restaurant/updateMenu/${item._id}`}>
                     Update
                   </NavLink>
-                  <button >Delete</button>
+                  <button>Delete</button>
                 </td>
               </tr>
             ))}

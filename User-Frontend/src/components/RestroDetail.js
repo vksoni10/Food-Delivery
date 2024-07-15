@@ -34,6 +34,7 @@ const RestroDetail = () => {
     setActiveTab(tab);
     setBookingSuccess(false);
   };
+  
 
   const handleBookingChange = (e) => {
     setBooking({ ...booking, [e.target.name]: e.target.value });
@@ -70,8 +71,16 @@ const RestroDetail = () => {
   }
 
   const handleMenuClick = () => {
-    navigate(`/restaurant/${id}`);
+    setActiveTab("order"); // Set active tab to "order"
+  
+    // Use setTimeout to ensure the tab state updates before scrolling
+    setTimeout(() => {
+      document.getElementById('menuss').scrollIntoView({ behavior: 'smooth' });
+    }, 0); // Delay to ensure the state update takes effect
   };
+  
+  
+  
 
   return (
     <>
@@ -108,7 +117,10 @@ const RestroDetail = () => {
                 Directions
               </a>
             </button>
-            <button className="hello">Menu</button>
+            <button className="hello" onClick={handleMenuClick}>
+  Menu
+</button>
+
             <button className="heh">
               <ShareButton className="mt-5" />
             </button>
@@ -120,7 +132,7 @@ const RestroDetail = () => {
             </div>
           </div>
           <div className="tabs">
-            <span
+            <span id='menuss'
               className={`tab ${activeTab === "order" ? "active" : ""}`}
               onClick={() => handleTabClick("order")}
             >
@@ -161,53 +173,57 @@ const RestroDetail = () => {
             )}
             {activeTab === "book" && (
               <div id="book">
-                <h2 className="h">Book a Table</h2>
-                {bookingSuccess ? (
-                  <div className="booking-success">
-                    <span>&#10004;</span> Booked successfully!
-                  </div>
-                ) : (
-                  <form onSubmit={handleBookingSubmit}>
-                    <label className="form-label">
-                      <h5 className="text">Table for</h5>
-                      <input
-                        type="number"
-                        name="people"
-                        value={booking.people}
-                        onChange={handleBookingChange}
-                        required
-                        className="form-input"
-                      />
-                    </label>
-                    <label className="form-label">
-                      <h5 className="text">Date:</h5>
-                      <input
-                        type="date"
-                        name="date"
-                        value={booking.date}
-                        onChange={handleBookingChange}
-                        required
-                        className="form-input"
-                      />
-                    </label>
-                    <label className="form-label">
-                      <h5 className="text">Time:</h5>
-                      <input
-                        type="time"
-                        name="time"
-                        value={booking.time}
-                        onChange={handleBookingChange}
-                        required
-                        className="form-input"
-                      />
-                    </label>
-                    <button type="submit" className="form-button">
-                      Book Now
-                    </button>
-                  </form>
+  <h2 className="h">Book a Table</h2>
+  {bookingSuccess ? (
+    <div className="booking-success">
+      <span>&#10004;</span> Booked successfully!
+    </div>
+  ) : (
+    <div className='booking'>
+      <form onSubmit={handleBookingSubmit}>
+        <label className="form-label">
+          <h5 className="text">Table for</h5>
+          <input
+            type="number"
+            name="people"
+            value={booking.people}
+            onChange={handleBookingChange}
+            required
+            className="form-input"
+          />
+        </label>
+        <label className="form-label">
+          <h5 className="text">Date:</h5>
+          <input
+            type="date"
+            name="date"
+            value={booking.date}
+            onChange={handleBookingChange}
+            required
+            className="form-input"
+          />
+        </label>
+        <label className="form-label">
+          <h5 className="text">Time:</h5>
+          <input
+            type="time"
+            name="time"
+            value={booking.time}
+            onChange={handleBookingChange}
+            required
+            className="form-input"
+          />
+        </label>
+        <button type="submit" className="form-button">
+          Book Now
+        </button>
+      </form>
+    </div>
+  )}
+</div>
+
                 )}
-              </div>
-            )}
+            
           </div>
         </div>
       </div>

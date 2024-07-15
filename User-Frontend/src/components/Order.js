@@ -4,6 +4,8 @@ import './Order.css';
 import { fetchUserInfo } from './userApi';
 import { useParams } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
+import {toast} from 'react-toastify'
+
 
 const Order = ({ restaurant }) => {
   const { id } = useParams();
@@ -68,10 +70,12 @@ const Order = ({ restaurant }) => {
       }, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log('Add to cart response:', response.data);
+      toast.success(`Item added successfully`, {
+        autoClose: 1000,
+      });
       fetchCartItems(); // Refresh the cart items after adding
     } catch (error) {
-      console.error('Error adding item to cart:', error);
+      toast.error('Error adding item to cart:', error);
     }
   };
 

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateMenu = () => {
   const { id } = useParams();
@@ -11,42 +11,41 @@ const UpdateMenu = () => {
   const navigate = useNavigate();
 
   // UpdateMenu.js
-useEffect(() => {
-  axios
-    .get(`http://localhost:3001/Restaurant/menu/${id}`)
-    .then((response) => {
-      const { dishName, price, dishImage, dishType } = response.data;
-      setDishName(dishName);
-      setPrice(price);
-      setDishImage(dishImage);
-      setDishType(dishType);
-    })
-    .catch((err) => console.log(err));
-}, [id]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/Restaurant/menu/${id}`)
+      .then((response) => {
+        const { dishName, price, dishImage, dishType } = response.data;
+        setDishName(dishName);
+        setPrice(price);
+        setDishImage(dishImage);
+        setDishType(dishType);
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
 
-// Handle the submit
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  await axios
-    .put(`http://localhost:3001/Restaurant/menu/${id}`, {
-      dishName,
-      price,
-      dishImage,
-      dishType,
-    })
-    .then((result) => {
-      console.log(result);
-      navigate("/Restaurant/menu");
-    })
-    .catch((err) => {
-      if (err.response && err.response.status === 400) {
-        alert(err.response.data.message);
-      } else {
-        console.error(err);
-      }
-    });
-};
-
+  // Handle the submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .put(`http://localhost:3001/Restaurant/menu/${id}`, {
+        dishName,
+        price,
+        dishImage,
+        dishType,
+      })
+      .then((result) => {
+        console.log(result);
+        navigate("/Restaurant/menu");
+      })
+      .catch((err) => {
+        if (err.response && err.response.status === 400) {
+          alert(err.response.data.message);
+        } else {
+          console.error(err);
+        }
+      });
+  };
 
   return (
     <div className="update-menu-form">
