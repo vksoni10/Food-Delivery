@@ -10,8 +10,15 @@ import Menu from "./Menu";
 import Profile from "./Profile";
 import CreateMenu from "./CreateMenu";
 import UpdateMenu from "./UpdateMenu";
+import MenuTable from "./MenuTable";
+
 
 export default function RestaurantHome() {
+  const [menu, setMenu] = useState([]);
+
+  const onMenuAdd = (newMenuItem) => {
+    setMenu([...menu, newMenuItem]);
+  };
   const [currentComponent, setCurrentComponent] = useState(
     "/Restaurant/restaurantDashboard"
   );
@@ -124,10 +131,11 @@ export default function RestaurantHome() {
           <Route path="/Restaurant/currentOrders" element={<CurrentOrders />} />
           <Route path="/Restaurant/orderHistory" element={<OrderHistory />} />
           <Route path="/Restaurant/reviews" element={<Reviews />} />
-          <Route path="/*" element={<Menu />} />
+          <Route path="/Restaurant/menu" element={<Menu />} />
           <Route path="/Restaurant/profile" element={<Profile />} />
-          <Route path="/Restaurant/createMenu" element={<CreateMenu />} />
+          <Route path="/Restaurant/createMenu" element={<CreateMenu onMenuAdd={onMenuAdd} />} />
           <Route path="/Restaurant/updateMenu" element={<UpdateMenu />} />
+          <Route path="/Restaurant/MenuTable" element={<MenuTable menu={menu} setMenu={setMenu} />} />
         </Routes>
       </div>
     </div>
