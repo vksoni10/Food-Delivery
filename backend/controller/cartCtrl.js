@@ -47,6 +47,7 @@ const addToCart = async (req, res) => {
             name: menuItem.dishName,
             quantity: 1,
             individualPrice: menuItem.price,
+            itemRestro: restaurant.resName
         });
     }
 

@@ -6,7 +6,8 @@ const Schema = mongoose.Schema;
 const ItemSchema = new Schema({
   name: { type: String, required: false },
   quantity: { type: Number, required: false },
-  individualPrice: { type: Number, required: false }
+  individualPrice: { type: Number, required: false },
+  itemRestro: {type: String, required:false}
 });
 
 // Define the cart schema
