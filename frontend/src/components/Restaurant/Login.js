@@ -12,8 +12,8 @@ export default function Login() {
     axios
       .post("http://localhost:3001/Restaurant/login", { rEmail, rPassword })
       .then((res) => {
-        const { token, message } = res.data; // Destructure token and message from response data
-        if (token) {
+        const {  message, token } = res.data; // Destructure token and message from response data
+        if (message == "Login successful" , token) {
           localStorage.setItem("token", token); // Store the token in localStorage or a cookie
           window.location.href = "/";
         } else {

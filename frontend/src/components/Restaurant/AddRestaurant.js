@@ -235,9 +235,27 @@ export default function AddRestaurant() {
     formData.append("resOperationalHours", resOperationalHours);
     formData.append("restaurantTypes", JSON.stringify(restaurantTypes));
 
-    resImage.forEach((file) => {
-      formData.append("resImage", file);
-    });
+    axios
+      .post("http://localhost:3001/Restaurant/addRestaurant", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        const { token } = res.data; // Destructure token and message from response data
+        if (token) {
+          localStorage.setItem("token", token); // Store the token in localStorage or a cookie
+          navigate("/Restaurant/restaurantHome");
+        }
+      })
+      .catch((err) => {
+        if (err.response && err.response.status === 400) {
+          alert(err.response.data.message);
+        } else {
+          console.error(err);
+        }
+      });
 
     axios
       .post("http://localhost:3001/Restaurant/addRestaurant", formData, {

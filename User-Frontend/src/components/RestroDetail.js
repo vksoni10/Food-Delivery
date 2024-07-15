@@ -1,19 +1,21 @@
-// src/RestroDetail.js
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './RestroDetail.css';
 import Navbar from './Navbar';
 import Review from './Review';
 import Comment from './Comment';
 import ShareButton from './ShareButton';
 import axios from 'axios';
+import Order from './Order';  // Import the Order component
 
 const RestroDetail = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState('overview');
   const [booking, setBooking] = useState({ people: '', time: '' });
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [restaurant, setRestaurant] = useState(null);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const fetchRestaurantDetails = async () => {
@@ -42,9 +44,34 @@ const RestroDetail = () => {
     setBookingSuccess(true);
   };
 
+  const handleAddToCart = (item) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((cartItem) => cartItem._id === item._id);
+      if (existingItem) {
+        return prevCart.map((cartItem) =>
+          cartItem._id === item._id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+        );
+      } else {
+        return [...prevCart, { ...item, quantity: 1 }];
+      }
+    });
+  };
+
+  const handleUpdateQuantity = (item, quantity) => {
+    setCart((prevCart) =>
+      prevCart.map((cartItem) =>
+        cartItem._id === item._id ? { ...cartItem, quantity } : cartItem
+      )
+    );
+  };
+
   if (!restaurant) {
     return <div>Loading...</div>;
   }
+
+  const handleMenuClick = () => {
+    navigate(`/restaurant/${id}`);
+  };
 
   return (
     <>
@@ -93,12 +120,6 @@ const RestroDetail = () => {
             </div>
           </div>
           <div className="tabs">
-            {/* <span
-              className={`tab ${activeTab === 'overview' ? 'active' : ''}`}
-              onClick={() => handleTabClick('overview')}
-            >
-              Overview
-            </span> */}
             <span
               className={`tab ${activeTab === "order" ? "active" : ""}`}
               onClick={() => handleTabClick("order")}
@@ -125,16 +146,12 @@ const RestroDetail = () => {
               </div>
             )}
             {activeTab === "order" && (
-              <div id="order">
-                <h2 className="h">Menu</h2>
-                <ul>
-                  {restaurant.menu.map((item) => (
-                    <li key={item._id}>
-                      {item.dishName} - ${item.price}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <Order 
+                restaurant={restaurant} 
+                cart={cart} 
+                handleAddToCart={handleAddToCart} 
+                handleUpdateQuantity={handleUpdateQuantity} 
+              />
             )}
             {activeTab === "reviews" && (
               <div id="reviews">

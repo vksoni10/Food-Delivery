@@ -1,15 +1,14 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
+// const cartCtrl = require('../controller/cartCtrl')
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-const {createCart, deleteCartItem, updateCartItem}=require('../controller/cartCtrl')
+const {addToCart, getCartItems, deleteItem, updateItem} = require('../controller/cartCtrl')
 
 
-router.get('/',createCart);
+router.get('/get-cart-items', getCartItems);
+router.post('/add-to-cart',addToCart);
+router.delete('/remove-item/:itemId', deleteItem);
+router.patch('/update-item', updateItem);
 
-// DELETE /api/cart/:itemId
-router.delete('/:itemId', deleteCartItem);
-
-router.patch('/:itemId', updateCartItem);
 
 module.exports= router;

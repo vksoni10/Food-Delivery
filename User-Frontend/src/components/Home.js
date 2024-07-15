@@ -25,12 +25,12 @@ export default function Home() {
         <h4>Discover the best food and drinks in your area</h4>
         {isLoggedIn ? (
           <>
-                    <NavLink className="button" to='/auth/restaurants'>Order Now</NavLink>
+                    <NavLink className="button style" to='/auth/restaurants'>Order Now</NavLink>
 
           </>
         ) : (
           <>
-        <NavLink className="button" to='/auth/login'>Login Now!</NavLink>
+        <NavLink className="button style" to='/auth/login'>Login Now!</NavLink>
 
           </>
         )}

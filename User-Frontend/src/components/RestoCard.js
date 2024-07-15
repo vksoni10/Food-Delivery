@@ -1,4 +1,3 @@
-// src/RestoCard.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RestoCard.css';
@@ -9,6 +8,10 @@ const RestoCard = ({ id, image, name, cuisine, price, rating, discount, opensAt,
   const handleClick = () => {
     navigate(`/restaurant/${id}`);
   };
+
+  // Round the price to the nearest 0.5
+  const roundedPrice = (Math.round(price * 2) / 2).toFixed(2);
+
   return (
     <div className="resto-card" onClick={handleClick}>
       <div
@@ -19,12 +22,10 @@ const RestoCard = ({ id, image, name, cuisine, price, rating, discount, opensAt,
       </div>
       <div className="resto-details">
         <h3 className="resto-name">{name}</h3>
-        <p className="resto-cuisine">{cuisine}</p>
-        <p className="resto-price">Average Price: ${price}</p>
+        <p className="resto-price">Average Price: ₹{roundedPrice}</p>
         <div className="resto-info">
           <span className="resto-rating">Rating: {rating}</span>
-          <span className="resto-opens">{opensAt}</span>
-          <span className="resto-distance">Distance: {distance} meters</span>
+          <span className="resto-opens">Timings: {opensAt}</span>
         </div>
       </div>
     </div>

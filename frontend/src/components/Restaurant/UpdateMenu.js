@@ -1,60 +1,42 @@
 import React, { useState, useEffect } from "react";
-import "./Menu.css";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { useParams, useNavigate } from "react-router-dom";
-
-export default function UpdateMenu() {
+const UpdateMenu = () => {
   const { id } = useParams();
-  const [menu, setMenu] = useState([]);
   const [dishName, setDishName] = useState("");
   const [price, setPrice] = useState("");
   const [dishImage, setDishImage] = useState("");
   const [dishType, setDishType] = useState("");
-
   const navigate = useNavigate();
+
+  // UpdateMenu.js
   useEffect(() => {
     axios
-      .get("http://localhost:3001/UpdateMenu/" + id)
-      .then((result) => {
-        setDishType(result.data.dishType);
-        setDishName(result.data.dishName);
-        setPrice(result.data.price);
-        setDishImage(result.data.dishImage);
+      .get(`http://localhost:3001/Restaurant/menu/${id}`)
+      .then((response) => {
+        const { dishName, price, dishImage, dishType } = response.data;
+        setDishName(dishName);
+        setPrice(price);
+        setDishImage(dishImage);
+        setDishType(dishType);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
-  const fetchRestaurantName = async () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      console.log(token);
-      const decoded = jwtDecode(token);
-      const { resName } = decoded;
-      return resName;
-    }
-    return null;
-  };
-
-  const updateMenu = async (e) => {
+  // Handle the submit
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const resName = await fetchRestaurantName();
-    if (!resName) {
-      alert("User not authenticated");
-      return;
-    }
     await axios
-      .post("http://localhost:3001/Restaurant/UpdateMenu", {
+      .put(`http://localhost:3001/Restaurant/menu/${id}`, {
         dishName,
         price,
         dishImage,
         dishType,
-        resName,
       })
       .then((result) => {
         console.log(result);
-        navigate("/Restaurant/login");
+        navigate("/Restaurant/menu");
       })
       .catch((err) => {
         if (err.response && err.response.status === 400) {
@@ -66,55 +48,46 @@ export default function UpdateMenu() {
   };
 
   return (
-    <>
-      <div className="update">
-        <form onSubmit={updateMenu}>
-          <h4>Update Item Details</h4>
-          <div className="form-floating mb-3">
-            <input
-              type="text"
-              className="form-control"
-              id="floatingItemName"
-              placeholder="Item Name"
-              value={dishName}
-              onChange={(e) => setDishName(e.target.value)}
-            />
-            <label htmlFor="floatingInput">Item Name</label>
-          </div>
-          <div className="form-floating mb-3">
-            <input
-              type="number"
-              className="form-control"
-              id="floatingItemPrice"
-              placeholder="Item Price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-            <label htmlFor="floatingInput">Item Price</label>
-          </div>
-          <div className="form-floating mb-3">
-            <input
-              type="text"
-              className="form-control"
-              id="floatingItemType"
-              placeholder="Item Type"
-              value={dishType}
-              onChange={(e) => setDishType(e.target.value)}
-            />
-            <label htmlFor="floatingInput">Item Type</label>
-          </div>
-          <div className="input-group mb-3">
-            <label className="input-group-text">Item Image</label>
-            <input
-              type="file"
-              className="form-control"
-              value={dishImage}
-              onChange={(e) => setDishImage(e.target.value)}
-            />
-          </div>
-          <button className="btn btn-success">Update</button>
-        </form>
-      </div>
-    </>
+    <div className="update-menu-form">
+      <form onSubmit={handleSubmit}>
+        <div className="menu-item-inputs">
+          <input
+            type="text"
+            name="dishName"
+            value={dishName}
+            onChange={(e) => setDishName(e.target.value)}
+            placeholder="Dish Name"
+            required
+          />
+          <input
+            type="number"
+            name="price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            placeholder="Price"
+            required
+          />
+          <input
+            type="text"
+            name="dishImage"
+            value={dishImage}
+            onChange={(e) => setDishImage(e.target.value)}
+            placeholder="Dish Image URL"
+            required
+          />
+          <input
+            type="text"
+            name="dishType"
+            value={dishType}
+            onChange={(e) => setDishType(e.target.value)}
+            placeholder="Dish Type"
+            required
+          />
+          <button type="submit">Update Menu Item</button>
+        </div>
+      </form>
+    </div>
   );
-}
+};
+
+export default UpdateMenu;

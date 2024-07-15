@@ -1,66 +1,51 @@
-import React, { useState, useEffect } from "react";
-import "./Menu.css";
+import React, { useState } from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
-export default function UpdateMenu() {
-  const { id } = useParams();
-  const [menu, setMenu] = useState([]);
+const CreateMenu = ({ onMenuAdd }) => {
   const [dishName, setDishName] = useState("");
   const [price, setPrice] = useState("");
-  const [dishImage, setDishImage] = useState("");
+  const [dishImage, setDishImage] = useState(null);
   const [dishType, setDishType] = useState("");
-  const navigate = useNavigate();
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3001/UpdateMenu/" + id)
-  //     .then((result) => {
-  //       setDishType(result.data.dishType);
-  //       setDishName(result.data.dishName);
-  //       setPrice(result.data.price);
-  //       setDishImage(result.data.dishImage);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/Restaurant/createMenu")
-      .then((response) => setMenu(response.data))
-      .catch((err) => console.log(err));
-  }, []);
 
   const fetchRestaurantName = async () => {
     const token = localStorage.getItem("token");
     if (token) {
-      console.log(token);
       const decoded = jwtDecode(token);
       const { resName } = decoded;
-      console.log(resName);
       return resName;
     }
     return null;
   };
 
-  const createMenu = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const resName = await fetchRestaurantName();
     if (!resName) {
       alert("User not authenticated");
       return;
     }
+
+    const formData = new FormData();
+    formData.append("dishName", dishName);
+    formData.append("price", price);
+    formData.append("dishImage", dishImage);
+    formData.append("dishType", dishType);
+    formData.append("resName", resName);
+
     await axios
-      .post("http://localhost:3001/Restaurant/createMenu", {
-        dishName,
-        price,
-        dishImage,
-        dishType,
-        resName,
+      .post(`http://localhost:3001/Restaurant/menu`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       })
       .then((result) => {
-        console.log(result);
-        navigate("/Restaurant/login");
+        onMenuAdd(result.data);
+        setDishName("");
+        setPrice("");
+        setDishImage(null);
+        setDishType("");
+        console.log(result.data);
       })
       .catch((err) => {
         if (err.response && err.response.status === 400) {
@@ -72,55 +57,44 @@ export default function UpdateMenu() {
   };
 
   return (
-    <>
-      <div className="createMenu">
-        <form onSubmit={createMenu}>
-          <h4>Enter Item Details</h4>
-          <div className="form-floating mb-3">
-            <input
-              type="text"
-              className="form-control"
-              id="floatingItemName"
-              placeholder="Item Name"
-              value={dishName}
-              onChange={(e) => setDishName(e.target.value)}
-            />
-            <label htmlFor="floatingInput">Item Name</label>
-          </div>
-          <div className="form-floating mb-3">
-            <input
-              type="number"
-              className="form-control"
-              id="floatingItemPrice"
-              placeholder="Item Price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-            <label htmlFor="floatingInput">Item Price</label>
-          </div>
-          <div className="form-floating mb-3">
-            <input
-              type="text"
-              className="form-control"
-              id="floatingItemType"
-              placeholder="Item Type"
-              value={dishType}
-              onChange={(e) => setDishType(e.target.value)}
-            />
-            <label htmlFor="floatingInput">Item Type</label>
-          </div>
-          <div className="input-group mb-3">
-            <label className="input-group-text">Item Image</label>
-            <input
-              type="file"
-              className="form-control"
-              value={dishImage}
-              onChange={(e) => setDishImage(e.target.value)}
-            />
-          </div>
-          <button className="btn btn-success">Update</button>
-        </form>
-      </div>
-    </>
+    <div className="add-menu-form">
+      <form onSubmit={handleSubmit}>
+        <div className="menu-item-inputs">
+          <input
+            type="text"
+            name="dishName"
+            value={dishName}
+            onChange={(e) => setDishName(e.target.value)}
+            placeholder="Dish Name"
+            required
+          />
+          <input
+            type="number"
+            name="price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            placeholder="Price"
+            required
+          />
+          <input
+            type="file"
+            name="dishImage"
+            onChange={(e) => setDishImage(e.target.files[0])}
+            required
+          />
+          <input
+            type="text"
+            name="dishType"
+            value={dishType}
+            onChange={(e) => setDishType(e.target.value)}
+            placeholder="Dish Type"
+            required
+          />
+          <button type="submit">Add Menu Item</button>
+        </div>
+      </form>
+    </div>
   );
-}
+};
+
+export default CreateMenu;
