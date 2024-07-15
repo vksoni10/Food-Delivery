@@ -44,7 +44,7 @@ const count = localStorage.getItem('cartcount')
   <span className="material-symbols-outlined">
     shopping_cart
   </span>
-  <span className="cart-text">Cart: </span>
+  <span className="cart-text">Cart</span>
   <span className="cart-badge">{count}</span>
 </NavLink>
 
