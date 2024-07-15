@@ -111,9 +111,9 @@ const Cart = () => {
           ))}
         </ul>
         <div className="cart-totals">
-          <p>Subtotal: ${subtotal}</p>
-          <p>Tax: ${tax}</p>
-          <p>Total: ${total}</p>
+          <p>Subtotal: ₹{subtotal}</p>
+          <p>Tax: ₹{tax}</p>
+          <p>Total: ₹{total}</p>
         </div>
         <button onClick={handleCheckout} disabled={cartItems.length === 0} className='checkout-button'>
           Proceed to Checkout
