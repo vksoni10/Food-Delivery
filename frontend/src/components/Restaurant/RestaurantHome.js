@@ -29,7 +29,6 @@ export default function RestaurantHome() {
 
   return (
     <div className="restaurant-dashboard">
-      {/* Sidebar */}
       <div className="sidebar">
         <div className="sidebar-tab btn btn-info">
           <NavLink
