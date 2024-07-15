@@ -8,42 +8,41 @@
 }
 
 .h {
-  color: white;
   text-align: center;
-}
-
-.menu-table {
-  width: 100%;
-  border-collapse: collapse;
+  margin-bottom: 20px;
   color: white;
 }
 
-.menu-table th,
-.menu-table td {
-  padding: 10px;
-  text-align: center;
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.menu-table thead th {
-  font-size: 1.2em;
-  color: black;
-  text-align: center;
-}
-
-.menu-table tr:nth-child(even) {
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
   background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.menu-table tr:nth-child(odd) {
-  background: rgba(255, 255, 255, 0.05);
+.item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.menu-table th {
-  border-bottom: none;
+.item-name {
+  font-size: 1.2em;
+  color: white;
 }
 
-.menu-table td {
-  border: none;
+.item-price {
+  font-size: 1em;
+  color: white;
 }
 
 .dish-image {
@@ -68,6 +67,11 @@
   margin: 0 5px;
   cursor: pointer;
   border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.cart-actions button:hover {
+  background-color: darkgoldenrod;
 }
 
 .cart-actions button:disabled {
