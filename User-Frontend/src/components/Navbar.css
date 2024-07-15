@@ -91,3 +91,14 @@ body {
   transform: translate(0, -50%);
   
 }
+.cart-badge {
+  background-color: red;
+  opacity: 80%;
+  color: white;
+  padding: 3px 5px; /* Adjust padding as needed */
+  border-radius: 50%; /* For a round badge */
+  position: absolute;
+  font-size: x-small;
+  top: -5px; /* Position above the cart icon */
+  right: -5px; /* Position to the right of the cart icon */
+}

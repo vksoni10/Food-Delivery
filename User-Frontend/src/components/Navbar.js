@@ -8,6 +8,9 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
+const count = localStorage.getItem('cartcount')
+
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
@@ -37,12 +40,14 @@ function Navbar() {
       <div className="nav-links">
         {isLoggedIn ? (
           <>
-             <NavLink to="/auth/cart" className="navbutton">
-      <span className="material-symbols-outlined">
-        shopping_cart
-      </span>
-      <span className="cart-text">Cart</span> {/* Additional span for the cart text */}
-    </NavLink>
+           <NavLink to="/auth/cart" className="navbutton">
+  <span className="material-symbols-outlined">
+    shopping_cart
+  </span>
+  <span className="cart-text">Cart: </span>
+  <span className="cart-badge">{count}</span>
+</NavLink>
+
             <NavLink to="/auth/profile" className="navbutton"><span class="material-symbols-outlined">
 person
 </span>
