@@ -142,5 +142,16 @@ const updateItem = async (req, res) => {
   }
 };
 
+const clearCart=  async (req, res) => {
+  const { userId } = req.query;
+  try {
+    // Logic to clear the cart for the user
+    await Cart.updateOne({ userId }, { $set: { items: [] } });
+    res.status(200).send({ message: 'Cart cleared successfully' });
+  } catch (error) {
+    res.status(500).send({ error: 'Error clearing cart' });
+  }
+};
 
-module.exports = { addToCart, getCartItems, deleteItem ,updateItem};
+
+module.exports = { addToCart, getCartItems, deleteItem ,updateItem, clearCart};

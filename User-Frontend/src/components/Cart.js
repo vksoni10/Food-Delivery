@@ -103,8 +103,23 @@ const Cart = () => {
       setShowOverlay(false); // Hide overlay after navigation
     }
   };
-  
-  
+
+  const handleClearCart = async () => {
+    try {
+      await axios.delete('http://localhost:3001/cart/clear', {
+        params: { userId },
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      // Clear the cart items and reset totals
+      setCartItems([]);
+      setSubtotal(0);
+      setTax(0);
+      setTotal(0);
+    } catch (error) {
+      console.error('Error clearing cart:', error);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -130,6 +145,9 @@ const Cart = () => {
         <button onClick={handleCheckout} disabled={cartItems.length === 0} className='checkout-button'>
           Proceed to Checkout
         </button>
+        {/* <button onClick={handleClearCart} disabled={cartItems.length === 0} className='clear-cart-button'>
+          Clear Cart
+        </button> */}
       </div>
     </>
   );
