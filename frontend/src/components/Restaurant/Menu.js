@@ -4,11 +4,20 @@ import axios from "axios";
 //import MenuTable from "./MenuTable";
 import "./Menu.css";
 
-const Menu = () => {
+const Menu = (restaurantId) => {
   
   const [menu, setMenu] = useState([]);
   console.log(menu);
 
+  useEffect(() => {
+        axios.get(`http://localhost:3001/Restaurant/${restaurantId}/menu`)
+            .then(response => {
+                setMenu(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching menu items:', error);
+            });
+    }, [restaurantId]);
   
 
  
