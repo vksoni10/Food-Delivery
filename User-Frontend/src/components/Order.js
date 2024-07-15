@@ -30,7 +30,6 @@ const Order = ({ restaurant }) => {
   const fetchCartItems = async () => {
     try {
       const token = localStorage.getItem('token');
-      const token = localStorage.getItem('token');
       const decodedToken = jwtDecode(token);
       const userId = decodedToken.id;
 
@@ -109,6 +108,8 @@ const Order = ({ restaurant }) => {
         {restaurant.menu.map((item) => (
           <div className="menu-item" key={item._id}>
             <div className="item-details">
+            <span className="dish-image" style={{ backgroundImage: `url(${item.dishImage})` }}></span>
+
               <span className="item-name">{item.dishName}</span>
               <span className="item-price">₹{item.price}</span>
             </div>
