@@ -76,7 +76,7 @@ export default function RestaurantHome() {
         </div>
         <div className="sidebar-tab mb-3 btn btn-info">
           <NavLink
-            to="/Restaurant/incomingOrders"
+            to="/orders"
             className="btn btn-info"
             // onClick={() => setDefaultRoute("/Restaurant/incomingOrders")}
           >
@@ -150,10 +150,7 @@ export default function RestaurantHome() {
             path="/Restaurant/restaurantDashboard"
             element={<RestaurantDashboard />}
           />
-          <Route
-            path="/Restaurant/incomingOrders"
-            element={<IncomingOrders />}
-          />
+          <Route path="/orders" element={<IncomingOrders />} />
           <Route path="/Restaurant/currentOrders" element={<CurrentOrders />} />
           <Route path="/Restaurant/orderHistory" element={<OrderHistory />} />
           <Route path="/Restaurant/review" element={<Reviews />} />

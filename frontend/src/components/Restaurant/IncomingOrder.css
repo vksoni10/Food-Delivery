@@ -1,0 +1,125 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .orders-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 10px;
+  }
+  
+  /* Order section styles */
+  .order-section {
+    background-color: #fff;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-section h2 {
+    margin-top: 0;
+    color: #007bff;
+  }
+  
+  /* Order card styles */
+  .order-card {
+    background-color: #e9ecef;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .order-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .order-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #343a40;
+  }
+  
+  .order-header p {
+    margin: 0;
+    color: #6c757d;
+  }
+  
+  /* Order items styles */
+  .order-items {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 5px;
+  }
+  
+  .order-item p {
+    margin: 0;
+    color: #495057;
+  }
+  
+  .order-status {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .order-status select {
+    padding: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #495057;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .order-status select:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .order-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .order-status {
+      justify-content: flex-start;
+      margin-top: 10px;
+    }
+  
+    .order-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .order-item p {
+      margin-bottom: 5px;
+    }
+  }
+  

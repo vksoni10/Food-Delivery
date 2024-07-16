@@ -147,5 +147,4 @@ router.get("/review/:resName", async (req, res) => {
   }
 });
 
-
 module.exports = router;
