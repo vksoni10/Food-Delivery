@@ -10,6 +10,7 @@ function Profile() {
     const [addresses, setAddresses] = useState([]);
     const [editingIndex, setEditingIndex] = useState(null);
     const [editingAddress, setEditingAddress] = useState('');
+    const [orders, setOrders] = useState([]);
 
     // Function to fetch user profile and addresses
     const fetchUserProfile = async () => {
@@ -17,9 +18,25 @@ function Profile() {
             const token = localStorage.getItem('token');
             if (token) {
                 const decoded = jwtDecode(token);
-                const { name, email, mobile, addresses } = decoded;
-                setUser({ name, email, mobile });
+                const { id, name, email, mobile, addresses } = decoded;
+                setUser({ id, name, email, mobile });
                 setAddresses(addresses || []);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    // Function to fetch user orders
+    const fetchUserOrders = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const config = {
+                    headers: { Authorization: `Bearer ${token}` }
+                };
+                const response = await axios.get('http://localhost:3001/orders/user-orders', { params: { userId: user.id }, ...config });
+                setOrders(response.data.orders || []);
             }
         } catch (err) {
             console.log(err);
@@ -29,6 +46,12 @@ function Profile() {
     useEffect(() => {
         fetchUserProfile();
     }, []);
+
+    useEffect(() => {
+        if (user.id) {
+            fetchUserOrders();
+        }
+    }, [user.id]);
 
     const handleAddressChange = (e) => {
         setNewAddress(e.target.value);
@@ -154,6 +177,24 @@ function Profile() {
                         />
                         <button type="submit">Add Address</button>
                     </form>
+                </div>
+                <div className="orders">
+                    <h2>Your Orders</h2>
+                    <ul>
+                        {orders.map((order) => (
+                            <li key={order._id}>
+                                <p><strong>Order ID:</strong> {order._id}</p>
+                                <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleString()}</p>
+                                <p><strong>Total:</strong> ₹{order.totalPrice}</p>
+                                <p><strong>Items:</strong></p>
+                                <ul>
+                                    {order.items.map((item, index) => (
+                                        <li key={index}>{item.name} x {item.quantity} - ₹{item.individualPrice * item.quantity}</li>
+                                    ))}
+                                </ul>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </>
