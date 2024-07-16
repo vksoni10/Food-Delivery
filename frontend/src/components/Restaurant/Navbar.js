@@ -6,17 +6,24 @@ import "./Navbar.css";
 export default function Navbar() {
   return (
     <>
-      <header className="navbar">
-        <NavLink to="/" className="logo">
-          <img src={logo} alt="Logo" />
+      <header
+        className="navbar navbar-dark bg-light"
+        style={{ backgroundColor: "#000000" }}
+      >
+        <NavLink to="/" className="">
+          <img src={logo} alt="Logo" className="logo" />
         </NavLink>
-        <div className="nav-links">
-          <NavLink to="/Restaurant/addRestaurant" className="navbutton">
-            Add a new restaurant
-          </NavLink>
-          <NavLink to="/Restaurant/viewRestaurant" className="navbutton">
-            View existing restaurants
-          </NavLink>
+        <div className="nav-link">
+          <div className="btn">
+            <NavLink to="/Restaurant/addRestaurant" className="btn btn-dark">
+              Add a new restaurant
+            </NavLink>
+          </div>
+          <div className="btn">
+            <NavLink to="/Restaurant/viewRestaurant" className="btn btn-dark">
+              View existing restaurants
+            </NavLink>
+          </div>
         </div>
       </header>
     </>

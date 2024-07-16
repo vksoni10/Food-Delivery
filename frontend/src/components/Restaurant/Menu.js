@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import "./Menu.css";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
-const Menu = (restaurantId) => {
+const Menu = () => {
   const [menu, setMenu] = useState([]);
   const [resName, setResName] = useState("");
 
@@ -23,7 +23,9 @@ const Menu = (restaurantId) => {
 
     const fetchMenu = async (resName) => {
       try {
-        const response = await axios.get(`http://localhost:3001/Restaurant/${resName}/menu`);
+        const response = await axios.get(
+          `http://localhost:3001/Restaurant/${resName}/menu`
+        );
         setMenu(response.data);
       } catch (error) {
         console.error("Error fetching menu items:", error);
@@ -39,8 +41,10 @@ const Menu = (restaurantId) => {
 
   const handleDelete = async (itemId) => {
     try {
-      await axios.delete(`http://localhost:3001/Restaurant/${resName}/menu/${itemId}`);
-      setMenu(menu.filter(item => item._id !== itemId));
+      await axios.delete(
+        `http://localhost:3001/Restaurant/${resName}/menu/${itemId}`
+      );
+      setMenu(menu.filter((item) => item._id !== itemId));
     } catch (error) {
       console.error("Error deleting menu item:", error);
     }

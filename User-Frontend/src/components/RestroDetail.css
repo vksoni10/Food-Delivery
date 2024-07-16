@@ -461,3 +461,11 @@ button:disabled {
   -webkit-backdrop-filter: blur(10px); /* Blurring effect for Safari */
   border: 1px solid rgba(255, 255, 255, 0.18); /* Light border */
 }
+.over{
+ color: white;
+ border: 3px solid gold;
+}
+.ov{
+  width: 50%;
+  margin-left: 25%;
+}
