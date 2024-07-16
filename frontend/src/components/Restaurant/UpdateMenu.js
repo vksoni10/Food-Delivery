@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import "./Menu.css";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 const UpdateMenu = () => {
   const { itemId } = useParams();
@@ -74,39 +75,58 @@ const UpdateMenu = () => {
   };
 
   return (
-    <div className="update-menu-form">
+    <div className="form">
       <form onSubmit={handleUpdate}>
         <div className="menu-item-inputs">
-          <input
-            type="text"
-            name="dishName"
-            value={dishName}
-            onChange={(e) => setDishName(e.target.value)}
-            placeholder="Dish Name"
-            required
-          />
-          <input
-            type="number"
-            name="price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            placeholder="Price"
-            required
-          />
-          <input
-            type="file"
-            name="dishImage"
-            onChange={(e) => setDishImage(e.target.files[0])}
-          />
-          <input
-            type="text"
-            name="dishType"
-            value={dishType}
-            onChange={(e) => setDishType(e.target.value)}
-            placeholder="Dish Type"
-            required
-          />
-          <button type="submit">Update Menu Item</button>
+          <div className="mb-3">
+            <input
+              type="text"
+              className="form-control"
+              name="dishName"
+              value={dishName}
+              onChange={(e) => setDishName(e.target.value)}
+              placeholder="Dish Name"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="number"
+              className="form-control"
+              name="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              placeholder="Price"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              className="form-control"
+              name="dishType"
+              value={dishType}
+              onChange={(e) => setDishType(e.target.value)}
+              placeholder="Dish Type"
+              required
+            />
+          </div>
+          <div className="custom-file mb-3">
+            <input
+              type="file"
+              className="custom-file-input"
+              name="dishImage"
+              onChange={(e) => setDishImage(e.target.files[0])}
+            />
+            <label class="custom-file-label" htmlFor="customFile">
+              Upload Item Image
+            </label>
+          </div>
+          <div className="update-item">
+            <button type="submit" className="btn btn-success">
+              Update Menu Item
+            </button>
+          </div>
         </div>
       </form>
     </div>

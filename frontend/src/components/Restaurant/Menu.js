@@ -52,11 +52,14 @@ const Menu = () => {
 
   return (
     <div className="menu">
-      <NavLink to="/Restaurant/createMenu" className="add-button">
+      <NavLink
+        to="/Restaurant/createMenu"
+        className="add-btn btn btn-outline-success mb-3"
+      >
         Add +
       </NavLink>
       <div className="menu-table">
-        <table>
+        <table className="table table-dark table-hover table-stripped">
           <thead>
             <tr>
               <th scope="col">Item Name</th>
@@ -66,20 +69,28 @@ const Menu = () => {
               <th scope="col">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="tbody">
             {menu.map((item) => (
-              <tr key={item._id}>
+              <tr key={item._id} scope="row">
                 <td>{item.dishName}</td>
                 <td>{item.price}</td>
                 <td>{item.dishType}</td>
                 <td>
                   <img src={item.dishImage} alt={item.dishName} width="100" />
                 </td>
-                <td>
-                  <NavLink to={`/Restaurant/updateMenu/${item._id}`}>
+                <td className="button">
+                  <NavLink
+                    to={`/Restaurant/updateMenu/${item._id}`}
+                    className="btn btn-light"
+                  >
                     Update
                   </NavLink>
-                  <button onClick={() => handleDelete(item._id)}>Delete</button>
+                  <button
+                    onClick={() => handleDelete(item._id)}
+                    className="btn btn-light"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}

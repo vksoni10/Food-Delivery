@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./Menu.css";
 import { jwtDecode } from "jwt-decode";
 
 const CreateMenu = ({ onMenuAdd }) => {
@@ -57,40 +58,59 @@ const CreateMenu = ({ onMenuAdd }) => {
   };
 
   return (
-    <div className="add-menu-form">
+    <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="menu-item-inputs">
-          <input
-            type="text"
-            name="dishName"
-            value={dishName}
-            onChange={(e) => setDishName(e.target.value)}
-            placeholder="Dish Name"
-            required
-          />
-          <input
-            type="number"
-            name="price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            placeholder="Price"
-            required
-          />
-          <input
-            type="file"
-            name="dishImage"
-            onChange={(e) => setDishImage(e.target.files[0])}
-            required
-          />
-          <input
-            type="text"
-            name="dishType"
-            value={dishType}
-            onChange={(e) => setDishType(e.target.value)}
-            placeholder="Dish Type"
-            required
-          />
-          <button type="submit">Add Menu Item</button>
+          <div className="mb-3">
+            <input
+              type="text"
+              className="form-control"
+              name="dishName"
+              value={dishName}
+              onChange={(e) => setDishName(e.target.value)}
+              placeholder="Dish Name"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              className="form-control"
+              type="number"
+              name="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              placeholder="Price"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              className="form-control"
+              name="dishType"
+              value={dishType}
+              onChange={(e) => setDishType(e.target.value)}
+              placeholder="Dish Type"
+              required
+            />
+          </div>
+          <div className="custom-file mb-3">
+            <input
+              type="file"
+              className="custom-file-input"
+              name="dishImage"
+              onChange={(e) => setDishImage(e.target.files[0])}
+              required
+            />
+            <label class="custom-file-label" htmlFor="customFile">
+              Upload Item Image
+            </label>
+          </div>
+          <div className="add-item">
+            <button type="submit" className="btn btn-secondary">
+              Add Menu Item
+            </button>
+          </div>
         </div>
       </form>
     </div>
