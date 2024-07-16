@@ -35,5 +35,16 @@ router.get('/:orderId', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+// Assuming you are using Express.js in your backend
+router.get('/user-orders', async (req, res) => {
+  const { userId } = req.query;
+  try {
+    const orders = await Order.find({ userId });
+    res.status(200).send({ orders });
+  } catch (error) {
+    res.status(500).send({ message: 'Error fetching orders', error });
+  }
+});
+
 
 module.exports = router;
