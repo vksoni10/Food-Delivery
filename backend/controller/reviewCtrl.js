@@ -1,21 +1,21 @@
 // controllers/reviewController.js
-const Restaurant = require('../model/Addrestaurant');
+const Restaurant = require("../model/Addrestaurant");
 
 const addReview = async (req, res) => {
   const { rating, comment, name } = req.body;
-const {id} = req.params;
+  const { id } = req.params;
   try {
     const restaurant = await Restaurant.findById(id);
     if (!restaurant) {
-      return res.status(404).json({ message: 'Restaurant not found' });
+      return res.status(404).json({ message: "Restaurant not found" });
     }
 
     const newReview = {
-    id,
+      id,
       rating,
       comment,
       username: name,
-      createdAt: new Date()
+      createdAt: new Date(),
     };
 
     restaurant.resReview.push(newReview);
@@ -24,7 +24,7 @@ const {id} = req.params;
     res.status(201).json(newReview);
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -32,33 +32,18 @@ const getReviewsByRestaurant = async (req, res) => {
   const { id } = req.params;
 
   try {
-    console.log(id)
+    console.log(id);
     const restaurant = await Restaurant.findById(id);
     if (!restaurant) {
-      return res.status(404).json({ message: 'Restaurant not found' });
+      return res.status(404).json({ message: "Restaurant not found" });
     }
 
     res.status(200).json(restaurant.resReview);
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ message: 'Server error' });
-  }
-};
-const getReviewsToRestaurant = async (req, res) => {
-  const { reviewId } = req.params;
-
-  try {
-    console.log(reviewId)
-    const restaurant = await Restaurant.findById(id);
-    if (!restaurant) {
-      return res.status(404).json({ message: 'Restaurant not found' });
-    }
-
-    res.status(200).json(restaurant.resReview);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
-module.exports = { addReview, getReviewsByRestaurant, getReviewsToRestaurant };
+
+module.exports = { addReview, getReviewsByRestaurant };
