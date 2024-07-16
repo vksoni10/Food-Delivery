@@ -1,0 +1,9 @@
+.logo {
+  height: 6rem;
+  width: 6rem;
+}
+
+.nav-link {
+  display: flex;
+  flex-direction: column;
+}
