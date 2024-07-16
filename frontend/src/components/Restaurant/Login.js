@@ -14,7 +14,7 @@ export default function Login() {
       .then((res) => {
         const {  message, token } = res.data; // Destructure token and message from response data
         if (message == "Login successful" , token) {
-          localStorage.setItem("token", token); // Store the token in localStorage or a cookie
+          localStorage.setItem('ownerToken', token); // Store the token in localStorage or a cookie
           window.location.href = "/";
         } else {
           alert("Invalid credentials");

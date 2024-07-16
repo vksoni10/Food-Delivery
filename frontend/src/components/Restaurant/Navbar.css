@@ -7,3 +7,20 @@
   display: grid;
   grid-template-columns: auto auto;
 }
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+    
+  .btn {
+    margin-left: 10px;
+  }
+  
+  .start-business-heading {
+    color: white;
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: center;
+  }
