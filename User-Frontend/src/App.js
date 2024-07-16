@@ -1,4 +1,3 @@
-// App.js
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -16,10 +15,11 @@ import Cart from './components/Cart';
 import RestroDetail from './components/RestroDetail'; 
 import Menu from './components/Menu';
 import OrderConfirmation from './components/Orderconfirmation';
+import ProtectedRoute from './components/ProtectedRoute';
+
 function App() {
   return (
     <Router>
-      {/* <Navbar /> */}
       <main>
         <Routes>
           <Route exact path='/' element={<Home />} />
@@ -29,14 +29,36 @@ function App() {
           <Route exact path='/auth/cart' element={<Cart />} />
           <Route exact path='/auth/restaurants' element={<Restaurants />} />
           <Route exact path='/auth/logout' element={<Logout />} />
-          <Route exact path='/auth/checkout' element={<Checkout />} />
-          <Route exact path='/auth/profile' element={<Profile />} />
+          <Route
+            exact
+            path='/auth/checkout'
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path='/auth/profile'
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
           <Route exact path='/auth/track' element={<Tracking />} />
           <Route exact path='/restaurant/:id' element={<RestroDetail />} /> 
-          <Route exact path='/order-confirmation/:orderId' element={<OrderConfirmation />} /> 
+          <Route
+            exact
+            path='/order-confirmation/:orderId'
+            element={
+              <ProtectedRoute>
+                <OrderConfirmation />
+              </ProtectedRoute>
+            }
+          />
           <Route exact path='/restaurant/:id/menu' element={<Menu />} /> 
-          
-
         </Routes>
       </main>
     </Router>

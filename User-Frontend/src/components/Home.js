@@ -23,17 +23,11 @@ export default function Home() {
       <div className="content">
         <h1>POTATO</h1>
         <h4>Discover the best food and drinks in your area</h4>
-        {isLoggedIn ? (
-          <>
+        
                     <NavLink className="button style" to='/auth/restaurants'>Order Now</NavLink>
 
-          </>
-        ) : (
-          <>
-        <NavLink className="button style" to='/auth/login'>Login Now!</NavLink>
-
-          </>
-        )}
+         
+        
       </div>
     </div>
     </>
