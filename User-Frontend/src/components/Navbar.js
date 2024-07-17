@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Navbar.css'; // Ensure you import the correct CSS file
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../components/final.png';
 import { jwtDecode } from 'jwt-decode';
+import DataContext, { DataProvider } from './DataContext';
+
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const token = localStorage.getItem('token');
+
+  const count  = useContext(DataProvider)
 
   const navigate = useNavigate();
   const decodedToken = jwtDecode(token);

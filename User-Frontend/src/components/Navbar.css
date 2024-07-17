@@ -107,6 +107,7 @@ body {
 @media (max-width: 1024px) {
   .navbar {
     height: 70px; /* Adjusted height for smaller tablets */
+   
   }
 
   .logo img {
@@ -156,7 +157,7 @@ body {
 @media (max-width: 480px) {
   .navbar {
     height: auto; /* Revert to auto height for smallest mobile devices */
-    flex-direction: column;
+  
     padding: 10px 15px;
   }
 
