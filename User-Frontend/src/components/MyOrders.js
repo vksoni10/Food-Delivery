@@ -61,11 +61,11 @@ const MyOrders = () => {
                                 <NavLink to={`/order-confirmation/${order._id}`} className="order-link">
                                     <h2>Order ID: {order._id}</h2>
                                     <p>Status: {order.status}</p>
-                                    <p>Total Price: ${order.totalPrice}</p>
+                                    <p>Total Price: ₹{order.totalPrice}</p>
                                     <ul className="order-items">
                                         {order.items.map(item => (
                                             <li key={item._id} className="order-item-detail">
-                                                {item.name} - {item.quantity} x ${item.individualPrice}
+                                                {item.name} - {item.quantity} x ₹{item.individualPrice}
                                             </li>
                                         ))}
                                     </ul>

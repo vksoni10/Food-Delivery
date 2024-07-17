@@ -26,7 +26,6 @@ const Cart = () => {
       });
       console.log('Cart items:', response.data.cart.items);
       setCartItems(response.data.cart.items);
-
       calculateTotals(response.data.cart.items);
     } catch (error) {
       console.error('Error fetching cart items:', error);
