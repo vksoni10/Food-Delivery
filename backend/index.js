@@ -6,16 +6,20 @@ const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/authRoute");
 const cartRoutes = require("./routes/cartRoute");
 const orderRoutes = require("./routes/orderRoutes");
+const restOrderRoute = require("./routes/restOrderRoute");
 const restRoute = require("./routes/restRoute");
 const adminRoutes= require("./routes/adminRoute");
 const registerRoute = require("./routes/addRestRoute");
+
+const ownersRoute = require('./routes/ownerRoute');
+const restaurantsRoute = require('./routes/restDetailRoute');
 const path = require('path');
 
 const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    // origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true, // Important
   })
@@ -45,7 +49,10 @@ app.use("/cart", cartRoutes);
 app.use("/admin", adminRoutes)
 app.use("/order", orderRoutes)
 app.use("/admin", restRoute);
+app.use("/orders", restOrderRoute);
 app.use("/Restaurant", registerRoute);
+app.use("/owners", ownersRoute);
+app.use("/restaurants", restaurantsRoute);
 app.use("/static", express.static(__dirname + "/public/Images"));
 app.use('/static', express.static(path.join(__dirname, "/public/Images")));
 app.listen("3001", () => {

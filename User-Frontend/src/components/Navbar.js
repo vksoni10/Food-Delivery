@@ -3,17 +3,36 @@ import './Navbar.css'; // Ensure you import the correct CSS file
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../components/final.png';
+import { jwtDecode } from 'jwt-decode';
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+  const token = localStorage.getItem('token');
+
   const navigate = useNavigate();
-
-const count = localStorage.getItem('cartcount')
-
+  const decodedToken = jwtDecode(token);
+  const userId = decodedToken.id;
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
+
+    const getCartItems = async () => {
+      try {
+        const responsed = await axios.get('http://localhost:3001/cart/get-cart-items', {
+          params: { userId },
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setCartCount(responsed.data.cart.totalQuantity);
+        
+      } catch (error) {
+        console.error('Error fetching cart items:', error);
+      }
+    };
+    if (token) {
+      getCartItems();
+    }
   }, []);
 
   const handleLogout = async () => {
@@ -31,7 +50,6 @@ const count = localStorage.getItem('cartcount')
       console.error('Error:', error);
     }
   };
-
   return (
     <header className="navbar">
       <NavLink to="/" className="logo">
@@ -40,24 +58,19 @@ const count = localStorage.getItem('cartcount')
       <div className="nav-links">
         {isLoggedIn ? (
           <>
-           <NavLink to="/auth/cart" className="navbutton">
-  <span className="material-symbols-outlined">
-    shopping_cart
-  </span>
-  <span className="cart-text">Cart</span>
-  <span className="cart-badge">{count}</span>
-</NavLink>
-
-            <NavLink to="/auth/profile" className="navbutton"><span class="material-symbols-outlined">
-person
-</span>
-<span className="cart-text">Profile</span>
-</NavLink>
-            <NavLink to='/auth/logout' className="navbutton" onClick={handleLogout}><span class="material-symbols-outlined">
-logout
-</span>
-<span className="cart-text">Logout</span>
-</NavLink>
+            <NavLink to="/auth/cart" className="navbutton">
+              <span className="material-symbols-outlined">shopping_cart</span>
+              <span className="cart-text">Cart</span>
+              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+            </NavLink>
+            <NavLink to="/auth/profile" className="navbutton">
+              <span className="material-symbols-outlined">person</span>
+              <span className="cart-text">Profile</span>
+            </NavLink>
+            <NavLink to='/auth/logout' className="navbutton" onClick={handleLogout}>
+              <span className="material-symbols-outlined">logout</span>
+              <span className="cart-text">Logout</span>
+            </NavLink>
           </>
         ) : (
           <>

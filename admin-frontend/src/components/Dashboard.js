@@ -1,38 +1,61 @@
-// src/components/Dashboard.js
-
 import React, { useState, useEffect } from 'react';
 import { Line, Pie } from 'react-chartjs-2';
 import { useNavigate } from 'react-router-dom';
-import {
-  Chart as ChartJS,
+import axios from 'axios'; // For making HTTP requests
+import { Chart as ChartJS, ArcElement, PointElement, LineElement, Tooltip, Legend, CategoryScale, LinearScale } from 'chart.js';
+import './Dashboard.css';
+
+ChartJS.register(
   ArcElement,
   PointElement,
   LineElement,
   Tooltip,
   Legend,
   CategoryScale,
-  LinearScale,
-} from 'chart.js';
-import './Dashboard.css';
-import UserList from './UserList';
-import RestaurantList from './RestaurantList';
-
-// Registering required elements and scales
-ChartJS.register(ArcElement, PointElement, LineElement, Tooltip, Legend, CategoryScale, LinearScale);
+  LinearScale
+);
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [userCount, setUserCount] = useState(0);
   const [restaurantCount, setRestaurantCount] = useState(0);
 
-  useEffect(() => {
-    // No need for an effect here unless you're fetching counts from APIs
-    // You can manage counts directly in UserList and RestaurantList components
-  }, []);
-
   const handleNavigation = (path) => {
     navigate(path);
   };
+
+  useEffect(() => {
+    const fetchUserCount = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/admin/users');
+        setUserCount(response.data.length); // Assuming response is an array
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserCount();
+    const intervalUser = setInterval(fetchUserCount, 300);
+
+    return () => clearInterval(intervalUser);
+  }, []);
+
+
+  useEffect(() => {
+    const fetchRestaurantCount = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/admin/restaurantslist');
+        setRestaurantCount(response.data.length); // Assuming response is an array
+      } catch (error) {
+        console.error('Error fetching restaurant data:', error);
+      }
+    };
+
+    fetchRestaurantCount();
+    const intervalRestaurant = setInterval(fetchRestaurantCount, 300);
+
+    return () => clearInterval(intervalRestaurant);
+  }, []);
 
   const lineData = {
     labels: [
@@ -97,15 +120,15 @@ const Dashboard = () => {
         </div>
 
         <div className="site-stats box">
-          <h3>  
+          <h3>
             <i className="fas fa-chart-line"></i> Site Statistics
           </h3>
           <div className="stats">
-            <button className="stat-box blue" onClick={() => handleNavigation('/restaurantslist')}>
+          <button className="stat-box blue" onClick={() => handleNavigation('/restaurantslist')}>
               <p>Restaurant</p>
               <span>{restaurantCount}</span>
             </button>
-            <button className="stat-box green" onClick={() => handleNavigation('/user ')}>
+            <button className="stat-box green" onClick={() => handleNavigation('/user')}>
               <p>Users</p>
               <span>{userCount}</span>
             </button>
@@ -157,10 +180,6 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
-
-      {/* Include UserList and RestaurantList components with count props */}
-      <UserList setUserCount={setUserCount} />
-      <RestaurantList setRestaurantCount={setRestaurantCount} />
     </div>
   );
 };

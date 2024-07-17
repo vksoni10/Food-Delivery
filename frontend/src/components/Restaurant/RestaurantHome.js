@@ -32,7 +32,7 @@ export default function RestaurantHome() {
       <div className="sidebar">
         <div className="sidebar-tab btn btn-info">
           <NavLink
-            to="/Restaurant/restaurantDashboard"
+            to="/profile"
             className="btn btn-info"
             // onClick={() => setDefaultRoute("/Restaurant/restaurantDashboard")}
           >
@@ -76,7 +76,7 @@ export default function RestaurantHome() {
         </div>
         <div className="sidebar-tab mb-3 btn btn-info">
           <NavLink
-            to="/Restaurant/incomingOrders"
+            to="/orders"
             className="btn btn-info"
             // onClick={() => setDefaultRoute("/Restaurant/incomingOrders")}
           >
@@ -118,7 +118,7 @@ export default function RestaurantHome() {
         </div>
         <div className="sidebar-tab mb-3 btn btn-info">
           <NavLink
-            to="/Restaurant/reviews"
+            to="/Restaurant/review"
             className="btn btn-info"
             // onClick={() => setDefaultRoute("/Restaurant/reviews")}
           >
@@ -147,23 +147,23 @@ export default function RestaurantHome() {
         <Routes>
           <Route path="/" element={<Profile />} />
           <Route
-            path="/Restaurant/restaurantDashboard"
+            path="/profile"
             element={<RestaurantDashboard />}
           />
-          <Route
-            path="/Restaurant/incomingOrders"
-            element={<IncomingOrders />}
-          />
+          <Route path="/orders" element={<IncomingOrders />} />
           <Route path="/Restaurant/currentOrders" element={<CurrentOrders />} />
           <Route path="/Restaurant/orderHistory" element={<OrderHistory />} />
-          <Route path="/Restaurant/reviews" element={<Reviews />} />
+          <Route path="/Restaurant/review" element={<Reviews />} />
           <Route path="/*" element={<Menu />} />
           <Route path="/Restaurant/profile" element={<Profile />} />
           <Route
             path="/Restaurant/createMenu"
             element={<CreateMenu onMenuAdd={onMenuAdd} />}
           />
-          <Route path="/Restaurant/updateMenu" element={<UpdateMenu />} />
+          <Route
+            path="/Restaurant/updateMenu/:itemId"
+            element={<UpdateMenu />}
+          />
           <Route
             path="/Restaurant/MenuTable"
             element={<MenuTable menu={menu} setMenu={setMenu} />}

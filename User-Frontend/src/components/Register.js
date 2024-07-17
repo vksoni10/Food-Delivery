@@ -49,13 +49,15 @@ export default function Register() {
   };
 
   const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(email);
+    
   };
 
   const validateMobile = (mobile) => {
-    const regex = /^[0-9]{10}$/;
+    const regex = /^[6-9][0-9]{9}$/;
     return regex.test(mobile);
+    
   };
 
 

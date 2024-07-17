@@ -14,16 +14,24 @@ const Home = () => {
               select cities.
             </p>
             <div className="buttons">
-              <NavLink
-                to="/Restaurant/register"
-                className="register-btn"
-                type="text"
-              >
-                Register your restaurant
-              </NavLink>
-              <NavLink className="view-btn" to="/Restaurant/login" type="text">
-                View your existing restaurants
-              </NavLink>
+              <div className="button">
+                <NavLink
+                  to="/Restaurant/register"
+                  className="register-btn btn btn-dark btn-lg"
+                  type="text"
+                >
+                  Register your restaurant
+                </NavLink>
+              </div>
+              <div className="button">
+                <NavLink
+                  className="view-btn btn btn-dark btn-lg"
+                  to="/Restaurant/login"
+                  type="text"
+                >
+                  View your existing restaurants
+                </NavLink>
+              </div>
             </div>
             <p className="contact">Need help? Contact +91 97-38-38-38-38</p>
           </div>
@@ -82,7 +90,7 @@ const Home = () => {
           <div>
             <h2>Manage it all with ease</h2>
             <p>
-              Orders can run smoothly with Uber Eats restaurant software,
+              Orders can run smoothly with Potato's restaurant software,
               flexible integration options, and support when you need it.
             </p>
           </div>
@@ -96,7 +104,7 @@ const Home = () => {
       </div>
       <div className="spacer"></div>
       <div className="home1">
-        <h1>How Tomato works for restaurant partners</h1>
+        <h1>How Potato works for restaurant partners</h1>
         <div className="steps">
           <div className="step">
             <img
@@ -106,7 +114,7 @@ const Home = () => {
             <h2>Customers order</h2>
             <p>
               A customer finds your restaurant and places an order through the
-              Tomato app.
+              Potato app.
             </p>
           </div>
           <div className="step">
@@ -124,7 +132,7 @@ const Home = () => {
             />
             <h2>Delivery partners arrive</h2>
             <p>
-              Delivery people using the Tomato platform pick up the order from
+              Delivery people using the Potato platform pick up the order from
               your restaurant, then deliver it to the customer.
             </p>
           </div>
