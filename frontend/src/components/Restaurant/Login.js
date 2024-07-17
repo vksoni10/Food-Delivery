@@ -12,9 +12,9 @@ export default function Login() {
     axios
       .post("http://localhost:3001/Restaurant/login", { rEmail, rPassword })
       .then((res) => {
-        const {  message, token } = res.data; // Destructure token and message from response data
-        if (message == "Login successful" , token) {
-          localStorage.setItem('ownerToken', token); // Store the token in localStorage or a cookie
+        const { message, token } = res.data; // Destructure token and message from response data
+        if ((message == "Login successful", token)) {
+          localStorage.setItem("ownerToken", token); // Store the token in localStorage or a cookie
           window.location.href = "/";
         } else {
           alert("Invalid credentials");
@@ -53,7 +53,7 @@ export default function Login() {
           />
         </div>
         <div className="btnarea">
-          <button className="btn" type="submit">
+          <button className="btn btn-dark" type="submit">
             Login
           </button>
           <p>

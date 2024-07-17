@@ -8,6 +8,9 @@ import Login from "./components/Restaurant/Login";
 import AddRestaurant from "./components/Restaurant/AddRestaurant";
 import ViewRestaurant from "./components/Restaurant/ViewRestaurant";
 import RestaurantHome from "./components/Restaurant/RestaurantHome";
+import { jwtDecode } from "jwt-decode";
+
+
 
 function App() {
   return (

@@ -22,8 +22,8 @@ export default function Register() {
         rPassword,
       })
       .then((result) => {
-        const{token} = result.data;
-        localStorage.setItem('ownerToken', token); // Store the token in localStorage or a cookie
+        const { token } = result.data;
+        localStorage.setItem("ownerToken", token); // Store the token in localStorage or a cookie
         console.log(result);
 
         navigate("/Restaurant/login");
@@ -94,7 +94,7 @@ export default function Register() {
             />
           </div>
           <div className="btnarea">
-            <button className="btn" type="submit">
+            <button className="btn btn-dark" type="submit">
               Register
             </button>
             <p>
