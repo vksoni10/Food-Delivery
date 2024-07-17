@@ -51,6 +51,11 @@ const reviewSchema = new mongoose.Schema({
 });
 
 const restaurantSchema = new mongoose.Schema({
+  ownerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Restaurant',
+    required: false,
+  },
   resDiscount: {
     type: String,
     required: false,
