@@ -62,10 +62,10 @@ export default function AddRestaurant() {
           console.error(err);
         }
       });
+    }
 
     return (
       <>
-        <div>hello</div>
         <div className="containerrr mb-3">
           <div className="intro mb-3">
             <h2>Unlock a new revenue stream.</h2>
@@ -196,4 +196,3 @@ export default function AddRestaurant() {
       </>
     );
   };
-}

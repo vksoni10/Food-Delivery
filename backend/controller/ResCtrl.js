@@ -50,7 +50,7 @@ const createUser = async (req, res) => {
 };
 
 const loginResCtrl = async (req, res) => {
-  const { rEmail, rPassword } = req.body;
+  const { rEmail, rPassword} = req.body;
 
   try {
     const Restaurant = await Rest.findOne({ rEmail });
@@ -70,7 +70,8 @@ const loginResCtrl = async (req, res) => {
       {
         rEmail: Restaurant.rEmail,
         rName: Restaurant.rName,
-        id: Restaurant._id,
+        rMobile: Restaurant.rMobile,
+        id: Restaurant._id
       },
       JWT_SECRET,
       { expiresIn: "1d" }
