@@ -318,7 +318,6 @@ h2 {
   background-color: rgba(0, 86, 179, 0.7);
 }
 
-
 .text {
   color: white;
 }
@@ -388,7 +387,6 @@ button:disabled {
 }
 
 .h {
-
   text-align: center;
 }
 
@@ -461,11 +459,12 @@ button:disabled {
   -webkit-backdrop-filter: blur(10px); /* Blurring effect for Safari */
   border: 1px solid rgba(255, 255, 255, 0.18); /* Light border */
 }
-.over{
- color: white;
- border: 3px solid gold;
+.over {
+  color: white;
 }
-.ov{
-  width: 50%;
-  margin-left: 25%;
+.ov {
+  width: 80%;
+  text-align: justify;
+  justify-content: center;
+  margin: auto;
 }
