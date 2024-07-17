@@ -15,9 +15,10 @@ function Navbar() {
 
     const fetchCartCount = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/cart/get-cart-count', {
+        const response = await axios.get('http://localhost:3001/cart/get-cart-items', {
           headers: { Authorization: `Bearer ${token}` }
         });
+        console.log(response.data)
         setCartCount(response.data.count);
       } catch (error) {
         console.error('Error fetching cart count:', error);
@@ -44,7 +45,7 @@ function Navbar() {
       console.error('Error:', error);
     }
   };
-console.log(cartCount)
+
   return (
     <header className="navbar">
       <NavLink to="/" className="logo">
