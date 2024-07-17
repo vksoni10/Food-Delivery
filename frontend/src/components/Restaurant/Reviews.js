@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import {jwtDecode} from "jwt-decode"; // Corrected import statement
-import "./Review.css"
+import { jwtDecode } from "jwt-decode"; // Corrected import statement
+import "./Review.css";
 
 export default function Reviews() {
   const [reviews, setReviews] = useState([]);
@@ -43,7 +43,6 @@ export default function Reviews() {
 
   return (
     <div className="reviews-list">
-      <div>hello</div>
       {reviews.map((review) => (
         <div key={review._id} className="review-item">
           <div className="review-header">

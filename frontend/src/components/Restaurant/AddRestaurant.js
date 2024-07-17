@@ -379,7 +379,7 @@ export default function AddRestaurant() {
             </div>
             <h4 className="mb-3">Three Restaurant Images</h4>
             {Array.from({ length: 3 }).map((_, index) => (
-              <div className="input-group mb-3" key={index}>
+              <div className="input-group" key={index}>
                 <label
                   className="input-group-text"
                   htmlFor={`image${index + 1}`}

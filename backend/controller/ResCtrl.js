@@ -27,7 +27,22 @@ const createUser = async (req, res) => {
       rMobile,
       rPassword: hash,
     });
-    res.json(newRestaurant);
+
+    const token = jwt.sign(
+      {
+        rEmail: newRestaurant.rEmail,
+        rName: newRestaurant.rName,
+        id: newRestaurant._id,
+      },
+      JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.cookie("ownerToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+    res.json({ message: "Owner registration successful", token });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ message: "Server error" });
@@ -60,7 +75,8 @@ const loginResCtrl = async (req, res) => {
       JWT_SECRET,
       { expiresIn: "1d" }
     );
-    res.cookie("token", token, {
+
+    res.cookie("ownerToken", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
     });
