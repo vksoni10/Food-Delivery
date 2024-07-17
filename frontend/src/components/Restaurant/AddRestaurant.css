@@ -6,6 +6,7 @@
   padding: 0;
   width: 100%;
   padding: 3rem 0.5rem 3rem 0.5rem;
+  color: black;
 }
 
 .intro {
@@ -20,7 +21,7 @@
 }
 
 @media screen and (width<500px) {
-  .containerr {
+  .containerrr {
     display: flex;
     flex-direction: column;
     justify-content: center;
