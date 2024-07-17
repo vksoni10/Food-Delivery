@@ -167,25 +167,29 @@ export default function AddRestaurant() {
                 ))}
               </div>
             </div>
-            <h4 className="mb-3">Three Restaurant Images</h4>
+            <h4 className="mb-3 mt-3">Three Restaurant Images</h4>
             {Array.from({ length: 3 }).map((_, index) => (
               <div className="input-group" key={index}>
                 <label
-                  className="input-group-text"
+                  className="custom-file-label"
                   htmlFor={`image${index + 1}`}
                 >
                   Restaurant Image {index + 1}
                 </label>
                 <input
                   type="file"
-                  className="form-control"
+                  className="custom-file-input"
                   id={`image${index + 1}`}
                   onChange={handleImageChange}
                   multiple
                 />
               </div>
             ))}
-            <button type="submit" className="btn btn-dark">
+            <button
+              type="submit"
+              className="btn btn-dark mt-3"
+              style={{ margin: "0" }}
+            >
               Register Restaurant
             </button>
           </form>

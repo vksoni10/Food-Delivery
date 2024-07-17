@@ -58,7 +58,7 @@ html {
 .labels {
   display: block;
   margin-bottom: 5px;
-  font-weight: 9000;
+  font-weight: bold;
   color: white;
 }
 
@@ -80,7 +80,7 @@ html {
   margin-top: 20px;
 }
 
-.bttn{
+.bttn {
   background-color: gold;
   color: #f6f5f5;
   padding: 15px 30px;
@@ -95,7 +95,7 @@ html {
 .bttn:hover {
   background-color: #f5f0e8;
   color: #0d0909;
-  border-color:black;
+  border-color: black;
 }
 
 .btnarea p {
@@ -111,4 +111,42 @@ html {
 
 .btnarea p a:hover {
   color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .formarea {
+    padding: 30px 40px;
+    max-width: 350px;
+  }
+
+  .formarea h1 {
+    font-size: 2rem;
+  }
+
+  .bttn {
+    padding: 12px 25px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .formarea {
+    padding: 20px 30px;
+    max-width: 300px;
+  }
+
+  .formarea h1 {
+    font-size: 1.5rem;
+  }
+
+  .bttn {
+    padding: 10px 20px;
+    font-size: 0.8rem;
+  }
+
+  .inputs {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
 }

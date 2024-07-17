@@ -1,8 +1,6 @@
 .restro-detail {
   font-family: Arial, sans-serif;
   margin: 0px;
-  /* background-color: rgb(158, 81, 81); */
-
   background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
@@ -24,8 +22,8 @@
 .main-image {
   margin: 10px;
   height: 550px;
-  width: 1100px;
-  max-width: 1700px;
+  width: 100%;
+  max-width: 1100px;
   border: 2px solid black;
   border-radius: 8px;
   margin-bottom: 30px;
@@ -47,7 +45,8 @@
 .gallery-item img {
   margin: 5px;
   margin-left: 0px;
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   height: 265px;
   object-fit: cover;
   border: 2px solid black;
@@ -90,14 +89,7 @@
   margin: 10px 0;
 }
 
-.active a {
-  margin-right: 10px;
-  padding: 10px 20px;
-  background: #eee;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+.actions a,
 .actions button {
   margin-right: 10px;
   padding: 10px 20px;
@@ -106,14 +98,16 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
 .h {
   color: white;
 }
+
 .heh {
   display: inline-block;
-
   border-radius: 50%;
 }
+
 .heh:hover {
   background-color: gold;
 }
@@ -159,14 +153,12 @@
   opacity: 75%;
 }
 
-.about {
-  margin-top: 20px;
-  text-align: center;
-}
+.about,
 .menu {
   margin-top: 20px;
   text-align: center;
 }
+
 .hello {
   background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
   border-radius: 10px; /* Rounded corners */
@@ -177,15 +169,19 @@
   color: black;
   display: inline;
 }
+
 .hello:hover {
   background-color: gold;
 }
+
 h2 {
   color: white;
 }
+
 .view {
   cursor: pointer;
 }
+
 .restro-detail .content {
   margin-top: 20px;
   text-align: center;
@@ -208,7 +204,6 @@ h2 {
 .restro-detail #book input {
   padding: 10px;
   font-size: 16px;
-
   width: 150px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -243,9 +238,6 @@ h2 {
   font-size: 24px;
   margin-right: 10px;
 }
-/* Glassmorphism CSS */
-
-/* Glassmorphism CSS */
 
 .container {
   display: flex;
@@ -269,11 +261,9 @@ h2 {
   display: flex;
   align-items: center;
   flex-direction: column;
-
   font-weight: bold;
   width: 50%;
   justify-content: center;
-
   border-radius: 5px;
   padding: 5px;
   background: rgba(255, 255, 255, 0.2);
@@ -377,6 +367,7 @@ button {
 button:disabled {
   background-color: gray;
 }
+
 #order {
   padding: 20px;
   background: rgba(255, 255, 255, 0.1);
@@ -448,6 +439,7 @@ button:disabled {
   font-size: 1.2em;
   color: white;
 }
+
 .booking {
   width: 40%;
   margin-left: 30%;
@@ -459,12 +451,91 @@ button:disabled {
   -webkit-backdrop-filter: blur(10px); /* Blurring effect for Safari */
   border: 1px solid rgba(255, 255, 255, 0.18); /* Light border */
 }
+
 .over {
   color: white;
+  border: 3px solid gold;
 }
+
 .ov {
-  width: 80%;
-  text-align: justify;
-  justify-content: center;
-  margin: auto;
+  width: 50%;
+  margin-left: 25%;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+  .main-image {
+    height: 450px;
+    width: 90%;
+  }
+  
+  .gallery-item img {
+    width: 80%;
+    height: 200px;
+  }
+}
+
+@media (max-width: 992px) {
+  .image-section {
+    flex-direction: column;
+  }
+  
+  .main-image {
+    height: 350px;
+    width: 80%;
+  }
+  
+  .gallery-item img {
+    width: 70%;
+    height: 180px;
+  }
+  
+  .details-section h1 {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-image {
+    height: 300px;
+    width: 100%;
+  }
+  
+  .gallery-item img {
+    width: 90%;
+    height: 150px;
+  }
+  
+  .details-section h1 {
+    font-size: 30px;
+  }
+  
+  .details-section {
+    margin: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-image {
+    height: 250px;
+    width: 100%;
+  }
+  
+  .gallery-item img {
+    width: 100%;
+    height: 120px;
+  }
+  
+  .details-section h1 {
+    font-size: 25px;
+  }
+  
+  .details-section p {
+    font-size: 14px;
+  }
+  
+  .booking {
+    width: 90%;
+    margin-left: 5%;
+  }
 }
