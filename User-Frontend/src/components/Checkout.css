@@ -81,3 +81,40 @@ h1 {
     opacity: 1;
   }
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tick-mark {
+    width: 80px;
+    height: 80px;
+  }
+
+  .tick {
+    width: 40px;
+    height: 20px;
+    border-left: 4px solid white;
+    border-bottom: 4px solid white;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tick-mark {
+    width: 60px;
+    height: 60px;
+  }
+
+  .tick {
+    width: 30px;
+    height: 15px;
+    border-left: 3px solid white;
+    border-bottom: 3px solid white;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+}

@@ -90,6 +90,7 @@
 .checkout-link:hover {
   background-color: #828e3e; /* Darker green on hover */
 }
+
 .overlay {
   position: fixed;
   top: 0;
@@ -107,4 +108,55 @@
   padding: 20px;
   border-radius: 5px;
   text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cart-container {
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .cart-container li {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .cart-container li span:first-child,
+  .cart-container li span:last-child {
+    width: 100%;
+    text-align: left;
+  }
+
+  .cart-container button {
+    width: 100%;
+    margin: 10px 0 0 0;
+  }
+
+  .checkout-link {
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-container {
+    margin: 10px auto;
+    padding: 10px;
+  }
+
+  .cart-container li {
+    padding: 5px;
+  }
+
+  .cart-totals {
+    padding: 15px;
+  }
+
+  .checkout-link {
+    padding: 10px;
+    font-size: 14px;
+  }
 }
