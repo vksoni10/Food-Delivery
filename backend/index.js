@@ -7,6 +7,7 @@ const cartRoutes = require("./routes/cartRoute");
 const restRoute = require("./routes/restRoute");
 const adminRoutes= require("./routes/adminRoute");
 const registerRoute = require("./routes/addRestRoute");
+const newAdminRoutes = require("./routes/adminRoute");
 
 const app = express();
 app.use(express.json());
