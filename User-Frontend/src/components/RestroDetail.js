@@ -125,12 +125,7 @@ const RestroDetail = () => {
               <ShareButton className="mt-5" />
             </button>
           </div>
-          <div className="ratings">
-            <div className="rating-item">
-              <span className="rating-value ta">{restaurant.rating}</span>
-              <p className='display-6'>Rating</p>
-            </div>
-          </div>
+         
           <div className="tabs">
             <span id='menuss'
               className={`tab ${activeTab === "order" ? "active" : ""}`}
@@ -153,8 +148,8 @@ const RestroDetail = () => {
           </div>
           <div className="tab-content">
             {activeTab === "overview" && (
-              <div id="overview">
-                <h4 className="h">Order now from {restaurant.resName}.<br></br>The best place in town to have {restaurant.restaurantTypes}. <br></br> Visit us now at {restaurant.resAddress}. <br></br> Checkout the above tabs to explore ordering online, the reviews our customers gave and also to book a table! </h4>
+              <div id="overview" className='ov'>
+                <h4 className="over">Order now from {restaurant.resName}. Visit us now at {restaurant.resAddress}. Checkout the above tabs to explore ordering online, the reviews our customers gave and also to book a table! </h4>
               </div>
             )}
             {activeTab === "order" && (

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../model/OrderModel');
-
+const {getAllUserOrders}= require('../controller/orderCtrl')
 router.post('/create', async (req, res) => {
   const { userId, userName, restaurantName, items, totalPrice } = req.body;
 
@@ -35,5 +35,8 @@ router.get('/:orderId', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+// Assuming you are using Express.js in your backend
+router.get('/myorders/:userId',getAllUserOrders );
+
 
 module.exports = router;

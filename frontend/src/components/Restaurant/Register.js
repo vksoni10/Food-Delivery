@@ -22,7 +22,10 @@ export default function Register() {
         rPassword,
       })
       .then((result) => {
+        const{token} = result.data;
+        localStorage.setItem('ownerToken', token); // Store the token in localStorage or a cookie
         console.log(result);
+
         navigate("/Restaurant/login");
       })
       .catch((err) => {

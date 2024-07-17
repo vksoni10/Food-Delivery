@@ -234,7 +234,9 @@ export default function AddRestaurant() {
     formData.append("resNumber", resNumber);
     formData.append("resOperationalHours", resOperationalHours);
     formData.append("restaurantTypes", JSON.stringify(restaurantTypes));
-
+    resImage.forEach((file) => {
+      formData.append("resImage", file);
+    });
     axios
       .post("http://localhost:3001/Restaurant/addRestaurant", formData, {
         headers: {
@@ -379,7 +381,7 @@ export default function AddRestaurant() {
             </div>
             <h4 className="mb-3">Three Restaurant Images</h4>
             {Array.from({ length: 3 }).map((_, index) => (
-              <div className="input-group mb-3" key={index}>
+              <div className="input-group" key={index}>
                 <label
                   className="input-group-text"
                   htmlFor={`image${index + 1}`}

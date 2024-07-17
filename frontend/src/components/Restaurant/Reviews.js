@@ -1,27 +1,45 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-// import './Reviews.css'; // Make sure to import the CSS file
-import { useParams } from "react-router-dom";
+import { jwtDecode } from "jwt-decode"; // Corrected import statement
+import "./Review.css";
 
 export default function Reviews() {
-  const { reviewId } = useParams();
-
   const [reviews, setReviews] = useState([]);
+  const [resName, setResName] = useState("");
 
   useEffect(() => {
-    fetchReviews();
-  }, [reviewId]);
+    const fetchRestaurantName = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const decoded = jwtDecode(token);
+        const { resName } = decoded;
+        setResName(resName);
+        console.log(resName);
+        return resName;
+      }
+      return null;
+    };
 
-  const fetchReviews = async () => {
-    try {
-      const response = await axios.get(
-      `http://localhost:3001/Restaurant/reviews/${reviewId}`
-      );
-      setReviews(response.data);
-    } catch (err) {
-      console.error("Error fetching reviews:", err.message);
-    }
-  };
+    const fetchReviews = async (resName) => {
+      try {
+        console.log(resName);
+
+        const response = await axios.get(
+          `http://localhost:3001/Restaurant/review/${resName}`
+        );
+        console.log(response.data);
+        setReviews(response.data);
+      } catch (err) {
+        console.error("Error fetching reviews:", err.message);
+      }
+    };
+
+    fetchRestaurantName().then((resName) => {
+      if (resName) {
+        fetchReviews(resName);
+      }
+    });
+  }, []); // Ensure this useEffect runs only once on component mount
 
   return (
     <div className="reviews-list">

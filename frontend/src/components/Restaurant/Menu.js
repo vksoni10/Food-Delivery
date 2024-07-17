@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import "./Menu.css";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
-const Menu = (restaurantId) => {
+const Menu = () => {
   const [menu, setMenu] = useState([]);
   const [resName, setResName] = useState("");
 
@@ -23,7 +23,9 @@ const Menu = (restaurantId) => {
 
     const fetchMenu = async (resName) => {
       try {
-        const response = await axios.get(`http://localhost:3001/Restaurant/${resName}/menu`);
+        const response = await axios.get(
+          `http://localhost:3001/Restaurant/${resName}/menu`
+        );
         setMenu(response.data);
       } catch (error) {
         console.error("Error fetching menu items:", error);
@@ -39,8 +41,10 @@ const Menu = (restaurantId) => {
 
   const handleDelete = async (itemId) => {
     try {
-      await axios.delete(`http://localhost:3001/Restaurant/${resName}/menu/${itemId}`);
-      setMenu(menu.filter(item => item._id !== itemId));
+      await axios.delete(
+        `http://localhost:3001/Restaurant/${resName}/menu/${itemId}`
+      );
+      setMenu(menu.filter((item) => item._id !== itemId));
     } catch (error) {
       console.error("Error deleting menu item:", error);
     }
@@ -48,11 +52,14 @@ const Menu = (restaurantId) => {
 
   return (
     <div className="menu">
-      <NavLink to="/Restaurant/createMenu" className="add-button">
+      <NavLink
+        to="/Restaurant/createMenu"
+        className="add-btn btn btn-outline-success mb-3"
+      >
         Add +
       </NavLink>
       <div className="menu-table">
-        <table>
+        <table className="table table-dark table-hover table-stripped">
           <thead>
             <tr>
               <th scope="col">Item Name</th>
@@ -62,20 +69,28 @@ const Menu = (restaurantId) => {
               <th scope="col">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="tbody">
             {menu.map((item) => (
-              <tr key={item._id}>
+              <tr key={item._id} scope="row">
                 <td>{item.dishName}</td>
                 <td>{item.price}</td>
                 <td>{item.dishType}</td>
                 <td>
                   <img src={item.dishImage} alt={item.dishName} width="100" />
                 </td>
-                <td>
-                  <NavLink to={`/Restaurant/updateMenu/${item._id}`}>
+                <td className="button">
+                  <NavLink
+                    to={`/Restaurant/updateMenu/${item._id}`}
+                    className="btn btn-light"
+                  >
                     Update
                   </NavLink>
-                  <button onClick={() => handleDelete(item._id)}>Delete</button>
+                  <button
+                    onClick={() => handleDelete(item._id)}
+                    className="btn btn-light"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
