@@ -67,7 +67,7 @@ const Home = () => {
               <p>
                 Our offerings are flexible so you can customize them to your
                 needs. Get started with your delivery people or connect with
-                delivery people through the Uber platform.
+                delivery people through the Potato platform.
               </p>
             </div>
             <div className="feature">

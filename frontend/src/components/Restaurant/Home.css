@@ -39,6 +39,15 @@ body {
   gap: 1rem;
 }
 
+@media screen and (width<600px) {
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 /* .register-btn,
 .view-btn {
   background-color: #0073e6;
@@ -152,6 +161,7 @@ body {
   display: flex;
   padding-left: 1rem;
   justify-content: center;
+  color: #000;
 }
 
 .manage-ease h2 {
@@ -173,6 +183,7 @@ body {
   margin: auto;
   text-align: center;
   padding: 3rem;
+  color: #000;
 }
 
 .potatoDesc h1 {

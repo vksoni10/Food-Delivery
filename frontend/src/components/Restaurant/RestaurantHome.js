@@ -146,10 +146,7 @@ export default function RestaurantHome() {
       <div className="main-content">
         <Routes>
           <Route path="/" element={<Profile />} />
-          <Route
-            path="/profile"
-            element={<RestaurantDashboard />}
-          />
+          <Route path="/profile" element={<RestaurantDashboard />} />
           <Route path="/orders" element={<IncomingOrders />} />
           <Route path="/Restaurant/currentOrders" element={<CurrentOrders />} />
           <Route path="/Restaurant/orderHistory" element={<OrderHistory />} />
