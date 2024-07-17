@@ -1,5 +1,4 @@
 /* src/components/Dashboard.css */
-
 .dashboard {
   display: flex;
   flex-direction: column;
@@ -81,7 +80,6 @@
   justify-content: center;
   align-items: center;
 }
-
 .pie-chart {
   width: 400px;
   height: 400px;
@@ -119,5 +117,5 @@
 
 .order-details p strong {
   display: block;
-  font-size: 1.1em;
+  font-size: 1.1em;
 }
