@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../model/OrderModel');
-
+const {getAllUserOrders}= require('../controller/orderCtrl')
 router.post('/create', async (req, res) => {
   const { userId, userName, restaurantName, items, totalPrice } = req.body;
 
@@ -36,15 +36,7 @@ router.get('/:orderId', async (req, res) => {
   }
 });
 // Assuming you are using Express.js in your backend
-router.get('/user-orders', async (req, res) => {
-  const { userId } = req.query;
-  try {
-    const orders = await Order.find({ userId });
-    res.status(200).send({ orders });
-  } catch (error) {
-    res.status(500).send({ message: 'Error fetching orders', error });
-  }
-});
+router.get('/myorders/:userId',getAllUserOrders );
 
 
 module.exports = router;
