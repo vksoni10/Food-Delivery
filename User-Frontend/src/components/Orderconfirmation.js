@@ -29,7 +29,7 @@ const OrderConfirmation = () => {
     <>
       <Navbar />
       <div className="order-confirmation-container">
-        <h2>Order Confirmation</h2>
+        <h2>Order Details</h2>
         {order ? (
           <>
             <h4>Status: {status}</h4>
