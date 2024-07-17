@@ -7,11 +7,12 @@ body {
   text-align: center;
   color: white;
   background-color: #f5f3f5;
+  background-image: url("https://b.zmtcdn.com/web_assets/81f3ff974d82520780078ba1cfbd453a1583259680.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .header {
-  background-image: url("https://th.bing.com/th/id/OIP.psYS0K-w245IO9FEm2bNrwHaE7?w=265&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7");
-  background-size: cover;
   padding: 4rem 0;
 }
 
@@ -34,9 +35,11 @@ body {
   display: flex;
   justify-content: center;
   margin-right: 1rem;
+  opacity: 0.7;
+  gap: 1rem;
 }
 
-.register-btn,
+/* .register-btn,
 .view-btn {
   background-color: #0073e6;
   color: white;
@@ -52,8 +55,8 @@ body {
 .register-btn:hover,
 .view-btn:hover {
   background-color: #005bb5;
-  opacity: 1;
-}
+  opacity: 0;
+} */
 
 .contact {
   margin-top: 20px;
