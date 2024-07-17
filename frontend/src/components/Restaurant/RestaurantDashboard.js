@@ -22,7 +22,9 @@ const RestaurantDashboard = () => {
         try {
           const restaurantResponse = await axios.get(`http://localhost:3001/restaurants/${decodedRestaurant.resName}`);
           const ordersResponse = await axios.get(`http://localhost:3001/orders/${decodedRestaurant.resName}`);
-
+if(ordersResponse == null){
+  
+}
           setOwnerDetails(decodedOwner);
           setRestaurantDetails(restaurantResponse.data);
           calculateTotalIncome(ordersResponse.data);
