@@ -17,6 +17,9 @@ html {
   align-items: center;
   height: 100vh;
   background-color: #f0f2f5;
+  background-image: url("https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .formarea {

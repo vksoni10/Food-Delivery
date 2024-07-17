@@ -20,6 +20,9 @@ html {
   align-items: center;
   height: 100vh;
   background-color: #f0f2f5;
+  background-image: url("https://w0.peakpx.com/wallpaper/776/861/HD-wallpaper-hamburger-flames-fast-food-food.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .formarea {
