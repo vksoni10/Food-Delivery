@@ -1,0 +1,24 @@
+.add-btn {
+  width: 5rem;
+}
+
+.button {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.menu-item-inputs {
+  width: 25rem;
+}
+
+.add-item .update-item {
+  width: 10rem;
+}
+
+.form {
+  background-color: #d5a021;
+  margin-left: 10rem;
+  width: 27rem;
+  padding: 1rem;
+  border-radius: 1rem;
+}

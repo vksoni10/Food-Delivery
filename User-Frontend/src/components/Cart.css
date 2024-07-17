@@ -1,12 +1,15 @@
+/* Overall container styling */
 .cart-container {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #fff; /* Light background for better readability */
   border: 1px solid #ddd;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px; /* Rounded corners for a modern look */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
+/* List styling for improved clarity */
 .cart-container ul {
   list-style: none;
   padding: 0;
@@ -14,40 +17,49 @@
 }
 
 .cart-container li {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+  padding: 15px; /* More space for better readability */
+  display: flex; /* Use flexbox for cleaner layout */
+  justify-content: space-between; /* Align items horizontally */
+  align-items: center; /* Align items vertically */
+  border-bottom: 1px solid #eee; /* Thinner and lighter border */
 }
 
 .cart-container li:last-child {
   border-bottom: none;
 }
 
-.cart-container span {
+/* Product and price display */
+.cart-container li span:first-child {
   font-weight: bold;
-  margin-right: 10px;
+  flex-grow: 1; /* Allow product name to expand */
 }
 
+.cart-container li span:last-child {
+  font-weight: bold;
+}
+
+/* Improved button styling for better look and feel */
 .cart-container button {
-  background-color: #af9b4c;
+  background-color: goldenrod; /* Darker green for better contrast */
   color: #fff;
   border: none;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 5px 10px; /* Smaller padding for tighter layout */
+  font-size: 14px; /* Smaller font size for better fit */
   cursor: pointer;
+  border-radius: 3px; /* Rounded corners for a more modern feel */
+  margin-left: 10px; /* Add spacing between buttons */
 }
 
 .cart-container button:hover {
-  background-color: #3e8e41;
+  background-color: #828e3e; /* Darker green on hover */
 }
 
+/* Remove input field for cleaner design (optional) */
 .cart-container input[type="number"] {
-  width: 50px;
-  height: 30px;
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid #ccc;
+  display: none; /* You can remove this line if you prefer quantity input */
 }
 
+/* Totals section styling */
 .cart-totals {
   padding: 20px;
   background-color: #f0f0f0;
@@ -56,12 +68,14 @@
 
 .cart-totals p {
   margin-bottom: 10px;
+  font-weight: bold; /* Make all totals bold for clarity */
 }
 
 .cart-totals p:last-child {
-  font-weight: bold;
-  font-size: 18px;
+  font-size: 16px; /* Slightly smaller font size for total */
 }
+
+/* Checkout link styling */
 .checkout-link {
   background-color: #dcae15; /* Green */
   color: #ffffff; /* White */
@@ -75,4 +89,22 @@
 
 .checkout-link:hover {
   background-color: #828e3e; /* Darker green on hover */
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
 }

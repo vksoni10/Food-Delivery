@@ -59,14 +59,14 @@ body {
   padding: 10px 20px; /* Adjust button padding */
   background-color: #06060644;
   color: #f6fef8; /* Text color */
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, width 0.3s ease; /* Add transition for width */
   position: relative; /* Position relative for absolute positioning of text */
   display: flex; /* Use flexbox for positioning */
   align-items: center; /* Center align items vertically */
   width: auto; /* Ensure button width adjusts based on content */
 }
 
-.nav-links .navbutton .material-symbols-outlined {
+.nav-links .navbutton .material-icons {
   margin-right: 5px; /* Adjust spacing between icon and text */
 }
 
@@ -83,11 +83,22 @@ body {
 .nav-links .navbutton:hover {
   background-color: #eb9f3b; /* Hover background color */
   color: #f3eff4; /* Hover text color */
-  width: 110px;
+  width: 120px; /* Increase width on hover */
 }
 
 .nav-links .navbutton:hover .cart-text {
   opacity: 1;
   transform: translate(0, -50%);
-  
+}
+
+.cart-badge {
+  background-color: red;
+  opacity: 80%;
+  color: white;
+  padding: 3px 5px; /* Adjust padding as needed */
+  border-radius: 50%; /* For a round badge */
+  position: absolute;
+  font-size: x-small;
+  top: -5px; /* Position above the cart icon */
+  right: -5px; /* Position to the right of the cart icon */
 }

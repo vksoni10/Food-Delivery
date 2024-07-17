@@ -6,11 +6,28 @@ import logo from '../components/final.png';
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
+
+    const fetchCartCount = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/cart/get-cart-items', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        console.log(response.data)
+        setCartCount(response.data.count);
+      } catch (error) {
+        console.error('Error fetching cart count:', error);
+      }
+    };
+
+    if (token) {
+      fetchCartCount();
+    }
   }, []);
 
   const handleLogout = async () => {
@@ -37,22 +54,19 @@ function Navbar() {
       <div className="nav-links">
         {isLoggedIn ? (
           <>
-             <NavLink to="/auth/cart" className="navbutton">
-      <span className="material-symbols-outlined">
-        shopping_cart
-      </span>
-      <span className="cart-text">Cart</span> {/* Additional span for the cart text */}
-    </NavLink>
-            <NavLink to="/auth/profile" className="navbutton"><span class="material-symbols-outlined">
-person
-</span>
-<span className="cart-text">Profile</span>
-</NavLink>
-            <NavLink to='/auth/logout' className="navbutton" onClick={handleLogout}><span class="material-symbols-outlined">
-logout
-</span>
-<span className="cart-text">Logout</span>
-</NavLink>
+            <NavLink to="/auth/cart" className="navbutton">
+              <span className="material-symbols-outlined">shopping_cart</span>
+              <span className="cart-text">Cart</span>
+              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+            </NavLink>
+            <NavLink to="/auth/profile" className="navbutton">
+              <span className="material-symbols-outlined">person</span>
+              <span className="cart-text">Profile</span>
+            </NavLink>
+            <NavLink to='/auth/logout' className="navbutton" onClick={handleLogout}>
+              <span className="material-symbols-outlined">logout</span>
+              <span className="cart-text">Logout</span>
+            </NavLink>
           </>
         ) : (
           <>

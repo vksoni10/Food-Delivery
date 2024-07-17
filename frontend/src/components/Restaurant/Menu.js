@@ -1,138 +1,104 @@
 import React, { useEffect, useState } from "react";
-import "./Menu.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
-import {jwtDecode} from "jwt-decode";
+import "./Menu.css";
+import { jwtDecode } from "jwt-decode";
 
-export default function Menu() {
+const Menu = () => {
   const [menu, setMenu] = useState([]);
-  const [dishName, setDishName] = useState("");
-  const [price, setPrice] = useState("");
-  const [dishImage, setDishImage] = useState("");
-  const [dishType, setDishType] = useState("");
-  const navigate = useNavigate();
+  const [resName, setResName] = useState("");
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/Restaurant/Menu")
-      .then((response) => setMenu(response.data))
-      .catch((err) => console.log(err));
+    const fetchRestaurantName = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const decoded = jwtDecode(token);
+        const { resName } = decoded;
+        setResName(resName);
+        console.log(resName);
+        return resName;
+      }
+      return null;
+    };
+
+    const fetchMenu = async (resName) => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/Restaurant/${resName}/menu`
+        );
+        setMenu(response.data);
+      } catch (error) {
+        console.error("Error fetching menu items:", error);
+      }
+    };
+
+    fetchRestaurantName().then((resName) => {
+      if (resName) {
+        fetchMenu(resName);
+      }
+    });
   }, []);
 
-  const fetchRestaurantName = async () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      console.log(token)
-      const decoded = jwtDecode(token);
-      const { resName } = decoded;
-      return resName;
+  const handleDelete = async (itemId) => {
+    try {
+      await axios.delete(
+        `http://localhost:3001/Restaurant/${resName}/menu/${itemId}`
+      );
+      setMenu(menu.filter((item) => item._id !== itemId));
+    } catch (error) {
+      console.error("Error deleting menu item:", error);
     }
-    return null;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const resName = await fetchRestaurantName();
-    if (!resName) {
-      alert("User not authenticated");
-      return;
-    }
-    await axios
-      .post("http://localhost:3001/Restaurant/menu", {
-        dishName,
-        price,
-        dishImage,
-        dishType,
-        resName,
-      })
-      .then((result) => {
-        console.log(result);
-        navigate("/Restaurant/login");
-      })
-      .catch((err) => {
-        if (err.response && err.response.status === 400) {
-          alert(err.response.data.message);
-        } else {
-          console.error(err);
-        }
-      });
   };
 
   return (
-    <>
-      <div className="menu">
-        {/* <NavLink to="#" onClick={addMenuItem}>Add</NavLink> */}
-      </div>
-      <div className="add-menu-form">
-        <form onSubmit={handleSubmit}>
-          <div className="menu-item-inputs">
-            <input
-              type="text"
-              name="dishName"
-              value={dishName}
-              onChange={(e) => setDishName(e.target.value)}
-              placeholder="Dish Name"
-              required
-            />
-            <input
-              type="number"
-              name="price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              placeholder="Price"
-              required
-            />
-            <input
-              type="text"
-              name="dishImage"
-              value={dishImage}
-              onChange={(e) => setDishImage(e.target.value)}
-              placeholder="Dish Image URL"
-              required
-            />
-            <input
-              type="text"
-              name="dishType"
-              value={dishType}
-              onChange={(e) => setDishType(e.target.value)}
-              placeholder="Dish Type"
-              required
-            />
-            <button type="submit">Register Restaurant</button>
-          </div>
-        </form>
-      </div>
+    <div className="menu">
+      <NavLink
+        to="/Restaurant/createMenu"
+        className="add-btn btn btn-outline-success mb-3"
+      >
+        Add +
+      </NavLink>
       <div className="menu-table">
-        <table>
+        <table className="table table-dark table-hover table-stripped">
           <thead>
             <tr>
-              <th>Item Name</th>
-              <th>Item Price</th>
-              <th>Item Type</th>
-              <th>Item Image</th>
-              <th>Actions</th>
+              <th scope="col">Item Name</th>
+              <th scope="col">Item Price</th>
+              <th scope="col">Item Type</th>
+              <th scope="col">Item Image</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {menu.map((item, index) => (
-              <tr key={item._id}>
+          <tbody className="tbody">
+            {menu.map((item) => (
+              <tr key={item._id} scope="row">
                 <td>{item.dishName}</td>
                 <td>{item.price}</td>
                 <td>{item.dishType}</td>
                 <td>
                   <img src={item.dishImage} alt={item.dishName} width="100" />
                 </td>
-                <td>
-                  <NavLink to={`/Restaurant/updateMenu/${item._id}`}>
+                <td className="button">
+                  <NavLink
+                    to={`/Restaurant/updateMenu/${item._id}`}
+                    className="btn btn-light"
+                  >
                     Update
                   </NavLink>
-                  {/* <button onClick={() => handleDelete(item._id)}>Delete</button> */}
+                  <button
+                    onClick={() => handleDelete(item._id)}
+                    className="btn btn-light"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default Menu;

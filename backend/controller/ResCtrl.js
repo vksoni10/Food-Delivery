@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const restadd = require("../model/Addrestaurant");
 const IMG_BASE_URL = "http://localhost:3001/static/";
 
+
 const restro = require("../model/Addrestaurant");
 const JWT_SECRET = "jwt-secret-key";
 
@@ -26,7 +27,22 @@ const createUser = async (req, res) => {
       rMobile,
       rPassword: hash,
     });
-    res.json(newRestaurant);
+
+    const token = jwt.sign(
+      {
+        rEmail: newRestaurant.rEmail,
+        rName: newRestaurant.rName,
+        id: newRestaurant._id,
+      },
+      JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.cookie("ownerToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+    res.json({ message: "Owner registration successful", token });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ message: "Server error" });
@@ -59,7 +75,8 @@ const loginResCtrl = async (req, res) => {
       JWT_SECRET,
       { expiresIn: "1d" }
     );
-    res.cookie("token", token, {
+
+    res.cookie("ownerToken", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
     });
@@ -88,7 +105,7 @@ const restaurantAdd = async (req, res) => {
     }
     let resImages = [];
     if (req.files) {
-      resImages = req.files.map(file => IMG_BASE_URL + file.filename);
+      resImages = req.files.map((file) => IMG_BASE_URL + file.filename);
     }
 
     const newRest = await restadd.create({
@@ -116,7 +133,7 @@ const restaurantAdd = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
     });
-    res.json({newRest,token});
+    res.json({ newRest, token });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ message: "Server error" });
@@ -146,32 +163,26 @@ const getRestroDetails = async (req, res) => {
   }
 };
 
-const addMenu = async (req, res) => {
-  const { dishName, price, dishImage, dishType, resName } = req.body;
+const updateMenu = async (req, res) => {
+  const { dishName, price, dishType, resName } = req.body;
+  const dishImage = (IMG_BASE_URL+req.file.filename);
   try {
     const restaurant = await restadd.findOne({ resName });
     if (!restaurant) {
-      return res.status(404).json({ message: 'Restaurant not found' });
+      return res.status(404).json({ message: "Restaurant not found" });
     }
 
-    const newMenuItem = {
-      dishName,
-      price,
-      dishImage,
-      dishType
-    };
-
+    const newMenuItem = { dishName, price, dishImage, dishType };
     restaurant.menu.push(newMenuItem);
     await restaurant.save();
 
-    res.status(201).json(newMenuItem);
+    res.json(newMenuItem);
+    
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
-}
-
-
+};
 
 module.exports = {
   createUser,
@@ -179,5 +190,5 @@ module.exports = {
   getAllRestaurants,
   getRestroDetails,
   restaurantAdd,
-  addMenu
+  updateMenu,
 };

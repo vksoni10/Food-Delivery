@@ -1,0 +1,133 @@
+.custom-card {
+    /* background: rgba(255, 255, 255, 0.3); Semi-transparent white background */
+    backdrop-filter: blur(7px); /* Apply blur effect */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Slightly rounded corners */
+    padding: 16px; /* Add padding for better spacing */
+    margin-bottom: 16px; /* Space between cards */
+    max-width: 600px; /* Limit width for better readability */
+    margin: auto; /* Center align the card */
+  }
+  
+  .custom-card-header {
+    /* background: linear-gradient(to right, zinc, rgba(255, 215, 0, 0.6)); Gradient background in golden color */
+    border: none; /* Remove border */
+    border-radius: 8px 8px 8px 8px; /* Rounded corners on top */
+    padding: 12px 16px; /* Padding for better spacing */
+    color: white; /* White text for contrast */
+    font-weight: bold; /* Bold text */
+    text-align: center; /* Center align the text */
+  }
+  
+  .rating-stars {
+    display: flex; /* Align stars horizontally */
+    gap: 4px; /* Space between stars */
+    cursor: pointer; /* Pointer cursor on hover */
+    justify-content: center; /* Center align the stars */
+    margin-bottom: 16px; /* Space below stars */
+  }
+  
+  .star {
+    font-size: 2rem; /* Large star size */
+    transition: color 0.3s; /* Smooth color transition */
+  }
+  
+  .filled-star {
+    color: #ffc107; /* Gold color */
+  }
+  
+  .empty-star {
+    color: #e4e5e9; /* Light gray color */
+  }
+  
+  .optional-text {
+    background-color: rgba(211, 211, 211, 0.7); /* Light grey with opacity */
+    padding: 8px; /* Padding for spacing */
+    border-radius: 4px; /* Rounded corners */
+    margin-top: 8px; /* Space above */
+    font-size: 0.9rem; /* Slightly smaller font */
+    display: block; /* Block display for full width */
+    text-align: center; /* Center align text */
+  }
+  
+  .comment-info {
+    display: flex; /* Align items horizontally */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Center items vertically */
+    margin-top: 8px; /* Space above */
+  }
+  
+  .comment-length {
+    /* background-color: rgba(211, 211, 211, 0.7); Light grey with opacity */
+    padding: 4px 8px; /* Padding for spacing */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 0.9rem; /* Slightly smaller font */
+    color: white;
+  }
+  
+  .comment-warning {
+    color: red; /* Red color for warnings */
+    font-weight: bold; /* Bold text for emphasis */
+    margin-left: 8px; /* Space to the left */
+  }
+  
+  .form-control {
+    width: 100%; /* Full width */
+    padding: 8px; /* Padding inside the textarea */
+    border: 1px solid #ccc; /* Light grey border */
+    border-radius: 4px; /* Rounded corners */
+    margin-top: 8px; /* Space above */
+    font-size: 1rem; /* Regular font size */
+  }
+  
+  .submit-button {
+    display: block; /* Block display for full width */
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding inside the button */
+    background-color: #ffc107; /* Gold background */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    color: white; /* White text */
+    font-size: 1rem; /* Regular font size */
+    font-weight: bold; /* Bold text */
+    margin-top: 16px; /* Space above */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth background color transition */
+  }
+  
+  .submit-button:hover {
+    background-color: #e0a800; /* Darker gold on hover */
+  }
+  
+  .reviews-list {
+    margin-top: 20px;
+  }
+  
+  .review-item {
+    background: rgba(0, 0, 0, 0.6); /* Transparent black background */
+    border-radius: 8px; /* Slightly rounded corners */
+    padding: 16px; /* Padding for better spacing */
+    margin-bottom: 16px; /* Space between review items */
+    color: white; /* White text color for contrast */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* White border for contrast */
+  }
+  
+  
+  
+  
+  
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .reviewer-name {
+    font-weight: bold;
+  }
+  
+  .review-comment {
+    margin-top: 8px;
+  }
+  

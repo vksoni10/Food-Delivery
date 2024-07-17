@@ -3,6 +3,7 @@ import {jwtDecode} from 'jwt-decode';
 import axios from 'axios';
 import './Profile.css';
 import Navbar from './Navbar';
+import { NavLink } from 'react-router-dom';
 
 function Profile() {
     const [user, setUser] = useState({});
@@ -17,8 +18,8 @@ function Profile() {
             const token = localStorage.getItem('token');
             if (token) {
                 const decoded = jwtDecode(token);
-                const { name, email, mobile, addresses } = decoded;
-                setUser({ name, email, mobile });
+                const { id, name, email, mobile, addresses } = decoded;
+                setUser({ id, name, email, mobile });
                 setAddresses(addresses || []);
             }
         } catch (err) {
@@ -26,9 +27,13 @@ function Profile() {
         }
     };
 
+    // Function to fetch user orders
+    
     useEffect(() => {
         fetchUserProfile();
     }, []);
+
+
 
     const handleAddressChange = (e) => {
         setNewAddress(e.target.value);
@@ -154,6 +159,9 @@ function Profile() {
                         />
                         <button type="submit">Add Address</button>
                     </form>
+                </div>
+                <div className="orders">
+                                    <NavLink to="/auth/myorders">View your orders</NavLink>
                 </div>
             </div>
         </>

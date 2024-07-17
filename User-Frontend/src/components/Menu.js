@@ -5,6 +5,7 @@ import './Menu.css';
 function Menu({ restaurantId }) {
     const [menuItems, setMenuItems] = useState([]);
     const [cart, setCart] = useState({});
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         axios.get(`http://localhost:3001/Restaurant/${restaurantId}/menuItems`)
@@ -35,39 +36,41 @@ function Menu({ restaurantId }) {
         });
     };
 
+    const filteredItems = menuItems.filter(item => 
+        item.dishName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
         <div>
             <h2>Menu Items</h2>
-            <table className="menu-table">
-                <thead>
-                    <tr>
-                        {/* <th>Image</th> */}
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {menuItems.map(item => (
-                        <tr key={item._id}>
-                            {/* <td><img src={item.dishImage} alt={item.dishName} style={{width: "100px"}} /></td> */}
-                            <td>{item.dishName}</td>
-                            <td>${item.price}</td>
-                            <td>
-                                {cart[item._id] ? (
-                                    <div className="cart-actions">
-                                        <button onClick={() => handleRemoveFromCart(item._id)}>-</button>
-                                        <span>{cart[item._id]}</span>
-                                        <button onClick={() => handleAddToCart(item._id)}>+</button>
-                                    </div>
-                                ) : (
-                                    <button onClick={() => handleAddToCart(item._id)}>ADD</button>
-                                )}
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <input
+                type="text"
+                placeholder="Search items..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="search-bar"
+            />
+            <div className="menu-list">
+                {filteredItems.map(item => (
+                    <div className="menu-item" key={item._id}>
+                        <div className="item-details">
+                            <span className="item-name">{item.dishName}</span>
+                            <span className="item-price">${item.price}</span>
+                        </div>
+                        <div className="cart-actions">
+                            {cart[item._id] ? (
+                                <div className="cart-actions">
+                                    <button onClick={() => handleRemoveFromCart(item._id)}>-</button>
+                                    <span>{cart[item._id]}</span>
+                                    <button onClick={() => handleAddToCart(item._id)}>+</button>
+                                </div>
+                            ) : (
+                                <button onClick={() => handleAddToCart(item._id)}>ADD</button>
+                            )}
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

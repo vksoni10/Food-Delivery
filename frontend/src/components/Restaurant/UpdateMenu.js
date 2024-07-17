@@ -2,92 +2,135 @@ import React, { useState, useEffect } from "react";
 import "./Menu.css";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
-export default function UpdateMenu() {
-  const { id } = useParams();
+const UpdateMenu = () => {
+  const { itemId } = useParams();
   const navigate = useNavigate();
-  const [itemType, setItemType] = useState();
-  const [itemName, setItemName] = useState();
-  const [itemPrice, setItemPrice] = useState();
-  const [itemImage, setItemImage] = useState();
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/menu/" + id)
-      .then((result) => {
-        setItemType(result.data.itemType);
-        setItemName(result.data.itemName);
-        setItemPrice(result.data.itemPrice);
-        setItemImage(result.data.itemImage);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const [dishName, setDishName] = useState("");
+  const [price, setPrice] = useState("");
+  const [dishType, setDishType] = useState("");
+  const [dishImage, setDishImage] = useState(null);
+  const [resName, setResName] = useState("");
 
-  const updateMenu = (e) => {
+  useEffect(() => {
+    const fetchRestaurantName = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const decoded = jwtDecode(token);
+        const { resName } = decoded;
+        setResName(resName);
+        console.log(resName);
+        return resName;
+      }
+      return null;
+    };
+
+    const fetchMenuItem = async (resName) => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/Restaurant/${resName}/menu/${itemId}`
+        );
+        const { dishName, price, dishType, dishImage } = response.data;
+        setDishName(dishName);
+        setPrice(price);
+        setDishType(dishType);
+        setDishImage(dishImage);
+      } catch (error) {
+        console.error("Error fetching menu item:", error);
+      }
+    };
+
+    fetchRestaurantName().then((resName) => {
+      if (resName) {
+        fetchMenuItem(resName);
+      }
+    });
+  }, [itemId]);
+
+  const handleUpdate = async (e) => {
     e.preventDefault();
-    axios
-      .put("http://localhost:3001/updateMenu" + id, {
-        itemImage,
-        itemName,
-        itemPrice,
-        itemType,
-      })
-      .then((result) => {
-        console.log(result);
-        navigate("/Restaurant/menu");
-      })
-      .catch((err) => console.log(err));
+    const formData = new FormData();
+    formData.append("dishName", dishName);
+    formData.append("price", price);
+    formData.append("dishType", dishType);
+    if (dishImage instanceof File) {
+      formData.append("dishImage", dishImage);
+    }
+
+    try {
+      await axios.put(
+        `http://localhost:3001/Restaurant/${resName}/menu/${itemId}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      navigate("/Restaurant/menu");
+    } catch (error) {
+      console.error("Error updating menu item:", error);
+    }
   };
 
   return (
-    <>
-      <div className="update">
-        <form onSubmit={updateMenu}>
-          <h4>Update Item Details</h4>
-          <div className="form-floating mb-3">
+    <div className="form">
+      <form onSubmit={handleUpdate}>
+        <div className="menu-item-inputs">
+          <div className="mb-3">
             <input
               type="text"
               className="form-control"
-              id="floatingItemName"
-              placeholder="Item Name"
-              value={itemName}
-              onChange={(e) => setItemName(e.target.value)}
+              name="dishName"
+              value={dishName}
+              onChange={(e) => setDishName(e.target.value)}
+              placeholder="Dish Name"
+              required
             />
-            <label htmlFor="floatingInput">Item Name</label>
           </div>
-          <div className="form-floating mb-3">
+          <div className="mb-3">
             <input
               type="number"
               className="form-control"
-              id="floatingItemPrice"
-              placeholder="Item Price"
-              value={itemPrice}
-              onChange={(e) => setItemPrice(e.target.value)}
+              name="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              placeholder="Price"
+              required
             />
-            <label htmlFor="floatingInput">Item Price</label>
           </div>
-          <div className="form-floating mb-3">
+          <div className="mb-3">
             <input
               type="text"
               className="form-control"
-              id="floatingItemType"
-              placeholder="Item Type"
-              value={itemType}
-              onChange={(e) => setItemType(e.target.value)}
+              name="dishType"
+              value={dishType}
+              onChange={(e) => setDishType(e.target.value)}
+              placeholder="Dish Type"
+              required
             />
-            <label htmlFor="floatingInput">Item Type</label>
           </div>
-          <div className="input-group mb-3">
-            <label className="input-group-text">Item Image</label>
+          <div className="custom-file mb-3">
             <input
               type="file"
-              className="form-control"
-              value={itemImage}
-              onChange={(e) => setItemImage(e.target.value)}
+              className="custom-file-input"
+              name="dishImage"
+              onChange={(e) => setDishImage(e.target.files[0])}
             />
+            <label class="custom-file-label" htmlFor="customFile">
+              Upload Item Image
+            </label>
           </div>
-          <button className="btn btn-success">Update</button>
-        </form>
-      </div>
-    </>
+          <div className="update-item">
+            <button type="submit" className="btn btn-success">
+              Update Menu Item
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
-}
+};
+
+export default UpdateMenu;
