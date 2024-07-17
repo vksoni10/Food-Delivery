@@ -1,6 +1,8 @@
+// src/components/RestaurantList.js
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './RestaurantList.css';
+import './RestaurantList.css'; // Include your CSS file here
 
 const RestaurantList = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -27,15 +29,6 @@ const RestaurantList = () => {
     setSearchTerm(event.target.value);
   };
 
-  const handleDelete = (id) => {
-    axios.delete(`http://localhost:3001/admin/deleteRestaurant/${id}`)
-      .then(res => {
-        console.log(res);
-        setRestaurants(restaurants.filter(restaurant => restaurant._id !== id));
-      })
-      .catch(err => console.log(err));
-  };
-  
   const filteredRestaurants = restaurants.filter((restaurant) =>
     restaurant.resName && restaurant.resName.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -46,43 +39,40 @@ const RestaurantList = () => {
   return (
     <div className="restaurant-list">
       <h1>Restaurant List</h1>
-      <div className="search-bars-container">
-        <div className="search-bars">
-          <input
-            type="text"
-            placeholder="Search by name..."
-            value={searchTerm}
-            onChange={handleSearch}
-          />
-        </div>
+      <div className="search-bars">
+        <input
+          type="text"
+          placeholder="Search by name..."
+          value={searchTerm}
+          onChange={handleSearch}
+        />
       </div>
-      <div className="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Address</th>
-              <th>Phone</th>
-              <th>Operational Hours</th>
-              <th>Action</th>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Operational Hours</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredRestaurants.map((restaurant) => (
+            <tr key={restaurant._id}>
+              <td>{restaurant.resName || 'N/A'}</td>
+              <td>{restaurant.resAddress || 'N/A'}</td>
+              <td>{restaurant.resNumber || 'N/A'}</td>
+              <td>{restaurant.resOperationalHours || 'N/A'}</td>
+              <td>
+                <button className="delete-button" onClick={() => handleDelete(restaurant._id)}>
+                  Remove
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {filteredRestaurants.map((restaurant) => (
-              <tr key={restaurant._id}>
-                <td>{restaurant.resName || 'N/A'}</td>
-                <td>{restaurant.resAddress || 'N/A'}</td>
-                <td>{restaurant.resNumber || 'N/A'}</td>
-                <td>{restaurant.resOperationalHours || 'N/A'}</td>
-                <td>
-                  <button className='delete-button'>Delete</button>
-                </td>
-              
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

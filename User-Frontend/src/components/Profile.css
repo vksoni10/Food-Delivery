@@ -18,13 +18,10 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.profile-details {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.05
-  ); /* Translucent background for details */
+.profile-details,
+.profile-addresses,
+.add-address {
+  background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -51,23 +48,11 @@
   vertical-align: top;
 }
 
-.profile-addresses {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.05
-  ); /* Translucent background for addresses */
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 30px;
-}
-
-.profile-addresses h2 {
+.profile-addresses h2,
+.add-address h2 {
   font-size: 2rem;
   margin-bottom: 20px;
-  color: #ddd; /* Addresses heading color */
+  color: #ddd; /* Heading color */
 }
 
 .profile-addresses ul {
@@ -87,61 +72,13 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.profile-addresses li form {
-  display: flex;
-  align-items: center;
-}
-
-.profile-addresses input[type="text"] {
-  flex-grow: 1;
-  padding: 10px;
-  margin-right: 10px;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #ddd;
-  outline: none;
-}
-
-.profile-addresses button {
-  padding: 10px 15px;
-  margin-left: 10px;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff; /* Button background color */
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.profile-addresses button:hover {
-  background-color: #0056b3; /* Darker button background on hover */
-}
-
-.add-address {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.05
-  ); /* Translucent background for add address */
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 30px;
-}
-
-.add-address h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #ddd; /* Add address heading color */
-}
-
+.profile-addresses li form,
 .add-address form {
   display: flex;
   align-items: center;
 }
 
+.profile-addresses input[type="text"],
 .add-address input[type="text"] {
   flex-grow: 1;
   padding: 10px;
@@ -153,8 +90,10 @@
   outline: none;
 }
 
+.profile-addresses button,
 .add-address button {
   padding: 10px 15px;
+  margin-left: 10px;
   border: none;
   border-radius: 4px;
   background-color: #007bff; /* Button background color */
@@ -163,8 +102,60 @@
   transition: background-color 0.3s ease;
 }
 
+.profile-addresses button:hover,
 .add-address button:hover {
   background-color: #0056b3; /* Darker button background on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile {
+    padding: 20px;
+  }
+
+  .profile h1 {
+    font-size: 2.5rem;
+  }
+
+  .profile-details,
+  .profile-addresses,
+  .add-address {
+    padding: 20px;
+  }
+
+  .profile-details td {
+    font-size: 1rem;
+  }
+
+  .profile-addresses h2,
+  .add-address h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile {
+    padding: 15px;
+  }
+
+  .profile h1 {
+    font-size: 2rem;
+  }
+
+  .profile-details,
+  .profile-addresses,
+  .add-address {
+    padding: 15px;
+  }
+
+  .profile-details td {
+    font-size: 0.9rem;
+  }
+
+  .profile-addresses h2,
+  .add-address h2 {
+    font-size: 1.2rem;
+  }
 }
 
 .orders {

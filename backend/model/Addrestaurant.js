@@ -51,6 +51,7 @@ const reviewSchema = new mongoose.Schema({
 });
 
 const restaurantSchema = new mongoose.Schema({
+  
   resDiscount: {
     type: String,
     required: false,

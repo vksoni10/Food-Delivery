@@ -10,6 +10,7 @@ const restOrderRoute = require("./routes/restOrderRoute");
 const restRoute = require("./routes/restRoute");
 const adminRoutes= require("./routes/adminRoute");
 const registerRoute = require("./routes/addRestRoute");
+
 const ownersRoute = require('./routes/ownerRoute');
 const restaurantsRoute = require('./routes/restDetailRoute');
 const path = require('path');
@@ -18,7 +19,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    // origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true, // Important
   })
