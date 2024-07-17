@@ -32,7 +32,7 @@ export default function RestaurantHome() {
       <div className="sidebar">
         <div className="sidebar-tab btn btn-info">
           <NavLink
-            to="/Restaurant/restaurantDashboard"
+            to="/profile"
             className="btn btn-info"
             // onClick={() => setDefaultRoute("/Restaurant/restaurantDashboard")}
           >
@@ -147,7 +147,7 @@ export default function RestaurantHome() {
         <Routes>
           <Route path="/" element={<Profile />} />
           <Route
-            path="/Restaurant/restaurantDashboard"
+            path="/profile"
             element={<RestaurantDashboard />}
           />
           <Route path="/orders" element={<IncomingOrders />} />

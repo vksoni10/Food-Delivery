@@ -16,6 +16,7 @@ import RestroDetail from './components/RestroDetail';
 import Menu from './components/Menu';
 import OrderConfirmation from './components/Orderconfirmation';
 import ProtectedRoute from './components/ProtectedRoute';
+import MyOrders from './components/MyOrders';
 
 function App() {
   return (
@@ -44,6 +45,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path='/auth/myorders'
+            element={
+              <ProtectedRoute>
+                <MyOrders />
               </ProtectedRoute>
             }
           />

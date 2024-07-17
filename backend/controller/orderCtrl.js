@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../model/OrderModel');
+const User = require('../model/UserModel');
+const mongoose = require('mongoose');
+
+
 
 const createOrder = async (req, res) => {
     const { userId, userName, items, totalPrice } = req.body;
@@ -34,16 +38,24 @@ const getCurrentOrder = async(req,res)=>{
       res.status(500).json({ message: 'Internal server error' });
     }
   };  
+
   const getAllUserOrders = async (req, res) => {
-    const { userId } = req.query;
+    const { userId } = req.params; // Use req.params to get userId
+    console.log(userId)
+    
+
     try {
-      const orders = await Order.find({ userId });
-      res.status(200).send({ orders });
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).send({ message: 'User not found' });
+        }
+        const orders = await Order.find({ userId });
+        console.log(orders)
+        res.status(200).send({ orders });
     } catch (error) {
-      res.status(500).send({ message: 'Error fetching orders', error });
+        res.status(500).send({ message: 'Error fetching orders', error });
     }
-  });
-  
+}; 
 
   
 module.exports={createOrder, getCurrentOrder, getAllUserOrders};

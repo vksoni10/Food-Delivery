@@ -124,10 +124,9 @@ const IncomingOrders = () => {
         "Order Created",
         "Order Accepted",
         "Order is Being Prepared",
-        "Order Has Been Prepared",
-        "Order Delivered",
+        
       ])}
-      {renderOrderSection("Current Orders", currentOrders, [
+      {/* {renderOrderSection("Current Orders", currentOrders, [
         "Order Created",
         "Order Accepted",
         "Order is Being Prepared",
@@ -140,7 +139,7 @@ const IncomingOrders = () => {
         "Order is Being Prepared",
         "Order Has Been Prepared",
         "Order Delivered",
-      ])}
+      ])} */}
     </div>
   );
 };
