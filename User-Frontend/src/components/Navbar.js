@@ -3,30 +3,35 @@ import './Navbar.css'; // Ensure you import the correct CSS file
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../components/final.png';
+import { jwtDecode } from 'jwt-decode';
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+  const token = localStorage.getItem('token');
+
   const navigate = useNavigate();
+  const decodedToken = jwtDecode(token);
+  const userId = decodedToken.id;
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
 
-    const fetchCartCount = async () => {
+    const getCartItems = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/cart/get-cart-items', {
+        const responsed = await axios.get('http://localhost:3001/cart/get-cart-items', {
+          params: { userId },
           headers: { Authorization: `Bearer ${token}` }
         });
-        console.log(response.data)
-        setCartCount(response.data.count);
+        setCartCount(responsed.data.cart.totalQuantity);
+        
       } catch (error) {
-        console.error('Error fetching cart count:', error);
+        console.error('Error fetching cart items:', error);
       }
     };
-
     if (token) {
-      fetchCartCount();
+      getCartItems();
     }
   }, []);
 
@@ -45,7 +50,6 @@ function Navbar() {
       console.error('Error:', error);
     }
   };
-
   return (
     <header className="navbar">
       <NavLink to="/" className="logo">
