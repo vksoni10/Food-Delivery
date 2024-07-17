@@ -64,7 +64,7 @@ export default function AddRestaurant() {
       });
 
     
-
+    }
   return (
     <>
       <div className="containerrr mb-3">
