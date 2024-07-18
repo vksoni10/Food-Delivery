@@ -11,19 +11,28 @@ html {
   background-color: #f0f2f5;
 }
 
+.background {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("./registerImage.jpg"); /* Specify your background image path */
+  display: flex;
+  justify-content: center;
+}
+
 .reg {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0f2f5;
-  background-image: url("https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3");
-  background-repeat: no-repeat;
-  background-size: cover;
+  width: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Blur effect for the container itself */
+  border-radius: 15px;
+  opacity: 0.9;
 }
 
 .formarea {
-  background: black;
   padding: 40px 60px;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -36,7 +45,6 @@ html {
 .formarea h1 {
   margin-bottom: 20px;
   font-size: 2.5rem;
-  color: #fff;
 }
 
 .inputarea {
@@ -58,6 +66,7 @@ html {
   border-radius: 5px;
   font-size: 1rem;
   color: #333;
+  background-color: #fff; /* Ensure input fields have a white background for visibility */
 }
 
 .inputs:focus {

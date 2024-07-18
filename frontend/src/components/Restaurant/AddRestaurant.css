@@ -1,12 +1,25 @@
 .containerrr {
   display: flex;
   justify-content: center;
-  background-color: #a4d4b4;
   margin: 0;
   padding: 0;
   width: 100%;
   padding: 3rem 0.5rem 3rem 0.5rem;
+  color: white;
+}
+.forrm {
+  background-color: white;
   color: black;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.background {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("https://images.inc.com/uploaded_files/image/1920x1080/getty_516722612_200013342000928081_128034.jpg"); /* Specify your background image path */
+  display: flex;
+  justify-content: center;
 }
 
 .intro {

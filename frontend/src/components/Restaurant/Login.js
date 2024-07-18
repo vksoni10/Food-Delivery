@@ -27,41 +27,43 @@ export default function Login() {
   };
 
   return (
-    <div className="login">
-      <form onSubmit={handleLogin} className="formarea">
-        <h1>Login</h1>
-        <div className="inputarea">
-          <label className="labels" htmlFor="email">
-            Email:
-          </label>
-          <input
-            className="inputs"
-            type="email"
-            id="email"
-            onChange={(e) => setrEmail(e.target.value)}
-          />
-        </div>
-        <div className="inputarea">
-          <label className="labels" htmlFor="password">
-            Password:
-          </label>
-          <input
-            className="inputs"
-            type="password"
-            id="password"
-            onChange={(e) => setrPassword(e.target.value)}
-          />
-        </div>
-        <div className="btnarea">
-          <button className="btn btn-dark" type="submit">
-            Login
-          </button>
-          <p>
-            First time on our website?{" "}
-            <NavLink to="/Restaurant/register">Register Now</NavLink>
-          </p>
-        </div>
-      </form>
+    <div className="background">
+      <div className="login">
+        <form onSubmit={handleLogin} className="formarea">
+          <h1>Login</h1>
+          <div className="inputarea">
+            <label className="labels" htmlFor="email">
+              Email:
+            </label>
+            <input
+              className="inputs"
+              type="email"
+              id="email"
+              onChange={(e) => setrEmail(e.target.value)}
+            />
+          </div>
+          <div className="inputarea">
+            <label className="labels" htmlFor="password">
+              Password:
+            </label>
+            <input
+              className="inputs"
+              type="password"
+              id="password"
+              onChange={(e) => setrPassword(e.target.value)}
+            />
+          </div>
+          <div className="btnarea">
+            <button className="btn btn-dark" type="submit">
+              Login
+            </button>
+            <p>
+              First time on our website?{" "}
+              <NavLink to="/Restaurant/register">Register Now</NavLink>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

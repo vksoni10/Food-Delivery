@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import "./Register.css";
+import backgroundImage from "./registerImage.jpg";
 
 export default function Register() {
   const [rName, setrName] = useState("");
@@ -38,71 +39,76 @@ export default function Register() {
   };
   return (
     <>
-      <div className="reg">
-        <form onSubmit={handleSubmit} className="formarea">
-          <h1>Register</h1>
-          <div className="inputarea">
-            <label className="labels" htmlFor="name">
-              Full Name:
-            </label>
-            <input
-              className="inputs"
-              type="text"
-              id="name"
-              value={rName}
-              onChange={(e) => setrName(e.target.value)}
-              required
-            />
-          </div>
-          <div className="inputarea">
-            <label className="labels" htmlFor="email">
-              Email:
-            </label>
-            <input
-              className="inputs"
-              type="email"
-              id="email"
-              value={rEmail}
-              onChange={(e) => setrEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="inputarea">
-            <label className="labels" htmlFor="mobile">
-              Phone Number:
-            </label>
-            <input
-              className="inputs"
-              type="number"
-              id="mobile"
-              value={rMobile}
-              onChange={(e) => setrMobile(e.target.value)}
-              required
-            />
-          </div>
-          <div className="inputarea">
-            <label className="labels" htmlFor="password">
-              Password:
-            </label>
-            <input
-              className="inputs"
-              type="password"
-              id="password"
-              value={rPassword}
-              onChange={(e) => setrPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="btnarea">
-            <button className="btn btn-dark" type="submit">
-              Register
-            </button>
-            <p>
-              Already a user?{" "}
-              <NavLink to="/Restaurant/login">Login Now</NavLink>
-            </p>
-          </div>
-        </form>
+      <div
+        className="background"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      >
+        <div className="reg">
+          <form onSubmit={handleSubmit} className="formarea">
+            <h1>Register</h1>
+            <div className="inputarea">
+              <label className="labels" htmlFor="name">
+                Full Name:
+              </label>
+              <input
+                className="inputs"
+                type="text"
+                id="name"
+                value={rName}
+                onChange={(e) => setrName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="inputarea">
+              <label className="labels" htmlFor="email">
+                Email:
+              </label>
+              <input
+                className="inputs"
+                type="email"
+                id="email"
+                value={rEmail}
+                onChange={(e) => setrEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="inputarea">
+              <label className="labels" htmlFor="mobile">
+                Phone Number:
+              </label>
+              <input
+                className="inputs"
+                type="number"
+                id="mobile"
+                value={rMobile}
+                onChange={(e) => setrMobile(e.target.value)}
+                required
+              />
+            </div>
+            <div className="inputarea">
+              <label className="labels" htmlFor="password">
+                Password:
+              </label>
+              <input
+                className="inputs"
+                type="password"
+                id="password"
+                value={rPassword}
+                onChange={(e) => setrPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div className="btnarea">
+              <button className="btn btn-dark" type="submit">
+                Register
+              </button>
+              <p>
+                Already a user?{" "}
+                <NavLink to="/Restaurant/login">Login Now</NavLink>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );
