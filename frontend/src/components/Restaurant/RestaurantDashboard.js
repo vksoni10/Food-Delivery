@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode';
 import './ProfilePage.css';
 
@@ -25,7 +25,13 @@ const RestaurantDashboard = () => {
 
           setOwnerDetails(decodedOwner);
           setRestaurantDetails(restaurantResponse.data);
-          calculateTotalIncome(ordersResponse.data);
+
+          // Calculate total income only if orders exist
+          if (ordersResponse.data && ordersResponse.data.length > 0) {
+            calculateTotalIncome(ordersResponse.data);
+          } else {
+            setTotalIncome(0);
+          }
         } catch (error) {
           console.error('Error fetching profile data:', error);
         }
@@ -46,14 +52,22 @@ const RestaurantDashboard = () => {
 
   const handleOwnerUpdate = async () => {
     const { id } = ownerDetails;
-    await axios.put(`http://localhost:3001/owners/${id}`, ownerDetails);
-    setIsEditingOwner(false);
+    try {
+      await axios.put(`http://localhost:3001/owners/${id}`, ownerDetails);
+      setIsEditingOwner(false);
+    } catch (error) {
+      console.error('Error updating owner details:', error);
+    }
   };
 
   const handleRestaurantUpdate = async () => {
     const { resName } = restaurantDetails;
-    await axios.put(`http://localhost:3001/restaurants/${resName}`, restaurantDetails);
-    setIsEditingRestaurant(false);
+    try {
+      await axios.put(`http://localhost:3001/restaurants/${resName}`, restaurantDetails);
+      setIsEditingRestaurant(false);
+    } catch (error) {
+      console.error('Error updating restaurant details:', error);
+    }
   };
 
   return (

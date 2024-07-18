@@ -41,9 +41,9 @@ export default function Navbar() {
                 </NavLink>
               </div>
               <div className="btn">
-                <button onClick={handleLogout} className="btn btn-dark">
+              <NavLink to="/" onClick={handleLogout} className="btn btn-dark">
                   Logout
-                </button>
+                  </NavLink>
               </div>
             </>
           ) : (

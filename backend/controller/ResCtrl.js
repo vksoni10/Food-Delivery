@@ -50,7 +50,7 @@ const createUser = async (req, res) => {
 };
 
 const loginResCtrl = async (req, res) => {
-  const { rEmail, rPassword } = req.body;
+  const { rEmail, rPassword} = req.body;
 
   try {
     const Restaurant = await Rest.findOne({ rEmail });
@@ -70,13 +70,52 @@ const loginResCtrl = async (req, res) => {
       {
         rEmail: Restaurant.rEmail,
         rName: Restaurant.rName,
-        id: Restaurant._id,
+        rMobile: Restaurant.rMobile,
+        id: Restaurant._id
       },
       JWT_SECRET,
       { expiresIn: "1d" }
     );
 
     res.cookie("ownerToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+    res.json({ message: "Login successful", token });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const restLoginCtrl = async (req, res) => {
+  const { resName} = req.body;
+
+  try {
+    const Restaurant = await restadd.findOne({ resName });
+    if (!Restaurant) {
+      return res.status(404).json({ message: "Restaurant does not exist" });
+    }
+
+    // const isPasswordValid = await bcrypt.compare(
+    //   rPassword,
+    //   Restaurant.rPassword
+    // );
+    // if (!isPasswordValid) {
+    //   return res.status(401).json({ message: "Password is incorrect" });
+    // }
+
+    const token = jwt.sign(
+      {
+        resName: Restaurant.resName,
+        resNumber: Restaurant.resNumber,
+        
+      },
+      JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
     });
@@ -191,4 +230,5 @@ module.exports = {
   getRestroDetails,
   restaurantAdd,
   updateMenu,
+  restLoginCtrl,
 };
