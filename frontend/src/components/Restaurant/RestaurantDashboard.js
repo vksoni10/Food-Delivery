@@ -25,14 +25,13 @@ const RestaurantDashboard = () => {
 
           setOwnerDetails(decodedOwner);
           setRestaurantDetails(restaurantResponse.data);
+          calculateTotalIncome(ordersResponse.data);
 
           // Calculate total income only if orders exist
-          if (ordersResponse.data && ordersResponse.data.length > 0) {
-            calculateTotalIncome(ordersResponse.data);
-          } else {
-            setTotalIncome(0);
-          }
         } catch (error) {
+          if (error.response.data.message == "No orders found for this restaurant"  ) {
+            setTotalIncome(0);
+          } 
           console.error('Error fetching profile data:', error);
         }
       }
