@@ -16,7 +16,7 @@
 
 .navbar-nav {
   display: flex !important;
-  flex-direction: row;
+  flex-direction: row !important;
   align-items: center !important; /* Align items vertically in the navbar */
 }
 
@@ -24,9 +24,9 @@
   margin-right: 10px; /* Adjust spacing between buttons */
 }
 
-@media (max-width: 538px) {
+@media (max-width: 600px) {
   .navbar-nav {
-    flex-direction: column; /* Stack buttons vertically on smaller screens */
+    flex-direction: column !important; /* Stack buttons vertically on smaller screens */
   }
 
   .nav-link {

@@ -14,7 +14,7 @@ html {
   background-repeat: no-repeat;
 }
 
-.background {
+.backgroundd {
   background-image: url("https://w0.peakpx.com/wallpaper/776/861/HD-wallpaper-hamburger-flames-fast-food-food.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -31,7 +31,7 @@ html {
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0.9;
   z-index: 1;
-  backdrop-filter: blur(7px);
+  backdrop-filter: blur(15px);
   width: 100%;
 }
 

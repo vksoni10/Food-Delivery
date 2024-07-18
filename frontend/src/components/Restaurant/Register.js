@@ -69,7 +69,7 @@ export default function Register() {
 
   return (
     <>
-      <div className="background">
+      <div className="backgrounddd">
         <div className="reg">
           <form onSubmit={handleSubmit} className="formarea">
             <h1>Register</h1>
