@@ -142,6 +142,14 @@ const restaurantAdd = async (req, res) => {
         .status(400)
         .json({ message: "Restaurant with the same number already exists" });
     }
+
+    const existingRestName = await restadd.findOne({ resName });
+    if (existingRestName) {
+      return res
+        .status(400)
+        .json({ message: "Restaurant with the same name already exists" });
+    }
+
     let resImages = [];
     if (req.files) {
       resImages = req.files.map((file) => IMG_BASE_URL + file.filename);
@@ -178,6 +186,7 @@ const restaurantAdd = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
 
 const getAllRestaurants = async (req, res) => {
   try {

@@ -10,6 +10,7 @@ export default function AddRestaurant() {
   const [resOperationalHours, setResOperationalHours] = useState("");
   const [restaurantTypes, setRestaurantTypes] = useState([]);
   const [resImage, setResImages] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -32,6 +33,7 @@ export default function AddRestaurant() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setErrorMessage(""); // Clear any previous error messages
     const formData = new FormData();
     formData.append("resName", resName);
     formData.append("resAddress", resAddress);
@@ -41,6 +43,7 @@ export default function AddRestaurant() {
     resImage.forEach((file) => {
       formData.append("resImage", file);
     });
+
     axios
       .post("http://localhost:3001/Restaurant/addRestaurant", formData, {
         headers: {
@@ -49,21 +52,21 @@ export default function AddRestaurant() {
       })
       .then((res) => {
         console.log(res);
-        const { token } = res.data; // Destructure token and message from response data
+        const { token } = res.data;
         if (token) {
-          localStorage.setItem("token", token); // Store the token in localStorage or a cookie
+          localStorage.setItem("token", token);
           navigate("/Restaurant/restaurantHome");
         }
       })
       .catch((err) => {
         if (err.response && err.response.status === 400) {
-          alert(err.response.data.message);
+          setErrorMessage(err.response.data.message);
         } else {
           console.error(err);
+          setErrorMessage("An error occurred. Please try again.");
         }
       });
-    }
-
+  };
     return (
       <>
         <div className="containerrr mb-3">
@@ -79,6 +82,11 @@ export default function AddRestaurant() {
           </div>
           <div>
             <form onSubmit={handleSubmit}>
+            {errorMessage && (
+              <div className="alert alert-danger" role="alert">
+                {errorMessage}
+              </div>
+            )}
               <h4>Restaurant Details</h4>
               <div className="form-floating mb-3">
                 <input
