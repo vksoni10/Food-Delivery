@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const restadd = require("../model/Addrestaurant");
 const IMG_BASE_URL = "http://localhost:3001/static/";
 
-
 const restro = require("../model/Addrestaurant");
 const JWT_SECRET = "jwt-secret-key";
 
@@ -50,7 +49,7 @@ const createUser = async (req, res) => {
 };
 
 const loginResCtrl = async (req, res) => {
-  const { rEmail, rPassword} = req.body;
+  const { rEmail, rPassword } = req.body;
 
   try {
     const Restaurant = await Rest.findOne({ rEmail });
@@ -71,7 +70,7 @@ const loginResCtrl = async (req, res) => {
         rEmail: Restaurant.rEmail,
         rName: Restaurant.rName,
         rMobile: Restaurant.rMobile,
-        id: Restaurant._id
+        id: Restaurant._id,
       },
       JWT_SECRET,
       { expiresIn: "1d" }
@@ -89,7 +88,7 @@ const loginResCtrl = async (req, res) => {
 };
 
 const restLoginCtrl = async (req, res) => {
-  const { resName} = req.body;
+  const { resName } = req.body;
 
   try {
     const Restaurant = await restadd.findOne({ resName });
@@ -109,7 +108,6 @@ const restLoginCtrl = async (req, res) => {
       {
         resName: Restaurant.resName,
         resNumber: Restaurant.resNumber,
-        
       },
       JWT_SECRET,
       { expiresIn: "1d" }
@@ -140,14 +138,14 @@ const restaurantAdd = async (req, res) => {
     if (existingRest) {
       return res
         .status(400)
-        .json({ message: "Restaurant with the same number already exists" });
+        .json({ message: "Restaurant with the same number already exists!" });
     }
 
     const existingRestName = await restadd.findOne({ resName });
     if (existingRestName) {
       return res
         .status(400)
-        .json({ message: "Restaurant with the same name already exists" });
+        .json({ message: "Restaurant with the same name already exists!" });
     }
 
     let resImages = [];
@@ -187,7 +185,6 @@ const restaurantAdd = async (req, res) => {
   }
 };
 
-
 const getAllRestaurants = async (req, res) => {
   try {
     const restaurants = await restro.find();
@@ -213,7 +210,7 @@ const getRestroDetails = async (req, res) => {
 
 const updateMenu = async (req, res) => {
   const { dishName, price, dishType, resName } = req.body;
-  const dishImage = (IMG_BASE_URL+req.file.filename);
+  const dishImage = IMG_BASE_URL + req.file.filename;
   try {
     const restaurant = await restadd.findOne({ resName });
     if (!restaurant) {
@@ -225,7 +222,6 @@ const updateMenu = async (req, res) => {
     await restaurant.save();
 
     res.json(newMenuItem);
-    
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ message: "Server error" });

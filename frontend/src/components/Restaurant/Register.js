@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import "./Register.css";
-import backgroundImage from "./registerImage.jpg";
 
 export default function Register() {
   const [rName, setrName] = useState("");
@@ -20,7 +19,7 @@ export default function Register() {
     if (!rEmail) {
       errors.rEmail = "Email is required.";
     } else if (
-      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(rEmail)
+      /^[a-zA-Z0-9._%+-]{3,}@[a-zA-Z0-9-]{3,}\.[a-zA-Z]{2,}$/.test(rEmail)
     ) {
       errors.rEmail = "Email address is invalid.";
     }

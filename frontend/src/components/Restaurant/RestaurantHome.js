@@ -7,7 +7,6 @@ import CurrentOrders from "./CurrentOrders";
 import OrderHistory from "./OrderHistory";
 import Reviews from "./Reviews";
 import Menu from "./Menu";
-import Profile from "./Profile";
 import CreateMenu from "./CreateMenu";
 import UpdateMenu from "./UpdateMenu";
 import MenuTable from "./MenuTable";
@@ -41,10 +40,14 @@ export default function RestaurantHome() {
       </div>
       <div className="restaurant-dashboard">
         <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-          <div className="sidebar-tab btn btn-info mb-3">
+          <div
+            className="sidebar-tab btn mb-3"
+            style={{ backgroundColor: "goldenrod" }}
+          >
             <NavLink
               to="/profile"
-              className="btn btn-info"
+              className="btn"
+              style={{ backgroundColor: "goldenrod" }}
               // onClick={() => setDefaultRoute("/Restaurant/restaurantDashboard")}
             >
               <sub>
@@ -55,26 +58,14 @@ export default function RestaurantHome() {
               &nbsp;&nbsp;Dashboard
             </NavLink>
           </div>
-          <div className="sidebar-tab mb-3 btn btn-info">
-            <NavLink
-              to="/Restaurant/profile"
-              className="btn btn-info"
-              // onClick={() => setDefaultRoute("/Restaurant/profile")}
-            >
-              <sub>
-                <sub>
-                  <span className="material-symbols-outlined">
-                    account_circle
-                  </span>
-                </sub>
-              </sub>
-              &nbsp;&nbsp;Profile
-            </NavLink>
-          </div>
-          <div className="sidebar-tab mb-3 btn btn-info">
+          <div
+            className="sidebar-tab mb-3 btn"
+            style={{ backgroundColor: "goldenrod" }}
+          >
             <NavLink
               to="/Restaurant/menu"
-              className="btn btn-info"
+              className="btn"
+              style={{ backgroundColor: "goldenrod" }}
               // onClick={() => setDefaultRoute("/*")}
             >
               <sub>
@@ -85,10 +76,14 @@ export default function RestaurantHome() {
               &nbsp;&nbsp;Menu
             </NavLink>
           </div>
-          <div className="sidebar-tab mb-3 btn btn-info">
+          <div
+            className="sidebar-tab mb-3 btn"
+            style={{ backgroundColor: "goldenrod" }}
+          >
             <NavLink
               to="/orders"
-              className="btn btn-info"
+              className="btn"
+              style={{ backgroundColor: "goldenrod" }}
               // onClick={() => setDefaultRoute("/Restaurant/incomingOrders")}
             >
               <sub>
@@ -99,10 +94,14 @@ export default function RestaurantHome() {
               &nbsp;&nbsp;Incoming Orders
             </NavLink>
           </div>
-          <div className="sidebar-tab mb-3 btn btn-info">
+          <div
+            className="sidebar-tab mb-3 btn"
+            style={{ backgroundColor: "goldenrod" }}
+          >
             <NavLink
               to="/Restaurant/currentOrders"
-              className="btn btn-info"
+              className="btn"
+              style={{ backgroundColor: "goldenrod" }}
               // onClick={() => setDefaultRoute("/Restaurant/currentOrders")}
             >
               <sub>
@@ -115,10 +114,14 @@ export default function RestaurantHome() {
               &nbsp;&nbsp;Current Orders
             </NavLink>
           </div>
-          <div className="sidebar-tab mb-3 btn btn-info">
+          <div
+            className="sidebar-tab mb-3 btn"
+            style={{ backgroundColor: "goldenrod" }}
+          >
             <NavLink
               to="/Restaurant/orderHistory"
-              className="btn btn-info"
+              className="btn"
+              style={{ backgroundColor: "goldenrod" }}
               // onClick={() => setDefaultRoute("/Restaurant/orderHistory")}
             >
               <sub>
@@ -129,10 +132,14 @@ export default function RestaurantHome() {
               &nbsp;&nbsp;Order History
             </NavLink>
           </div>
-          <div className="sidebar-tab mb-3 btn btn-info">
+          <div
+            className="sidebar-tab mb-3 btn"
+            style={{ backgroundColor: "goldenrod" }}
+          >
             <NavLink
               to="/Restaurant/review"
-              className="btn btn-info"
+              className="btn"
+              style={{ backgroundColor: "goldenrod" }}
               // onClick={() => setDefaultRoute("/Restaurant/reviews")}
             >
               <sub>
@@ -143,8 +150,15 @@ export default function RestaurantHome() {
               &nbsp;&nbsp;Ratings &#38; Reviews
             </NavLink>
           </div>
-          <div className="sidebar-tab mb-3 btn btn-info">
-            <NavLink to="/" className="btn btn-info">
+          <div
+            className="sidebar-tab mb-3 btn"
+            style={{ backgroundColor: "goldenrod" }}
+          >
+            <NavLink
+              to="/"
+              className="btn"
+              style={{ backgroundColor: "goldenrod" }}
+            >
               <sub>
                 <sub>
                   <span className="material-symbols-outlined">logout</span>
@@ -161,7 +175,6 @@ export default function RestaurantHome() {
           style={{ width: sidebarOpen ? "auto" : "100%" }}
         >
           <Routes>
-            <Route path="/" element={<Profile />} />
             <Route path="/profile" element={<RestaurantDashboard />} />
             <Route path="/orders" element={<IncomingOrders />} />
             <Route
@@ -171,7 +184,6 @@ export default function RestaurantHome() {
             <Route path="/Restaurant/orderHistory" element={<OrderHistory />} />
             <Route path="/Restaurant/review" element={<Reviews />} />
             <Route path="/*" element={<Menu />} />
-            <Route path="/Restaurant/profile" element={<Profile />} />
             <Route
               path="/Restaurant/createMenu"
               element={<CreateMenu onMenuAdd={onMenuAdd} />}
