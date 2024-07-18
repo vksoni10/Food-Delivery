@@ -11,38 +11,66 @@ export default function Register() {
   const [rEmail, setrEmail] = useState("");
   const [rMobile, setrMobile] = useState("");
   const [rPassword, setrPassword] = useState("");
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
+  const validate = () => {
+    const errors = {};
+    if (!rName) errors.rName = "Full Name is required.";
+    if (!rEmail) {
+      errors.rEmail = "Email is required.";
+    } else if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(rEmail)
+    ) {
+      errors.rEmail = "Email address is invalid.";
+    }
+    if (!rMobile) {
+      errors.rMobile = "Phone Number is required.";
+    } else if (!/^[6-9]\d{9}$/.test(rMobile)) {
+      errors.rMobile = "Phone number is invalid.";
+    }
+    if (!rPassword) {
+      errors.rPassword = "Password is required.";
+    } else if (rPassword.length < 8) {
+      errors.rPassword = "Password must be at least 8 characters.";
+    } else if (!/[A-Z]/.test(rPassword)) {
+      errors.rPassword = "Password must contain at least one uppercase letter.";
+    }
+    return errors;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/Restaurant/register", {
-        rName,
-        rEmail,
-        rMobile,
-        rPassword,
-      })
-      .then((result) => {
-        const { token } = result.data;
-        localStorage.setItem("ownerToken", token); // Store the token in localStorage or a cookie
-        console.log(result);
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
+      axios
+        .post("http://localhost:3001/Restaurant/register", {
+          rName,
+          rEmail,
+          rMobile,
+          rPassword,
+        })
+        .then((result) => {
+          const { token } = result.data;
+          localStorage.setItem("ownerToken", token); // Store the token in localStorage or a cookie
+          console.log(result);
 
-        navigate("/Restaurant/login");
-      })
-      .catch((err) => {
-        if (err.response && err.response.status === 400) {
-          alert(err.response.data.message);
-        } else {
-          console.log(err);
-        }
-      });
+          navigate("/Restaurant/login");
+        })
+        .catch((err) => {
+          if (err.response && err.response.status === 400) {
+            alert(err.response.data.message);
+          } else {
+            console.log(err);
+          }
+        });
+    }
   };
+
   return (
     <>
-      <div
-        className="background"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      >
+      <div className="background">
         <div className="reg">
           <form onSubmit={handleSubmit} className="formarea">
             <h1>Register</h1>
@@ -58,6 +86,7 @@ export default function Register() {
                 onChange={(e) => setrName(e.target.value)}
                 required
               />
+              {errors.rName && <p className="error">{errors.rName}</p>}
             </div>
             <div className="inputarea">
               <label className="labels" htmlFor="email">
@@ -71,6 +100,7 @@ export default function Register() {
                 onChange={(e) => setrEmail(e.target.value)}
                 required
               />
+              {errors.rEmail && <p className="error">{errors.rEmail}</p>}
             </div>
             <div className="inputarea">
               <label className="labels" htmlFor="mobile">
@@ -78,12 +108,13 @@ export default function Register() {
               </label>
               <input
                 className="inputs"
-                type="number"
+                type="tel"
                 id="mobile"
                 value={rMobile}
                 onChange={(e) => setrMobile(e.target.value)}
                 required
               />
+              {errors.rMobile && <p className="error">{errors.rMobile}</p>}
             </div>
             <div className="inputarea">
               <label className="labels" htmlFor="password">
@@ -97,6 +128,7 @@ export default function Register() {
                 onChange={(e) => setrPassword(e.target.value)}
                 required
               />
+              {errors.rPassword && <p className="error">{errors.rPassword}</p>}
             </div>
             <div className="btnarea">
               <button className="btn btn-dark" type="submit">

@@ -8,6 +8,7 @@ import Login from "./components/Restaurant/Login";
 import AddRestaurant from "./components/Restaurant/AddRestaurant";
 import ViewRestaurant from "./components/Restaurant/ViewRestaurant";
 import RestaurantHome from "./components/Restaurant/RestaurantHome";
+import ProtectedRoute from "./components/Restaurant/ProtectedRoute";
 import { jwtDecode } from "jwt-decode";
 
 
@@ -36,7 +37,7 @@ function App() {
             path="/Restaurant/viewRestaurant"
             element={<ViewRestaurant />}
           ></Route>
-          <Route exact path="/*" element={<RestaurantHome />}></Route>
+          <Route exact path="/*" element={<ProtectedRoute><RestaurantHome /></ProtectedRoute>}></Route>
         </Routes>
         <Footer />
       </Router>

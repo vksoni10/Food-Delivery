@@ -10,6 +10,7 @@ export default function AddRestaurant() {
   const [resOperationalHours, setResOperationalHours] = useState("");
   const [restaurantTypes, setRestaurantTypes] = useState([]);
   const [resImage, setResImages] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -32,6 +33,7 @@ export default function AddRestaurant() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setErrorMessage(""); // Clear any previous error messages
     const formData = new FormData();
     formData.append("resName", resName);
     formData.append("resAddress", resAddress);
@@ -41,6 +43,7 @@ export default function AddRestaurant() {
     resImage.forEach((file) => {
       formData.append("resImage", file);
     });
+
     axios
       .post("http://localhost:3001/Restaurant/addRestaurant", formData, {
         headers: {
@@ -49,17 +52,18 @@ export default function AddRestaurant() {
       })
       .then((res) => {
         console.log(res);
-        const { token } = res.data; // Destructure token and message from response data
+        const { token } = res.data;
         if (token) {
-          localStorage.setItem("token", token); // Store the token in localStorage or a cookie
+          localStorage.setItem("token", token);
           navigate("/Restaurant/restaurantHome");
         }
       })
       .catch((err) => {
         if (err.response && err.response.status === 400) {
-          alert(err.response.data.message);
+          setErrorMessage(err.response.data.message);
         } else {
           console.error(err);
+          setErrorMessage("An error occurred. Please try again.");
         }
       });
   };
@@ -79,119 +83,126 @@ export default function AddRestaurant() {
             </h4>
           </div>
           <div className="forrm">
-            <form onSubmit={handleSubmit}>
-              <h4 className="mb-3">Restaurant Details</h4>
-              <div className="form-floating mb-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="floatingName"
-                  placeholder="Pizza Hut - Vaishali Nagar"
-                  value={resName}
-                  onChange={(e) => setResName(e.target.value)}
-                />
-                <label htmlFor="floatingInput">Store Name</label>
-              </div>
-              <div className="form-floating mb-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="floatingAddress"
-                  placeholder="Address"
-                  value={resAddress}
-                  onChange={(e) => setResAddress(e.target.value)}
-                />
-                <label htmlFor="floatingPassword">Store Address</label>
-              </div>
-              <div className="form-floating mb-3">
-                <input
-                  type="number"
-                  className="form-control"
-                  id="floatingTel"
-                  placeholder="Telephone number"
-                  value={resNumber}
-                  onChange={(e) => setResNumber(e.target.value)}
-                />
-                <label htmlFor="floatingInput">Contact Details</label>
-              </div>
-              <div className="form-floating mb-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="floatingBrand"
-                  placeholder="10am - 12pm"
-                  value={resOperationalHours}
-                  onChange={(e) => setResOperationalHours(e.target.value)}
-                />
-                <label htmlFor="floatingInput">Operational Hours</label>
-              </div>
-              <h4>Restaurant Type</h4>
-              <div>
-                <div className="resType">
-                  {[
-                    "Asian",
-                    "Punjabi",
-                    "BBQ",
-                    "Bar",
-                    "Bakery and Cake",
-                    "Breakfast",
-                    "Fast Foods",
-                    "Chinese",
-                    "Korean",
-                    "Desserts and IceCream",
-                    "Seafood",
-                    "North Indian",
-                    "Juice and Shakes",
-                    "Mexican",
-                    "Pizza",
-                    "Snacks & Sandwiches",
-                    "Chaat",
-                    "South Indian",
-                  ].map((type) => (
-                    <div className="form-check" key={type}>
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        value={type}
-                        id={type.toLowerCase().replace(/ /g, "")}
-                        onChange={handleTypeChange}
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor={type.toLowerCase().replace(/ /g, "")}
-                      >
-                        {type}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <h4 className="mb-3 mt-3">Three Restaurant Images</h4>
-              {Array.from({ length: 3 }).map((_, index) => (
-                <div className="input-group" key={index}>
-                  <label
-                    className="custom-file-label"
-                    htmlFor={`image${index + 1}`}
-                  >
-                    Restaurant Image {index + 1}
-                  </label>
+            <div>
+              <form onSubmit={handleSubmit}>
+                {errorMessage && (
+                  <div className="alert alert-danger" role="alert">
+                    {errorMessage}
+                  </div>
+                )}
+                <h4>Restaurant Details</h4>
+                <div className="form-floating mb-3">
                   <input
-                    type="file"
-                    className="custom-file-input"
-                    id={`image${index + 1}`}
-                    onChange={handleImageChange}
-                    multiple
+                    type="text"
+                    className="form-control"
+                    id="floatingName"
+                    placeholder="Pizza Hut - Vaishali Nagar"
+                    value={resName}
+                    onChange={(e) => setResName(e.target.value)}
                   />
+                  <label htmlFor="floatingInput">Store Name</label>
                 </div>
-              ))}
-              <button
-                type="submit"
-                className="btn btn-dark mt-3"
-                style={{ margin: "0" }}
-              >
-                Register Restaurant
-              </button>
-            </form>
+                <div className="form-floating mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="floatingAddress"
+                    placeholder="Address"
+                    value={resAddress}
+                    onChange={(e) => setResAddress(e.target.value)}
+                  />
+                  <label htmlFor="floatingPassword">Store Address</label>
+                </div>
+                <div className="form-floating mb-3">
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="floatingTel"
+                    placeholder="Telephone number"
+                    value={resNumber}
+                    onChange={(e) => setResNumber(e.target.value)}
+                  />
+                  <label htmlFor="floatingInput">Contact Details</label>
+                </div>
+                <div className="form-floating mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="floatingBrand"
+                    placeholder="10am - 12pm"
+                    value={resOperationalHours}
+                    onChange={(e) => setResOperationalHours(e.target.value)}
+                  />
+                  <label htmlFor="floatingInput">Operational Hours</label>
+                </div>
+                <h4>Restaurant Type</h4>
+                <div>
+                  <div className="resType">
+                    {[
+                      "Asian",
+                      "Punjabi",
+                      "BBQ",
+                      "Bar",
+                      "Bakery and Cake",
+                      "Breakfast",
+                      "Fast Foods",
+                      "Chinese",
+                      "Korean",
+                      "Desserts and IceCream",
+                      "Seafood",
+                      "North Indian",
+                      "Juice and Shakes",
+                      "Mexican",
+                      "Pizza",
+                      "Snacks & Sandwiches",
+                      "Chaat",
+                      "South Indian",
+                    ].map((type) => (
+                      <div className="form-check" key={type}>
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          value={type}
+                          id={type.toLowerCase().replace(/ /g, "")}
+                          onChange={handleTypeChange}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor={type.toLowerCase().replace(/ /g, "")}
+                        >
+                          {type}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <h4 className="mb-3 mt-3">Three Restaurant Images</h4>
+                {Array.from({ length: 3 }).map((_, index) => (
+                  <div className="input-group" key={index}>
+                    <label
+                      className="custom-file-label"
+                      htmlFor={`image${index + 1}`}
+                    >
+                      Restaurant Image {index + 1}
+                    </label>
+                    <input
+                      type="file"
+                      className="custom-file-input"
+                      id={`image${index + 1}`}
+                      onChange={handleImageChange}
+                      multiple
+                    />
+                  </div>
+                ))}
+                <button
+                  type="submit"
+                  className="btn btn-dark mt-3"
+                  style={{ margin: "0" }}
+                >
+                  Register Restaurant
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
