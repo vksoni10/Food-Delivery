@@ -59,7 +59,7 @@ const Menu = () => {
         Add +
       </NavLink>
       <div className="menu-table">
-        <table className="table table-dark table-hover table-stripped">
+        <table className="table table-light table-hover">
           <thead>
             <tr>
               <th scope="col">Item Name</th>

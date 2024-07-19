@@ -40,10 +40,7 @@ export default function RestaurantHome() {
       </div>
       <div className="restaurant-dashboard">
         <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-          <div
-            className="sidebar-tab btn mb-3"
-            style={{ backgroundColor: "goldenrod" }}
-          >
+          <div className="sidebar-tab btn mb-3">
             <NavLink
               to="/profile"
               className="btn"
@@ -58,10 +55,7 @@ export default function RestaurantHome() {
               &nbsp;&nbsp;Dashboard
             </NavLink>
           </div>
-          <div
-            className="sidebar-tab mb-3 btn"
-            style={{ backgroundColor: "goldenrod" }}
-          >
+          <div className="sidebar-tab mb-3 btn">
             <NavLink
               to="/Restaurant/menu"
               className="btn"
@@ -76,10 +70,7 @@ export default function RestaurantHome() {
               &nbsp;&nbsp;Menu
             </NavLink>
           </div>
-          <div
-            className="sidebar-tab mb-3 btn"
-            style={{ backgroundColor: "goldenrod" }}
-          >
+          <div className="sidebar-tab mb-3 btn">
             <NavLink
               to="/orders"
               className="btn"
@@ -94,10 +85,7 @@ export default function RestaurantHome() {
               &nbsp;&nbsp;Incoming Orders
             </NavLink>
           </div>
-          <div
-            className="sidebar-tab mb-3 btn"
-            style={{ backgroundColor: "goldenrod" }}
-          >
+          <div className="sidebar-tab mb-3 btn">
             <NavLink
               to="/Restaurant/currentOrders"
               className="btn"
@@ -114,10 +102,7 @@ export default function RestaurantHome() {
               &nbsp;&nbsp;Current Orders
             </NavLink>
           </div>
-          <div
-            className="sidebar-tab mb-3 btn"
-            style={{ backgroundColor: "goldenrod" }}
-          >
+          <div className="sidebar-tab mb-3 btn">
             <NavLink
               to="/Restaurant/orderHistory"
               className="btn"
@@ -132,10 +117,7 @@ export default function RestaurantHome() {
               &nbsp;&nbsp;Order History
             </NavLink>
           </div>
-          <div
-            className="sidebar-tab mb-3 btn"
-            style={{ backgroundColor: "goldenrod" }}
-          >
+          <div className="sidebar-tab mb-3 btn">
             <NavLink
               to="/Restaurant/review"
               className="btn"
@@ -150,10 +132,7 @@ export default function RestaurantHome() {
               &nbsp;&nbsp;Ratings &#38; Reviews
             </NavLink>
           </div>
-          <div
-            className="sidebar-tab mb-3 btn"
-            style={{ backgroundColor: "goldenrod" }}
-          >
+          <div className="sidebar-tab mb-3 btn">
             <NavLink
               to="/"
               className="btn"
