@@ -1,7 +1,7 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import {jwtDecode} from 'jwt-decode';
-import './ProfilePage.css';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
+import "./ProfilePage.css";
 
 const RestaurantDashboard = () => {
   const [ownerDetails, setOwnerDetails] = useState({});
@@ -12,16 +12,20 @@ const RestaurantDashboard = () => {
 
   useEffect(() => {
     const fetchProfileData = async () => {
-      const ownerToken = localStorage.getItem('ownerToken');
-      const restaurantToken = localStorage.getItem('token');
+      const ownerToken = localStorage.getItem("ownerToken");
+      const restaurantToken = localStorage.getItem("token");
 
       if (ownerToken && restaurantToken) {
         const decodedOwner = jwtDecode(ownerToken);
         const decodedRestaurant = jwtDecode(restaurantToken);
 
         try {
-          const restaurantResponse = await axios.get(`http://localhost:3001/restaurants/${decodedRestaurant.resName}`);
-          const ordersResponse = await axios.get(`http://localhost:3001/orders/${decodedRestaurant.resName}`);
+          const restaurantResponse = await axios.get(
+            `http://localhost:3001/restaurants/${decodedRestaurant.resName}`
+          );
+          const ordersResponse = await axios.get(
+            `http://localhost:3001/orders/${decodedRestaurant.resName}`
+          );
 
           setOwnerDetails(decodedOwner);
           setRestaurantDetails(restaurantResponse.data);
@@ -29,10 +33,12 @@ const RestaurantDashboard = () => {
 
           // Calculate total income only if orders exist
         } catch (error) {
-          if (error.response.data.message == "No orders found for this restaurant"  ) {
+          if (
+            error.response.data.message == "No orders found for this restaurant"
+          ) {
             setTotalIncome(0);
-          } 
-          console.error('Error fetching profile data:', error);
+          }
+          console.error("Error fetching profile data:", error);
         }
       }
     };
@@ -42,9 +48,12 @@ const RestaurantDashboard = () => {
 
   const calculateTotalIncome = (orders) => {
     const income = orders.reduce((acc, order) => {
-      return acc + order.items.reduce((itemAcc, item) => {
-        return itemAcc + (item.individualPrice * item.quantity);
-      }, 0);
+      return (
+        acc +
+        order.items.reduce((itemAcc, item) => {
+          return itemAcc + item.individualPrice * item.quantity;
+        }, 0)
+      );
     }, 0);
     setTotalIncome(income);
   };
@@ -55,23 +64,26 @@ const RestaurantDashboard = () => {
       await axios.put(`http://localhost:3001/owners/${id}`, ownerDetails);
       setIsEditingOwner(false);
     } catch (error) {
-      console.error('Error updating owner details:', error);
+      console.error("Error updating owner details:", error);
     }
   };
 
   const handleRestaurantUpdate = async () => {
     const { resName } = restaurantDetails;
     try {
-      await axios.put(`http://localhost:3001/restaurants/${resName}`, restaurantDetails);
+      await axios.put(
+        `http://localhost:3001/restaurants/${resName}`,
+        restaurantDetails
+      );
       setIsEditingRestaurant(false);
     } catch (error) {
-      console.error('Error updating restaurant details:', error);
+      console.error("Error updating restaurant details:", error);
     }
   };
 
   return (
     <div className="profile-container">
-      <h1>Profile Page</h1>
+      <h1>Dashboard</h1>
 
       <section className="owner-details">
         <h2>Owner Details</h2>
@@ -81,7 +93,9 @@ const RestaurantDashboard = () => {
             <input
               type="text"
               value={ownerDetails.rName}
-              onChange={(e) => setOwnerDetails({ ...ownerDetails, rName: e.target.value })}
+              onChange={(e) =>
+                setOwnerDetails({ ...ownerDetails, rName: e.target.value })
+              }
             />
           ) : (
             <span>{ownerDetails.rName}</span>
@@ -93,7 +107,9 @@ const RestaurantDashboard = () => {
             <input
               type="email"
               value={ownerDetails.rEmail}
-              onChange={(e) => setOwnerDetails({ ...ownerDetails, rEmail: e.target.value })}
+              onChange={(e) =>
+                setOwnerDetails({ ...ownerDetails, rEmail: e.target.value })
+              }
             />
           ) : (
             <span>{ownerDetails.rEmail}</span>
@@ -105,14 +121,20 @@ const RestaurantDashboard = () => {
             <input
               type="text"
               value={ownerDetails.rMobile}
-              onChange={(e) => setOwnerDetails({ ...ownerDetails, rMobile: e.target.value })}
+              onChange={(e) =>
+                setOwnerDetails({ ...ownerDetails, rMobile: e.target.value })
+              }
             />
           ) : (
             <span>{ownerDetails.rMobile}</span>
           )}
         </div>
-        <button onClick={isEditingOwner ? handleOwnerUpdate : () => setIsEditingOwner(true)}>
-          {isEditingOwner ? 'Save' : 'Edit'}
+        <button
+          onClick={
+            isEditingOwner ? handleOwnerUpdate : () => setIsEditingOwner(true)
+          }
+        >
+          {isEditingOwner ? "Save" : "Edit"}
         </button>
       </section>
 
@@ -132,7 +154,12 @@ const RestaurantDashboard = () => {
             <input
               type="text"
               value={restaurantDetails.resNumber}
-              onChange={(e) => setRestaurantDetails({ ...restaurantDetails, resNumber: e.target.value })}
+              onChange={(e) =>
+                setRestaurantDetails({
+                  ...restaurantDetails,
+                  resNumber: e.target.value,
+                })
+              }
             />
           ) : (
             <span>{restaurantDetails.resNumber}</span>
@@ -144,14 +171,25 @@ const RestaurantDashboard = () => {
             <input
               type="text"
               value={restaurantDetails.resOperationalHours}
-              onChange={(e) => setRestaurantDetails({ ...restaurantDetails, resOperationalHours: e.target.value })}
+              onChange={(e) =>
+                setRestaurantDetails({
+                  ...restaurantDetails,
+                  resOperationalHours: e.target.value,
+                })
+              }
             />
           ) : (
             <span>{restaurantDetails.resOperationalHours}</span>
           )}
         </div>
-        <button onClick={isEditingRestaurant ? handleRestaurantUpdate : () => setIsEditingRestaurant(true)}>
-          {isEditingRestaurant ? 'Save' : 'Edit'}
+        <button
+          onClick={
+            isEditingRestaurant
+              ? handleRestaurantUpdate
+              : () => setIsEditingRestaurant(true)
+          }
+        >
+          {isEditingRestaurant ? "Save" : "Edit"}
         </button>
       </section>
 

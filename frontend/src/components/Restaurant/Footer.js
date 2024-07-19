@@ -19,13 +19,13 @@ const Footer = () => {
           <div className="footer-section contact-us">
             <h2>Contact Us</h2>
             <p>Email: support@potato.com</p>
-            <p>Phone: +1 (234) 567-890</p>
+            <p>Phone: +91 78-78-78-78-78</p>
           </div>
           <div className="footer-section address">
             <h2>Address</h2>
             <p>Potato Inc.</p>
-            <p>Heaven</p>
-            <p>Delicious City, FL 420</p>
+            <p>Netparam Technologies</p>
+            <p>Jan Path. Jaipur</p>
           </div>
           <div className="footer-section social-media">
             <h2>Follow Us</h2>

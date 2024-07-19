@@ -19,10 +19,11 @@ export default function Register() {
     if (!rEmail) {
       errors.rEmail = "Email is required.";
     } else if (
-      /^[a-zA-Z0-9._%+-]{3,}@[a-zA-Z0-9-]{3,}\.[a-zA-Z]{2,}$/.test(rEmail)
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(rEmail)
     ) {
       errors.rEmail = "Email address is invalid.";
     }
+
     if (!rMobile) {
       errors.rMobile = "Phone Number is required.";
     } else if (!/^[6-9]\d{9}$/.test(rMobile)) {
@@ -69,7 +70,7 @@ export default function Register() {
 
   return (
     <>
-      <div className="background">
+      <div className="backgrounddd">
         <div className="reg">
           <form onSubmit={handleSubmit} className="formarea">
             <h1>Register</h1>

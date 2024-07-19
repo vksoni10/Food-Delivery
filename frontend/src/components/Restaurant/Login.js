@@ -27,7 +27,7 @@ export default function Login() {
   };
 
   return (
-    <div className="background">
+    <div className="backgroundd">
       <div className="login">
         <form onSubmit={handleLogin} className="formarea">
           <h1>Login</h1>

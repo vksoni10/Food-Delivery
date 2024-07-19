@@ -11,7 +11,7 @@ html {
   background-color: #f0f2f5;
 }
 
-.background {
+.backgrounddd {
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url("./registerImage.jpg"); /* Specify your background image path */
@@ -27,7 +27,7 @@ html {
   width: 100%;
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  backdrop-filter: blur(10px); /* Blur effect for the container itself */
+  backdrop-filter: blur(15px); /* Blur effect for the container itself */
   border-radius: 15px;
   opacity: 0.9;
 }

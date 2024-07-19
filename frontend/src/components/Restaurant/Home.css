@@ -118,6 +118,7 @@ body {
   .documentList {
     display: flex;
     flex-direction: column;
+    justify-content: center;
   }
   .steps {
     display: flex;
