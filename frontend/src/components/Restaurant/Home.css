@@ -118,6 +118,7 @@ body {
   .documentList {
     display: flex;
     flex-direction: column;
+    justify-content: center;
   }
   .steps {
     display: flex;
@@ -192,11 +193,6 @@ body {
 .manage-ease :nth-last-child(2) {
   margin-right: 2rem;
   width: 35%;
-}
-
-.spacer {
-  height: 6rem;
-  background-color: #f5f3f5;
 }
 
 /* todo2  */

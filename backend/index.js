@@ -8,9 +8,8 @@ const cartRoutes = require("./routes/cartRoute");
 const orderRoutes = require("./routes/orderRoutes");
 const restOrderRoute = require("./routes/restOrderRoute");
 const restRoute = require("./routes/restRoute");
-const adminRoutes= require("./routes/adminRoute");
+const adminRoute= require("./routes/adminRoute");
 const registerRoute = require("./routes/addRestRoute");
-
 const ownersRoute = require('./routes/ownerRoute');
 const restaurantsRoute = require('./routes/restDetailRoute');
 const path = require('path');
@@ -46,13 +45,14 @@ mongoose
 app.use("/Restaurant", restRoute);
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
-app.use("/admin", adminRoutes)
+app.use("/Admins", adminRoute)
 app.use("/order", orderRoutes)
 app.use("/admin", restRoute);
 app.use("/orders", restOrderRoute);
 app.use("/Restaurant", registerRoute);
 app.use("/owners", ownersRoute);
 app.use("/restaurants", restaurantsRoute);
+
 app.use("/static", express.static(__dirname + "/public/Images"));
 app.use('/static', express.static(path.join(__dirname, "/public/Images")));
 app.listen("3001", () => {

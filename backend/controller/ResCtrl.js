@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const restadd = require("../model/Addrestaurant");
 const IMG_BASE_URL = "http://localhost:3001/static/";
 
-
 const restro = require("../model/Addrestaurant");
 const JWT_SECRET = "jwt-secret-key";
 
@@ -70,6 +69,7 @@ const loginResCtrl = async (req, res) => {
       {
         rEmail: Restaurant.rEmail,
         rName: Restaurant.rName,
+        rMobile: Restaurant.rMobile,
         id: Restaurant._id,
       },
       JWT_SECRET,
@@ -77,6 +77,43 @@ const loginResCtrl = async (req, res) => {
     );
 
     res.cookie("ownerToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+    res.json({ message: "Login successful", token });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const restLoginCtrl = async (req, res) => {
+  const { resName } = req.body;
+
+  try {
+    const Restaurant = await restadd.findOne({ resName });
+    if (!Restaurant) {
+      return res.status(404).json({ message: "Restaurant does not exist" });
+    }
+
+    // const isPasswordValid = await bcrypt.compare(
+    //   rPassword,
+    //   Restaurant.rPassword
+    // );
+    // if (!isPasswordValid) {
+    //   return res.status(401).json({ message: "Password is incorrect" });
+    // }
+
+    const token = jwt.sign(
+      {
+        resName: Restaurant.resName,
+        resNumber: Restaurant.resNumber,
+      },
+      JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
     });
@@ -101,8 +138,16 @@ const restaurantAdd = async (req, res) => {
     if (existingRest) {
       return res
         .status(400)
-        .json({ message: "Restaurant with the same number already exists" });
+        .json({ message: "Restaurant with the same number already exists!" });
     }
+
+    const existingRestName = await restadd.findOne({ resName });
+    if (existingRestName) {
+      return res
+        .status(400)
+        .json({ message: "Restaurant with the same name already exists!" });
+    }
+
     let resImages = [];
     if (req.files) {
       resImages = req.files.map((file) => IMG_BASE_URL + file.filename);
@@ -165,7 +210,7 @@ const getRestroDetails = async (req, res) => {
 
 const updateMenu = async (req, res) => {
   const { dishName, price, dishType, resName } = req.body;
-  const dishImage = (IMG_BASE_URL+req.file.filename);
+  const dishImage = IMG_BASE_URL + req.file.filename;
   try {
     const restaurant = await restadd.findOne({ resName });
     if (!restaurant) {
@@ -177,7 +222,6 @@ const updateMenu = async (req, res) => {
     await restaurant.save();
 
     res.json(newMenuItem);
-    
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ message: "Server error" });
@@ -191,4 +235,5 @@ module.exports = {
   getRestroDetails,
   restaurantAdd,
   updateMenu,
+  restLoginCtrl,
 };

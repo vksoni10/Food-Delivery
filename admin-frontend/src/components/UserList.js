@@ -13,7 +13,7 @@ const UserList = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/admin/users');
+        const response = await axios.get('http://localhost:3001/Admins/users');
         setUsers(response.data);
         setLoading(false);
       } catch (err) {
@@ -39,7 +39,7 @@ const UserList = () => {
   return (
     <div className="user-list">
       <h1>User List</h1>
-      <div className="search-bar">
+      <div className="search-barss">
         <input
           type="text"
           placeholder="Search by name..."

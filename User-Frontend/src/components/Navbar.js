@@ -3,20 +3,21 @@ import './Navbar.css'; // Ensure you import the correct CSS file
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../components/final.png';
-import { jwtDecode } from 'jwt-decode';
-import DataContext, { DataProvider } from './DataContext';
-
+import {jwtDecode} from 'jwt-decode';
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const token = localStorage.getItem('token');
-
-  const count  = useContext(DataProvider)
+  
 
   const navigate = useNavigate();
-  const decodedToken = jwtDecode(token);
-  const userId = decodedToken.id;
+  let userId = null;
+
+  if (token) {
+    const decodedToken = jwtDecode(token);
+    userId = decodedToken.id;
+  }
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -29,15 +30,15 @@ function Navbar() {
           headers: { Authorization: `Bearer ${token}` }
         });
         setCartCount(responsed.data.cart.totalQuantity);
-        
       } catch (error) {
         console.error('Error fetching cart items:', error);
       }
     };
+
     if (token) {
       getCartItems();
     }
-  }, []);
+  }, [userId]);
 
   const handleLogout = async () => {
     try {
@@ -54,6 +55,7 @@ function Navbar() {
       console.error('Error:', error);
     }
   };
+
   return (
     <header className="navbar">
       <NavLink to="/" className="logo">

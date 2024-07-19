@@ -17,7 +17,7 @@ const OrderSchema = new Schema({
   totalPrice: { type: Number, required: true },
   status: {
     type: String,
-    enum: ['Order Created', 'Order Accepted', 'Order is Being Prepared', 'Order Has Been Prepared', 'Order on Your Way', 'Order Delivered'],
+    enum: ['Order Created', 'Order Accepted', 'Order is Being Prepared', 'Order Has Been Prepared', 'Order on Your Way', 'Order Delivered', 'Order Cancelled'],
     default: 'Order Created'
   },
   createdAt: { type: Date, default: Date.now }

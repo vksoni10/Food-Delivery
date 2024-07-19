@@ -3,24 +3,35 @@
   width: 6rem;
 }
 
-.nav-link {
-  display: grid;
-  grid-template-columns: auto auto;
-}
 .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
+  padding: 1rem 2rem;
+}
+
+.start-business-heading {
+  color: white;
+  margin: 0;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-right: 2rem;
+}
+
+.navbar-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important; /* Align items vertically in the navbar */
+}
+
+.nav-link {
+  margin-right: 10px; /* Adjust spacing between buttons */
+}
+
+@media (max-width: 600px) {
+  .navbar-nav {
+    flex-direction: column !important; /* Stack buttons vertically on smaller screens */
   }
-    
-  .btn {
-    margin-left: 10px;
+
+  .nav-link {
+    margin-right: 0; /* Remove margin between buttons on smaller screens */
+    margin-bottom: 10px; /* Add margin below each button on smaller screens */
   }
-  
-  .start-business-heading {
-    color: white;
-    margin: 0;
-    font-size: 1.5rem;
-    text-align: center;
-  }
+}
