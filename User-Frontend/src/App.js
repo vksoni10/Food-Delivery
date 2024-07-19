@@ -17,12 +17,10 @@ import Menu from './components/Menu';
 import OrderConfirmation from './components/Orderconfirmation';
 import ProtectedRoute from './components/ProtectedRoute';
 import MyOrders from './components/MyOrders';
-import DataContext from './components/DataContext';
 
 
 function App() {
   return (
-    <DataContext>
     <Router>
       <main>
         <Routes>
@@ -75,7 +73,6 @@ function App() {
         </Routes>
       </main>
     </Router>
-    </DataContext>
   );
 }
 
