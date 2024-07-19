@@ -539,3 +539,30 @@ button:disabled {
     margin-left: 5%;
   }
 }
+#overview {
+  /* background-color: #FFD700; goldenrod background */
+  padding: 20px;
+  border: 2px solid #DAA520; /* darker goldenrod border */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-top: 50px;
+}
+
+#overview:hover {
+  transform: translateY(-50px);
+  transform: translateX(+50px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.over {
+  font-family: 'Arial', sans-serif;
+  color: #f7f1f1; /* dark text for readability */
+  text-align: center;
+  line-height: 1.6;
+}
+
+.over span {
+  font-weight: bold;
+  color: #DAA520; /* emphasize the restaurant name and address */
+}

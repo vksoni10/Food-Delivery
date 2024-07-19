@@ -149,8 +149,9 @@ const RestroDetail = () => {
           <div className="tab-content">
             {activeTab === "overview" && (
               <div id="overview" className='ov'>
-                <h4 className="over">Order now from {restaurant.resName}. Visit us now at {restaurant.resAddress}. Checkout the above tabs to explore ordering online, the reviews our customers gave and also to book a table! </h4>
-              </div>
+              <h4 className="over">Order now from <span>{restaurant.resName}</span>. Visit us now at <span>{restaurant.resAddress}</span>. Checkout the above tabs to explore ordering online, the reviews our customers gave and also to book a table!</h4>
+          </div>
+            
             )}
             {activeTab === "order" && (
               <Order 
