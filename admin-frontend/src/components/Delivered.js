@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './AllOrders.css'; // Include your CSS file here
+import './Order.css'; // Include your CSS file here
 import { NavLink } from 'react-router-dom';
 
 const AllOrders = () => {

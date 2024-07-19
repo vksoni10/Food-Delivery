@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Line, Pie } from 'react-chartjs-2';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // For making HTTP requests
+import axios from 'axios';
 import { Chart as ChartJS, ArcElement, PointElement, LineElement, Tooltip, Legend, CategoryScale, LinearScale } from 'chart.js';
 import './Dashboard.css';
 
@@ -28,6 +28,16 @@ const Dashboard = () => {
     delivered: [],
     cancelled: []
   });
+  const [pieData, setPieData] = useState({
+    labels: ['Received', 'Processing', 'Cancelled', 'Delivered'],
+    datasets: [
+      {
+        data: [0, 0, 0, 0],
+        backgroundColor: ['#3498db', '#f1c40f', '#e74c3c', '#2ecc71'],
+        hoverBackgroundColor: ['#2980b9', '#f39c12', '#c0392b', '#27ae60'],
+      },
+    ],
+  });
 
   const handleNavigation = (path) => {
     navigate(path);
@@ -37,7 +47,7 @@ const Dashboard = () => {
     const fetchUserCount = async () => {
       try {
         const response = await axios.get('http://localhost:3001/Admins/users');
-        setUserCount(response.data.length); // Assuming response is an array
+        setUserCount(response.data.length);
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -49,12 +59,11 @@ const Dashboard = () => {
     return () => clearInterval(intervalUser);
   }, []);
 
-
   useEffect(() => {
     const fetchRestaurantCount = async () => {
       try {
         const response = await axios.get('http://localhost:3001/Admins/restaurantslist');
-        setRestaurantCount(response.data.length); // Assuming response is an array
+        setRestaurantCount(response.data.length);
       } catch (error) {
         console.error('Error fetching restaurant data:', error);
       }
@@ -70,7 +79,8 @@ const Dashboard = () => {
     const fetchOrderCountsAndEarnings = async () => {
       try {
         const response = await axios.get('http://localhost:3001/Admins/all');
-        const orders = response.data; // Assuming response is an array
+        const orders = response.data;
+        
         const receivedOrders = orders.filter(order => ['Order Created', 'Order Accepted'].includes(order.status));
         const processingOrders = orders.filter(order => ['Order is Being Prepared', 'Order Has Been Prepared', 'Order on Your Way'].includes(order.status));
         const deliveredOrders = orders.filter(order => order.status === 'Order Delivered');
@@ -81,72 +91,67 @@ const Dashboard = () => {
         setDeliveredCount(deliveredOrders.length);
         setCancelledCount(cancelledOrders.length);
 
-         // Filter orders based on status and calculate counts
-         const deliveredData = Array(12).fill(0);
-         const cancelledData = Array(12).fill(0);
- 
-         orders.forEach(order => {
-           const status = order.status;
-           const createdAt = new Date(order.createdAt);
-           const month = createdAt.getMonth(); // Month is 0-indexed (0 = January, 11 = December)
- 
-           if (status === 'Order Delivered') {
-             deliveredData[month]++;
-           } else if (status === 'Order Cancelled') {
-             cancelledData[month]++;
-           }
-         });
- 
-         setDeliveredCount(deliveredData.reduce((total, count) => total + count, 0));
-         setCancelledCount(cancelledData.reduce((total, count) => total + count, 0));
- 
-         const monthlyDelivered = deliveredData.map((count, index) => ({
-           month: index + 1,
-           value: count
-         }));
- 
-         const monthlyCancelled = cancelledData.map((count, index) => ({
-           month: index + 1,
-           value: count
-         }));
- 
-         setMonthlyData({
-           delivered: monthlyDelivered,
-           cancelled: monthlyCancelled
-         });
+        const deliveredData = Array(12).fill(0);
+        const cancelledData = Array(12).fill(0);
 
-         setPieData({
+        orders.forEach(order => {
+          const status = order.status;
+          const createdAt = new Date(order.createdAt);
+          const month = createdAt.getMonth();
+
+          if (status === 'Order Delivered') {
+            deliveredData[month]++;
+          } else if (status === 'Order Cancelled') {
+            cancelledData[month]++;
+          }
+        });
+
+        const monthlyDelivered = deliveredData.map((count, index) => ({
+          month: index + 1,
+          value: count
+        }));
+
+        const monthlyCancelled = cancelledData.map((count, index) => ({
+          month: index + 1,
+          value: count
+        }));
+
+        setMonthlyData({
+          delivered: monthlyDelivered,
+          cancelled: monthlyCancelled
+        });
+
+        setPieData({
           labels: ['Received', 'Processing', 'Cancelled', 'Delivered'],
           datasets: [
             {
-              data: [receivedCount, processingCount, cancelledCount, deliveredCount],
+              data: [receivedOrders.length, processingOrders.length, cancelledOrders.length, deliveredOrders.length],
               backgroundColor: ['#3498db', '#f1c40f', '#e74c3c', '#2ecc71'],
               hoverBackgroundColor: ['#2980b9', '#f39c12', '#c0392b', '#27ae60'],
             },
           ],
         });
-      
 
+        // Calculate total earnings
+        const totalRevenue = orders.reduce((sum, order) => sum + parseFloat(order.totalPrice || 0), 0);
+        const revenueAfterGST = totalRevenue * 0.82;
+        const platformRevenue = revenueAfterGST * 0.10;
+        setEarning(platformRevenue.toFixed(2));
 
-   // Calculate total earnings
-   const totalRevenue = orders.reduce((sum, order) => sum + order.totalPrice, 0);
-   const revenueAfterGST = totalRevenue * 0.82;
-   const platformRevenue = revenueAfterGST * 0.10;
-   setEarning(platformRevenue.toFixed(2)); // Round to 2 decimal places
+        console.log('Total Revenue:', totalRevenue);
+        console.log('Revenue After GST:', revenueAfterGST);
+        console.log('Platform Revenue:', platformRevenue);
 
+      } catch (error) {
+        console.error('Error fetching order data:', error);
+      }
+    };
 
+    fetchOrderCountsAndEarnings();
+    const intervalOrders = setInterval(fetchOrderCountsAndEarnings, 300);
 
- } catch (error) {
-   console.error('Error fetching order data:', error);
- }
-};
-
-fetchOrderCountsAndEarnings();
-const intervalOrders = setInterval(fetchOrderCountsAndEarnings, 300);
-
-return () => clearInterval(intervalOrders);
-}, []);
-
+    return () => clearInterval(intervalOrders);
+  }, []);
 
   const barData = {
     labels: [
@@ -166,17 +171,6 @@ return () => clearInterval(intervalOrders);
         borderColor: 'rgba(192, 192, 192, 1)',
         borderWidth: 1,
         data: monthlyData.cancelled.map(data => data.value),
-      },
-    ],
-  };
-
-  const pieData = {
-    labels: ['Received', 'Processing', 'Cancelled', 'Delivered'],
-    datasets: [
-      {
-        data: [receivedCount, processingCount, cancelledCount, deliveredCount],
-        backgroundColor: ['#3498db', '#f1c40f', '#e74c3c', '#2ecc71'],
-        hoverBackgroundColor: ['#2980b9', '#f39c12', '#c0392b', '#27ae60'],
       },
     ],
   };

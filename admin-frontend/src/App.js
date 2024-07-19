@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import Sidebar from './components/Sidebar';
@@ -8,12 +8,20 @@ import Received from './components/Received';
 import AllOrders from './components/AllOrders';
 import RestaurantList from './components/RestaurantList';
 import UserList from './components/UserList';
-import Processing from './components/Processing'
-import Delivered from './components/Delivered'
-import Cancelled from './components/Cancelled'
- 
+import Processing from './components/Processing';
+import Delivered from './components/Delivered';
+import Cancelled from './components/Cancelled';
+import Login from './components/Login';
+import Register from './components/Register';
+import ProtectedRoute from './components/ProtectedRoute';
+
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // Set to true for now to bypass login
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('ownerToken');
+    setIsAuthenticated(!!token);
+  }, []);
 
   const handleLogin = () => {
     setIsAuthenticated(true);
@@ -21,7 +29,24 @@ function App() {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
+    localStorage.removeItem('ownerToken');
   };
+
+  useEffect(() => {
+    const handlePopState = (event) => {
+      // Check if the user is navigating to the login page
+      if (window.location.pathname === '/login') {
+        localStorage.removeItem('ownerToken');
+        setIsAuthenticated(false);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   return (
     <Router>
@@ -31,16 +56,19 @@ function App() {
           {isAuthenticated && <Header onLogout={handleLogout} />}
           <div className="content">
             <Routes>
-              <Route path="/" element={<Navigate to="/dashboard" />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/received" element={<Received />} />
-              <Route path="/processing" element={<Processing />} />
-              <Route path="/delivered" element={<Delivered />} />
-              <Route path="/cancelled" element={<Cancelled />} />
-              <Route path="/all-orders" element={<AllOrders />} />
-              <Route path="/restaurantslist" element={<RestaurantList />} />
-              <Route path="/user" element={<UserList />} />
-              <Route path="*" element={<Navigate to="/dashboard" />} />
+              <Route path="/" element={<Register />} />
+              <Route path="/login" element={<Login onLogin={handleLogin} />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/received" element={<Received />} />
+                <Route path="/processing" element={<Processing />} />
+                <Route path="/delivered" element={<Delivered />} />
+                <Route path="/cancelled" element={<Cancelled />} />
+                <Route path="/all-orders" element={<AllOrders />} />
+                <Route path="/restaurantslist" element={<RestaurantList />} />
+                <Route path="/user" element={<UserList />} />
+              </Route>
+              <Route path="*" element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} />} />
             </Routes>
           </div>
         </div>

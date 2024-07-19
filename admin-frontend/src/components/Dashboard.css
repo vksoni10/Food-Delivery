@@ -1,61 +1,64 @@
 /* src/components/Dashboard.css */
+
+/* Base styles */
 .dashboard {
   display: flex;
-  /* flex-direction: column; */
-  gap: 20px;
-  padding: 20px;
+  flex-direction: column;
+  gap: 1.25rem; /* 20px / 16px */
+  padding: 1.25rem; /* 20px / 16px */
   background: #f4f4f4;
-  margin-top: 40px;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  
+  margin-top: 2.5rem; /* 40px / 16px */
 }
 
 .stats-container {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: 1.25rem; /* 20px / 16px */
   flex-wrap: wrap;
-  
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
-@media screen and (width<900) {
-  .stats-container .charts-container{
-    display: flex;
-    /* flex-direction: column; */
-  }
+.order-stats,
+.site-stats {
+  flex: 1; /* Allows the divs to grow and shrink equally */
+  min-width: 0; /* Prevents overflow issues */
+  display: flex;
+  flex-direction: column;
 }
 
 .box {
+  gap: 1.5rem;
   background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 550px;
+  border-radius: 0.5rem; /* 8px / 16px */
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* 2px 4px / 16px */
+  padding: 1.25rem; /* 20px / 16px */
+  width: 34.375rem; /* 550px / 16px */
 }
 
 .stats {
   display: flex;
-  gap: 10px;
+  gap: 0.625rem; /* 10px / 16px */
 }
 
 .stat-box {
   flex: 1;
-  padding: 20px;
-  border-radius: 8px;
+  padding: 1.25rem; /* 20px / 16px */
+  border-radius: 0.5rem; /* 8px / 16px */
   color: #ffffff;
   text-align: center;
   cursor: pointer;
   transition: background 0.3s;
+  font-size: 1rem; /* Added for better text size control */
 }
 
 .stat-box p {
-  margin: 0 0 10px;
+  margin: 0 0 0.625rem; /* 10px / 16px */
   font-weight: bold;
 }
 
 .stat-box span {
-  font-size: 1.5em;
+  font-size: 1.5rem; /* 1.5em */
 }
 
 .stat-box.blue {
@@ -76,15 +79,16 @@
 
 .charts-container {
   display: flex;
-  gap: 20px;
-  flex-wrap:nowrap;
+  gap: 1.25rem; /* 20px / 16px */
+  flex-wrap: nowrap;
+  
 }
 
 .product-sales,
 .orders-pie {
   flex: 1;
   position: relative;
-  height: 400px;
+  height: 30rem; /* 400px / 16px */
 }
 
 .orders-pie {
@@ -92,29 +96,31 @@
   justify-content: center;
   align-items: center;
 }
+
 .pie-chart {
-  width: 400px;
-  height: 400px;
+  width: 25rem; /* 400px / 16px */
+  height: 25rem; /* 400px / 16px */
 }
+
 
 .latest-orders {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.625rem; /* 10px / 16px */
 }
 
 .order {
   display: flex;
-  gap: 10px;
-  border: 1px solid #eaeaea;
-  padding: 10px;
-  border-radius: 8px;
+  gap: 0.625rem; /* 10px / 16px */
+  border: 0.0625rem solid #eaeaea; /* 1px / 16px */
+  padding: 0.625rem; /* 10px / 16px */
+  border-radius: 0.5rem; /* 8px / 16px */
   background: #f9f9f9;
 }
 
 .order img {
-  width: 50px;
-  height: 50px;
+  width: 3.125rem; /* 50px / 16px */
+  height: 3.125rem; /* 50px / 16px */
   border-radius: 50%;
 }
 
@@ -124,10 +130,59 @@
 
 .order-details p {
   margin: 0;
-  font-size: 0.9em;
+  font-size: 0.9rem; /* 0.9em */
 }
 
 .order-details p strong {
   display: block;
-  font-size: 1.1em;
+  font-size: 1.1rem; /* 1.1em */
+}
+
+/* Media Queries for responsiveness */
+
+/* For screens larger than 56rem (896px) */
+@media (min-width: 56rem) { /* 896px / 16px */
+  .stats-container {
+    flex-direction: row;
+  }
+  
+  .box {
+    width: 34.375rem; /* 550px / 16px */
+  }
+  
+  .stat-box {
+    padding: 1.25rem; /* 20px / 16px */
+    font-size: 1rem; /* 1em */
+  }
+  
+  .stat-box span {
+    font-size: 1.5rem; /* 1.5em */
+  }
+}
+
+/* For screens smaller than 56rem (896px) */
+@media (max-width: 56rem) { /* 896px / 16px */
+  .stats-container {
+    flex-direction: column;
+    gap: 1.25rem; /* Ensures space between stacked items */
+  }
+  
+  .box {
+    width: 100%; /* Full width for stacked items */
+  }
+  
+  .charts-container {
+    flex-direction: column;
+    gap: 1.25rem; /* Ensures space between stacked charts */
+  }
+  
+  .stat-box {
+    flex: 1 1 100%; /* Ensure each stat-box takes full width in stacked layout */
+    padding: 1rem; /* Reduce padding for smaller screens */
+    font-size: 0.875rem; /* Adjust font size for better fit */
+  }
+  
+  .stat-box span {
+    font-size: 1.25rem; /* Adjust font size for smaller screens */
+  }
 }

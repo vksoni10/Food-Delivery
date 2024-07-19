@@ -1,44 +1,57 @@
+/* src/components/RestaurantList.css */
+
 .restaurant-list {
-  padding: 20px;
-  margin-top: 30px;
+  padding: 1.25rem; /* 20px */
+  margin-top: 1.875rem; /* 30px */
   font-family: Arial, sans-serif;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem; /* 20px */
 }
 
 .restaurant-list h1 {
-  margin-bottom: 0px;
+  margin-top: 2rem;
+  margin-bottom: 1rem; /* Adjusted from 2px to 1rem for space */
   text-align: center;
-  font-size: 34px;
+  font-size: 3.225rem; /* 34px */
   color: #333;
+  position: relative;
+}
+
+.restaurant-list h1::after {
+  content: "";
+  display: block;
+  width: 3.125rem; /* 50px */
+  height: 0.1875rem; /* 3px */
+  background-color: #3498db; /* Blue underline color */
+  position: absolute;
+  bottom: -0.625rem; /* -10px */
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .search-bars-container {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem; /* 20px */
 }
 
 .search-bars {
-  position: absolute;
-  top: 54px;
-  right: 35px;
-  margin-right: 2px;
-  margin-top: 39px;
+  position: relative; /* Changed to relative for better control */
+  margin-right: 0.125rem; /* 2px */
 }
 
 .search-bars input[type="text"] {
-  margin-top: 0px;
-  padding: 10px 16px;
-  border: 1px solid #3acbef;
-  border-radius: 20px;
-  font-size: 14px;
-  width: 150px;
-  transition: width 0.3s ease-in-out;
+  margin-bottom: 0.625rem; /* 10px */
+  padding: 0.625rem 1rem; /* 10px 16px */
+  border: 0.0625rem solid #3498db; /* 1px */
+  border-radius: 1.5rem; /* 20px */
+  font-size: 1.05rem; /* 14px */
+  width: 12.375rem; /* 150px */
+  transition: width 0.3s ease-in-out; /* Smooth transition for width change */
 }
 
 .search-bars input[type="text"]:focus {
-  width: 170px;
-  outline: none;
+  width: 16.625rem; /* 170px */
+  border: 0.0625rem solid #3498db; /* 1px */
 }
 
 .table-container {
@@ -48,41 +61,82 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 1.25rem; /* 20px */
 }
 
 table th,
 table td {
-  padding: 12px 15px;
+  padding: 0.75rem 1rem; /* 12px 16px */
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 0.0625rem solid #ddd; /* 1px */
 }
 
 table th {
   background-color: #f4f4f4;
-  font-size: 16px;
+  font-size: 1rem; /* 16px */
 }
 
 table tr:hover {
   background-color: #f1f1f1;
 }
 
-@media (max-width: 768px) {
+.delete-button {
+  background-color: rgb(237, 63, 63);
+  color: white;
+  border-radius: 1.25rem; /* 20px */
+  padding: 0.375rem; /* 6px */
+  border: 0.0625rem solid rgb(246, 40, 40); /* 1px */
+}
+
+/* Media Queries for responsiveness */
+
+/* For screens smaller than 56rem (896px) */
+@media (max-width: 56rem) {
+  .search-bars input[type="text"] {
+    width: 7.5rem; /* 120px */
+  }
+
+  .search-bars input[type="text"]:focus {
+    width: 9.375rem; /* 150px */
+  }
+
   table th,
   table td {
-    font-size: 14px;
-    padding: 10px;
-  }
-  
-  .search-bar input[type="text"] {
-    width: 100px;
+    font-size: 0.875rem; /* Adjust font size for smaller screens */
+    padding: 0.5rem; /* 8px */
   }
 }
 
-.delete-button{
-  background-color: rgb(237, 63, 63);
-  color: white;
-  border-radius: 20px;
-  padding: 6px;
-  border-color:rgb(246, 40, 40);
+/* For screens smaller than 40rem (640px) */
+@media (max-width: 40rem) {
+  .search-bars input[type="text"] {
+    width: 6.25rem; /* 100px */
+  }
+
+  .search-bars input[type="text"]:focus {
+    width: 7.5rem; /* 120px */
+  }
+
+  table th,
+  table td {
+    font-size: 0.75rem; /* Further reduce font size */
+    padding: 0.375rem; /* 6px */
+  }
+}
+
+/* For screens smaller than 36rem (576px) */
+@media (max-width: 36rem) {
+  .search-bars input[type="text"] {
+    width: 5.5rem; /* 100px */
+  }
+
+  .search-bars input[type="text"]:focus {
+    width: 7rem; /* 120px */
+  }
+
+  table th,
+  table td {
+    font-size: 0.7rem; /* Further reduce font size */
+    padding: 0.45rem 0.6rem; /* 8px 10px */
+  }
 }

@@ -1,23 +1,27 @@
+/* Base styles */
 .order-list {
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .buttons-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  /* margin-bottom: 20px; */
-  margin-top: 40px; /* Added to match the dispatcher container margin */
+  gap: 10px; /* Adjust gap between buttons */
+  margin-top: 40px;
 }
 
 .order-button {
-  flex: 1;
+  flex: 1 1 calc(20% - 10px); /* Adjust for responsive wrapping */
   text-align: center;
   padding: 10px;
-  margin: 0 7px;
   background-color: #3498db;
   color: white;
   text-decoration: none;
   border-radius: 5px;
+  transition: background-color 0.3s;
+  margin-bottom: 3rem;
 }
 
 .order-button:hover {
@@ -25,33 +29,30 @@
 }
 
 .search-bar {
-  position: absolute;
-  right: 20px;
-  top: 0px;
-  margin-right: 20px;
-  margin-top: 149px;
-
-  
+  position: relative; /* Changed to relative for better control */
+  margin-right: 0.125rem; /* 2px */
 }
 
 .search-bar input[type="text"] {
-  padding: 10px 16px; /* Adjusted padding for input field */
-  border: 1px solid #3498db;
-  border-radius: 20px; /* Rounded corners */
-  font-size: 14px;
-  width: 150px;
+  margin-bottom: 0.625rem; /* 10px */
+  padding: 0.625rem 1rem; /* 10px 16px */
+  border: 0.0625rem solid #3498db; /* 1px */
+  border-radius: 1.5rem; /* 20px */
+  font-size: 1.05rem; /* 14px */
+  width: 12.375rem; /* 150px */
   transition: width 0.3s ease-in-out; /* Smooth transition for width change */
-  
 }
 
 .search-bar input[type="text"]:focus {
-  width: 170px; /* Expanded width on focus */
-  border: 1px solid #3498db;
+  width: 16.625rem; /* 170px */
+  border: 0.0625rem solid #3498db; /* 1px */
 }
+
 
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 20px; /* Margin top for spacing */
 }
 
 thead {
@@ -84,13 +85,16 @@ tbody tr:hover {
   text-align: center;
   padding: 50px 0;
 }
-h2{
-  margin-bottom: 0px;
+
+h1 {
+  margin-bottom: 0;
   text-align: center;
   font-size: 34px;
   color: #333;
+  position: relative;
 }
-h2::after {
+
+h1::after {
   content: "";
   display: block;
   width: 50px;
@@ -100,4 +104,142 @@ h2::after {
   bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+/* Media Queries for responsiveness */
+
+/* For screens smaller than 56rem (896px) */
+@media (max-width: 56rem) { /* 896px / 16px */
+  .buttons-container {
+    display:inline-flexbox;
+  flex-wrap:nowrap;
+  justify-content: space-between;
+  gap: 6px; /* Adjust gap between buttons */
+  margin-top: 40px;
+  margin-left: 0px;
+  margin-bottom: 1px;
+}
+
+  .order-button {
+    flex:auto; /* Up to 2 buttons per row */
+    font-size: 1.575rem;
+    padding: 6px;
+    margin-bottom: 10px; /* Space between rows */
+  }
+
+  h1 {
+    margin-bottom: 0;
+    text-align: center;
+    font-size: 34px;
+    color: #333;
+    position: relative;
+  }
+
+  .search-bar input[type="text"] {
+    width: 50%;
+    max-width: 300px; /* Keep a reasonable max-width */
+  }
+
+  table {
+    font-size: 0.875rem; /* Adjust font size for smaller screens */
+  }
+
+  th, td {
+    padding: 8px; /* Reduce padding for smaller screens */
+  }
+}
+
+/* For screens smaller than 40rem (640px) */
+@media (max-width: 40rem) { /* 640px / 16px */
+  .buttons-container {
+    display:inline-flexbox;
+  flex-wrap:nowrap;
+  justify-content: space-between;
+  gap: 6px; /* Adjust gap between buttons */
+  margin-top: 40px;
+  margin-left: 0px;
+  }
+
+  .order-button {
+    flex:auto; /* Up to 2 buttons per row */
+    font-size: 1.75rem;
+    padding: 6px;
+    margin-bottom: 10px; /* Space between rows */
+  }
+
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0; /* Margin top and bottom for spacing */
+  }
+  
+  .search-bar input[type="text"] {
+    padding: 10px 16px;
+    border: 1px solid #3498db;
+    border-radius: 20px;
+    font-size: 14px;
+    width: 50%;
+    max-width: 200px; /* Prevent excessive expansion */
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .search-bar input[type="text"]:focus {
+    width: 100%;
+    max-width: 400px; /* Expanded width on focus */
+  }
+}
+
+/* For screens smaller than 36rem (576px) */
+@media (max-width: 36rem) { /* 576px / 16px */
+  .buttons-container {
+    display:inline-flexbox;
+  flex-wrap:nowrap;
+  justify-content: space-between;
+  gap: 6px; /* Adjust gap between buttons */
+  margin-top: 40px;
+  margin-left: 0px;
+  }
+
+  .order-button {
+    flex:auto; /* Up to 2 buttons per row */
+    font-size: 1.875rem;
+    padding: 6px;
+    margin-bottom: 10px; /* Space between rows */
+  }
+
+  .order-button:nth-child(4),
+  .order-button:nth-child(5) {
+    margin-bottom: 10px; /* Space between rows */
+  }
+
+  /* .order-button:nth-child(5) {
+    flex: 1 1 calc(100% - 10px); /* Last button on its own line */
+   /* Remove bottom margin for the last button */
+  
+
+  /* .search-bar input[type="text"] {
+    font-size: 12px;
+    padding: 8px 12px;
+  } */
+
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0; /* Margin top and bottom for spacing */
+  }
+  
+  .search-bar input[type="text"] {
+    padding: 10px 16px;
+    border: 1px solid #3498db;
+    border-radius: 20px;
+    font-size: 14px;
+    width: 70%;
+    max-width: 250px; /* Prevent excessive expansion */
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .search-bar input[type="text"]:focus {
+    width: 100%;
+    max-width: 400px; /* Expanded width on focus */
+  }
 }
