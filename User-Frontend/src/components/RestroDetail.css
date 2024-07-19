@@ -45,7 +45,7 @@
 .gallery-item img {
   margin: 5px;
   margin-left: 0px;
-  width: 100%;
+  width: 29vw;
   max-width: 600px;
   height: 265px;
   object-fit: cover;
@@ -468,7 +468,7 @@ button:disabled {
     height: 450px;
     width: 90%;
   }
-  
+
   .gallery-item img {
     width: 80%;
     height: 200px;
@@ -479,17 +479,17 @@ button:disabled {
   .image-section {
     flex-direction: column;
   }
-  
+
   .main-image {
     height: 350px;
     width: 80%;
   }
-  
+
   .gallery-item img {
-    width: 70%;
+    width: 100%;
     height: 180px;
   }
-  
+
   .details-section h1 {
     font-size: 40px;
   }
@@ -500,16 +500,16 @@ button:disabled {
     height: 300px;
     width: 100%;
   }
-  
+
   .gallery-item img {
     width: 90%;
     height: 150px;
   }
-  
+
   .details-section h1 {
     font-size: 30px;
   }
-  
+
   .details-section {
     margin: 10px;
   }
@@ -520,20 +520,20 @@ button:disabled {
     height: 250px;
     width: 100%;
   }
-  
+
   .gallery-item img {
     width: 100%;
     height: 120px;
   }
-  
+
   .details-section h1 {
     font-size: 25px;
   }
-  
+
   .details-section p {
     font-size: 14px;
   }
-  
+
   .booking {
     width: 90%;
     margin-left: 5%;
