@@ -12,9 +12,9 @@ export default function Login() {
     axios
       .post("http://localhost:3001/Restaurant/login", { rEmail, rPassword })
       .then((res) => {
-        const {  message, token } = res.data; // Destructure token and message from response data
-        if (message == "Login successful" , token) {
-          localStorage.setItem('ownerToken', token); // Store the token in localStorage or a cookie
+        const { message, token } = res.data; // Destructure token and message from response data
+        if ((message == "Login successful", token)) {
+          localStorage.setItem("ownerToken", token); // Store the token in localStorage or a cookie
           window.location.href = "/";
         } else {
           alert("Invalid credentials");
@@ -27,41 +27,43 @@ export default function Login() {
   };
 
   return (
-    <div className="login">
-      <form onSubmit={handleLogin} className="formarea">
-        <h1>Login</h1>
-        <div className="inputarea">
-          <label className="labels" htmlFor="email">
-            Email:
-          </label>
-          <input
-            className="inputs"
-            type="email"
-            id="email"
-            onChange={(e) => setrEmail(e.target.value)}
-          />
-        </div>
-        <div className="inputarea">
-          <label className="labels" htmlFor="password">
-            Password:
-          </label>
-          <input
-            className="inputs"
-            type="password"
-            id="password"
-            onChange={(e) => setrPassword(e.target.value)}
-          />
-        </div>
-        <div className="btnarea">
-          <button className="btn" type="submit">
-            Login
-          </button>
-          <p>
-            First time on our website?{" "}
-            <NavLink to="/Restaurant/register">Register Now</NavLink>
-          </p>
-        </div>
-      </form>
+    <div className="backgroundd">
+      <div className="login">
+        <form onSubmit={handleLogin} className="formarea">
+          <h1>Login</h1>
+          <div className="inputarea">
+            <label className="labels" htmlFor="email">
+              Email:
+            </label>
+            <input
+              className="inputs"
+              type="email"
+              id="email"
+              onChange={(e) => setrEmail(e.target.value)}
+            />
+          </div>
+          <div className="inputarea">
+            <label className="labels" htmlFor="password">
+              Password:
+            </label>
+            <input
+              className="inputs"
+              type="password"
+              id="password"
+              onChange={(e) => setrPassword(e.target.value)}
+            />
+          </div>
+          <div className="btnarea">
+            <button className="btn btn-dark" type="submit">
+              Login
+            </button>
+            <p>
+              First time on our website?{" "}
+              <NavLink to="/Restaurant/register">Register Now</NavLink>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
