@@ -101,6 +101,7 @@ const Cart = () => {
     } finally {
       setShowOverlay(false); // Hide overlay after navigation
     }
+  
   };
 
   const handleClearCart = async () => {
@@ -140,10 +141,17 @@ const Cart = () => {
           <p>Subtotal: ₹{subtotal}</p>
           <p>Tax: ₹{tax}</p>
           <p>Total: ₹{total}</p>
-        </div>
-        <button onClick={handleCheckout} disabled={cartItems.length === 0} className='checkout-button'>
-          Proceed to Checkout
-        </button>
+        </div><button
+  onClick={() => {
+    handleCheckout();
+    handleClearCart();
+  }}
+  disabled={cartItems.length === 0}
+  className='checkout-button'
+>
+  Proceed to Checkout
+</button>
+
         {/* <button onClick={handleClearCart} disabled={cartItems.length === 0} className='clear-cart-button'>
           Clear Cart
         </button> */}
