@@ -38,16 +38,16 @@ h1::after {
   transform: translateX(-50%);
 }
 
-.search-bar {
+.search-barss {
   position: absolute;
   top: 0px;
   right: 20px;
-  margin-right: 2px;
-  margin-top: 48px;
+  margin-right: 20px;
+  margin-top: 49px;
   
 }
 
-.search-bar input[type="text"] {
+.search-barss input[type="text"] {
   padding: 10px 16px; /* Adjusted padding for input field */
   border: 1px solid #3498db;
   border-radius: 20px; /* Rounded corners */
@@ -57,7 +57,7 @@ h1::after {
   
 }
 
-.search-bar input[type="text"]:focus {
+.search-barss input[type="text"]:focus {
   width: 170px; /* Expanded width on focus */
   border: 1px solid #3498db;
 }

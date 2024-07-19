@@ -1,18 +1,29 @@
 /* src/components/Dashboard.css */
 .dashboard {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   gap: 20px;
   padding: 20px;
   background: #f4f4f4;
   margin-top: 40px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  
 }
 
 .stats-container {
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  flex-wrap: wrap;
   
+}
+
+@media screen and (width<900) {
+  .stats-container .charts-container{
+    display: flex;
+    /* flex-direction: column; */
+  }
 }
 
 .box {
@@ -66,6 +77,7 @@
 .charts-container {
   display: flex;
   gap: 20px;
+  flex-wrap:nowrap;
 }
 
 .product-sales,
