@@ -41,17 +41,7 @@ export default function ViewRestaurant() {
             onChange={(e) => setResName(e.target.value)}
           />
         </div>
-        {/* <div className="inputarea">
-          <label className="labels" htmlFor="password">
-            Password:
-          </label>
-          <input
-            className="inputs"
-            type="password"
-            id="password"
-            onChange={(e) => setrPassword(e.target.value)}
-          />
-        </div> */}
+        
         <div className="btnarea">
           <button className="btn btn-dark" type="submit">
             Login
