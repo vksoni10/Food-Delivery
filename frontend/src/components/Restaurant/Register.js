@@ -18,16 +18,12 @@ export default function Register() {
     if (!rName) errors.rName = "Full Name is required.";
     if (!rEmail) {
       errors.rEmail = "Email is required.";
-<<<<<<< HEAD
     } else if (
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(rEmail)
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(rEmail)
     ) {
-=======
-    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(rEmail)) {
->>>>>>> 29317541a9d9a82ecb1c44c925d27230c6879ba8
       errors.rEmail = "Email address is invalid.";
     }
-  
+
     if (!rMobile) {
       errors.rMobile = "Phone Number is required.";
     } else if (!/^[6-9]\d{9}$/.test(rMobile)) {
