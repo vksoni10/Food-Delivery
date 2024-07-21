@@ -33,15 +33,38 @@ export default function RestaurantHome() {
 
   return (
     <>
-      <span className="toggle-btn-container">
-        <button className="toggle-btn" onClick={toggleSidebar}>
-          {sidebarOpen ? (
-            <span class="material-symbols-outlined">arrow_back_ios</span>
-          ) : (
-            <span class="material-symbols-outlined">arrow_forward_ios</span>
-          )}
-        </button>
-      </span>
+      <div className="toggle">
+        <div className="toggle-btn-container">
+          <button className="toggle-btn" onClick={toggleSidebar}>
+            {sidebarOpen ? (
+              <>
+                <div className="span">
+                  <span class="material-symbols-outlined">arrow_back_ios</span>
+                  <span>Collapse Sidebar</span>
+                </div>
+              </>
+            ) : (
+              <span class="material-symbols-outlined">arrow_forward_ios</span>
+            )}
+          </button>
+        </div>
+        <div className="filler">
+          <h3>
+            <span>P</span>
+            <span>o</span>
+            <span>t</span>
+            <span>a</span>
+            <span>t</span>
+            <span>o</span>
+            <span>&nbsp;</span>
+            <span>F</span>
+            <span>o</span>
+            <span>o</span>
+            <span>d</span>
+            <span>s</span>
+          </h3>
+        </div>
+      </div>
       <div className="restaurant-dashboard">
         <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
           <div className="sidebar-tab btn mb-3">
