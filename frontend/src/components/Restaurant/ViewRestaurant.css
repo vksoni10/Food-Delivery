@@ -1,0 +1,20 @@
+.backgrounddddd {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLe6wOJavvexGrwP-EB0XcnkkiVqdbO5AgaQ&s");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  z-index: -1;
+}
+
+.resLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0.9;
+  z-index: 1;
+  backdrop-filter: blur(10px);
+  width: 100%;
+}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-//import "./Login.css";
 import axios from "axios";
+import "./ViewRestaurant.css";
 import { NavLink } from "react-router-dom";
 
 export default function ViewRestaurant() {
@@ -27,31 +27,33 @@ export default function ViewRestaurant() {
   };
 
   return (
-    <div className="login">
-      <form onSubmit={handleLogin} className="formarea">
-        <h1>Login</h1>
-        <div className="inputarea">
-          <label className="labels" htmlFor="email">
-            RestaurantName:
-          </label>
-          <input
-            className="inputs"
-            type="text"
-            id="name"
-            onChange={(e) => setResName(e.target.value)}
-          />
-        </div>
-        
-        <div className="btnarea">
-          <button className="btn btn-dark" type="submit">
-            Login
-          </button>
-          <p>
-            Don't Have a Restaurant?{" "}
-            <NavLink to="/Restaurant/addRestaurant">Register Now</NavLink>
-          </p>
-        </div>
-      </form>
+    <div className="backgrounddddd">
+      <div className="resLogin">
+        <form onSubmit={handleLogin} className="formarea">
+          <h1>Login</h1>
+          <div className="inputarea">
+            <label className="labels" htmlFor="email">
+              RestaurantName:
+            </label>
+            <input
+              className="inputs"
+              type="text"
+              id="name"
+              onChange={(e) => setResName(e.target.value)}
+            />
+          </div>
+
+          <div className="btnarea">
+            <button className="btn btn-dark" type="submit">
+              Login
+            </button>
+            <p>
+              Don't Have a Restaurant?{" "}
+              <NavLink to="/Restaurant/addRestaurant">Register Now</NavLink>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
