@@ -5,6 +5,9 @@ import { fetchUserInfo } from './userApi';
 import { useParams } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
 import {toast} from 'react-toastify'
+import { useContext } from 'react';
+import { CartContext } from './CartContext';
+
 
 
 const Order = ({ restaurant }) => {
@@ -12,6 +15,8 @@ const Order = ({ restaurant }) => {
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState({});
   const [itemInCart, setItemInCart] = useState({});
+
+  // const {handleAddToCart} = useContext(CartContext)
 
   useEffect(() => {
     fetchUserProfile();

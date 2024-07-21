@@ -4,11 +4,17 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../components/final.png';
 import {jwtDecode} from 'jwt-decode';
+import { CartContext } from './CartContext';
+
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
+  // const [cartCount, setCartCount] = useState(0);
   const token = localStorage.getItem('token');
+
+  const {cartCount, setCartCount} = useContext(CartContext)
+
+  // const {cartCount} = us
   
 
   const navigate = useNavigate();

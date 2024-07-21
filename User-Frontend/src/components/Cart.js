@@ -119,6 +119,8 @@ const Cart = () => {
     }
   };
 
+  
+
   return (
     <>
       <Navbar />

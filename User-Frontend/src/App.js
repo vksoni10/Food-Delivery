@@ -17,10 +17,13 @@ import Menu from './components/Menu';
 import OrderConfirmation from './components/Orderconfirmation';
 import ProtectedRoute from './components/ProtectedRoute';
 import MyOrders from './components/MyOrders';
+import { CartProvider } from './components/CartContext';
+
 
 
 function App() {
   return (
+    <CartProvider>
     <Router>
       <main>
         <Routes>
@@ -73,6 +76,7 @@ function App() {
         </Routes>
       </main>
     </Router>
+    </CartProvider>
   );
 }
 
