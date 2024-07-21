@@ -47,7 +47,11 @@
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
-  justify-content: center;
+}
+@media screen and (width>550px) {
+  .main-content {
+    justify-content: center;
+  }
 }
 
 /* Media Query for smaller screens */
