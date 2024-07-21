@@ -10,6 +10,16 @@ const RestaurantList = () => {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:3001/Admins/deleteRestaurant/${id}`)
+      .then(res => {
+        console.log(res);
+        setRestaurants(restaurants.filter(restaurant => restaurant._id !== id));
+      })
+      .catch(err => console.log(err));
+  };
+
+
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {

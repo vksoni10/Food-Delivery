@@ -1,0 +1,135 @@
+/* src/Login.css */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+:root {
+  --primary-color: #ff7e5f;
+  --secondary-color: #ffd700;
+  --background-color: #f0f2f5;
+  --form-background: rgba(20, 18, 18, 0.8);
+  --text-color: #fff;
+  --input-color: #333;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--background-color);
+  font-size: 1.6rem;
+}
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://thumbs.dreamstime.com/b/menu-food-culinary-frame-concept-black-background-closeup-74317966.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+}
+
+.login-form {
+  background: var(--form-background);
+  padding: 4rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 0.4rem 1.5rem rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 40rem;
+  backdrop-filter: blur(1.5rem);
+}
+
+.login-form h1 {
+  margin-bottom: 2rem;
+  font-size: 2.8rem;
+  color: var(--text-color);
+}
+
+.input-group {
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.input-group input {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  color: var(--input-color);
+}
+
+.input-group input:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem var(--primary-color);
+}
+
+.btn-login {
+  background-color: var(--text-color);
+  color: var(--primary-color);
+  padding: 1.5rem 3rem;
+  border: none;
+  border-radius: 2.5rem;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  width: 100%;
+}
+
+.btn-login:hover {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.register-link {
+  margin-top: 2rem;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.register-link a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.register-link a:hover {
+  color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 50%;
+  }
+
+  .login-form {
+    padding: 3rem;
+  }
+}

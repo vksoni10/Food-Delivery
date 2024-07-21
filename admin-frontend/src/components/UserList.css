@@ -1,81 +1,84 @@
 /* src/components/UserList.css */
 
 .user-list {
-  padding: 20px;
-  max-width: 1200px;
+  padding: 1.25rem; /* 20px */
+  max-width: 105rem; /* 1200px */
   margin: auto;
-  margin-top: 25px;
+  margin-top: 4.5625rem; /* 25px */
   background-color: #ffffff;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Stronger shadow */
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1); /* 8px 16px */
+  border-radius: 0.75rem; /* 12px */
+  border: 0.0625rem solid #e0e0e0; /* 1px */
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   position: relative; /* Allows positioning of search bar */
 }
 
 .user-list:hover {
-  transform: translateY(-4px); /* Lifts the component on hover */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+  transform: translateY(-0.25rem); /* 4px */
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2); /* 12px 24px */
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-top: 0.625rem; /* 10px */
+  margin-bottom: 1.25rem; /* 20px */
   color: #333;
-  font-size: 34px; /* Larger font size */
+  font-size: 3.225rem; /* 34px */
   position: relative; /* Allows positioning of search bar */
 }
 
 h1::after {
   content: "";
   display: block;
-  width: 50px;
-  height: 3px;
+  width: 3.125rem; /* 50px */
+  height: 0.1875rem; /* 3px */
   background-color: #3498db; /* Blue underline color */
   position: absolute;
-  bottom: -10px;
+  bottom: -0.625rem; /* 10px */
   left: 50%;
   transform: translateX(-50%);
 }
 
 .search-barss {
-  position: absolute;
-  top: 0px;
-  right: 20px;
-  margin-right: 20px;
-  margin-top: 49px;
-  
+  position: relative; /* Changed to relative for better control */
+  margin-right: 0.125rem; /* 2px */
 }
 
 .search-barss input[type="text"] {
-  padding: 10px 16px; /* Adjusted padding for input field */
-  border: 1px solid #3498db;
-  border-radius: 20px; /* Rounded corners */
-  font-size: 14px;
-  width: 150px;
+  margin-bottom: 0.625rem; /* 10px */
+  padding: 0.625rem 1rem; /* 10px 16px */
+  border: 0.0625rem solid #3498db; /* 1px */
+  border-radius: 1.5rem; /* 20px */
+  font-size: 1.05rem; /* 14px */
+  width: 12.375rem; /* 150px */
   transition: width 0.3s ease-in-out; /* Smooth transition for width change */
-  
 }
 
 .search-barss input[type="text"]:focus {
-  width: 170px; /* Expanded width on focus */
-  border: 1px solid #3498db;
+  width: 16.625rem; /* 170px */
+  border: 0.0625rem solid #3498db; /* 1px */
+}
+
+
+.table-container {
+  overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem; /* 20px */
+  margin-top: 3.125rem; /* 50px */
   background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
-  border-radius: 12px;
+  border-radius: 0.75rem; /* 12px */
   overflow: hidden; /* Ensures rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* 4px 8px */
 }
 
 th, td {
-  padding: 16px 20px;
+  padding: 1rem 1.25rem; /* 16px 20px */
   text-align: left;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 0.0625rem solid #e0e0e0; /* 1px */
 }
 
 th {
@@ -96,10 +99,69 @@ tr:hover {
 .error {
   color: red;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 1.25rem; /* 20px */
 }
 
 .loading {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 1.25rem; /* 20px */
+}
+
+/* Media Queries for responsiveness */
+
+/* For screens smaller than 56rem (896px) */
+@media (max-width: 56rem) { /* 896px */
+  h1 {
+    font-size: 1.75rem; /* 28px */
+  }
+
+  .search-barss input[type="text"] {
+    width: 7.5rem; /* 120px */
+  }
+
+  .search-barss input[type="text"]:focus {
+    width: 9.375rem; /* 150px */
+  }
+
+  th, td {
+    padding: 0.75rem 1rem; /* 12px 16px */
+  }
+}
+
+/* For screens smaller than 40rem (640px) */
+@media (max-width: 40rem) { /* 640px */
+  h1 {
+    font-size: 1.5rem; /* 24px */
+  }
+
+  .search-barss input[type="text"] {
+    width: 6.25rem; /* 100px */
+  }
+
+  .search-barss input[type="text"]:focus {
+    width: 7.5rem; /* 120px */
+  }
+
+  th, td {
+    padding: 0.625rem 0.875rem; /* 10px 14px */
+  }
+}
+
+/* For screens smaller than 36rem (576px) */
+@media (max-width: 36rem) { /* 576px */
+  h1 {
+    font-size: 1rem; /* 20px */
+  }
+
+  .search-barss input[type="text"] {
+    width: 5.5rem; /* 100px */
+  }
+
+  .search-barss input[type="text"]:focus {
+    width: 7rem; /* 120px */
+  }
+
+  th, td {
+    padding: 0.45rem 0.6rem; /* 8px 10px */
+  }
 }
