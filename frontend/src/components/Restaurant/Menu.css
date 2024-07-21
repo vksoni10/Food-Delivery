@@ -17,8 +17,13 @@
 
 .form {
   background-color: #d5a021;
-  margin-left: 10rem;
   width: 27rem;
   padding: 1rem;
-  border-radius: 1rem;
+  border-radius: 10px;
+  height: fit-content;
+  margin-top: 8rem;
+}
+
+.table {
+  margin: 1rem;
 }

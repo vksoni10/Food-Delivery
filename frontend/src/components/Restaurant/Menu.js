@@ -54,14 +54,14 @@ const Menu = () => {
     <div className="menu">
       <NavLink
         to="/Restaurant/createMenu"
-        className="add-btn btn btn-outline-success mb-3"
+        className="add-btn btn btn-success mb-3"
       >
         Add +
       </NavLink>
       <div className="menu-table">
         <table className="table table-light table-hover">
           <thead>
-            <tr>
+            <tr className="table-dark">
               <th scope="col">Item Name</th>
               <th scope="col">Item Price</th>
               <th scope="col">Item Type</th>

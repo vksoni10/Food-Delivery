@@ -4,13 +4,13 @@
   display: flex;
   height: 100vh;
   overflow-x: hidden; /* Hide horizontal overflow */
+  padding-bottom: 0.2rem;
 }
 
 .sidebar {
   width: 25rem; /* Initial width for larger screens */
-  background-color: #f5f3f5;
   padding: 0.5rem;
-  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrBT3IsYiATdnsONvweBTf0YNxaklkgseEeA&s"); */
+  background-image: url("https://png.pngtree.com/background/20220715/original/pngtree-dark-green-dark-green-advertising-menu-cover-background-gold-content-box-picture-image_1625160.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   transition: width 0.5s ease-in-out; /* Smooth animation for width */
@@ -40,13 +40,14 @@
   flex: 1;
   padding: 3rem;
   background-color: white;
-  margin-bottom: 2rem;
   width: calc(100% - 25rem); /* Adjust width based on sidebar */
   transition: width 0.3s ease-in-out; /* Smooth animation for width */
   overflow-y: auto; /* Enable vertical scrolling if needed */
-  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrBT3IsYiATdnsONvweBTf0YNxaklkgseEeA&s");
+  background-image: url("https://i.etsystatic.com/8583516/r/il/413579/605177524/il_fullxfull.605177524_ht7a.jpg");
   background-repeat: no-repeat;
-  background-size: cover; */
+  background-size: cover;
+  display: flex;
+  justify-content: center;
 }
 
 /* Media Query for smaller screens */
