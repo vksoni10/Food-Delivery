@@ -14,6 +14,9 @@
   background-repeat: no-repeat;
   background-size: cover;
   transition: width 0.5s ease-in-out; /* Smooth animation for width */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .sidebar.open {
